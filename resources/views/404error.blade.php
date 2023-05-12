@@ -3,7 +3,7 @@
 
 <head>
 
-  <title>FreshCart - eCommerce HTML Template</title>
+  <title>404 Error</title>
   <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -47,7 +47,7 @@
         <div class="offset-lg-1 col-lg-10  py-8 py-xl-0">
           <div class=" mb-10 mb-xxl-0">
             <!-- img -->
-            <a href="../index.html"> <img src="images/logo/freshcart-logo.svg" alt=""></a>
+            <a href="{{url('/')}}"> <img src="images/logo/freshcart-logo.svg" alt=""></a>
           </div>
           <div class="row justify-content-center align-items-center">
             <!-- content -->
@@ -57,9 +57,9 @@
                 <p class="mb-8">We can’t find the page you’re looking for.<br>
                   Check out our help center or head back to home.</p>
    <!-- btn -->
-                <a href="#" class="btn btn-dark">Help Center <i class="feather-icon icon-arrow-right"></i></a>
+                {{-- <a href="#" class="btn btn-dark">Help Center <i class="feather-icon icon-arrow-right"></i></a> --}}
                  <!-- btn -->
-                <a href="../index.html" class="btn btn-primary ms-2">Back to home</a>
+                <a href="{{url('/')}}" class="btn btn-primary ms-2">Back to home</a>
               </div>
 
             </div>
