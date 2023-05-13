@@ -252,7 +252,7 @@
                                 </a>
                             </div>
                             <div class="list-inline-item">
-
+                                {{-- ini button trigger modal untuk akunnya --}}
                                 <a href="#!" class="text-muted" data-bs-toggle="modal"
                                     data-bs-target="#userModal">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -836,6 +836,7 @@
         </nav>
     </div>
     <!-- Modal -->
+    {{-- modal di taro di sini ya jing --}}
     <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-4">
