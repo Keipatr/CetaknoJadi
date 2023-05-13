@@ -19,9 +19,19 @@ Route::get('/', function () {
 Route::get('index', function () {
     return view('index');
 });
+
+
 Route::get('signin', function () {
     return view('signin');
 });
+Route::get('signup', function () {
+    return view('signup');
+});
+Route::get('forgot', function () {
+    return view('forgot-password');
+});
+
+
 Route::get('store', function () {
     return view('store-list');
 });
@@ -59,6 +69,12 @@ Route::get('wishlist', function () {
     return view('shop-wishlist');
 });
 
+Route::get('stores', function () {
+    return view('store-list');
+});
+Route::get('store-draya', function () {
+    return view('store-single');
+});
 
 
 Route::fallback(function () {

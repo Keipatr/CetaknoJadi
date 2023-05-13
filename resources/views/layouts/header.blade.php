@@ -176,7 +176,7 @@
                                             </svg>
                                             <span
                                                 class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
-                                                1
+                                                5
                                                 <span class="visually-hidden">unread messages</span>
                                             </span>
                                         </a>
@@ -278,7 +278,7 @@
                                     </svg>
                                     <span
                                         class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
-                                        1
+                                        5
                                         <span class="visually-hidden">unread messages</span>
                                     </span>
                                 </a>
@@ -394,7 +394,7 @@
                     </div>
                     <div class="d-none d-lg-block">
                         <ul class="navbar-nav align-items-center ">
-                            <li class="nav-item dropdown">
+                            {{-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Home
@@ -406,8 +406,8 @@
                                     <li><a class="dropdown-item" href="./pages/index-4.html">Home 4 <span
                                                 class="badge bg-light-info text-dark-info ms-1">New</span></a></li>
                                 </ul>
-                            </li>
-                            <li class="nav-item dropdown">
+                            </li> --}}
+                            {{-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Shop
@@ -432,8 +432,8 @@
                                     <li><a class="dropdown-item" href="{{url('checkout')}}">Shop Checkout</a>
                                     </li>
                                 </ul>
-                            </li>
-                            <li class="nav-item dropdown">
+                            </li> --}}
+                            {{-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Stores
@@ -444,8 +444,8 @@
                                     <li><a class="dropdown-item" href="./pages/store-single.html">Store Single</a>
                                     </li>
                                 </ul>
-                            </li>
-                            <li class="nav-item dropdown dropdown-fullwidth">
+                            </li> --}}
+                            {{-- <li class="nav-item dropdown dropdown-fullwidth">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Mega menu
@@ -503,8 +503,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </li>
-                            <li class="nav-item dropdown">
+                            </li> --}}
+                            {{-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Pages
@@ -518,16 +518,16 @@
                                     <li><a class="dropdown-item" href="./pages/404error.html">404 Error</a></li>
                                     <li><a class="dropdown-item" href="./pages/contact.html">Contact</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Account
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{ url('/signin') }}">Sign in</a></li>
-                                    <li><a class="dropdown-item" href="./pages/signup.html">Signup</a></li>
-                                    <li><a class="dropdown-item" href="./pages/forgot-password.html">Forgot
+                                    <li><a class="dropdown-item" href="{{ url('signin') }}">Sign in</a></li>
+                                    <li><a class="dropdown-item" href="{{url('signup')}}">Signup</a></li>
+                                    <li><a class="dropdown-item" href="{{url('forgot')}}">Forgot
                                             Password</a></li>
                                     <li class="dropdown-submenu dropend">
                                         <a class="dropdown-item dropdown-list-group-item dropdown-toggle"
@@ -535,20 +535,30 @@
                                             My Account
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="./pages/account-orders.html">Orders</a>
+                                            <li><a class="dropdown-item" href="{{url('account-orders')}}">Orders</a>
                                             </li>
                                             <li><a class="dropdown-item"
-                                                    href="./pages/account-settings.html">Settings</a></li>
+                                                    href="{{url('account')}}">Settings</a></li>
                                             <li><a class="dropdown-item"
-                                                    href="./pages/account-address.html">Address</a></li>
+                                                    href="{{url('account-address')}}">Address</a></li>
                                             <li><a class="dropdown-item"
-                                                    href="./pages/account-payment-method.html">Payment Method</a>
+                                                    href="{{url('account-payment')}}">Payment Method</a>
                                             </li>
                                             <li><a class="dropdown-item"
-                                                    href="./pages/account-notification.html">Notification</a></li>
+                                                    href="{{url('account-notification')}}">Notification</a></li>
                                         </ul>
                                     </li>
                                 </ul>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{url('about-us')}}">
+                                    About Us
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{url('contact-us')}}">
+                                    Contact Us
+                                </a>
                             </li>
                             {{-- <li class="nav-item ">
                                 <a class="nav-link" href="./dashboard/index.html">
@@ -606,7 +616,7 @@
                                     Wishlist
                                 </a>
                             </li>
-                            <li class="nav-item dropdown">
+                            {{-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Home
@@ -618,8 +628,8 @@
                                     <li><a class="dropdown-item" href="./pages/index-4.html">Home 4 <span
                                                 class="badge bg-light-info text-dark-info ms-1">New</span></a></li>
                                 </ul>
-                            </li>
-                            <li class="nav-item dropdown">
+                            </li> --}}
+                            {{-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Shop
@@ -644,8 +654,8 @@
                                     <li><a class="dropdown-item" href="{{url('checkout')}}">Shop Checkout</a>
                                     </li>
                                 </ul>
-                            </li>
-                            <li class="nav-item dropdown">
+                            </li> --}}
+                            {{-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Stores
@@ -656,8 +666,8 @@
                                     <li><a class="dropdown-item" href="./pages/store-single.html">Store Single</a>
                                     </li>
                                 </ul>
-                            </li>
-                            <li class="nav-item dropdown">
+                            </li> --}}
+                            {{-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Mega Menu
@@ -723,8 +733,8 @@
                                         </ul>
                                     </li>
                                 </ul>
-                            </li>
-                            <li class="nav-item dropdown">
+                            </li> --}}
+                            {{-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Pages
@@ -738,16 +748,16 @@
                                     <li><a class="dropdown-item" href="./pages/404error.html">404 Error</a></li>
                                     <li><a class="dropdown-item" href="./pages/contact.html">Contact</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                    Account
+                                    My Account
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="./pages/signin.html">Sign in</a></li>
-                                    <li><a class="dropdown-item" href="./pages/signup.html">Signup</a></li>
-                                    <li><a class="dropdown-item" href="./pages/forgot-password.html">Forgot
+                                    <li><a class="dropdown-item" href="{{url('signin')}}">Sign in</a></li>
+                                    <li><a class="dropdown-item" href="{{url('signup')}}">Signup</a></li>
+                                    <li><a class="dropdown-item" href="{{url('forgot')}}">Forgot
                                             Password</a></li>
                                     <li class="dropdown-submenu dropend">
                                         <a class="dropdown-item dropdown-list-group-item dropdown-toggle"
@@ -755,17 +765,17 @@
                                             My Account
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="./pages/account-orders.html">Orders</a>
+                                            <li><a class="dropdown-item" href="{{url('account-orders')}}">Orders</a>
                                             </li>
                                             <li><a class="dropdown-item"
-                                                    href="./pages/account-settings.html">Settings</a></li>
+                                                    href="{{url('account')}}">Settings</a></li>
                                             <li><a class="dropdown-item"
-                                                    href="./pages/account-address.html">Address</a></li>
+                                                    href="{{url('account-address')}}">Address</a></li>
                                             <li><a class="dropdown-item"
-                                                    href="./pages/account-payment-method.html">Payment Method</a>
+                                                    href="{{url('account-payment')}}">Payment Method</a>
                                             </li>
                                             <li><a class="dropdown-item"
-                                                    href="./pages/account-notification.html">Notification</a></li>
+                                                    href="{{url('account-notification')}}">Notification</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -870,7 +880,7 @@
                 </div>
                 <div class="modal-footer border-0 justify-content-center">
 
-                    Already have an account? <a href="#">Sign in</a>
+                    Already have an account? <a href="{{url('signin')}}" style="color: black; text-decoration: none;" onmouseover="this.style.color='green'; this.style.textDecoration='underline';" onmouseout="this.style.color='black'; this.style.textDecoration='none';">Sign in</a>
                 </div>
             </div>
         </div>
@@ -884,7 +894,7 @@
         <div class="offcanvas-header border-bottom">
             <div class="text-start">
                 <h5 id="offcanvasRightLabel" class="mb-0 fs-4">Shop Cart</h5>
-                <small>Location in 382480</small>
+                {{-- <small>Location in 382480</small> --}}
             </div>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                 aria-label="Close"></button>
@@ -1211,34 +1221,54 @@
 
                                 <a href="#"
                                     class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action active">
-                                    <span>Alabama</span><span>Min:$20</span></a>
+                                    <span>Surabaya</span>
+                                    {{-- <span>Min:$20</span> --}}
+                                    </a>
                                 <a href="#"
                                     class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-                                    <span>Alaska</span><span>Min:$30</span></a>
+                                    <span>Makassar</span>
+                                    {{-- <span>Min:$30</span> --}}
+                                </a>
                                 <a href="#"
                                     class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-                                    <span>Arizona</span><span>Min:$50</span></a>
+                                    <span>Jember</span>
+                                    {{-- <span>Min:$50</span> --}}
+                                </a>
                                 <a href="#"
                                     class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-                                    <span>California</span><span>Min:$29</span></a>
+                                    <span>Sorong</span>
+                                    {{-- <span>Min:$29</span> --}}
+                                </a>
                                 <a href="#"
                                     class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-                                    <span>Colorado</span><span>Min:$80</span></a>
+                                    <span>Sidoarjo</span>
+                                    {{-- <span>Min:$80</span> --}}
+                                </a>
                                 <a href="#"
                                     class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-                                    <span>Florida</span><span>Min:$90</span></a>
+                                    <span>Bone</span>
+                                    {{-- <span>Min:$90</span> --}}
+                                </a>
                                 <a href="#"
                                     class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-                                    <span>Arizona</span><span>Min:$50</span></a>
+                                    <span>Ketintang</span>
+                                    {{-- <span>Min:$50</span> --}}
+                                </a>
                                 <a href="#"
                                     class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-                                    <span>California</span><span>Min:$29</span></a>
+                                    <span>Bali</span>
+                                    {{-- <span>Min:$29</span> --}}
+                                </a>
                                 <a href="#"
                                     class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-                                    <span>Colorado</span><span>Min:$80</span></a>
+                                    <span>Yogyakarta</span>
+                                    {{-- <span>Min:$80</span> --}}
+                                </a>
                                 <a href="#"
                                     class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-                                    <span>Florida</span><span>Min:$90</span></a>
+                                    <span>Jakarta</span>
+                                    {{-- <span>Min:$90</span> --}}
+                                </a>
                             </div>
                         </div>
                     </div>

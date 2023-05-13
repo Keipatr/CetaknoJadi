@@ -9,10 +9,10 @@
           <div
             style="background: url(images/slider/slide-1.jpg)no-repeat; background-size: cover; border-radius: .5rem; background-position: center;">
             <div class="ps-lg-12 py-lg-16 col-xxl-5 col-md-7 py-14 px-8 text-xs-center">
-              <span class="badge text-bg-warning">Opening Sale Discount 50%</span>
+              {{-- <span class="badge text-bg-warning">Opening Sale Discount 50%</span> --}}
 
-              <h2 class="text-dark display-5 fw-bold mt-4">SuperMarket For Fresh Grocery </h2>
-              <p class="lead">Introduced a new model for online grocery shopping
+              <h2 class="text-dark display-5 fw-bold mt-4">Website For Printing </h2>
+              <p class="lead">Introduced a new model for online printing
                 and convenient home delivery.</p>
               <a href="#!" class="btn btn-dark mt-3">Shop Now <i class="feather-icon icon-arrow-right ms-1"></i></a>
             </div>
@@ -21,9 +21,9 @@
           <div class=" "
             style="background: url(images/slider/slider-2.jpg)no-repeat; background-size: cover; border-radius: .5rem; background-position: center;">
             <div class="ps-lg-12 py-lg-16 col-xxl-5 col-md-7 py-14 px-8 text-xs-center">
-              <span class="badge text-bg-warning">Free Shipping - orders over $100</span>
-              <h2 class="text-dark display-5 fw-bold mt-4">Free Shipping on <br> orders over <span
-                  class="text-primary">$100</span></h2>
+              {{-- <span class="badge text-bg-warning">Free Shipping - orders over $100</span> --}}
+              <h2 class="text-dark display-5 fw-bold mt-4">Free Shipping on <br>  <span
+                  class="text-primary">First Buyer</span></h2>
               <p class="lead">Free Shipping to First-Time Customers Only, After promotions and discounts are applied.
               </p>
               <a href="#!" class="btn btn-dark mt-3">Shop Now <i class="feather-icon icon-arrow-right ms-1"></i></a>
@@ -179,7 +179,7 @@
                                       </svg>
                                   </div>
                                   <!-- text -->
-                                  <div>Bakery</div>
+                                  <div>Kalender</div>
                                 </div>
                             </div>
                           </a>
@@ -197,7 +197,7 @@
                                       </svg>
                                   </div>
                                   <!-- text -->
-                                  <div class="text-truncate">Dairy</div>
+                                  <div class="text-truncate">Kartu</div>
                                 </div>
                             </div>
                           </a>
@@ -215,7 +215,7 @@
                                       </svg>
                                   </div>
                                   <!-- text -->
-                                  <div class="text-truncate">Vegetables</div>
+                                  <div class="text-truncate">Banner</div>
                                 </div>
                             </div>
                           </a>
@@ -233,7 +233,7 @@
                                       </svg>
                                   </div>
                                   <!-- text -->
-                                  <div class="text-truncate">Snacks</div>
+                                  <div class="text-truncate">Kaos & Kain</div>
                                 </div>
                             </div>
                           </a>
@@ -251,7 +251,7 @@
                                       </svg>
                                   </div>
                                   <!-- text -->
-                                  <div class="text-truncate">Baby Care</div>
+                                  <div class="text-truncate">Dokumen</div>
                                 </div>
                             </div>
                           </a>
@@ -269,12 +269,12 @@
                                       </svg>
                                   </div>
                                   <!-- text -->
-                                  <div class="text-truncate">Fish</div>
+                                  <div class="text-truncate">Media Promosi</div>
                                 </div>
                             </div>
                           </a>
                       </div>
-                      <div class="item">
+                      {{-- <div class="item">
                           <!-- item -->
                           <a href="shop-grid.html" class="text-decoration-none text-inherit">
                             <!-- card -->
@@ -363,7 +363,7 @@
                                 </div>
                             </div>
                           </a>
-                      </div>
+                      </div> --}}
                     </div>
                 </div>
               </div>
@@ -436,7 +436,7 @@
             </div>
                   <!-- all store -->
             <div class="col-md-4 text-end col-12 d-none d-md-block">
-              <a href="#">
+              <a href="{{url('stores')}}">
                   All stores
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -458,23 +458,24 @@
                   </div>
                   <div class="mt-4">
                     <!-- content -->
-                    <h2 class="mb-1 h5"><a href="#!" class="text-inherit">E-Grocery Super Market</a></h2>
-                    <div class="small text-muted"><span class="me-2">Organic </span><span
+                    <h2 class="mb-1 h5"><a href="#!" class="text-inherit">D'Raya Jember</a></h2>
+                    <div class="small text-muted">
+                        {{-- <span class="me-2">Organic </span><span
                         class="me-2">Groceries</span>
-                        <span>Butcher Shop</span>
+                        <span>Butcher Shop</span> --}}
                     </div>
                     <div class="py-3">
                         <ul class="list-unstyled mb-0 small">
-                          <li>Delivery
+                          <li><span class="text-primary">Delivery</span>
                           </li>
                           <li>Pickup available</li>
                         </ul>
                     </div>
                     <div>
                         <!-- badge -->
-                        <div class="badge text-bg-light border">7.5 mi away</div>
+                        <div class="badge text-bg-light border">7.5 km away</div>
                         <!-- badge -->
-                        <div class="badge text-bg-light border">In-store prices </div>
+                        {{-- <div class="badge text-bg-light border">In-store prices </div> --}}
                     </div>
                   </div>
               </div>
@@ -488,19 +489,21 @@
                   </div>
                   <div class="mt-4">
                     <!-- content -->
-                    <h2 class="mb-1 h5"><a href="#!" class="text-inherit">DealShare Mart</a></h2>
-                    <div class="small text-muted"><span class="me-2">Alcohol</span><span
-                        class="me-2">Groceries</span></div>
+                    <h2 class="mb-1 h5"><a href="#!" class="text-inherit">Aneka Niaga</a></h2>
+                    <div class="small text-muted">
+                        {{-- <span class="me-2">Alcohol</span><span
+                        class="me-2">Groceries</span> --}}
+                    </div>
                     <div class="py-3">
                         <ul class="list-unstyled mb-0 small">
-                          <li>Delivery
+                          <li><span class="text-primary">Delivery</span>
                           </li>
                           <li>Pickup available</li>
                         </ul>
                     </div>
                     <div>
                         <!-- badge -->
-                        <div class="badge text-bg-light border">7.2 mi away</div>
+                        <div class="badge text-bg-light border">9.3 km away</div>
                     </div>
                   </div>
               </div>
@@ -514,21 +517,22 @@
                   </div>
                   <div class="mt-4">
                     <!-- content -->
-                    <h2 class="mb-1 h5"><a href="#!" class="text-inherit">DMart</a></h2>
-                    <div class="small text-muted"><span class="me-2">Groceries</span><span
+                    <h2 class="mb-1 h5"><a href="#!" class="text-inherit">Wiyung Printing</a></h2>
+                    <div class="small text-muted">
+                        {{-- <span class="me-2">Groceries</span><span
                         class="me-2">Bakery</span>
-                        <span>Deli</span>
+                        <span>Deli</span> --}}
                     </div>
                     <div class="py-3">
                         <ul class="list-unstyled mb-0 small">
-                          <li><span class="text-primary">Delivery by 10:30pm</span>
+                          <li><span class="text-primary">Delivery</span>
                           </li>
                           <li>Pickup available</li>
                         </ul>
                     </div>
                     <div>
                         <!-- badge -->
-                        <div class="badge text-bg-light border">9.3 mi away</div>
+                        <div class="badge text-bg-light border">7.1 km away</div>
                     </div>
                   </div>
               </div>
@@ -559,7 +563,7 @@
                       points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
                    </polygon>
                 </svg>
-                <span class="ms-3">Recommended Products</span>
+                <span class="ms-3">Products</span>
              </h3>
           </div>
           <div class="col-lg-2 col-2">
@@ -573,9 +577,9 @@
 
                 <div class="text-center position-relative ">
                   <div class=" position-absolute top-0 start-0">
-                    <span class="badge bg-danger">Sale</span>
+                    {{-- <span class="badge bg-danger">Sale</span> --}}
                   </div>
-                  <a href=""> <img src="images/products/product-img-1.jpg" alt="Grocery Ecommerce Template"
+                  <a href=""> <img src="images/products/dokumen.jpg" alt="Grocery Ecommerce Template"
                       class="mb-3 img-fluid"></a>
 
                   <div class="card-product-action">
@@ -583,15 +587,14 @@
                         class="bi bi-eye" data-bs-toggle="tooltip" data-bs-html="true" title="Quick View"></i></a>
                     <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" title="Wishlist"><i
                         class="bi bi-heart"></i></a>
-                    <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" title="Compare"><i
-                        class="bi bi-arrow-left-right"></i></a>
+                    {{-- <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" title="Compare"><i
+                        class="bi bi-arrow-left-right"></i></a> --}}
                   </div>
 
                 </div>
                 <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Snack &
                       Munchies</small></a></div>
-                <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Haldiram's
-                    Sev Bhujia</a></h2>
+                <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Kertas A4</a></h2>
                 <div>
 
                   <small class="text-warning"> <i class="bi bi-star-fill"></i>
@@ -601,8 +604,8 @@
                     <i class="bi bi-star-half"></i></small> <span class="text-muted small">4.5(149)</span>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mt-3">
-                  <div><span class="text-dark">$18</span> <span
-                      class="text-decoration-line-through text-muted">$24</span>
+                  <div><span class="text-dark">Rp. 18,000</span>
+                    {{-- <span class="text-decoration-line-through text-muted">$24</span> --}}
                   </div>
                   <div><a href="#!" class="btn btn-primary btn-sm">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -620,24 +623,24 @@
               <div class="card-body">
                 <div class="text-center position-relative">
                   <div class=" position-absolute top-0 start-0">
-                    <span class="badge bg-success">14%</span>
+                    {{-- <span class="badge bg-success">14%</span> --}}
                   </div>
-                  <a href="./pages/shop-single.html"><img src="images/products/product-img-2.jpg"
+                  <a href="./pages/shop-single.html"><img src="images/products/banner.jpg"
                       alt="Grocery Ecommerce Template" class="mb-3 img-fluid"></a>
                   <div class="card-product-action">
                     <a href="#!" class="btn-action" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
                         class="bi bi-eye" data-bs-toggle="tooltip" data-bs-html="true" title="Quick View"></i></a>
                     <a href="../shop-wishlist.html" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true"
                       title="Wishlist"><i class="bi bi-heart"></i></a>
-                    <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" title="Compare"><i
-                        class="bi bi-arrow-left-right"></i></a>
+                    {{-- <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" title="Compare"><i
+                        class="bi bi-arrow-left-right"></i></a> --}}
                   </div>
 
                 </div>
                 <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Bakery &
                       Biscuits</small></a></div>
                 <h2 class="fs-6"><a href="./pages/shop-single.html"
-                    class="text-inherit text-decoration-none">NutriChoice Digestive </a></h2>
+                    class="text-inherit text-decoration-none">Print Spanduk </a></h2>
                 <div class="text-warning">
 
                   <small> <i class="bi bi-star-fill"></i>
@@ -647,7 +650,7 @@
                     <i class="bi bi-star-half"></i></small> <span class="text-muted small">4.5 (25)</span>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mt-3">
-                  <div><span class="text-dark">$24</span>
+                  <div><span class="text-dark">Rp. 24,000</span>
                   </div>
                   <div><a href="#!" class="btn btn-primary btn-sm">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -664,21 +667,20 @@
             <div class="card card-product">
               <div class="card-body">
                 <div class="text-center position-relative"> <a href="./pages/shop-single.html"><img
-                      src="images/products/product-img-3.jpg" alt="Grocery Ecommerce Template"
+                      src="images/products/dokumen.jpg" alt="Grocery Ecommerce Template"
                       class="mb-3 img-fluid"></a>
                   <div class="card-product-action">
                     <a href="#!" class="btn-action" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
                         class="bi bi-eye" data-bs-toggle="tooltip" data-bs-html="true" title="Quick View"></i></a>
                     <a href="../shop-wishlist.html" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true"
                       title="Wishlist"><i class="bi bi-heart"></i></a>
-                    <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" title="Compare"><i
-                        class="bi bi-arrow-left-right"></i></a>
+                    {{-- <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" title="Compare"><i
+                        class="bi bi-arrow-left-right"></i></a> --}}
                   </div>
                 </div>
                 <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Bakery &
                       Biscuits</small></a></div>
-                <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Cadbury 5
-                    Star Chocolate</a></h2>
+                <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Kertas A4</a></h2>
                 <div class="text-warning">
 
                   <small> <i class="bi bi-star-fill"></i>
@@ -688,8 +690,8 @@
                     <i class="bi bi-star-fill"></i></small> <span class="text-muted small">5 (469)</span>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mt-3">
-                  <div><span class="text-dark">$32</span> <span
-                      class="text-decoration-line-through text-muted">$35</span>
+                  <div><span class="text-dark">Rp. 32,000</span>
+                    {{-- <span class="text-decoration-line-through text-muted">$35</span> --}}
                   </div>
                   <div><a href="#!" class="btn btn-primary btn-sm">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -706,24 +708,23 @@
             <div class="card card-product">
               <div class="card-body">
                 <div class="text-center position-relative"> <a href="./pages/shop-single.html"><img
-                      src="images/products/product-img-4.jpg" alt="Grocery Ecommerce Template"
+                      src="images/products/banner.jpg" alt="Grocery Ecommerce Template"
                       class="mb-3 img-fluid"></a>
                   <div class="card-product-action">
                     <a href="#!" class="btn-action" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
                         class="bi bi-eye" data-bs-toggle="tooltip" data-bs-html="true" title="Quick View"></i></a>
                     <a href="../shop-wishlist.html" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true"
                       title="Wishlist"><i class="bi bi-heart"></i></a>
-                    <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" title="Compare"><i
-                        class="bi bi-arrow-left-right"></i></a>
+                    {{-- <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" title="Compare"><i
+                        class="bi bi-arrow-left-right"></i></a> --}}
                   </div>
                   <div class=" position-absolute top-0 start-0">
-                    <span class="badge bg-danger">Hot</span>
+                    {{-- <span class="badge bg-danger">Hot</> --}}
                   </div>
                 </div>
                 <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Snack &
                       Munchies</small></a></div>
-                <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Onion
-                    Flavour Potato</a></h2>
+                <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Print Spanduk</a></h2>
                 <div class="text-warning">
 
                   <small> <i class="bi bi-star-fill"></i>
@@ -733,7 +734,8 @@
                     <i class="bi bi-star"></i></small> <span class="text-muted small">3.5 (456)</span>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mt-3">
-                  <div><span class="text-dark">$3</span> <span class="text-decoration-line-through text-muted">$5</span>
+                  <div><span class="text-dark">Rp. 3,000</span>
+                    {{-- <span class="text-decoration-line-through text-muted">$5</span> --}}
                   </div>
                   <div><a href="#!" class="btn btn-primary btn-sm">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -750,21 +752,20 @@
             <div class="card card-product">
               <div class="card-body">
                 <div class="text-center position-relative"> <a href="./pages/shop-single.html"><img
-                      src="images/products/product-img-5.jpg" alt="Grocery Ecommerce Template"
+                      src="images/products/dokumen.jpg" alt="Grocery Ecommerce Template"
                       class="mb-3 img-fluid"></a>
                   <div class="card-product-action">
                     <a href="#!" class="btn-action" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
                         class="bi bi-eye" data-bs-toggle="tooltip" data-bs-html="true" title="Quick View"></i></a>
                     <a href="../shop-wishlist.html" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true"
                       title="Wishlist"><i class="bi bi-heart"></i></a>
-                    <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" title="Compare"><i
-                        class="bi bi-arrow-left-right"></i></a>
+                    {{-- <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" title="Compare"><i
+                        class="bi bi-arrow-left-right"></i></a> --}}
                   </div>
                 </div>
                 <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Instant
                       Food</small></a></div>
-                <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Salted
-                    Instant Popcorn </a></h2>
+                <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Kertas A4 </a></h2>
                 <div class="text-warning">
 
                   <small> <i class="bi bi-star-fill"></i>
@@ -774,8 +775,8 @@
                     <i class="bi bi-star-half"></i></small> <span class="text-muted small">4.5 (39)</span>
                 </div>
                 <div class="d-flex justify-content-between mt-4">
-                  <div><span class="text-dark">$13</span> <span
-                      class="text-decoration-line-through text-muted">$18</span>
+                  <div><span class="text-dark">Rp. 13,000</span>
+                    {{-- <span  class="text-decoration-line-through text-muted">$18</span> --}}
                   </div>
                   <div><a href="#!" class="btn btn-primary btn-sm">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -794,23 +795,22 @@
 
                 <div class="text-center position-relative ">
                   <div class=" position-absolute top-0 start-0">
-                    <span class="badge bg-danger">Sale</span>
+                    {{-- <span class="badge bg-danger">Sale</span> --}}
                   </div>
-                  <a href="#!"> <img src="images/products/product-img-6.jpg" alt="Grocery Ecommerce Template"
+                  <a href="#!"> <img src="images/products/banner.jpg" alt="Grocery Ecommerce Template"
                       class="mb-3 img-fluid"></a>
                   <div class="card-product-action">
                     <a href="#!" class="btn-action" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
                         class="bi bi-eye" data-bs-toggle="tooltip" data-bs-html="true" title="Quick View"></i></a>
                     <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" title="Wishlist"><i
                         class="bi bi-heart"></i></a>
-                    <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" title="Compare"><i
-                        class="bi bi-arrow-left-right"></i></a>
+                    {{-- <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" title="Compare"><i
+                        class="bi bi-arrow-left-right"></i></a> --}}
                   </div>
                 </div>
                 <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Dairy, Bread &
                       Eggs</small></a></div>
-                <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Blueberry
-                    Greek Yogurt</a></h2>
+                <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Print Spanduk</a></h2>
                 <div>
 
                   <small class="text-warning"> <i class="bi bi-star-fill"></i>
@@ -820,8 +820,8 @@
                     <i class="bi bi-star-half"></i></small> <span class="text-muted small">4.5 (189)</span>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mt-3">
-                  <div><span class="text-dark">$18</span> <span
-                      class="text-decoration-line-through text-muted">$24</span>
+                  <div><span class="text-dark">Rp. 18,000</span>
+                    {{-- <span  class="text-decoration-line-through text-muted">$24</span> --}}
                   </div>
                   <div><a href="#!" class="btn btn-primary btn-sm">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -838,21 +838,20 @@
             <div class="card card-product">
               <div class="card-body">
                 <div class="text-center position-relative"> <a href="./pages/shop-single.html"><img
-                      src="images/products/product-img-7.jpg" alt="Grocery Ecommerce Template"
+                      src="images/products/dokumen.jpg" alt="Grocery Ecommerce Template"
                       class="mb-3 img-fluid"></a>
                   <div class="card-product-action">
                     <a href="#!" class="btn-action" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
                         class="bi bi-eye" data-bs-toggle="tooltip" data-bs-html="true" title="Quick View"></i></a>
                     <a href="../shop-wishlist.html" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true"
                       title="Wishlist"><i class="bi bi-heart"></i></a>
-                    <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" title="Compare"><i
-                        class="bi bi-arrow-left-right"></i></a>
+                    {{-- <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" title="Compare"><i
+                        class="bi bi-arrow-left-right"></i></a> --}}
                   </div>
                 </div>
                 <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Dairy, Bread &
                       Eggs</small></a></div>
-                <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Britannia
-                    Cheese Slices</a></h2>
+                <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Kertas A4</a></h2>
                 <div class="text-warning">
 
                   <small> <i class="bi bi-star-fill"></i>
@@ -862,7 +861,7 @@
                     <i class="bi bi-star-fill"></i></small> <span class="text-muted small">5 (345)</span>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mt-3">
-                  <div><span class="text-dark">$24</span>
+                  <div><span class="text-dark">Rp. 24,000</span>
                   </div>
                   <div><a href="#!" class="btn btn-primary btn-sm">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -879,21 +878,20 @@
             <div class="card card-product">
               <div class="card-body">
                 <div class="text-center position-relative"> <a href="./pages/shop-single.html"><img
-                      src="images/products/product-img-8.jpg" alt="Grocery Ecommerce Template"
+                      src="images/products/banner.jpg" alt="Grocery Ecommerce Template"
                       class="mb-3 img-fluid"></a>
                   <div class="card-product-action">
                     <a href="#!" class="btn-action" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
                         class="bi bi-eye" data-bs-toggle="tooltip" data-bs-html="true" title="Quick View"></i></a>
                     <a href="../shop-wishlist.html" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true"
                       title="Wishlist"><i class="bi bi-heart"></i></a>
-                    <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" title="Compare"><i
-                        class="bi bi-arrow-left-right"></i></a>
+                    {{-- <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" title="Compare"><i
+                        class="bi bi-arrow-left-right"></i></a> --}}
                   </div>
                 </div>
                 <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Instant
                       Food</small></a></div>
-                <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Kellogg's
-                    Original Cereals</a>
+                <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Print Spanduk</a>
                 </h2>
                 <div class="text-warning">
 
@@ -904,8 +902,8 @@
                     <i class="bi bi-star-half"></i></small> <span class="text-muted small">4 (90)</span>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mt-3">
-                  <div><span class="text-dark">$32</span> <span
-                      class="text-decoration-line-through text-muted">$35</span>
+                  <div><span class="text-dark">Rp. 32,000</span>
+                    {{-- <span  class="text-decoration-line-through text-muted">$35</span> --}}
                   </div>
                   <div><a href="#!" class="btn btn-primary btn-sm">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -922,21 +920,20 @@
             <div class="card card-product">
               <div class="card-body">
                 <div class="text-center position-relative"> <a href="./pages/shop-single.html"><img
-                      src="images/products/product-img-9.jpg" alt="Grocery Ecommerce Template"
+                      src="images/products/dokumen.jpg" alt="Grocery Ecommerce Template"
                       class="mb-3 img-fluid"></a>
                   <div class="card-product-action">
                     <a href="#!" class="btn-action" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
                         class="bi bi-eye" data-bs-toggle="tooltip" data-bs-html="true" title="Quick View"></i></a>
                     <a href="../shop-wishlist.html" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true"
                       title="Wishlist"><i class="bi bi-heart"></i></a>
-                    <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" title="Compare"><i
-                        class="bi bi-arrow-left-right"></i></a>
+                    {{-- <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" title="Compare"><i
+                        class="bi bi-arrow-left-right"></i></a> --}}
                   </div>
                 </div>
                 <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Snack &
                       Munchies</small></a></div>
-                <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Slurrp
-                    Millet Chocolate </a></h2>
+                <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Kertas A4</a></h2>
                 <div class="text-warning">
 
                   <small> <i class="bi bi-star-fill"></i>
@@ -946,7 +943,8 @@
                     <i class="bi bi-star-half"></i></small> <span class="text-muted small">4.5 (67)</span>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mt-3">
-                  <div><span class="text-dark">$3</span> <span class="text-decoration-line-through text-muted">$5</span>
+                  <div><span class="text-dark">Rp. 3,000</span>
+                    {{-- <span class="text-decoration-line-through text-muted">$5</span> --}}
                   </div>
                   <div><a href="#!" class="btn btn-primary btn-sm">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -963,21 +961,20 @@
             <div class="card card-product">
               <div class="card-body">
                 <div class="text-center position-relative"> <a href="./pages/shop-single.html"><img
-                      src="images/products/product-img-10.jpg" alt="Grocery Ecommerce Template"
+                      src="images/products/banner.jpg" alt="Grocery Ecommerce Template"
                       class="mb-3 img-fluid"></a>
                   <div class="card-product-action">
                     <a href="#!" class="btn-action" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
                         class="bi bi-eye" data-bs-toggle="tooltip" data-bs-html="true" title="Quick View"></i></a>
                     <a href="../shop-wishlist.html" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true"
                       title="Wishlist"><i class="bi bi-heart"></i></a>
-                    <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" title="Compare"><i
-                        class="bi bi-arrow-left-right"></i></a>
+                    {{-- <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" title="Compare"><i
+                        class="bi bi-arrow-left-right"></i></a> --}}
                   </div>
                 </div>
                 <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Dairy, Bread &
                       Eggs</small></a></div>
-                <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Amul
-                    Butter - 500 g</a></h2>
+                <h2 class="fs-6"><a href="./pages/shop-single" class="text-inherit text-decoration-none">Print Spanduk</a></h2>
                 <div class="text-warning">
 
                   <small> <i class="bi bi-star-fill"></i>
@@ -987,8 +984,8 @@
                     <i class="bi bi-star"></i></small> <span class="text-muted small">3.5 (89)</span>
                 </div>
                 <div class="d-flex justify-content-between mt-4">
-                  <div><span class="text-dark">$13</span> <span
-                      class="text-decoration-line-through text-muted">$18</span>
+                  <div><span class="text-dark">Rp. 13,000</span>
+                    {{-- <span  class="text-decoration-line-through text-muted">$18</span> --}}
                   </div>
                   <div><a href="#!" class="btn btn-primary btn-sm">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -1176,16 +1173,16 @@
             <div class="mb-8 mb-xl-0">
               <div class="mb-6"><img src="images/icons/clock.svg" alt=""></div>
               <h3 class="h5 mb-3">
-                10 minute grocery now
+                24/7 Service
               </h3>
-              <p>Get your order delivered to your doorstep at the earliest from FreshCart pickup stores near you.</p>
+              <p>Get your order delivered to your doorstep at the earliest from Cetakno pickup stores near you.</p>
             </div>
           </div>
           <div class="col-md-6  col-lg-3">
             <div class="mb-8 mb-xl-0">
               <div class="mb-6"><img src="images/icons/gift.svg" alt=""></div>
-              <h3 class="h5 mb-3">Best Prices & Offers</h3>
-              <p>Cheaper prices than your local supermarket, great cashback offers to top it off. Get best pricess &
+              <h3 class="h5 mb-3">Friendly Design</h3>
+              <p>Cheaper prices than your local printing, great cashback offers to top it off. Get best prices &
                 offers.
               </p>
             </div>
@@ -1193,7 +1190,7 @@
           <div class="col-md-6 col-lg-3">
             <div class="mb-8 mb-xl-0">
               <div class="mb-6"><img src="images/icons/package.svg" alt=""></div>
-              <h3 class="h5 mb-3">Wide Assortment</h3>
+              <h3 class="h5 mb-3">Pilihan Banyak</h3>
               <p>Choose from 5000+ products across food, personal care, household, bakery, veg and non-veg & other
                 categories.</p>
             </div>
@@ -1201,7 +1198,7 @@
           <div class="col-md-6 col-lg-3">
             <div class="mb-8 mb-xl-0">
               <div class="mb-6"><img src="images/icons/refresh-cw.svg" alt=""></div>
-              <h3 class="h5 mb-3">Easy Returns</h3>
+              <h3 class="h5 mb-3">Pengiriman & Pengambilan</h3>
               <p>Not satisfied with a product? Return it at the doorstep & get a refund within hours. No questions asked
                 <a href="#!">policy</a>.</p>
             </div>
@@ -1233,12 +1230,12 @@
                 class="zoom"
                 onmousemove="zoom(event)"
                 style="
-                  background-image: url(images/products/product-single-img-1.jpg);
+                  background-image: url(images/products/dokumen.jpg);
                 "
               >
                 <!-- img -->
                 <img
-                  src="images/products/product-single-img-1.jpg"
+                  src="images/products/dokumen.jpg"
                   alt=""
             >
               </div>
@@ -1247,12 +1244,12 @@
                   class="zoom"
                   onmousemove="zoom(event)"
                   style="
-                    background-image: url(images/products/product-single-img-2.jpg);
+                    background-image: url(images/products/banner.jpg);
                   "
                 >
                   <!-- img -->
                   <img
-                    src="images/products/product-single-img-2.jpg"
+                    src="images/products/banner.jpg"
                     alt=""
               >
                 </div>
@@ -1262,12 +1259,12 @@
                   class="zoom"
                   onmousemove="zoom(event)"
                   style="
-                    background-image: url(images/products/product-single-img-3.jpg);
+                    background-image: url(images/products/dokumen.jpg);
                   "
                 >
                   <!-- img -->
                   <img
-                    src="images/products/product-single-img-3.jpg"
+                    src="images/products/dokumen.jpg"
                     alt=""
               >
                 </div>
@@ -1277,12 +1274,12 @@
                   class="zoom"
                   onmousemove="zoom(event)"
                   style="
-                    background-image: url(images/products/product-single-img-4.jpg);
+                    background-image: url(images/products/banner.jpg);
                   "
                 >
                   <!-- img -->
                   <img
-                    src="images/products/product-single-img-4.jpg"
+                    src="images/products/banner.jpg"
                     alt=""
               >
                 </div>
@@ -1295,7 +1292,7 @@
                   <div class="thumbnails-img">
                     <!-- img -->
                     <img
-                      src="images/products/product-single-img-1.jpg"
+                      src="images/products/dokumen.jpg"
                       alt=""
                 >
                   </div>
@@ -1304,7 +1301,7 @@
                   <div class="thumbnails-img" >
                     <!-- img -->
                     <img
-                      src="images/products/product-single-img-2.jpg"
+                      src="images/products/banner.jpg"
                       alt=""
                 >
                   </div>
@@ -1313,7 +1310,7 @@
                   <div class="thumbnails-img">
                     <!-- img -->
                     <img
-                      src="images/products/product-single-img-3.jpg"
+                      src="images/products/dokumen.jpg"
                       alt=""
                 >
                   </div>
@@ -1322,7 +1319,7 @@
                   <div class="thumbnails-img">
                     <!-- img -->
                     <img
-                      src="images/products/product-single-img-4.jpg"
+                      src="images/products/banner.jpg"
                       alt=""
                 >
                   </div>
@@ -1332,8 +1329,8 @@
           </div>
           <div class="col-lg-6">
             <div class="ps-lg-8 mt-6 mt-lg-0">
-              <a href="#!" class="mb-4 d-block">Bakery Biscuits</a>
-              <h2 class="mb-1 h1">Napolitanke Ljesnjak</h2>
+              <a href="#!" class="mb-4 d-block">Dokumen</a>
+              <h2 class="mb-1 h1">Kertas A4</h2>
               <div class="mb-4">
                 <small class="text-warning">
                   <i class="bi bi-star-fill"></i>
@@ -1344,23 +1341,21 @@
                 ><a href="#" class="ms-2">(30 reviews)</a>
               </div>
               <div class="fs-4">
-                <span class="fw-bold text-dark">$32</span>
-                <span class="text-decoration-line-through text-muted">$35</span
-                ><span
-                  ><small class="fs-6 ms-2 text-danger">26% Off</small></span
-                >
+                <span class="fw-bold text-dark">Rp. 32,000</span>
+                {{-- <span class="text-decoration-line-through text-muted">$35</span> --}}
+                {{-- <span><small class="fs-6 ms-2 text-danger">26% Off</small></span> --}}
               </div>
               <hr class="my-6">
               <div class="mb-4">
                 <button type="button" class="btn btn-outline-secondary">
-                  250g
+                  Warna
                 </button>
                 <button type="button" class="btn btn-outline-secondary">
-                  500g
+                  Hitam Putih
                 </button>
-                <button type="button" class="btn btn-outline-secondary">
+                {{-- <button type="button" class="btn btn-outline-secondary">
                   1kg
-                </button>
+                </button> --}}
               </div>
               <div>
                 <!-- input -->
@@ -1385,14 +1380,14 @@
                 </div>
                 <div class="col-md-4 col-5">
                   <!-- btn -->
-                  <a
+                  {{-- <a
                     class="btn btn-light"
                     href="#"
                     data-bs-toggle="tooltip"
                     data-bs-html="true"
                     aria-label="Compare"
                     ><i class="bi bi-arrow-left-right"></i
-                  ></a>
+                  ></a> --}}
                   <a
                     class="btn btn-light"
                     href="#!"
@@ -1415,7 +1410,7 @@
                       <td>Availability:</td>
                       <td>In Stock</td>
                     </tr>
-                    <tr>
+                    {{-- <tr>
                       <td>Type:</td>
                       <td>Fruits</td>
                     </tr>
@@ -1428,7 +1423,7 @@
                           ></small
                         >
                       </td>
-                    </tr>
+                    </tr> --}}
                   </tbody>
                 </table>
               </div>
