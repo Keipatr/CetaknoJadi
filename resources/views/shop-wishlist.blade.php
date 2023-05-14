@@ -71,18 +71,18 @@
 
                                             </td>
                                             <td class="align-middle">
-                                                <a href="#"><img src="images/products/product-img-18.jpg"
+                                                <a href="#"><img src="images/products/Banner.jpg"
                                                         class="icon-shape icon-xxl" alt=""></a>
 
                                             </td>
                                             <td class="align-middle">
                                                 <div>
                                                     <h5 class="fs-6 mb-0"><a href="#"
-                                                            class="text-inherit">Organic Banana</a></h5>
-                                                    <small>$.98 / lb</small>
+                                                            class="text-inherit">Print Spanduk</a></h5>
+                                                    <small>Besar</small>
                                                 </div>
                                             </td>
-                                            <td class="align-middle">$35.00</td>
+                                            <td class="align-middle">Rp. 18,000</td>
                                             <td class="align-middle"><span class="badge bg-success">In Stock</span>
                                             </td>
                                             <td class="align-middle">
@@ -109,18 +109,18 @@
 
                                             </td>
                                             <td class="align-middle">
-                                                <a href="#"><img src="images/products/product-img-17.jpg"
+                                                <a href="#"><img src="images/products/dokumen.jpg"
                                                         class="icon-shape icon-xxl" alt=""></a>
 
                                             </td>
                                             <td class="align-middle">
                                                 <div>
                                                     <h5 class="fs-6 mb-0"><a href="#"
-                                                            class="text-inherit">Fresh Kiwi</a></h5>
-                                                    <small>4 no</small>
+                                                            class="text-inherit">Kertas A4</a></h5>
+                                                    <small>Sinar Dunia</small>
                                                 </div>
                                             </td>
-                                            <td class="align-middle">$20.97</td>
+                                            <td class="align-middle">Rp.18,000</td>
                                             <td class="align-middle"><span class="badge bg-danger">Out of
                                                     Stock</span></td>
                                             <td class="align-middle">
@@ -147,18 +147,18 @@
 
                                             </td>
                                             <td class="align-middle">
-                                                <a href="#"><img src="images/products/product-img-16.jpg"
+                                                <a href="#"><img src="images/products/Banner.jpg"
                                                         class="icon-shape icon-xxl" alt=""></a>
 
                                             </td>
                                             <td class="align-middle">
                                                 <div>
                                                     <h5 class="fs-6 mb-0"><a href="#"
-                                                            class="text-inherit">Golden Pineapple</a></h5>
-                                                    <small>2 no</small>
+                                                            class="text-inherit">Print Spanduk</a></h5>
+                                                    <small>Sedang</small>
                                                 </div>
                                             </td>
-                                            <td class="align-middle">$35.00</td>
+                                            <td class="align-middle">Rp. 10,000</td>
                                             <td class="align-middle"><span class="badge bg-success">In Stock</span>
                                             </td>
                                             <td class="align-middle">
@@ -185,18 +185,18 @@
 
                                             </td>
                                             <td class="align-middle">
-                                                <a href="#"><img src="images/products/product-img-19.jpg"
+                                                <a href="#"><img src="images/products/dokumen.jpg"
                                                         class="icon-shape icon-xxl" alt=""></a>
 
                                             </td>
                                             <td class="align-middle">
                                                 <div>
                                                     <h5 class="fs-6 mb-0"><a href="#"
-                                                            class="text-inherit">BeatRoot</a></h5>
-                                                    <small>1 kg</small>
+                                                            class="text-inherit">Kertas A4</a></h5>
+                                                    <small>Epaper</small>
                                                 </div>
                                             </td>
-                                            <td class="align-middle">$29.00</td>
+                                            <td class="align-middle">Rp. 12,000</td>
                                             <td class="align-middle"><span class="badge bg-success">In Stock</span>
                                             </td>
                                             <td class="align-middle">
@@ -222,18 +222,18 @@
 
                                             </td>
                                             <td class="align-middle">
-                                                <a href="#"><img src="images/products/product-img-15.jpg"
+                                                <a href="#"><img src="images/products/dokumen.jpg"
                                                         class="icon-shape icon-xxl" alt=""></a>
 
                                             </td>
                                             <td class="align-middle">
                                                 <div>
                                                     <h5 class="fs-6 mb-0"><a href="#"
-                                                            class="text-inherit">Fresh Apple</a></h5>
-                                                    <small>2 kg</small>
+                                                            class="text-inherit">Kertas A4</a></h5>
+                                                    <small>PaperOne</small>
                                                 </div>
                                             </td>
-                                            <td class="align-middle">$70.00</td>
+                                            <td class="align-middle">Rp. 30,000</td>
                                             <td class="align-middle"><span class="badge bg-success">In Stock</span>
                                             </td>
                                             <td class="align-middle">
