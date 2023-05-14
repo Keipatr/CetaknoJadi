@@ -233,7 +233,7 @@
                                                     <small>PaperOne</small>
                                                 </div>
                                             </td>
-                                            <td class="align-middle">Rp. 30,000</td>
+                                            <td class="align-middle">Rp. 3,000</td>
                                             <td class="align-middle"><span class="badge bg-success">In Stock</span>
                                             </td>
                                             <td class="align-middle">
