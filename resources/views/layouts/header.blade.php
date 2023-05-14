@@ -134,7 +134,7 @@
             <div class="container">
                 <div class="row w-100 align-items-center gx-lg-2 gx-0">
                     <div class="col-xxl-2 col-lg-3">
-                        <a class="navbar-brand d-none d-lg-block" href="{{ url('/index') }}">
+                        <a class="navbar-brand d-none d-lg-block " href="{{ url('/index') }}">
                             <img src="images/logo/freshcart-logo.svg" alt="eCommerce HTML Template">
 
                         </a>
@@ -912,15 +912,15 @@
                         <!-- row -->
                         <div class="row align-items-center">
                             <div class="col-3 col-md-2">
-                                <!-- img --> <img src="images/products/product-img-1.jpg" alt="Ecommerce"
+                                <!-- img --> <img src="images/products/Banner.jpg" alt="Ecommerce"
                                     class="img-fluid">
                             </div>
                             <div class="col-4 col-md-6 col-lg-5">
                                 <!-- title -->
                                 <a href="./pages/shop-single.html" class="text-inherit">
-                                    <h6 class="mb-0">Haldiram's Sev Bhujia</h6>
+                                    <h6 class="mb-0">Print Spanduk</h6>
                                 </a>
-                                <span><small class="text-muted">.98 / lb</small></span>
+                                <span><small class="text-muted">Kecil</small></span>
                                 <!-- text -->
                                 <div class="mt-2 small lh-1"> <a href="#!"
                                         class="text-decoration-none text-inherit"> <span
@@ -955,7 +955,7 @@
                             </div>
                             <!-- price -->
                             <div class="col-2 text-lg-end text-start text-md-end col-md-2">
-                                <span class="fw-bold">$5.00</span>
+                                <span class="fw-bold">Rp. 3,000</span>
 
                             </div>
                         </div>
@@ -966,15 +966,15 @@
                         <!-- row -->
                         <div class="row align-items-center">
                             <div class="col-3 col-md-2">
-                                <!-- img --> <img src="images/products/product-img-2.jpg" alt="Ecommerce"
+                                <!-- img --> <img src="images/products/dokumen.jpg" alt="Ecommerce"
                                     class="img-fluid">
                             </div>
                             <div class="col-4 col-md-6 col-lg-5">
                                 <!-- title -->
                                 <a href="./pages/shop-single.html" class="text-inherit">
-                                    <h6 class="mb-0">NutriChoice Digestive </h6>
+                                    <h6 class="mb-0">Kertas A4 </h6>
                                 </a>
-                                <span><small class="text-muted">250g</small></span>
+                                <span><small class="text-muted">40 Lembar</small></span>
                                 <!-- text -->
                                 <div class="mt-2 small lh-1"> <a href="#!"
                                         class="text-decoration-none text-inherit"> <span
@@ -1008,7 +1008,7 @@
                             </div>
                             <!-- price -->
                             <div class="col-2 text-lg-end text-start text-md-end col-md-2">
-                                <span class="fw-bold">$26.00</span>
+                                <span class="fw-bold">Rp. 20,000</span>
                                 {{-- <span class="fw-bold text-danger">$20.00</span>
                                 <div class="text-decoration-line-through text-muted small">$26.00</div> --}}
                             </div>
@@ -1020,15 +1020,15 @@
                         <!-- row -->
                         <div class="row align-items-center">
                             <div class="col-3 col-md-2">
-                                <!-- img --> <img src="images/products/product-img-3.jpg" alt="Ecommerce"
+                                <!-- img --> <img src="images/products/dokumen.jpg" alt="Ecommerce"
                                     class="img-fluid">
                             </div>
                             <div class="col-4 col-md-6 col-lg-5">
                                 <!-- title -->
                                 <a href="./pages/shop-single.html" class="text-inherit">
-                                    <h6 class="mb-0">Cadbury 5 Star Chocolate</h6>
+                                    <h6 class="mb-0">Kertas A4</h6>
                                 </a>
-                                <span><small class="text-muted">1 kg</small></span>
+                                <span><small class="text-muted">1 Rim</small></span>
                                 <!-- text -->
                                 <div class="mt-2 small lh-1"> <a href="#!"
                                         class="text-decoration-none text-inherit"> <span
@@ -1064,7 +1064,7 @@
                             </div>
                             <!-- price -->
                             <div class="col-2 text-lg-end text-start text-md-end col-md-2">
-                                <span class="fw-bold">$15.00</span>
+                                <span class="fw-bold">Rp. 45,000</span>
                                 {{-- <span class="fw-bold">$15.00</span>
                                 <div class="text-decoration-line-through text-muted small">$20.00</div> --}}
                             </div>
@@ -1076,15 +1076,15 @@
                         <!-- row -->
                         <div class="row align-items-center">
                             <div class="col-3 col-md-2">
-                                <!-- img --> <img src="images/products/product-img-4.jpg" alt="Ecommerce"
+                                <!-- img --> <img src="images/products/banner.jpg" alt="Ecommerce"
                                     class="img-fluid">
                             </div>
                             <div class="col-4 col-md-6 col-lg-5">
                                 <!-- title -->
                                 <a href="./pages/shop-single.html" class="text-inherit">
-                                    <h6 class="mb-0">Onion Flavour Potato</h6>
+                                    <h6 class="mb-0">Print Spanduk</h6>
                                 </a>
-                                <span><small class="text-muted">250g</small></span>
+                                <span><small class="text-muted">Sedang</small></span>
                                 <!-- text -->
                                 <div class="mt-2 small lh-1"> <a href="#!"
                                         class="text-decoration-none text-inherit"> <span
@@ -1118,7 +1118,7 @@
                             </div>
                             <!-- price -->
                             <div class="col-2 text-lg-end text-start text-md-end col-md-2">
-                                <span class="fw-bold">$20.00</span>
+                                <span class="fw-bold">Rp. 15,000</span>
                                 {{-- <span class="fw-bold">$15.00</span>
                                 <div class="text-decoration-line-through text-muted small">$20.00</div> --}}
                             </div>
@@ -1130,15 +1130,15 @@
                         <!-- row -->
                         <div class="row align-items-center">
                             <div class="col-3 col-md-2">
-                                <!-- img --> <img src="images/products/product-img-5.jpg" alt="Ecommerce"
+                                <!-- img --> <img src="images/products/banner.jpg" alt="Ecommerce"
                                     class="img-fluid">
                             </div>
                             <div class="col-4 col-md-6 col-lg-5">
                                 <!-- title -->
                                 <a href="./pages/shop-single.html" class="text-inherit">
-                                    <h6 class="mb-0">Salted Instant Popcorn </h6>
+                                    <h6 class="mb-0">Print Spanduk </h6>
                                 </a>
-                                <span><small class="text-muted">100g</small></span>
+                                <span><small class="text-muted">Besar</small></span>
                                 <!-- text -->
                                 <div class="mt-2 small lh-1"> <a href="#!"
                                         class="text-decoration-none text-inherit"> <span
@@ -1172,7 +1172,7 @@
                             </div>
                             <!-- price -->
                             <div class="col-2 text-lg-end text-start text-md-end col-md-2">
-                                <span class="fw-bold">$15.00</span>
+                                <span class="fw-bold">Rp. 32,000</span>
                                 {{-- <span class="fw-bold">$15.00</span>
                                 <div class="text-decoration-line-through text-muted small">$25.00</div> --}}
                             </div>

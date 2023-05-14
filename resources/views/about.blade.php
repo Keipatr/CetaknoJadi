@@ -14,18 +14,15 @@
                             <div class="col-md-6">
                                 <!-- text -->
                                 <div class="ms-xxl-14 me-xxl-15 mb-8 mb-md-0 text-center text-md-start">
-                                    <h1 class="mb-6">The Future of Grocery Delivery:</h1>
-                                    <p class="mb-0 lead">By powering the future of grocery with our retail partners,
-                                        we give everyone access
-                                        to
-                                        the food they love and more time to enjoy it together.</p>
+                                    <h1 class="mb-6">Cetakno</h1>
+                                    <p class="mb-0 lead">Menyediakan kemudahan untuk kebutuhan printing Anda.</p>
                                 </div>
                             </div>
                             <!-- col -->
                             <div class="col-md-6">
                                 <div class=" me-6">
                                     <!-- img -->
-                                    <img src="images/about/about-img.jpg" alt=""
+                                    <img src="images/logo/EGI - Cetakno Logo Yellow.png" alt=""
                                         class="img-fluid rounded">
                                 </div>
                             </div>
@@ -48,12 +45,12 @@
                                             <!-- img -->
                                             <img src="images/about/about-icons-1.svg" alt="">
                                         </div>
-                                        <h4>Grow my business with Freshcart</h4>
+                                        <h4>Grow my business with Cetakno</h4>
                                         <p>Duis placerat, urna ut dictum lobortis, erat libero feugiat nulla,
                                             ullamcorper fermentum lectus
                                             dolor ut tortor. </p>
                                         <!-- btn -->
-                                        <a href="#" class="btn btn-dark mt-2">FreshCart Platform</a>
+                                        <a href="#" class="btn btn-dark mt-2">Cetakno Platform</a>
                                     </div>
 
                                 </div>
@@ -67,12 +64,12 @@
                                             <!-- img -->
                                             <img src="images/about/about-icons-2.svg" alt="">
                                         </div>
-                                        <h4>Advertise my brand on Freshcart</h4>
+                                        <h4>Advertise my brand on Cetakno</h4>
                                         <p>Duis placerat, urna ut dictum lobortis, erat libero feugiat nulla,
                                             ullamcorper fermentum lectus
                                             dolor ut tortor. </p>
                                         <!-- btn -->
-                                        <a href="#" class="btn btn-dark mt-2">FreshCart ads</a>
+                                        <a href="#" class="btn btn-dark mt-2">Cetakno ads</a>
                                     </div>
 
                                 </div>
@@ -86,7 +83,7 @@
                                             <!-- img -->
                                             <img src="images/about/about-icons-3.svg" alt="">
                                         </div>
-                                        <h4>Learn more about Freshcart</h4>
+                                        <h4>Learn more about Cetakno</h4>
                                         <p>Vivamus non risus id sapien egestas tempus id sed lla mus justo metus,
                                             suscipit non hendrerit. </p>
                                         <!-- btn -->
@@ -176,7 +173,7 @@
                     <div class="bg-light rounded ">
                         <!-- text -->
                         <div class="p-6">
-                            <h5 class="h6 mb-0">Chris Rogers</h5>
+                            <h5 class="h6 mb-0">Jeffri Lieca</h5>
                             <small>Vice President, Retail</small>
                         </div>
                         <!-- img -->
@@ -189,7 +186,7 @@
                     <div class="bg-light rounded">
                         <!-- text -->
                         <div class="p-6">
-                            <h5 class="h6 mb-0">Donna J. Shelton</h5>
+                            <h5 class="h6 mb-0">Kei Patrick</h5>
                             <small>Chief Financial Officer</small>
                         </div>
                         <!-- img -->
@@ -201,7 +198,7 @@
                     <div class="bg-light rounded ">
                         <!-- text -->
                         <div class="p-6">
-                            <h5 class="h6 mb-0">Daniel Leedom</h5>
+                            <h5 class="h6 mb-0">Yves King</h5>
                             <small>Chief Communications Officer</small>
                         </div>
                         <!-- img -->
@@ -213,7 +210,7 @@
                     <div class="bg-light rounded ">
                         <!-- text -->
                         <div class="p-6">
-                            <h5 class="h6 mb-0">Martha White</h5>
+                            <h5 class="h6 mb-0">Trisha Alexis</h5>
                             <small>Chief Technology Officer</small>
                         </div>
                         <!-- img -->
@@ -225,7 +222,7 @@
                     <div class="bg-light rounded ">
                         <!-- text -->
                         <div class="p-6">
-                            <h5 class="h6 mb-0">Victor Pugliese</h5>
+                            <h5 class="h6 mb-0">Chandra</h5>
                             <small>Chief Human Resources Officer</small>
                         </div>
                         <!-- img -->
@@ -237,7 +234,7 @@
                     <div class="bg-light rounded ">
                         <!-- text -->
                         <div class="p-6">
-                            <h5 class="h6 mb-0">Donna J. Shelton</h5>
+                            <h5 class="h6 mb-0">Hilton</h5>
                             <small>Chief Financial Officer</small>
                         </div>
                         <!-- img -->
@@ -249,7 +246,7 @@
                     <div class="bg-light rounded ">
                         <div class="p-6">
                             <!-- text -->
-                            <h5 class="h6 mb-0">Daniel Leedom</h5>
+                            <h5 class="h6 mb-0">Lieca</h5>
                             <small>Chief Communications Officer</small>
                         </div>
                         <!-- img -->
@@ -261,7 +258,7 @@
                     <div class="bg-light rounded ">
                         <!-- text -->
                         <div class="p-6">
-                            <h5 class="h6 mb-0">Martha White</h5>
+                            <h5 class="h6 mb-0">Alexis</h5>
                             <small>Chief Technology Officer</small>
                         </div>
                         <!-- img -->

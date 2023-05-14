@@ -592,8 +592,7 @@
                   </div>
 
                 </div>
-                <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Snack &
-                      Munchies</small></a></div>
+                <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Dokumen</small></a></div>
                 <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Kertas A4</a></h2>
                 <div>
 
@@ -637,8 +636,7 @@
                   </div>
 
                 </div>
-                <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Bakery &
-                      Biscuits</small></a></div>
+                <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Spanduk & Banner</small></a></div>
                 <h2 class="fs-6"><a href="./pages/shop-single.html"
                     class="text-inherit text-decoration-none">Print Spanduk </a></h2>
                 <div class="text-warning">
@@ -678,8 +676,7 @@
                         class="bi bi-arrow-left-right"></i></a> --}}
                   </div>
                 </div>
-                <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Bakery &
-                      Biscuits</small></a></div>
+                <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Dokumen</small></a></div>
                 <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Kertas A4</a></h2>
                 <div class="text-warning">
 
@@ -722,8 +719,7 @@
                     {{-- <span class="badge bg-danger">Hot</> --}}
                   </div>
                 </div>
-                <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Snack &
-                      Munchies</small></a></div>
+                <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Spanduk & Banner</small></a></div>
                 <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Print Spanduk</a></h2>
                 <div class="text-warning">
 
@@ -763,8 +759,7 @@
                         class="bi bi-arrow-left-right"></i></a> --}}
                   </div>
                 </div>
-                <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Instant
-                      Food</small></a></div>
+                <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Dokumen</small></a></div>
                 <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Kertas A4 </a></h2>
                 <div class="text-warning">
 
@@ -808,8 +803,7 @@
                         class="bi bi-arrow-left-right"></i></a> --}}
                   </div>
                 </div>
-                <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Dairy, Bread &
-                      Eggs</small></a></div>
+                <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Spanduk & Banner</small></a></div>
                 <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Print Spanduk</a></h2>
                 <div>
 
@@ -849,8 +843,7 @@
                         class="bi bi-arrow-left-right"></i></a> --}}
                   </div>
                 </div>
-                <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Dairy, Bread &
-                      Eggs</small></a></div>
+                <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Dokumen</small></a></div>
                 <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Kertas A4</a></h2>
                 <div class="text-warning">
 
@@ -889,8 +882,7 @@
                         class="bi bi-arrow-left-right"></i></a> --}}
                   </div>
                 </div>
-                <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Instant
-                      Food</small></a></div>
+                <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Spanduk & Banner</small></a></div>
                 <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Print Spanduk</a>
                 </h2>
                 <div class="text-warning">
@@ -931,8 +923,7 @@
                         class="bi bi-arrow-left-right"></i></a> --}}
                   </div>
                 </div>
-                <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Snack &
-                      Munchies</small></a></div>
+                <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Dokumen</small></a></div>
                 <h2 class="fs-6"><a href="./pages/shop-single.html" class="text-inherit text-decoration-none">Kertas A4</a></h2>
                 <div class="text-warning">
 
@@ -972,8 +963,7 @@
                         class="bi bi-arrow-left-right"></i></a> --}}
                   </div>
                 </div>
-                <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Dairy, Bread &
-                      Eggs</small></a></div>
+                <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>Spanduk & Banner</small></a></div>
                 <h2 class="fs-6"><a href="./pages/shop-single" class="text-inherit text-decoration-none">Print Spanduk</a></h2>
                 <div class="text-warning">
 
