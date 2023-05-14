@@ -5,8 +5,11 @@
 
     <title>Cetakno - Printing Provider</title>
     <link href="{{ asset('libs/slick-carousel/slick/slick.css') }}" rel="stylesheet" />
-    <link href="{{ asset('libs/slick-carousel/slick/slick-theme.css')}}" rel="stylesheet" />
+    <link href="{{ asset('libs/slick-carousel/slick/slick-theme.css') }}" rel="stylesheet" />
     <link href="{{ asset('libs/tiny-slider/dist/tiny-slider.css') }}" rel="stylesheet">
+    <link href="libs/dropzone/dist/min/dropzone.min.css" rel="stylesheet" />
+    <link href="libs/tiny-slider/dist/tiny-slider.css" rel="stylesheet">
+    <link href="libs/nouislider/dist/nouislider.min.css" rel="stylesheet">
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -37,7 +40,7 @@
 
 
     <!-- Theme CSS -->
-    <link rel="stylesheet" href="{{asset('css/theme.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/theme.min.css') }}">
 
 
 </head>
@@ -235,7 +238,7 @@
                         <div class="list-inline">
                             <div class="list-inline-item">
 
-                                <a href="{{url('wishlist')}}" class="text-muted position-relative">
+                                <a href="{{ url('wishlist') }}" class="text-muted position-relative">
 
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -380,13 +383,15 @@
                                 <ul class="mb-0 list-unstyled">
                                     <li><a class="dropdown-item" href="./pages/shop-grid.html">Cetak Kalender</a>
                                     </li>
-                                    <li><a class="dropdown-item" href="./pages/shop-grid.html">Kartu Nama Undangan & Foto</a>
+                                    <li><a class="dropdown-item" href="./pages/shop-grid.html">Kartu Nama Undangan &
+                                            Foto</a>
                                     </li>
                                     <li><a class="dropdown-item" href="./pages/shop-grid.html">Dokumen</a>
                                     </li>
                                     <li><a class="dropdown-item" href="./pages/shop-grid.html">Media Promosi</a></li>
                                     <li><a class="dropdown-item" href="./pages/shop-grid.html">Print Offset</a></li>
-                                    <li><a class="dropdown-item" href="./pages/shop-grid.html">Spanduk & Banner</a></li>
+                                    <li><a class="dropdown-item" href="./pages/shop-grid.html">Spanduk & Banner</a>
+                                    </li>
                                     <li><a class="dropdown-item" href="./pages/shop-grid.html">Kaos & Kain</a></li>
                                 </ul>
                             </div>
@@ -526,8 +531,8 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{{ url('signin') }}">Sign in</a></li>
-                                    <li><a class="dropdown-item" href="{{url('signup')}}">Signup</a></li>
-                                    <li><a class="dropdown-item" href="{{url('forgot')}}">Forgot
+                                    <li><a class="dropdown-item" href="{{ url('signup') }}">Signup</a></li>
+                                    <li><a class="dropdown-item" href="{{ url('forgot') }}">Forgot
                                             Password</a></li>
                                     <li class="dropdown-submenu dropend">
                                         <a class="dropdown-item dropdown-list-group-item dropdown-toggle"
@@ -535,28 +540,39 @@
                                             My Account
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="{{url('account-orders')}}">Orders</a>
+                                            <li><a class="dropdown-item"
+                                                    href="{{ url('account-orders') }}">Orders</a>
+                                            </li>
+                                            <li><a class="dropdown-item" href="{{ url('account') }}">Settings</a>
                                             </li>
                                             <li><a class="dropdown-item"
-                                                    href="{{url('account')}}">Settings</a></li>
-                                            <li><a class="dropdown-item"
-                                                    href="{{url('account-address')}}">Address</a></li>
-                                            <li><a class="dropdown-item"
-                                                    href="{{url('account-payment')}}">Payment Method</a>
+                                                    href="{{ url('account-address') }}">Address</a></li>
+                                            <li><a class="dropdown-item" href="{{ url('account-payment') }}">Payment
+                                                    Method</a>
                                             </li>
                                             <li><a class="dropdown-item"
-                                                    href="{{url('account-notification')}}">Notification</a></li>
+                                                    href="{{ url('account-notification') }}">Notification</a></li>
                                         </ul>
                                     </li>
                                 </ul>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link" href="{{url('about-us')}}">
+                                <a class="nav-link" href="{{ url('products') }}">
+                                    Products
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ url('stores') }}">
+                                    Stores
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ url('about-us') }}">
                                     About Us
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link" href="{{url('contact-us')}}">
+                                <a class="nav-link" href="{{ url('contact-us') }}">
                                     Contact Us
                                 </a>
                             </li>
@@ -612,7 +628,7 @@
                     <div class="d-block d-lg-none h-100" data-simplebar="">
                         <ul class="navbar-nav ">
                             <li class="nav-item ">
-                                <a class="nav-link" href="{{url('wishlist')}}">
+                                <a class="nav-link" href="{{ url('wishlist') }}">
                                     Wishlist
                                 </a>
                             </li>
@@ -755,9 +771,9 @@
                                     My Account
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{url('signin')}}">Sign in</a></li>
-                                    <li><a class="dropdown-item" href="{{url('signup')}}">Signup</a></li>
-                                    <li><a class="dropdown-item" href="{{url('forgot')}}">Forgot
+                                    <li><a class="dropdown-item" href="{{ url('signin') }}">Sign in</a></li>
+                                    <li><a class="dropdown-item" href="{{ url('signup') }}">Signup</a></li>
+                                    <li><a class="dropdown-item" href="{{ url('forgot') }}">Forgot
                                             Password</a></li>
                                     <li class="dropdown-submenu dropend">
                                         <a class="dropdown-item dropdown-list-group-item dropdown-toggle"
@@ -765,28 +781,39 @@
                                             My Account
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="{{url('account-orders')}}">Orders</a>
+                                            <li><a class="dropdown-item"
+                                                    href="{{ url('account-orders') }}">Orders</a>
+                                            </li>
+                                            <li><a class="dropdown-item" href="{{ url('account') }}">Settings</a>
                                             </li>
                                             <li><a class="dropdown-item"
-                                                    href="{{url('account')}}">Settings</a></li>
-                                            <li><a class="dropdown-item"
-                                                    href="{{url('account-address')}}">Address</a></li>
-                                            <li><a class="dropdown-item"
-                                                    href="{{url('account-payment')}}">Payment Method</a>
+                                                    href="{{ url('account-address') }}">Address</a></li>
+                                            <li><a class="dropdown-item" href="{{ url('account-payment') }}">Payment
+                                                    Method</a>
                                             </li>
                                             <li><a class="dropdown-item"
-                                                    href="{{url('account-notification')}}">Notification</a></li>
+                                                    href="{{ url('account-notification') }}">Notification</a></li>
                                         </ul>
                                     </li>
                                 </ul>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link" href="{{url('about-us')}}">
+                                <a class="nav-link" href="{{ url('products') }}">
+                                    Products
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ url('stores') }}">
+                                    Stores
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ url('about-us') }}">
                                     About Us
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link" href="{{url('contact-us')}}">
+                                <a class="nav-link" href="{{ url('contact-us') }}">
                                     Contact Us
                                 </a>
                             </li>
@@ -880,7 +907,10 @@
                 </div>
                 <div class="modal-footer border-0 justify-content-center">
 
-                    Already have an account? <a href="{{url('signin')}}" style="color: black; text-decoration: none;" onmouseover="this.style.color='green'; this.style.textDecoration='underline';" onmouseout="this.style.color='black'; this.style.textDecoration='none';">Sign in</a>
+                    Already have an account? <a href="{{ url('signin') }}"
+                        style="color: black; text-decoration: none;"
+                        onmouseover="this.style.color='green'; this.style.textDecoration='underline';"
+                        onmouseout="this.style.color='black'; this.style.textDecoration='none';">Sign in</a>
                 </div>
             </div>
         </div>
@@ -912,8 +942,7 @@
                         <!-- row -->
                         <div class="row align-items-center">
                             <div class="col-3 col-md-2">
-                                <!-- img --> <img src="images/products/Banner.jpg" alt="Ecommerce"
-                                    class="img-fluid">
+                                <!-- img --> <img src="images/products/Banner.jpg" alt="Ecommerce" class="img-fluid">
                             </div>
                             <div class="col-4 col-md-6 col-lg-5">
                                 <!-- title -->
@@ -1041,11 +1070,9 @@
                                                 <path
                                                     d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
                                                 </path>
-                                                <line x1="10" y1="11" x2="10"
-                                                    y2="17">
+                                                <line x1="10" y1="11" x2="10" y2="17">
                                                 </line>
-                                                <line x1="14" y1="11" x2="14"
-                                                    y2="17">
+                                                <line x1="14" y1="11" x2="14" y2="17">
                                                 </line>
                                             </svg></span><span class="text-muted">Remove</span></a></div>
                             </div>
@@ -1076,8 +1103,7 @@
                         <!-- row -->
                         <div class="row align-items-center">
                             <div class="col-3 col-md-2">
-                                <!-- img --> <img src="images/products/banner.jpg" alt="Ecommerce"
-                                    class="img-fluid">
+                                <!-- img --> <img src="images/products/banner.jpg" alt="Ecommerce" class="img-fluid">
                             </div>
                             <div class="col-4 col-md-6 col-lg-5">
                                 <!-- title -->
@@ -1097,10 +1123,10 @@
                                                 <path
                                                     d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
                                                 </path>
-                                                <line x1="10" y1="11" x2="10"
-                                                    y2="17"></line>
-                                                <line x1="14" y1="11" x2="14"
-                                                    y2="17"></line>
+                                                <line x1="10" y1="11" x2="10" y2="17">
+                                                </line>
+                                                <line x1="14" y1="11" x2="14" y2="17">
+                                                </line>
                                             </svg></span><span class="text-muted">Remove</span></a></div>
                             </div>
                             <!-- input group -->
@@ -1130,8 +1156,7 @@
                         <!-- row -->
                         <div class="row align-items-center">
                             <div class="col-3 col-md-2">
-                                <!-- img --> <img src="images/products/banner.jpg" alt="Ecommerce"
-                                    class="img-fluid">
+                                <!-- img --> <img src="images/products/banner.jpg" alt="Ecommerce" class="img-fluid">
                             </div>
                             <div class="col-4 col-md-6 col-lg-5">
                                 <!-- title -->
@@ -1151,10 +1176,10 @@
                                                 <path
                                                     d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
                                                 </path>
-                                                <line x1="10" y1="11" x2="10"
-                                                    y2="17"></line>
-                                                <line x1="14" y1="11" x2="14"
-                                                    y2="17"></line>
+                                                <line x1="10" y1="11" x2="10" y2="17">
+                                                </line>
+                                                <line x1="14" y1="11" x2="14" y2="17">
+                                                </line>
                                             </svg></span><span class="text-muted">Remove</span></a></div>
                             </div>
                             <!-- input group -->
@@ -1183,7 +1208,7 @@
                 </ul>
                 <!-- btn -->
                 <div class="d-flex justify-content-between mt-4">
-                    <a href="{{url('cart')}}" class="btn btn-primary">Go To Cart</a> {{-- Continue Shopping --}}
+                    <a href="{{ url('cart') }}" class="btn btn-primary">Go To Cart</a> {{-- Continue Shopping --}}
                     <a href="#!" class="btn btn-dark">Update Cart</a>
                 </div>
 
@@ -1223,7 +1248,7 @@
                                     class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action active">
                                     <span>Surabaya</span>
                                     {{-- <span>Min:$20</span> --}}
-                                    </a>
+                                </a>
                                 <a href="#"
                                     class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
                                     <span>Makassar</span>
@@ -1277,4 +1302,3 @@
             </div>
         </div>
     </div>
-

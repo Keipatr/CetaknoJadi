@@ -76,6 +76,20 @@ Route::get('store-draya', function () {
     return view('store-single');
 });
 
+Route::get('overview', function () {
+    return view('overview');
+});
+
+
+Route::get('products', function () {
+    return view('shop-grid');
+});
+Route::get('product-banner', function () {
+    return view('shop-single');
+});
+Route::get('products-banner', function () {
+    return view('shop-single');
+});
 
 Route::fallback(function () {
     return view('404error');
