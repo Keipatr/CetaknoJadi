@@ -169,7 +169,7 @@
                       <!-- item -->
                       <div class="item">
                           <!-- item -->
-                          <a href="shop-grid.html" class="text-decoration-none text-inherit">
+                          <a href="{{url('products')}}" class="text-decoration-none text-inherit">
                             <!-- card -->
                             <div class="card mb-3 card-lift">
                                 <div class="card-body text-center py-6 text-center">
@@ -179,14 +179,14 @@
                                       </svg>
                                   </div>
                                   <!-- text -->
-                                  <div>Kalender</div>
+                                  <div>Cetak Kalender</div>
                                 </div>
                             </div>
                           </a>
                       </div>
                       <div class="item">
                           <!-- item -->
-                          <a href="shop-grid.html" class="text-decoration-none text-inherit">
+                          <a href="{{url('products')}}" class="text-decoration-none text-inherit">
                             <!-- card -->
                             <div class="card mb-3 card-lift">
                                 <div class="card-body text-center py-6">
@@ -204,7 +204,7 @@
                       </div>
                       <div class="item">
                           <!-- item -->
-                          <a href="shop-grid.html" class="text-decoration-none text-inherit">
+                          <a href="{{url('products')}}" class="text-decoration-none text-inherit">
                             <!-- card -->
                             <div class="card mb-3 card-lift">
                                 <div class="card-body text-center py-6">
@@ -222,7 +222,7 @@
                       </div>
                       <div class="item">
                           <!-- item -->
-                          <a href="shop-grid.html" class="text-decoration-none text-inherit">
+                          <a href="{{url('products')}}" class="text-decoration-none text-inherit">
                             <!-- card -->
                             <div class="card mb-3 card-lift">
                                 <div class="card-body text-center py-6">
@@ -240,7 +240,7 @@
                       </div>
                       <div class="item">
                           <!-- item -->
-                          <a href="shop-grid.html" class="text-decoration-none text-inherit">
+                          <a href="{{url('products')}}" class="text-decoration-none text-inherit">
                             <!-- card -->
                             <div class="card mb-3 card-lift">
                                 <div class="card-body text-center py-6">
@@ -258,7 +258,7 @@
                       </div>
                       <div class="item">
                           <!-- item -->
-                          <a href="shop-grid.html" class="text-decoration-none text-inherit">
+                          <a href="{{url('products')}}" class="text-decoration-none text-inherit">
                             <!-- card -->
                             <div class="card mb-3 card-lift">
                                 <div class="card-body text-center py-6">
@@ -276,7 +276,7 @@
                       </div>
                       {{-- <div class="item">
                           <!-- item -->
-                          <a href="shop-grid.html" class="text-decoration-none text-inherit">
+                          <a href="{{url('products')}}" class="text-decoration-none text-inherit">
                             <!-- card -->
                             <div class="card mb-3 card-lift">
                                 <div class="card-body text-center py-6">
@@ -294,7 +294,7 @@
                       </div>
                       <div class="item">
                           <!-- item -->
-                          <a href="shop-grid.html" class="text-decoration-none text-inherit">
+                          <a href="{{url('products')}}" class="text-decoration-none text-inherit">
                             <!-- card -->
                             <div class="card mb-3 card-lift">
                                 <div class="card-body text-center py-6">
@@ -312,7 +312,7 @@
                       </div>
                       <div class="item">
                           <!-- item -->
-                          <a href="shop-grid.html" class="text-decoration-none text-inherit">
+                          <a href="{{url('products')}}" class="text-decoration-none text-inherit">
                             <!-- card -->
                             <div class="card mb-3 card-lift">
                                 <div class="card-body text-center py-6">
@@ -330,7 +330,7 @@
                       </div>
                       <div class="item">
                           <!-- item -->
-                          <a href="shop-grid.html" class="text-decoration-none text-inherit">
+                          <a href="{{url('products')}}" class="text-decoration-none text-inherit">
                             <!-- card -->
                             <div class="card mb-3 card-lift">
                                 <div class="card-body text-center py-6">
@@ -348,7 +348,7 @@
                       </div>
                       <div class="item">
                           <!-- item -->
-                          <a href="shop-grid.html" class="text-decoration-none text-inherit">
+                          <a href="{{url('products')}}" class="text-decoration-none text-inherit">
                             <!-- card -->
                             <div class="card mb-3 card-lift">
                                 <div class="card-body text-center py-6">
