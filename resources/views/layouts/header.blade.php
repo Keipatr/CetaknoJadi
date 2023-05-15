@@ -138,12 +138,12 @@
             <div class="row w-100 align-items-center gx-lg-2 gx-0">
                 <div class="col-xxl-2 col-lg-3">
                     <a class="navbar-brand d-none d-lg-block " href="{{ url('/index') }}">
-                        <img src="images/logo/logo-cetakno-hitam.png" alt="eCommerce HTML Template">
+                        <img src="images/logo/logo-cetakno-hitam.svg" alt="eCommerce HTML Template">
 
                     </a>
                     <div class="d-flex justify-content-between w-100 d-lg-none">
                         <a class="navbar-brand" href="{{ url('') }}">
-                            <img src="images/logo-cetakno-hitam.png" alt="eCommerce HTML Template">
+                            <img src="images/logo-cetakno-hitam.svg" alt="eCommerce HTML Template">
 
                         </a>
 
@@ -329,7 +329,7 @@
             </div>
             <div class="offcanvas offcanvas-start p-4 p-lg-0" id="navbar-default">
                 <div class="d-flex justify-content-between align-items-center mb-2 d-block d-lg-none">
-                    <a href="./index.html"><img src="images/logo/freshcart-logo.svg"
+                    <a href="./index.html"><img src="images/logo/logo-cetakno-hitam.svg"
                             alt="eCommerce HTML Template"></a>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>

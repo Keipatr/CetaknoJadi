@@ -229,10 +229,10 @@
                             </li>
                             <!-- nav item -->
                             <li class="nav-item" role="presentation">
-                                <!-- btn --> <button class="nav-link" id="sellerInfo-tab" data-bs-toggle="tab"
+                                {{-- <!-- btn --> <button class="nav-link" id="sellerInfo-tab" data-bs-toggle="tab"
                                     data-bs-target="#sellerInfo-tab-pane" type="button" role="tab"
                                     aria-controls="sellerInfo-tab-pane" aria-selected="false" >Seller
-                                    Info</button>
+                                    Info</button> --}}
                             </li>
                         </ul>
                         <!-- tab content -->
