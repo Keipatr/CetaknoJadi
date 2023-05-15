@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
-Route::get('index', function () {
+Route::get('/index', function () {
     return view('index');
 });
 
@@ -35,37 +35,37 @@ Route::get('forgot', function () {
 Route::get('store', function () {
     return view('store-list');
 });
-Route::get('about-us', function () {
+Route::get('/about-us', function () {
     return view('about');
 });
-Route::get('contact-us', function () {
+Route::get('/contact-us', function () {
     return view('contact');
 });
-Route::get('cart', function () {
+Route::get('/cart', function () {
     return view('shop-cart');
 });
-Route::get('checkout', function () {
+Route::get('/checkout', function () {
     return view('shop-checkout');
 });
-Route::get('account', function () {
+Route::get('/account', function () {
     return view('account-settings');
 });
-Route::get('account-settings', function () {
+Route::get('/account-settings', function () {
     return view('account-settings');
 });
-Route::get('account-orders', function () {
+Route::get('/account-orders', function () {
     return view('account-orders');
 });
-Route::get('account-notification', function () {
+Route::get('/account-notification', function () {
     return view('account-notification');
 });
-Route::get('account-address', function () {
+Route::get('/account-address', function () {
     return view('account-address');
 });
-Route::get('account-payment', function () {
+Route::get('/account-payment', function () {
     return view('account-payment-method');
 });
-Route::get('wishlist', function () {
+Route::get('/wishlist', function () {
     return view('shop-wishlist');
 });
 
