@@ -94,8 +94,8 @@
                             </div>
                             <div class="col">
                                 <!-- text -->
-                                <p>For assistance using Freshcart services, please visit our <a href="#">Help
-                                        Center</a></p>
+                                <!-- <p>For assistance using Freshcart services, please visit our <a href="#">Help
+                                        Center</a></p> -->
                             </div>
 
                         </div>
@@ -116,7 +116,7 @@
                                 <div class="text-white me-8 mb-12">
                                     <!-- text -->
                                     <h2 class="text-white mb-4 ">Trusted by retailers. Loved by customers.</h2>
-                                    <p>We give everyone access to the food they love and more time to enjoy it together.
+                                    <p>We give everyone access to print easy.
                                     </p>
                                 </div>
 
@@ -124,25 +124,25 @@
                             <div class="row row-cols-2 row-cols-md-4">
                                 <!-- col -->
                                 <div class="col mb-4 mb-md-0">
-                                    <h3 class="display-5 fw-bold text-white mb-0">500k</h3>
+                                    <h3 class="display-5 fw-bold text-white mb-0">1</h3>
                                     <span class="fs-6 text-white">Shoppers</span>
                                 </div>
                                 <!-- col -->
                                 <div class="col mb-4 mb-md-0">
-                                    <h3 class="display-5 fw-bold text-white mb-0">4,500+</h3>
+                                    <h3 class="display-5 fw-bold text-white mb-0">5</h3>
                                     <span class="fs-6 text-white">Cities</span>
                                 </div>
                                 <!-- col -->
                                 <div class="col mb-4 mb-md-0">
-                                    <h3 class="display-5 fw-bold text-white mb-0">40k+</h3>
+                                    <h3 class="display-5 fw-bold text-white mb-0">1</h3>
                                     <span class="fs-6 text-white">Stores</span>
                                 </div>
                                 <!-- col -->
-                                <div class="col mb-4 mb-md-0">
-                                    <h3 class="display-5 fw-bold text-white mb-0"> 650+
+                                <!-- <div class="col mb-4 mb-md-0">
+                                    <h3 class="display-5 fw-bold text-white mb-0"> 1
                                     </h3>
                                     <span class="fs-6 text-white">Retail Brands</span>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -174,7 +174,7 @@
                         <!-- text -->
                         <div class="p-6">
                             <h5 class="h6 mb-0">Jeffri Lieca</h5>
-                            <small>Vice President, Retail</small>
+                            <small>President</small>
                         </div>
                         <!-- img -->
                         <img src="images/about/team-1.png" alt="" class="img-fluid">
@@ -187,7 +187,7 @@
                         <!-- text -->
                         <div class="p-6">
                             <h5 class="h6 mb-0">Kei Patrick</h5>
-                            <small>Chief Financial Officer</small>
+                            <small>Pekerja Keras</small>
                         </div>
                         <!-- img -->
                         <img src="images/about/team-2.png" alt="" class="img-fluid">
@@ -218,53 +218,45 @@
                     </div>
                 </div>
                 <!-- item -->
-                <div class="item mx-2">
+                <!-- <div class="item mx-2">
                     <div class="bg-light rounded ">
-                        <!-- text -->
                         <div class="p-6">
                             <h5 class="h6 mb-0">Chandra</h5>
                             <small>Chief Human Resources Officer</small>
                         </div>
-                        <!-- img -->
                         <img src="images/about/team-5.png" alt="" class="img-fluid">
                     </div>
-                </div>
+                </div> -->
                 <!-- item -->
-                <div class="item mx-2">
+                <!-- <div class="item mx-2">
                     <div class="bg-light rounded ">
-                        <!-- text -->
                         <div class="p-6">
                             <h5 class="h6 mb-0">Hilton</h5>
                             <small>Chief Financial Officer</small>
                         </div>
-                        <!-- img -->
                         <img src="images/about/team-2.png" alt="" class="img-fluid">
                     </div>
-                </div>
+                </div> -->
                 <!-- item -->
-                <div class="item mx-2">
+                <!-- <div class="item mx-2">
                     <div class="bg-light rounded ">
                         <div class="p-6">
-                            <!-- text -->
                             <h5 class="h6 mb-0">Lieca</h5>
                             <small>Chief Communications Officer</small>
                         </div>
-                        <!-- img -->
                         <img src="images/about/team-3.png" alt="" class="img-fluid">
                     </div>
-                </div>
+                </div> -->
                 <!-- item -->
-                <div class="item mx-2">
+                <!-- <div class="item mx-2">
                     <div class="bg-light rounded ">
-                        <!-- text -->
                         <div class="p-6">
                             <h5 class="h6 mb-0">Alexis</h5>
                             <small>Chief Technology Officer</small>
                         </div>
-                        <!-- img -->
                         <img src="images/about/team-4.png" alt="" class="img-fluid">
                     </div>
-                </div>
+                </div> -->
 
 
 
