@@ -21,7 +21,7 @@
 </script>
 
 <!-- Favicon icon-->
-<link rel="shortcut icon" type="image/x-icon" href="images/favicon/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="images/favicon/logoTitleCetakno.ico">
 
 
 <!-- Libs CSS -->
@@ -84,7 +84,7 @@
 
 <!-- btn -->
                 <div class="col-12 d-grid gap-2"> <button type="submit" class="btn btn-primary">Reset Password</button>
-                  <a href="signup.html" class="btn btn-light">Back</a>
+                  <a href="{{url('signin')}}" class="btn btn-light">Back</a>
                 </div>
 
 

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('main-content')
-<body>
+{{-- <body> --}}
   <main>
     <section class="mt-8">
       <div class="container">
@@ -1447,6 +1447,6 @@
 
 
 
-</body>
+{{-- </body> --}}
 @endsection
-</html>
+{{-- </html> --}}

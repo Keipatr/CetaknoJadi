@@ -56,7 +56,7 @@ Route::get('/account-settings', function () {
 Route::get('/account-orders', function () {
     return view('account-orders');
 });
-Route::get('/account-notification', function () {
+Route::get('account-notification', function () {
     return view('account-notification');
 });
 Route::get('/account-address', function () {

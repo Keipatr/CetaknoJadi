@@ -264,7 +264,7 @@
             </div>
         </section>
     </main>
-    
+
     <!-- Javascript-->
     <!-- Libs JS -->
     <script src="libs/jquery/dist/jquery.min.js"></script>
@@ -279,6 +279,6 @@
 
 
 
-</body>
+{{-- </body> --}}
 @endsection
-</html>
+{{-- </html> --}}

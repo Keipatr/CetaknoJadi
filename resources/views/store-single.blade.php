@@ -1128,6 +1128,6 @@
     <script src="js/vendors/tns-slider.js"></script>
     <script src="js/vendors/increment-value.js"></script>
 
-</body>
+{{-- </body> --}}
 @endsection
-</html>
+{{-- </html> --}}

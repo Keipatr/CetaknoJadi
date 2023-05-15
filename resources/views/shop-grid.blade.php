@@ -2,7 +2,7 @@
 
 @section('main-content')
 
-    <body>
+    {{-- <body> --}}
 
         <main>
             <!-- section-->
@@ -1626,7 +1626,7 @@
 
 
 
-    </body>
+    {{-- </body> --}}
 @endsection
 
-</html>
+{{-- </html> --}}

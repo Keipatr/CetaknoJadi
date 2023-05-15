@@ -423,7 +423,7 @@
 
 
 
-    </body>
+    {{-- </body> --}}
 @endsection
 
-</html>
+{{-- </html> --}}

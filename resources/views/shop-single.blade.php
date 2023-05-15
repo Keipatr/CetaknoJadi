@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('main-content')
-<body>
+{{-- <body> --}}
     <main>
         <div class="mt-4">
             <div class="container">
@@ -725,7 +725,7 @@
                             <!-- tab pane -->
                             <div class="tab-pane fade" id="sellerInfo-tab-pane" role="tabpanel"
                                 aria-labelledby="sellerInfo-tab" tabindex="0">
-                                
+
 
                             </div>
                         </div>
@@ -1239,6 +1239,6 @@
 
 
 
-</body>
+{{-- </body> --}}
 @endsection
-</html>
+{{-- </html> --}}

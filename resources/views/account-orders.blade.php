@@ -27,27 +27,28 @@
                             <ul class="nav flex-column nav-pills nav-pills-dark">
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="account-orders.html"><i
+                                    <!-- nav link -->
+                                    <a class="nav-link active" aria-current="page" href="{{url('account-orders')}}"><i
                                             class="feather-icon icon-shopping-bag me-2"></i>Your Orders</a>
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="account-settings.html"><i
+                                    <a class="nav-link " href="{{url('account')}}"><i
                                             class="feather-icon icon-settings me-2"></i>Settings</a>
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="account-address.html"><i
+                                    <a class="nav-link " href="{{url('account-address')}}"><i
                                             class="feather-icon icon-map-pin me-2"></i>Address</a>
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="account-payment-method.html"><i
+                                    <a class="nav-link" href="{{url('account-payment')}}"><i
                                             class="feather-icon icon-credit-card me-2"></i>Payment Method</a>
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="account-notification.html"><i
+                                    <a class="nav-link" href="{{url('account-notification')}}"><i
                                             class="feather-icon icon-bell me-2"></i>Notification</a>
                                 </li>
                                 <!-- nav item -->
@@ -56,7 +57,7 @@
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link " href="../index.html"><i
+                                    <a class="nav-link " href="{{url('')}}"><i
                                             class="feather-icon icon-log-out me-2"></i>Log out</a>
                                 </li>
                             </ul>
@@ -88,20 +89,20 @@
                                         <!-- Table body -->
                                         <tr>
                                             <td class="align-middle border-top-0 w-0">
-                                                <a href="#"> <img src="images/products/product-img-1.jpg"
+                                                <a href="#"> <img src="images/products/dokumen.jpg"
                                                         alt="Ecommerce" class="icon-shape icon-xl"></a>
 
                                             </td>
                                             <td class="align-middle border-top-0">
 
                                                 <a href="#" class="fw-semi-bold text-inherit">
-                                                    <h6 class="mb-0">Haldiram's Nagpur Aloo Bhujia</h6>
+                                                    <h6 class="mb-0">Print A4</h6>
                                                 </a>
-                                                <span><small class="text-muted">400g</small></span>
+                                                <span><small class="text-muted">Warna</small></span>
 
                                             </td>
                                             <td class="align-middle border-top-0">
-                                                <a href="#" class="text-inherit">#14899</a>
+                                                <a href="#" class="text-inherit">ID11020301</a>
 
                                             </td>
                                             <td class="align-middle border-top-0">
@@ -116,131 +117,27 @@
                                                 <span class="badge bg-warning">Processing</span>
                                             </td>
                                             <td class="align-middle border-top-0">
-                                                $15.00
+                                                Rp. 15,000
                                             </td>
-                                            <td class="text-muted align-middle border-top-0">
+                                            {{-- <td class="text-muted align-middle border-top-0">
                                                 <a href="#" class="text-inherit" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" data-bs-title="View"><i
                                                         class="feather-icon icon-eye"></i></a>
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                         <tr>
                                             <td class="align-middle border-top-0 w-0">
-                                                <a href="#"> <img src="images/products/product-img-2.jpg"
-                                                        alt="Ecommerce" class="icon-shape icon-xl"></a>
-
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                <a href="#" class="fw-semi-bold text-inherit">
-                                                    <h6 class="mb-0">Nutri Choise Biscuit</h6>
-                                                </a>
-                                                <span><small class="text-muted">2 Pkt</small></span>
-
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                <a href="#" class="text-inherit">#14658
-                                                </a>
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                July 9, 2023
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                2
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                <span class="badge bg-success">Completed</span>
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                $45.00
-                                            </td>
-                                            <td class="text-muted align-middle border-top-0">
-                                                <a href="#" class="text-inherit" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" data-bs-title="View"><i
-                                                        class="feather-icon icon-eye"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="align-middle border-top-0 w-0">
-                                                <a href="#"> <img src="images/products/product-img-3.jpg"
-                                                        alt="Ecommerce" class="icon-shape icon-xl"></a>
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                <a href="#" class="text-inherit">
-                                                    <h6 class="mb-0">Cadbury Dairy Milk 5 Star Bites </h6>
-                                                    <span><small class="text-muted">202 g</small></span>
-                                                </a>
-
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                <a href="#" class="text-inherit">#13778
-                                                </a>
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                Oct 03, 2023
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                4
-
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                <span class="badge bg-success">Completed</span>
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                $99.00
-                                            </td>
-                                            <td class="text-muted align-middle border-top-0">
-                                                <a href="#" class="text-inherit" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" data-bs-title="View"><i
-                                                        class="feather-icon icon-eye"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="align-middle border-top-0 w-0">
-                                                <a href="#"> <img src="images/products/product-img-4.jpg"
-                                                        alt="Ecommerce" class="icon-shape icon-xl"></a>
-
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                <a href="#" class="fw-semi-bold text-inherit">
-                                                    <h6 class="mb-0">Onion Flavour Potato </h6>
-                                                </a>
-                                                <span><small class="text-muted">100 g</small></span>
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                <a href="#" class="text-inherit">#13746
-                                                </a>
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                March 5, 2023
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                1
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                <span class="badge bg-success">Completed</span>
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                $12.00
-                                            </td>
-                                            <td class="text-muted align-middle border-top-0">
-                                                <a href="#" class="text-inherit" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" data-bs-title="View"><i
-                                                        class="feather-icon icon-eye"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="align-middle border-top-0 w-0">
-                                                <a href="#"> <img src="images/products/product-img-5.jpg"
+                                                <a href="#"> <img src="images/products/Banner.jpg"
                                                         alt="Ecommerce" class="icon-shape icon-xl"></a>
                                             </td>
                                             <td class="align-middle border-top-0">
                                                 <a href="#" class="fw-semi-bold text-inherit">
-                                                    <h6 class="mb-0">Salted Instant Popcorn </h6>
+                                                    <h6 class="mb-0">Banner </h6>
                                                 </a>
-                                                <span><small class="text-muted">500 g</small></span>
+                                                <span><small class="text-muted">Kecil</small></span>
                                             </td>
                                             <td class="align-middle border-top-0">
-                                                <a href="#" class="text-inherit">#13566
+                                                <a href="#" class="text-inherit">ID11020302
                                                 </a>
                                             </td>
                                             <td class="align-middle border-top-0">
@@ -253,27 +150,27 @@
                                                 <span class="badge bg-danger">Cancel</span>
                                             </td>
                                             <td class="align-middle border-top-0">
-                                                $6.00
+                                                Rp. 6,000
                                             </td>
-                                            <td class="text-muted align-middle border-top-0">
+                                            {{-- <td class="text-muted align-middle border-top-0">
                                                 <a href="#" class="text-inherit" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" data-bs-title="View"><i
                                                         class="feather-icon icon-eye"></i></a>
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                         <tr>
                                             <td class="align-middle border-top-0 w-0">
-                                                <a href="#"> <img src="images/products/product-img-6.jpg"
+                                                <a href="#"> <img src="images/products/banner.jpg"
                                                         alt="Ecommerce" class="icon-shape icon-xl"></a>
                                             </td>
                                             <td class="align-middle border-top-0">
                                                 <a href="#" class="fw-semi-bold text-inherit">
-                                                    <h6 class="mb-0">Blueberry Greek Yogurt </h6>
+                                                    <h6 class="mb-0">Banner</h6>
                                                 </a>
-                                                <span><small class="text-muted">500 g</small></span>
+                                                <span><small class="text-muted">Sedang</small></span>
                                             </td>
                                             <td class="align-middle border-top-0">
-                                                <a href="#" class="text-inherit">#12094
+                                                <a href="#" class="text-inherit">ID11020303
                                                 </a>
                                             </td>
                                             <td class="align-middle border-top-0">
@@ -286,13 +183,13 @@
                                                 <span class="badge bg-success">Completed</span>
                                             </td>
                                             <td class="align-middle border-top-0">
-                                                $18.00
+                                                Rp. 18,000
                                             </td>
-                                            <td class="text-muted align-middle border-top-0">
+                                            {{-- <td class="text-muted align-middle border-top-0">
                                                 <a href="#" class="text-inherit" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" data-bs-title="View"><i
                                                         class="feather-icon icon-eye"></i></a>
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                     </tbody>
                                 </table>
@@ -319,27 +216,27 @@
             <ul class="nav flex-column nav-pills nav-pills-dark">
                 <!-- nav item -->
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="account-orders.html"><i
+                    <a class="nav-link active" aria-current="page" href="{{url('account-orders')}}"><i
                             class="feather-icon icon-shopping-bag me-2"></i>Your Orders</a>
                 </li>
                 <!-- nav item -->
                 <li class="nav-item">
-                    <a class="nav-link " href="account-settings.html"><i
+                    <a class="nav-link " href="{{url('account')}}"><i
                             class="feather-icon icon-settings me-2"></i>Settings</a>
                 </li>
                 <!-- nav item -->
                 <li class="nav-item">
-                    <a class="nav-link" href="account-address.html"><i
+                    <a class="nav-link " href="{{url('account-address')}}"><i
                             class="feather-icon icon-map-pin me-2"></i>Address</a>
                 </li>
                 <!-- nav item -->
                 <li class="nav-item">
-                    <a class="nav-link" href="account-payment-method.html"><i
+                    <a class="nav-link" href="{{url('account-payment')}}"><i
                             class="feather-icon icon-credit-card me-2"></i>Payment Method</a>
                 </li>
                 <!-- nav item -->
                 <li class="nav-item">
-                    <a class="nav-link" href="account-notification.html"><i
+                    <a class="nav-link" href="{{url('account-notification')}}"><i
                             class="feather-icon icon-bell me-2"></i>Notification</a>
                 </li>
 
@@ -373,6 +270,6 @@
 
 
 
-</body>
+{{-- </body> --}}
 @endsection
-</html>
+{{-- </html> --}}
