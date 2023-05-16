@@ -47,7 +47,7 @@
         <div class="offset-lg-1 col-lg-10  py-8 py-xl-0">
           <div class=" mb-10 mb-xxl-0">
             <!-- img -->
-            <a href="{{url('/')}}"> <img src="images/logo/freshcart-logo.svg" alt=""></a>
+            <a href="{{url('')}}"> <img src="images/logo/logo cetakno hitam.png" style="width: 250px !important; height: 100px !important;" alt=""></a>
           </div>
           <div class="row justify-content-center align-items-center">
             <!-- content -->

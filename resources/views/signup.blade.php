@@ -43,7 +43,7 @@
   <nav class="navbar navbar-light py-2">
     <div class="container justify-content-center justify-content-lg-between">
       <a class="navbar-brand" href="{{url('')}}">
-        <img src="images/logo/freshcart-logo.svg" alt="" class="d-inline-block align-text-top">
+        <img src="images/logo/logo cetakno hitam.png" style="width: 250px !important; height: 100px !important;" alt="" class="d-inline-block align-text-top">
       </a>
       <span class="navbar-text">
         Already have an account? <a href="{{url('signin')}}" style="color: black; text-decoration: none;" onmouseover="this.style.color='green'; this.style.textDecoration='underline';" onmouseout="this.style.color='black'; this.style.textDecoration='none';">Sign in</a>

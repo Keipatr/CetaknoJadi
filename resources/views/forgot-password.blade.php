@@ -42,8 +42,8 @@
 <div class="border-bottom shadow-sm">
   <nav class="navbar navbar-light py-2">
     <div class="container justify-content-center justify-content-lg-between">
-      <a class="navbar-brand" href="../index.html">
-        <img src="images/logo/freshcart-logo.svg" alt="" class="d-inline-block align-text-top">
+      <a class="navbar-brand" href="{{url('')}}">
+        <img src="images/logo/logo cetakno hitam.png" style="width: 200px !important; height: 100px !important;" alt="" class="d-inline-block align-text-top">
       </a>
       <span class="navbar-text">
         Remember Already? <a href="{{url('signin')}}" style="color: black; text-decoration: none;" onmouseover="this.style.color='green'; this.style.textDecoration='underline';" onmouseout="this.style.color='black'; this.style.textDecoration='none';">Sign in</a>

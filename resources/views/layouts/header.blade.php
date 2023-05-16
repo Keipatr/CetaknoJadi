@@ -856,7 +856,7 @@
                                             </form>
                                         </div>
                                         <div class="d-xl-flex justify-content-xl-center modal-footer" style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -20px;background: rgb(222,226,227);">
-                                            <a href="forgot.html" style="margin: 0px;color: rgb(153, 153, 153);">Forgot Password?</a>
+                                            <a href="{{url('forgot')}}" style="margin: 0px;color: rgb(153, 153, 153);">Forgot Password?</a>
                                         </div>
                                         <div class="d-xl-flex justify-content-xl-center modal-footer" style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -12px;background: rgb(222,226,227);margin-top: 30px;">
                                             <!-- Start: Register --><a style="margin: 0px;color: rgb(153,153,153);" href="index.html" data-bs-target="#modal-2" data-bs-toggle="modal">Dont have any acount? Sign up</a>
@@ -883,7 +883,7 @@
                                             <p class="d-inline-block" style="margin-left: 6px;">Remember me</p>
                                         </div>
                                         <div class="d-xl-flex justify-content-xl-center modal-footer" style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -20px;background: rgb(222,226,227);">
-                                            <a href="forgot.html" style="margin: 0px;color: rgb(153, 153, 153);">Forgot Password?</a>
+                                            <a href="{{url('forgot')}}" style="margin: 0px;color: rgb(153, 153, 153);">Forgot Password?</a>
                                         </div>
                                         <div class="d-xl-flex justify-content-xl-center modal-footer" style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -20px;background: rgb(222,226,227);margin-top: 30px;">
                                             <!-- Start: Register --><a style="margin: 0px;color: rgb(153,153,153);" href="index.html" data-bs-target="#modal-2" data-bs-toggle="modal">Dont have any acount? Sign up</a>
