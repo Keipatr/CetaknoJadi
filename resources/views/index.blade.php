@@ -14,7 +14,7 @@
               <h2 class="text-dark display-5 fw-bold mt-4">Website For Printing </h2>
               <p class="lead">Introduced a new model for online printing
                 and convenient home delivery.</p>
-              <a href="#!" class="btn btn-dark mt-3">Shop Now <i class="feather-icon icon-arrow-right ms-1"></i></a>
+              <a href="https://forms.gle/pWxDEK37DhUGE6GG6" class="btn btn-dark mt-3">Send Feedback<i class="feather-icon icon-arrow-right ms-1"></i></a>
             </div>
 
           </div>
@@ -26,7 +26,7 @@
                   class="text-primary">First Buyer</span></h2>
               <p class="lead">Free Shipping to First-Time Customers Only, After promotions and discounts are applied.
               </p>
-              <a href="#!" class="btn btn-dark mt-3">Shop Now <i class="feather-icon icon-arrow-right ms-1"></i></a>
+              <a href="https://forms.gle/pWxDEK37DhUGE6GG6" class="btn btn-dark mt-3">Send Feedback <i class="feather-icon icon-arrow-right ms-1"></i></a>
             </div>
 
           </div>
@@ -377,7 +377,7 @@
               <div class="py-10 px-8 rounded"
                 style="background:url(images/banner/grocery-banner.png)no-repeat; background-size: cover; background-position: center;">
                 <div>
-                  <h3 class="fw-bold mb-1">Fruits & Vegetables
+                  <h3 class="fw-bold mb-1">Printing
                   </h3>
                   <p class="mb-4">Get Upto <span class="fw-bold">30%</span> Off</p>
                   <a href="#!" class="btn btn-dark">Shop Now</a>
@@ -393,11 +393,10 @@
               <div class="py-10 px-8 rounded"
                 style="background:url(images/banner/grocery-banner-2.jpg)no-repeat; background-size: cover; background-position: center;">
                 <div>
-                  <h3 class="fw-bold mb-1">Freshly Baked
-                    Buns
+                  <h3 class="fw-bold mb-1">Printings
                   </h3>
                   <p class="mb-4">Get Upto <span class="fw-bold">25%</span> Off</p>
-                  <a href="#!" class="btn btn-dark">Shop Now</a>
+                  <a href="https://forms.gle/pWxDEK37DhUGE6GG6" class="btn btn-dark">Send Feedback</a>
                 </div>
               </div>
 
@@ -1005,7 +1004,7 @@
                   Coffee Beans.
                 </h3>
                 <p class="text-white">Get the best deal before close.</p>
-                <a href="#!" class="btn btn-primary">Shop Now <i class="feather-icon icon-arrow-right ms-1"></i></a>
+                <a href="https://forms.gle/pWxDEK37DhUGE6GG6" class="btn btn-primary">Shop Now <i class="feather-icon icon-arrow-right ms-1"></i></a>
               </div>
             </div>
           </div>
