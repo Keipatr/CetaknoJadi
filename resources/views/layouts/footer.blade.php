@@ -69,7 +69,7 @@
                             <li class="nav-item mb-2"><a href="#!" class="nav-link">Cetakno programs</a></li>
                             <li class="nav-item mb-2"><a href="#!" class="nav-link">Gift Cards</a></li>
                             <li class="nav-item mb-2"><a href="#!" class="nav-link">Promos & Coupons</a></li>
-                            <li class="nav-item mb-2"><a href="#!" class="nav-link">Freshcart Ads</a></li>
+                            <li class="nav-item mb-2"><a href="#!" class="nav-link">Cetakno Ads</a></li>
                             <li class="nav-item mb-2"><a href="#!" class="nav-link">Careers</a></li>
                         </ul>
                     </div>
