@@ -77,13 +77,13 @@
                                                             </label>
                                                         </div>
                                                         <!-- address -->
-                                                        <address> <strong>Jitu Chauhan</strong> <br>
+                                                        <address> <strong>Trisha</strong> <br>
 
-                                                            4450 North Avenue Oakland, <br>
+                                                            Jalan Ciputra no 123, <br>
 
-                                                            Nebraska, United States,<br>
+                                                            Surabaya, Indonesia<br>
 
-                                                            <abbr title="Phone">P: 402-776-1106</abbr>
+                                                            <abbr title="Phone">P: 081-111-111-111</abbr>
                                                         </address>
                                                         <span class="text-danger">Default address </span>
 
@@ -100,11 +100,11 @@
                                                                 Office
                                                             </label>
                                                         </div>
-                                                        <address> <strong>Nitu Chauhan</strong> <br> 3853 Coal Road,
+                                                        <address> <strong>Alexis</strong> <br> Jalan Surabaya,
                                                             <br>
-                                                            Tannersville, Pennsylvania, 18372, USA,<br>
+                                                            Universitas Ciputra, Surabaya, 62222, Indonesia<br>
 
-                                                            <abbr title="Phone">P: 402-776-1106</abbr>
+                                                            <abbr title="Phone">P: 081-222-222-222</abbr>
                                                         </address>
 
                                                     </div>
@@ -132,7 +132,7 @@
                                                 <button class="nav-link active" id="pills-today-tab"
                                                     data-bs-toggle="pill" data-bs-target="#pills-today"
                                                     type="button" role="tab" aria-controls="pills-today"
-                                                    aria-selected="true">Today <br><small>Oct 3</small>
+                                                    aria-selected="true">Today <br><small>3 Mei</small>
                                                 </button>
                                             </li>
                                             <li class="nav-item" role="presentation">
@@ -140,7 +140,7 @@
                                                 <button class="nav-link" id="pills-monday-tab"
                                                     data-bs-toggle="pill" data-bs-target="#pills-monday"
                                                     type="button" role="tab" aria-controls="pills-monday"
-                                                    aria-selected="false">Mon <br><small>Oct 4</small>
+                                                    aria-selected="false">Mon <br><small>4 Mei</small>
                                                 </button>
                                             </li>
                                             <li class="nav-item" role="presentation">
@@ -148,40 +148,40 @@
                                                 <button class="nav-link" id="pills-Tue-tab" data-bs-toggle="pill"
                                                     data-bs-target="#pills-Tue" type="button" role="tab"
                                                     aria-controls="pills-Tue" aria-selected="false">Tue
-                                                    <br><small>Oct
-                                                        5</small></button>
+                                                    <br><small>5 Mei
+                                                        </small></button>
                                             </li>
                                             <li class="nav-item" role="presentation">
                                                 <!-- button -->
                                                 <button class="nav-link" id="pills-Wed-tab" data-bs-toggle="pill"
                                                     data-bs-target="#pills-Wed" type="button" role="tab"
                                                     aria-controls="pills-Wed" aria-selected="false">Wed
-                                                    <br><small>Oct
-                                                        6</small></button>
+                                                    <br><small>6 Mei 
+                                                        </small></button>
                                             </li>
                                             <li class="nav-item" role="presentation">
                                                 <!-- button -->
                                                 <button class="nav-link" id="pills-Thu-tab" data-bs-toggle="pill"
                                                     data-bs-target="#pills-Thu" type="button" role="tab"
                                                     aria-controls="pills-Thu" aria-selected="false">Thu <br>
-                                                    <small>Oct
-                                                        7</small> </button>
+                                                    <small>7 Mei
+                                                        </small> </button>
                                             </li>
                                             <li class="nav-item" role="presentation">
                                                 <!-- button -->
                                                 <button class="nav-link" id="pills-Fri-tab" data-bs-toggle="pill"
                                                     data-bs-target="#pills-Fri" type="button" role="tab"
                                                     aria-controls="pills-Fri" aria-selected="false">Fri <br>
-                                                    <small>Oct
-                                                        8</small> </button>
+                                                    <small>8 Mei
+                                                        </small> </button>
                                             </li>
                                             <li class="nav-item" role="presentation">
                                                 <!-- button -->
                                                 <button class="nav-link" id="pills-Sat-tab" data-bs-toggle="pill"
                                                     data-bs-target="#pills-Sat" type="button" role="tab"
                                                     aria-controls="pills-Sat" aria-selected="false">Sat <br>
-                                                    <small>Oct
-                                                        9</small>
+                                                    <small>9 Mei
+                                                        </small>
                                                 </button>
                                             </li>
                                         </ul>
@@ -211,7 +211,7 @@
                                                         </div>
 
                                                         <!-- price -->
-                                                        <div class="col-3 text-center">$3.99</div>
+                                                        <div class="col-3 text-center">Rp. 3,000</div>
                                                         <!-- badge -->
                                                         <div class="col-3 text-center"> <span
                                                                 class="badge bg-danger">Paid</span></div>
@@ -238,7 +238,7 @@
                                                             </div>
                                                         </div>
                                                         <!-- price -->
-                                                        <div class="col-3 text-center">$3.99</div>
+                                                        <div class="col-3 text-center">Rp. 6,000</div>
                                                         <div class="col-3 text-center"><span
                                                                 class="badge bg-danger">Paid</span></div>
                                                         <!-- col -->
@@ -264,7 +264,7 @@
                                                             </div>
                                                         </div>
                                                         <!-- price -->
-                                                        <div class="col-3 text-center">$0.00</div>
+                                                        <div class="col-3 text-center">Rp. 0,000</div>
                                                         <div class="col-3 text-center"><span
                                                                 class="badge bg-success">Free</span></div>
                                                         <!-- col -->
@@ -290,7 +290,7 @@
                                                             </div>
                                                         </div>
                                                         <!-- price -->
-                                                        <div class="col-3 text-center">$3.99</div>
+                                                        <div class="col-3 text-center">Rp. 3,000</div>
                                                         <!-- badge -->
                                                         <div class="col-3 text-center"> <span
                                                                 class="badge bg-danger">Paid</span></div>
@@ -317,7 +317,7 @@
                                                             </div>
                                                         </div>
                                                         <!-- price -->
-                                                        <div class="col-3 text-center">$3.99</div>
+                                                        <div class="col-3 text-center">Rp. 3,000</div>
                                                         <!-- badge -->
                                                         <div class="col-3 text-center"> <span
                                                                 class="badge bg-danger">Paid</span></div>
@@ -352,7 +352,7 @@
                                                         </div>
 
                                                         <!-- price -->
-                                                        <div class="col-3 text-center">$3.99</div>
+                                                        <div class="col-3 text-center">Rp. 3,000</div>
                                                         <div class="col-3 text-center"><span
                                                                 class="badge bg-danger">Paid</span></div>
                                                         <!-- col -->
@@ -1376,12 +1376,12 @@
                                         <li class="list-group-item px-4 py-3">
                                             <div class="row align-items-center">
                                                 <div class="col-2 col-md-2">
-                                                    <img src="images/products/product-img-1.jpg" alt="Ecommerce"
+                                                    <img src="images/products/banner.jpg" alt="Ecommerce"
                                                         class="img-fluid">
                                                 </div>
                                                 <div class="col-5 col-md-5">
-                                                    <h6 class="mb-0">Haldiram's Sev Bhujia</h6>
-                                                    <span><small class="text-muted">.98 / lb</small></span>
+                                                    <h6 class="mb-0">Print Spanduk</h6>
+                                                    <span><small class="text-muted">Kecil</small></span>
 
                                                 </div>
                                                 <div class="col-2 col-md-2 text-center text-muted">
@@ -1389,7 +1389,7 @@
 
                                                 </div>
                                                 <div class="col-3 text-lg-end text-start text-md-end col-md-3">
-                                                    <span class="fw-bold">$5.00</span>
+                                                    <span class="fw-bold">Rp. 3,000</span>
 
                                                 </div>
                                             </div>
@@ -1399,12 +1399,12 @@
                                         <li class="list-group-item px-4 py-3">
                                             <div class="row align-items-center">
                                                 <div class="col-2 col-md-2">
-                                                    <img src="images/products/product-img-2.jpg" alt="Ecommerce"
+                                                    <img src="images/products/dokumen.jpg" alt="Ecommerce"
                                                         class="img-fluid">
                                                 </div>
                                                 <div class="col-5 col-md-5">
-                                                    <h6 class="mb-0">NutriChoice Digestive</h6>
-                                                    <span><small class="text-muted">250g</small></span>
+                                                    <h6 class="mb-0">Kertas A4</h6>
+                                                    <span><small class="text-muted">40 Lembar</small></span>
 
                                                 </div>
                                                 <div class="col-2 col-md-2 text-center text-muted">
@@ -1412,9 +1412,8 @@
 
                                                 </div>
                                                 <div class="col-3 text-lg-end text-start text-md-end col-md-3">
-                                                    <span class="fw-bold">$20.00</span>
-                                                    <div class="text-decoration-line-through text-muted small">$26.00
-                                                    </div>
+                                                    <span class="fw-bold">Rp. 20,000</span>
+                                              
                                                 </div>
                                             </div>
 
@@ -1423,12 +1422,12 @@
                                         <li class="list-group-item px-4 py-3">
                                             <div class="row align-items-center">
                                                 <div class="col-2 col-md-2">
-                                                    <img src="images/products/product-img-3.jpg" alt="Ecommerce"
+                                                    <img src="images/products/dokumen.jpg" alt="Ecommerce"
                                                         class="img-fluid">
                                                 </div>
                                                 <div class="col-5 col-md-5">
-                                                    <h6 class="mb-0">Cadbury 5 Star Chocolate</h6>
-                                                    <span><small class="text-muted">1 kg</small></span>
+                                                    <h6 class="mb-0">Kertas A4</h6>
+                                                    <span><small class="text-muted">1 Rim</small></span>
 
                                                 </div>
                                                 <div class="col-2 col-md-2 text-center text-muted">
@@ -1436,9 +1435,8 @@
 
                                                 </div>
                                                 <div class="col-3 text-lg-end text-start text-md-end col-md-3">
-                                                    <span class="fw-bold">$15.00</span>
-                                                    <div class="text-decoration-line-through text-muted small">$20.00
-                                                    </div>
+                                                    <span class="fw-bold">Rp. 45,000</span>
+                                                    
                                                 </div>
                                             </div>
 
@@ -1447,12 +1445,12 @@
                                         <li class="list-group-item px-4 py-3">
                                             <div class="row align-items-center">
                                                 <div class="col-2 col-md-2">
-                                                    <img src="images/products/product-img-4.jpg" alt="Ecommerce"
+                                                    <img src="images/products/banner.jpg" alt="Ecommerce"
                                                         class="img-fluid">
                                                 </div>
                                                 <div class="col-5 col-md-5">
-                                                    <h6 class="mb-0">Onion Flavour Potato</h6>
-                                                    <span><small class="text-muted">250g</small></span>
+                                                    <h6 class="mb-0">Print Spanduk</h6>
+                                                    <span><small class="text-muted">Sedang</small></span>
 
                                                 </div>
                                                 <div class="col-2 col-md-2 text-center text-muted">
@@ -1460,13 +1458,37 @@
 
                                                 </div>
                                                 <div class="col-3 text-lg-end text-start text-md-end col-md-3">
-                                                    <span class="fw-bold">$15.00</span>
-                                                    <div class="text-decoration-line-through text-muted small">$20.00
-                                                    </div>
+                                                    <span class="fw-bold">Rp. 15,000</span>
+                                                   
                                                 </div>
                                             </div>
 
                                         </li>
+                                    </li>
+                                    <!-- list group item -->
+                                    <li class="list-group-item px-4 py-3">
+                                        <div class="row align-items-center">
+                                            <div class="col-2 col-md-2">
+                                                <img src="images/products/banner.jpg" alt="Ecommerce"
+                                                    class="img-fluid">
+                                            </div>
+                                            <div class="col-5 col-md-5">
+                                                <h6 class="mb-0">Print Spanduk</h6>
+                                                <span><small class="text-muted">Besar</small></span>
+
+                                            </div>
+                                            <div class="col-2 col-md-2 text-center text-muted">
+                                                <span>1</span>
+
+                                            </div>
+                                            <div class="col-3 text-lg-end text-start text-md-end col-md-3">
+                                                <span class="fw-bold">Rp. 32,000</span>
+                                               
+                                            </div>
+                                        </div>
+
+                                    </li>
+
 
                                         <!-- list group item -->
                                         <li class="list-group-item px-4 py-3">
@@ -1476,7 +1498,7 @@
 
                                                 </div>
                                                 <div class="fw-bold">
-                                                    $70.00
+                                                    Rp. 115,000
 
                                                 </div>
 
@@ -1488,7 +1510,7 @@
 
                                                 </div>
                                                 <div class="fw-bold">
-                                                    $3.00
+                                                    Rp. 1,000
 
                                                 </div>
 
@@ -1502,7 +1524,7 @@
                                                     Subtotal
                                                 </div>
                                                 <div>
-                                                    $73.00
+                                                    Rp. 116,000
 
 
                                                 </div>

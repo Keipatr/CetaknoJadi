@@ -21,7 +21,7 @@
 </script>
 
 <!-- Favicon icon-->
-<link rel="shortcut icon" type="image/x-icon" href="images/favicon/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="images/favicon/logoTitleCetakno.ico">
 
 
 <!-- Libs CSS -->

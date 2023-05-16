@@ -27,27 +27,28 @@
                             <!-- nav item -->
                             <ul class="nav flex-column nav-pills nav-pills-dark">
                                 <li class="nav-item">
-                                    <a class="nav-link " aria-current="page" href="account-orders.html"><i
+                                    <!-- nav link -->
+                                    <a class="nav-link " aria-current="page" href="{{url('account-orders')}}"><i
                                             class="feather-icon icon-shopping-bag me-2"></i>Your Orders</a>
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="account-settings.html"><i
+                                    <a class="nav-link active" href="{{url('account')}}"><i
                                             class="feather-icon icon-settings me-2"></i>Settings</a>
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="account-address.html"><i
+                                    <a class="nav-link " href="{{url('account-address')}}"><i
                                             class="feather-icon icon-map-pin me-2"></i>Address</a>
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="account-payment-method.html"><i
+                                    <a class="nav-link " href="{{url('account-payment')}}"><i
                                             class="feather-icon icon-credit-card me-2"></i>Payment Method</a>
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="account-notification.html"><i
+                                    <a class="nav-link" href="{{url('account-notification')}}"><i
                                             class="feather-icon icon-bell me-2"></i>Notification</a>
                                 </li>
                                 <!-- nav item -->
@@ -56,7 +57,7 @@
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link " href="../index.html"><i
+                                    <a class="nav-link " href="{{url('')}}"><i
                                             class="feather-icon icon-log-out me-2"></i>Log out</a>
                                 </li>
                             </ul>
@@ -125,7 +126,7 @@
                                 </form>
                             </div>
                             <hr class="my-10">
-                            <div>
+                            {{-- <div>
                                 <!-- heading -->
                                 <h5 class="mb-4">Delete Account</h5>
                                 <p class="mb-2">Would you like to delete your account?</p>
@@ -134,7 +135,7 @@
                                     associated with it.</p>
                                 <!-- btn -->
                                 <a href="#" class="btn btn-outline-danger">I want to delete my account</a>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -155,31 +156,27 @@
             <ul class="nav flex-column nav-pills nav-pills-dark">
                 <!-- nav item -->
                 <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="account-orders.html"><i
+                    <a class="nav-link " aria-current="page" href="{{url('account-orders')}}"><i
                             class="feather-icon icon-shopping-bag me-2"></i>Your Orders</a>
                 </li>
                 <!-- nav item -->
-
                 <li class="nav-item">
-                    <a class="nav-link active" href="account-settings.html"><i
+                    <a class="nav-link active" href="{{url('account')}}"><i
                             class="feather-icon icon-settings me-2"></i>Settings</a>
                 </li>
                 <!-- nav item -->
-
                 <li class="nav-item">
-                    <a class="nav-link" href="account-address.html"><i
+                    <a class="nav-link " href="{{url('account-address')}}"><i
                             class="feather-icon icon-map-pin me-2"></i>Address</a>
                 </li>
                 <!-- nav item -->
-
                 <li class="nav-item">
-                    <a class="nav-link" href="account-payment-method.html"><i
+                    <a class="nav-link" href="{{url('account-payment')}}"><i
                             class="feather-icon icon-credit-card me-2"></i>Payment Method</a>
                 </li>
                 <!-- nav item -->
-
                 <li class="nav-item">
-                    <a class="nav-link" href="account-notification.html"><i
+                    <a class="nav-link" href="{{url('account-notification')}}"><i
                             class="feather-icon icon-bell me-2"></i>Notification</a>
                 </li>
             </ul>
@@ -211,6 +208,6 @@
 
 
 
-</body>
+{{-- </body> --}}
 @endsection
-</html>
+{{-- </html> --}}
