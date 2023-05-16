@@ -840,7 +840,7 @@
                     <div class="tab-content">
                         <div class="tab-pane" role="tabpanel" id="tab-1" style="border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;">
                             <!-- Start: Modal Login form -->
-                            <div class="d-xl-flex justify-content-xl-center" id="myModal" style="margin: 0px;padding-bottom: 331px;border-width: 0px;background: #f4f9f9;height: 303px;">
+                            <div class="d-xl-flex justify-content-xl-center" id="myModal" style="margin: 0px;padding-bottom: 318px;border-width: 0px;background: #f4f9f9;height: 303px;">
                                 <div class="d-xl-flex justify-content-xl-center modal-dialog modal-login" style="width: 400px;margin: 18px 33px;">
                                     <div class="modal-content" style="background: #f4f9f9;padding: 0px;height: 200px;width: 400px;padding-bottom: 0px;">
                                         <div class="modal-body" style="padding: 16px;padding-bottom: 0px;background: #f4f9f9;">
@@ -849,7 +849,7 @@
                                                 <div class="form-group"><i class="fa fa-star fa-lock"></i><input class="form-control" type="password" placeholder="Password" required="required" style="margin-bottom: 6px;margin-top: 8px;" name="PASSWORD_CUST"></div>
                                                 <div class="d-xl-flex justify-content-xl-start form-group" style="margin-right: 0px;margin-left: 20px;"><button class="btn btn-primary btn-block btn-lg" type="submit" value="Login" style="margin-top: 6px;margin-bottom: 12px;;">Login</button>
                                                 </div>
-                                                <div class="text-start" style="padding-top: 14px; margin-bottom: -14px"><input type="checkbox" name="Remember me">
+                                                <div class="text-start" style="padding-top: 0px; margin-bottom: 0px"><input type="checkbox" name="Remember me">
                                                     <p class="d-inline-block" style="margin-left: 6px;">Remember me
                                                     </p>
                                                 </div>
