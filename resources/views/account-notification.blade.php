@@ -100,19 +100,19 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <!-- text -->
                                     <div>
-                                        <h6 class="mb-1">Account Summary</h6>
+                                        <!-- <h6 class="mb-1">Account Summary</h6>
                                         <p class="mb-0 pe-12 ">Pellentesque habitant morbi tristique senectus et netus
                                             et malesuada fames ac
                                             turpis eguris eu sollicitudin massa. Nulla
                                             ipsum odio, aliquam in odio et, fermentum blandit nulla.
-                                        </p>
+                                        </p> -->
                                     </div>
                                     <!-- form checkbox -->
-                                    <div class="form-check form-switch">
+                                    <!-- <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" role="switch"
                                             id="flexSwitchCheckChecked" checked>
                                         <label class="form-check-label" for="flexSwitchCheckChecked"></label>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="mb-10">
@@ -123,21 +123,21 @@
                                 <div class="d-flex justify-content-between align-items-center mb-6">
                                     <div>
                                         <!-- heading -->
-                                        <h6 class="mb-0">Text messages</h6>
+                                        <!-- <h6 class="mb-0">Text messages</h6> -->
 
                                     </div>
                                     <!-- form checkbox -->
-                                    <div class="form-check form-switch">
+                                    <!-- <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" role="switch"
                                             id="flexSwitchCheckDefault2">
                                         <label class="form-check-label" for="flexSwitchCheckDefault2"></label>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <!-- text -->
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h6 class="mb-1">Call before checkout</h6>
-                                        <p class="mb-0 ">We'll only call if there are pending changes
+                                        <h6 class="mb-1">Email before checkout</h6>
+                                        <p class="mb-0 ">
                                         </p>
                                     </div>
                                     <!-- form checkbox -->
@@ -151,49 +151,49 @@
                             <div class="mb-6">
                                 <!-- text -->
                                 <div class="border-bottom pb-3 mb-5">
-                                    <h5 class="mb-0">Website Notification</h5>
+                                    <!-- <h5 class="mb-0">Website Notification</h5> -->
                                 </div>
                                 <div>
                                     <!-- form checkbox -->
-                                    <div class="form-check">
+                                    <!-- <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value=""
                                             id="flexCheckFollower" checked>
                                         <label class="form-check-label" for="flexCheckFollower">
                                             New Follower
                                         </label>
-                                    </div>
+                                    </div> -->
                                     <!-- form checkbox -->
-                                    <div class="form-check">
+                                    <!-- <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value=""
                                             id="flexCheckPost">
                                         <label class="form-check-label" for="flexCheckPost">
                                             Post Like
                                         </label>
-                                    </div>
+                                    </div> -->
                                     <!-- form checkbox -->
-                                    <div class="form-check">
+                                    <!-- <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value=""
                                             id="flexCheckPosted">
                                         <label class="form-check-label" for="flexCheckPosted">
                                             Someone you followed posted
                                         </label>
-                                    </div>
+                                    </div> -->
                                     <!-- form checkbox -->
-                                    <div class="form-check">
+                                    <!-- <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value=""
                                             id="flexCheckCollection">
                                         <label class="form-check-label" for="flexCheckCollection">
                                             Post added to collection
                                         </label>
-                                    </div>
+                                    </div> -->
                                     <!-- form checkbox -->
-                                    <div class="form-check">
+                                    <!-- <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value=""
                                             id="flexCheckOrder">
                                         <label class="form-check-label" for="flexCheckOrder">
                                             Order Delivery
                                         </label>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>

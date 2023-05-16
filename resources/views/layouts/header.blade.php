@@ -138,14 +138,14 @@
             <div class="row w-100 align-items-center gx-lg-2 gx-0">
                 <div class="col-xxl-2 col-lg-3">
                     <a class="navbar-brand d-none d-lg-block " href="{{ url('/index') }}">
-                        <img src="images/logo/logo cetakno hitam.png" alt="eCommerce HTML Template" 
+                        <img src="images/logo/logo cetakno hitam.png" alt="eCommerce HTML " 
                         width="180" height="30" class="img-fluid d-block mx-auto" >
                         
 
                     </a>
                     <div class="d-flex justify-content-between w-100 d-lg-none">
                         <a class="navbar-brand" href="{{ url('') }}">
-                            <img src="images/logo cetakno hitam.png" alt="eCommerce HTML Template" 
+                            <img src="images/logo/logo cetakno hitam.png" alt="eCommerce HTML " 
                             width="180" height="30" class="img-fluid d-block mx-auto">
 
                         </a>
