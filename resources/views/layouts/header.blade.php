@@ -139,14 +139,14 @@
                 <div class="col-xxl-2 col-lg-3">
                     <a class="navbar-brand d-none d-lg-block " href="{{ url('/index') }}">
                         <img src="images/logo/logo cetakno hitam.png" alt="eCommerce HTML Template" 
-                        width="200" height="30" class="img-fluid d-block mx-auto" >
+                        width="180" height="30" class="img-fluid d-block mx-auto" >
                         
 
                     </a>
                     <div class="d-flex justify-content-between w-100 d-lg-none">
                         <a class="navbar-brand" href="{{ url('') }}">
                             <img src="images/logo cetakno hitam.png" alt="eCommerce HTML Template" 
-                            width="200" height="30" class="img-fluid d-block mx-auto">
+                            width="180" height="30" class="img-fluid d-block mx-auto">
 
                         </a>
 
@@ -208,7 +208,7 @@
 
                     </form>
                 </div>
-                <div class="col-md-2 col-xxl-3 d-none d-lg-block">
+                <div class="col-md-2 col-xxl-3 d-none d-lg-block mt-lg-4">
                     <!-- Button trigger modal -->
                     <button type="button" class="btn  btn-outline-gray-400 text-muted" data-bs-toggle="modal" data-bs-target="#locationModal">
                         <i class="feather-icon icon-map-pin me-2"></i>Location
