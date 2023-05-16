@@ -12,10 +12,8 @@
                     <div class="offset-lg-2 col-lg-8 col-12">
                         <div class="mb-8">
                             <!-- heading -->
-                            <h1 class="h3">Retailer Inquiries</h1>
-                            <p class="lead mb-0">This form is for retailer inquiries only. For all other customer or
-                                shopper
-                                support requests, please visit the links below this form.</p>
+                            <h1 class="h3">Form Inquiries</h1>
+                            <p class="lead mb-0">For support requests</p>
                         </div>
                         <!-- form -->
                         <form class="row">
