@@ -179,7 +179,7 @@
                                       </svg>
                                   </div>
                                   <!-- text -->
-                                  <div>Cetak Kalender</div>
+                                  <div>Kalender</div>
                                 </div>
                             </div>
                           </a>
@@ -1181,7 +1181,7 @@
             <div class="mb-8 mb-xl-0">
               <div class="mb-6"><img src="images/icons/package.svg" alt=""></div>
               <h3 class="h5 mb-3">Pilihan Banyak</h3>
-              <p>Choose from 5000+ products across food, personal care, household, bakery, veg and non-veg & other
+              <p>Choose from 50+ products across digital printing, stationery, & other
                 categories.</p>
             </div>
           </div>

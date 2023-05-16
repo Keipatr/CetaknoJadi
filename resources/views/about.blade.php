@@ -22,7 +22,7 @@
                             <div class="col-md-6">
                                 <div class=" me-6">
                                     <!-- img -->
-                                    <img src="images/logo/EGI - Cetakno Logo Yellow.png" alt=""
+                                    <img src="images/logo/logo cetakno hitam.png" alt=""
                                         class="img-fluid rounded">
                                 </div>
                             </div>
