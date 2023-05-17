@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,13 +13,19 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// riil
+Route::get('/{optional?}', [ProductController::class, 'index'])
+    ->where('optional', '^(|/)$')
+    ->name('home');
+    
+// not riil
 
-Route::get('/', function () {
-    return view('index');
-});
-Route::get('/index', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
+// Route::get('/index', function () {
+//     return view('index');
+// });
 
 
 Route::get('signin', function () {
