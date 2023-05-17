@@ -17,7 +17,7 @@ use App\Http\Controllers\ProductController;
 Route::get('/{optional?}', [ProductController::class, 'index'])
     ->where('optional', '^(|/)$')
     ->name('home');
-    
+
 // not riil
 
 // Route::get('/', function () {
