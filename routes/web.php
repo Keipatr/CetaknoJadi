@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
-zRoute::get('/signin', function () {
+Route::get('/signin', function () {
     return view('signin');
 });
 Route::get('/store', function () {

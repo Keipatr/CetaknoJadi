@@ -832,7 +832,7 @@
             <div class="modal-body">
                 <div>
                     <ul class="nav nav-tabs" role="tablist" style="border-width: 1px;">
-                        <li class="nav-item text-center" role="presentation" style="width: 120px;background: #e6ebf1;"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-1" style="color: var(--bs-nav-tabs-link-active-color);background: #f4f9f9;border-bottom-color: #f4f9f9;">Customer</a>
+                        <li class="nav-item text-center" role="presentation" style="width: 120px;background: #e6ebf1;"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-1" style="color: var(--bs-nav-tabs-link-active-color);background: #fdffff;border-bottom-color: #f4f9f9;">Customer</a>
                         </li>
                         <li class="nav-item" role="presentation"><a class="nav-link active text-center" role="tab" data-bs-toggle="tab" href="#tab-2" style="color: var(--bs-nav-tabs-link-active-color);width: 120px;background: #fef9f9;border-bottom-color: #fef9f9;">Vendor</a>
                         </li>
@@ -840,26 +840,26 @@
                     <div class="tab-content">
                         <div class="tab-pane" role="tabpanel" id="tab-1" style="border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;">
                             <!-- Start: Modal Login form -->
-                            <div class="d-xl-flex justify-content-xl-center" id="myModal" style="margin: 0px;padding-bottom: 331px;border-width: 0px;background: #f4f9f9;height: 303px;">
+                            <div class="d-xl-flex justify-content-xl-center" id="myModal" style="margin: 0px;padding-bottom: 14px;border-width: 0px;background: #fdffff;height: 300px;">
                                 <div class="d-xl-flex justify-content-xl-center modal-dialog modal-login" style="width: 400px;margin: 18px 33px;">
-                                    <div class="modal-content" style="background: #f4f9f9;padding: 0px;height: 200px;width: 400px;padding-bottom: 0px;">
-                                        <div class="modal-body" style="padding: 16px;padding-bottom: 0px;background: #f4f9f9;">
+                                    <div class="modal-content" style="background: #fdffff;padding: 0px;height: 200px;width: 400px;padding-bottom: 0px;">
+                                        <div class="modal-body" style="padding: 16px;padding-bottom: 0px;background: #fdffff;">
                                             <form action="confirmation" method="post">
                                                 <div class="form-group"><i class="fa fa-star fa-user"></i><input class="form-control" type="text" placeholder="Username" required="required" style="margin: 0px;margin-bottom: 8px;" name="USERNAME_CUST"></div>
                                                 <div class="form-group"><i class="fa fa-star fa-lock"></i><input class="form-control" type="password" placeholder="Password" required="required" style="margin-bottom: 6px;margin-top: 8px;" name="PASSWORD_CUST"></div>
                                                 <div class="d-xl-flex justify-content-xl-start form-group" style="margin-right: 0px;margin-left: 20px;"><button class="btn btn-primary btn-block btn-lg" type="submit" value="Login" style="margin-top: 6px;margin-bottom: 12px;;">Login</button>
                                                 </div>
-                                                <div class="text-start" style="padding-top: 14px; margin-bottom: -14px"><input type="checkbox" name="Remember me">
+                                                <div class="text-start" style="padding-top: 0px; margin-bottom: 0px"><input type="checkbox" name="Remember me">
                                                     <p class="d-inline-block" style="margin-left: 6px;">Remember me
                                                     </p>
                                                 </div>
                                             </form>
                                         </div>
                                         <div class="d-xl-flex justify-content-xl-center modal-footer" style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -20px;background: rgb(222,226,227);">
-                                            <a href="forgot.html" style="margin: 0px;color: rgb(153, 153, 153);">Forgot Password?</a>
+                                            <a href="forgot.html" style="margin: 0px;">Forgot Password?</a>
                                         </div>
                                         <div class="d-xl-flex justify-content-xl-center modal-footer" style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -12px;background: rgb(222,226,227);margin-top: 30px;">
-                                            <!-- Start: Register --><a style="margin: 0px;color: rgb(153,153,153);" href="index.html" data-bs-target="#modal-2" data-bs-toggle="modal">Dont have any acount? Sign up</a>
+                                            <!-- Start: Register --><a style="margin: 0px;" href="index.html" data-bs-target="#modal-2" data-bs-toggle="modal">Dont have any acount? Sign up</a>
                                             <!-- End: Register -->
                                         </div>
                                     </div>
@@ -868,10 +868,10 @@
                         </div>
                         <div class="tab-pane active" role="tabpanel" id="tab-2" style="background: #efecec;">
                             <!-- Start: Modal Login form -->
-                            <div class="d-xl-flex justify-content-xl-center" id="myModal-1" style="background: #fef9f9;padding-bottom: 28px;">
+                            <div class="d-xl-flex justify-content-xl-center" id="myModal-1" style="margin: 0px;padding-bottom: 14px;border-width: 0px;background: #fdffff;height: 300px;">
                                 <div class="d-xl-flex justify-content-xl-center modal-dialog modal-login" style="width: 400px;margin: 18px 33px;">
-                                    <div class="modal-content" style="padding: 0px;background: #fef9f9;">
-                                        <div class="modal-body" style="padding: 16px;padding-bottom: 0px;background: #fef9f9;">
+                                    <div class="modal-content" style="padding: 0px;background: #fffdfd;">
+                                        <div class="modal-body" style="padding: 16px;padding-bottom: 0px;background: #fffdfd;">
                                             <form action="confirmation" method="post">
                                                 <div class="form-group"><i class="fa fa-envelope-square fa-user"></i><input class="form-control" type="text" placeholder="Email" required="required" style="margin: 0px;margin-bottom: 8px;" name="EMAIL_SHOP"></div>
                                                 <div class="form-group"><i class="fa fa-lock fa-lock"></i><input class="form-control" type="password" placeholder="Password" required="required" style="margin-bottom: 6px;margin-top: 8px;"></div>
@@ -879,14 +879,14 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        <div class="text-start" style="background: #fef9f9;width: 368px;margin-left: 16px;"><input type="checkbox" name="Remember me">
+                                        <div class="text-start" style="background: #fffdfd;width: 368px;margin-left: 16px;"><input type="checkbox" name="Remember me">
                                             <p class="d-inline-block" style="margin-left: 6px;">Remember me</p>
                                         </div>
                                         <div class="d-xl-flex justify-content-xl-center modal-footer" style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -20px;background: rgb(222,226,227);">
-                                            <a href="forgot.html" style="margin: 0px;color: rgb(153, 153, 153);">Forgot Password?</a>
+                                            <a href="forgot.html" style="margin: 0px;">Forgot Password?</a>
                                         </div>
                                         <div class="d-xl-flex justify-content-xl-center modal-footer" style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -20px;background: rgb(222,226,227);margin-top: 30px;">
-                                            <!-- Start: Register --><a style="margin: 0px;color: rgb(153,153,153);" href="index.html" data-bs-target="#modal-2" data-bs-toggle="modal">Dont have any acount? Sign up</a>
+                                            <!-- Start: Register --><a style="margin: 0px;" href="index.html" data-bs-target="#modal-2" data-bs-toggle="modal">Dont have any acount? Sign up</a>
                                             <!-- End: Register -->
                                         </div>
                                     </div>
@@ -900,7 +900,7 @@
     </div>
 </div><!-- End: Login -->
 <!-- Start: Regis -->
-<div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
+<div id="modal-2" class="modal fade" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom-width: 0px;">
@@ -909,58 +909,49 @@
             <div class="modal-body">
                 <div style="margin-bottom: 0px;margin-top: 0px;">
                     <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3" style="color: var(--bs-nav-tabs-link-active-color);background: #f4f9f9;border-bottom-color: #f4f9f9;">Customer</a>
-                        </li>
-                        <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-4" style="color: var(--bs-nav-tabs-link-active-color);background: #fef9f9;border-bottom-color: #fef9f9;">Vendor</a>
-                        </li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3" style="color: var(--bs-nav-tabs-link-active-color);background: #fdffff;border-bottom-color: #f4f9f9;">Customer</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-4" style="color: var(--bs-nav-tabs-link-active-color);background: #fffdfd;border-bottom-color: #fef9f9;">Vendor</a></li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane" role="tabpanel" id="tab-3">
-                            <!-- Start: Modal Login form -->
-                            <div id="myModal-2" style="background: #f4f9f9;margin-top: -18px;">
+                        <div id="tab-3" class="tab-pane" role="tabpanel">
+                            <div id="myModal-2" style="background: #fdffff;margin-top: -18px;height: 272px;">
                                 <div class="modal-dialog modal-login" style="width: 400px;margin: 18px 33px;height: AUTO;background: #f4f9f9;">
                                     <div class="modal-content" style="padding: 0px;width: 100%;background: #f4f9f9;">
-                                        <div class="modal-body" style="width: AUTO;height: AUTO;padding: 16px;background: #f4f9f9;padding-left: 16px;padding-bottom: 0px;">
+                                        <div class="modal-body" style="width: AUTO;height: AUTO;padding: 16px;background: #fdffff;padding-left: 16px;padding-bottom: 0px;">
                                             <form action="confirmation" method="post">
-                                                <div class="form-group"><i class="fa fa-star fa-user"></i><input class="form-control" type="text" placeholder="Full Name" required="required" style="margin-bottom: 8px;" name="NAME_CUST"></div>
-                                                <div class="form-group"><i class="fa fa-star fa-user"></i><input class="form-control" type="text" placeholder="Username" required="required" style="margin-bottom: 8px;" name="USERNAME_CUST"></div>
-                                                <div class="form-group"><i class="fa fa-envelope-square fa-user"></i><input class="form-control" type="text" placeholder="Email" required="required" style="margin-bottom: 8px;" name="EMAIL_CUST"></div>
-                                                <div class="form-group"><i class="fa fa-phone-square fa-user"></i><input class="form-control" type="text" placeholder="No Telp" required="required" style="margin-bottom: 8px;" name="TELP_CUST"></div>
-                                                <div class="form-group"><i class="fa fa-home fa-user"></i><input class="form-control" type="text" placeholder="Kota" required="required" style="margin-bottom: 8px;" name="CITY_CUST"></div>
-                                                <div class="form-group"><i class="fa fa-home fa-user"></i><input class="form-control" type="text" placeholder="Alamat" required="required" style="margin-bottom: 8px;" name="ADDRESS_CUST"></div>
-                                                <div class="form-group"><i class="fa fa-home fa-user"></i><input class="form-control" type="text" placeholder="Postal Code" required="required" style="margin-bottom: 8px;" name="POSTAL_CUST"></div>
+                                                <div class="form-group"><i class="fa fa-star fa-user"></i><input class="form-control" type="text" placeholder="First Name" required="required" style="margin-bottom: 8px;width: 48%;display: inline;" name="FIRST_NAME_CUST" /><input class="form-control" type="text" placeholder="Last Name" required="required" style="margin-bottom: 8px;width: 48%;display: inline;margin-left: 14px;" name="NAME_CUST" /></div>
+                                                <div class="form-group"><i class="fa fa-star fa-user"></i><input class="form-control" type="text" placeholder="Username" required="required" style="margin-bottom: 8px;" name="USERNAME_CUST" /></div>
+                                                <div class="form-group"><i class="fa fa-envelope-square fa-user"></i><input class="form-control" type="text" placeholder="Email" required="required" style="margin-bottom: 8px;" name="EMAIL_CUST" /></div>
+                                                <div class="form-group"><i class="fa fa-phone-square fa-user"></i></div>
+                                                <div class="form-group"><i class="fa fa-home fa-user"></i></div>
                                                 <div class="form-group"><i class="fa fa-star fa-user"></i></div>
                                                 <div class="form-group"><i class="fa fa-star fa-user"></i></div>
-                                                <div class="form-group"><i class="fa fa-star fa-lock"></i><input class="form-control" type="password" placeholder="Password" required="required" style="margin-bottom: 8px;" name="PASSWORD_CUST"></div>
-                                                <div class="form-group" style="margin-left: 20px;"><button class="btn btn-primary btn-block btn-lg" type="submit" value="Login" style="margin-bottom: 12px;margin-top: 6px;">Register</button>
-                                                </div>
+                                                <div class="form-group"><i class="fa fa-star fa-lock"></i><input class="form-control" type="password" placeholder="Password" required="required" style="margin-bottom: 8px;" name="PASSWORD_CUST" /></div>
+                                                <div class="form-group" style="margin-left: 20px;"><button class="btn btn-primary btn-block btn-lg" type="submit" value="Login" style="margin-bottom: 12px;margin-top: 6px;">Register</button></div>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
-                            </div><!-- End: Modal Login form -->
+                            </div>
                         </div>
-                        <div class="tab-pane active" role="tabpanel" id="tab-4">
-                            <!-- Start: Modal Login form -->
-                            <div id="myModal-3" style="background: #fef9f9;margin-top: -18px;height: 440px;">
+                        <div id="tab-4" class="tab-pane active" role="tabpanel">
+                            <div id="myModal-3" style="background: #fffdfd;margin-top: -18px;height: 224px;">
                                 <div class="d-xl-flex justify-content-xl-center modal-dialog modal-login" style="width: 400px;margin: 18px 33px;">
                                     <div class="modal-content" style="padding: 0px;background: #fef9f9;">
-                                        <div class="modal-body" style="padding: 16px;padding-bottom: 0px;background: #fef9f9;">
+                                        <div class="modal-body" style="padding: 16px;padding-bottom: 0px;background: #fffdfd;">
                                             <form action="confirmation" method="post">
-                                                <div class="form-group"><i class="fa fa-building-o fa-user"></i><input class="form-control" type="text" placeholder="Nama Toko" required="required" style="margin: 0px;margin-bottom: 8px;" name="NAME_SHOP"></div>
-                                                <div class="form-group"><i class="fa fa-envelope-square fa-user"></i><input class="form-control" type="text" placeholder="Email" required="required" style="margin: 0px;margin-bottom: 8px;" name="EMAIL_SHOP"></div>
-                                                <div class="form-group"><i class="fa fa-phone-square fa-user"></i><input class="form-control" type="text" placeholder="No Telp" required="required" style="margin: 0px;margin-bottom: 8px;" name="TELP_SHOP"></div>
-                                                <div class="form-group"><i class="fa fa-building-o fa-user"></i><input class="form-control" type="text" placeholder="Kota" required="required" style="margin: 0px;margin-bottom: 8px;" name="CITY_SHOP"></div>
-                                                <div class="form-group"><i class="fa fa-building-o fa-user"></i><input class="form-control" type="text" placeholder="Alamat" required="required" style="margin: 0px;margin-bottom: 8px;" name="ADDRESS_SHOP"></div>
-                                                <div class="form-group"><i class="fa fa-building-o fa-user"></i><input class="form-control" type="text" placeholder="Postal Code" required="required" style="margin: 0px;margin-bottom: 8px;" name="POSTAL_SHOP"></div>
-                                                <div class="form-group"><i class="fa fa-star fa-lock"></i><input class="form-control" type="password" placeholder="Password" required="required" style="margin-bottom: 6px;margin-top: 8px;"></div>
-                                                <div class="d-xl-flex justify-content-xl-start form-group" style="margin-right: 0px;margin-left: 20px;"><button class="btn btn-primary btn-block btn-lg" type="submit" value="Login" style="margin-top: 6px;margin-bottom: 12px;">Register</button>
-                                                </div>
+                                                <div class="form-group"><i class="fa fa-building-o fa-user"></i><input class="form-control" type="text" placeholder="Nama Toko" required="required" style="margin: 0px;margin-bottom: 8px;" name="NAME_SHOP" /></div>
+                                                <div class="form-group"><i class="fa fa-envelope-square fa-user"></i><input class="form-control" type="text" placeholder="Email" required="required" style="margin: 0px;margin-bottom: 8px;" name="EMAIL_SHOP" /></div>
+                                                <div class="form-group"><i class="fa fa-building-o fa-user"></i></div>
+                                                <div class="form-group"><i class="fa fa-building-o fa-user"></i></div>
+                                                <div class="form-group"><i class="fa fa-building-o fa-user"></i></div>
+                                                <div class="form-group"><i class="fa fa-star fa-lock"></i><input class="form-control" type="password" placeholder="Password" required="required" style="margin-bottom: 8px;margin-top: 8px;" /></div>
+                                                <div class="d-xl-flex justify-content-xl-start form-group" style="margin-right: 0px;margin-left: 20px;"><button class="btn btn-primary btn-block btn-lg" type="submit" value="Login" style="margin-top: 6px;margin-bottom: 12px;">Register</button></div>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
-                            </div><!-- End: Modal Login form -->
+                            </div>
                         </div>
                     </div>
                 </div>
