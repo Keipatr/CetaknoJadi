@@ -56,8 +56,10 @@ Route::get('/wishlist', function () {
     return view('shop-wishlist');
 });
 
-
-
 Route::fallback(function () {
     return view('404error');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

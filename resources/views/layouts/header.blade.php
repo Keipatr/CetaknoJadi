@@ -484,11 +484,24 @@
                             Account
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ url('signin') }}">Sign in</a></li>
+                            {{-- <li><a class="dropdown-item" href="{{ url('signin') }}">Sign in</a></li>
                             <li><a class="dropdown-item" href="{{ url('signup') }}">Signup</a></li>
                             <li><a class="dropdown-item" href="{{ url('forgot') }}">Forgot
-                                    Password</a></li>
-                            <li class="dropdown-submenu dropend">
+                                    Password</a></li> --}}
+                                    <li><a class="dropdown-item" href="{{ url('account-orders') }}">Orders</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="{{ url('account') }}">Settings</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="{{ url('account-address') }}">Address</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="{{ url('account-payment') }}">Payment
+                                            Method</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="{{ url('account-notification') }}">Notification</a></li>
+                                    {{-- new div inside li with button for logout --}}
+                                    <div class="dropdown-divider"></div>
+                                    <li><a class="dropdown-item" href="{{ url('logout') }}">Logout</a></li>
+                            {{-- <li class="dropdown-submenu dropend">
                                 <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">
                                     My Account
                                 </a>
@@ -504,7 +517,7 @@
                                     </li>
                                     <li><a class="dropdown-item" href="{{ url('account-notification') }}">Notification</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
                         </ul>
                     </li>
                     <li class="nav-item ">
