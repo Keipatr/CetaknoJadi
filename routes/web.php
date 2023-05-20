@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,11 +29,16 @@ Route::post('/signup', [LoginController::class, 'signup'])
 Route::middleware('auth')->group(function () {
     // Routes that require authentication
     // ...
-    
+
 });
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+
+
+Route::get('/wishlist', [WishlistController::class, 'fetch'])->name('wishlist');
+Route::get('/fetch-cart-quantity', [CartController::class, 'fetch'])->name('fetch-cart-quantity');
+Route::get('/qty', [HomeController::class, 'fetchQuantities'])->name('qty');
 
 
 // not riil

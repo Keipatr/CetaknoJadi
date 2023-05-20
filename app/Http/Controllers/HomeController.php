@@ -39,4 +39,27 @@ class HomeController extends Controller
 
         return view('index', compact('products', 'data'));
     }
+    public function fetchQuantities()
+    {
+        $userId = Auth::id();
+
+        $quantities = DB::select("SELECT w.QTY_WISHLIST, c.QTY_CART
+            FROM customer cu
+            LEFT JOIN wishlist w ON cu.ID_WISHLIST = w.ID_WISHLIST
+            LEFT JOIN cart c ON cu.ID_CART = c.ID_CART
+            WHERE cu.ID_CUSTOMER = '$userId'");
+        dd($quantities);
+        if ($quantities) {
+            $wishlistQty = $quantities[0]->QTY_WISHLIST;
+            $cartQty = $quantities[0]->QTY_CART;
+
+            return response()->json([
+                'wishlistQty' => $wishlistQty,
+                'cartQty' => $cartQty,
+            ]);
+
+        } else {
+            return response('Quantities not found', 404);
+        }
+    }
 }

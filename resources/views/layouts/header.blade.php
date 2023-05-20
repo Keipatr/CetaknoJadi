@@ -1,3 +1,33 @@
+{{-- <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script> --}}
+<script>
+    // Function to fetch cart and wishlist quantities
+    function fetchQuantities() {
+        // AJAX request to fetch quantities
+        $.ajax({
+            url: '/qty', // Replace with your route URL
+            method: 'GET',
+            success: function(response) {
+                // Log the response to the console
+                console.log(response);
+
+                // Update cart quantity in the HTML
+                $('#cartQty').text(response.cartQty);
+
+                // Update wishlist quantity in the HTML
+                $('#wishlistQty').text(response.wishlistQty);
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
+
+    // Call fetchQuantities when the page is loaded
+    $(document).ready(function() {
+        fetchQuantities();
+    });
+</script>
+
 <div class="border-bottom ">
 
     <div class="bg-light py-1">
@@ -89,13 +119,15 @@
             <div class="row w-100 align-items-center gx-lg-2 gx-0">
                 <div class="col-xxl-2 col-lg-3">
                     <a class="navbar-brand d-none d-lg-block " href="{{ url('/index') }}">
-                        <img src="images/logo/logo cetakno hitam.png" alt="eCommerce HTML " width="180" height="30" class="img-fluid d-block mx-auto">
+                        <img src="images/logo/logo cetakno hitam.png" alt="eCommerce HTML " width="180"
+                            height="30" class="img-fluid d-block mx-auto">
 
 
                     </a>
                     <div class="d-flex justify-content-between w-100 d-lg-none">
                         <a class="navbar-brand" href="{{ url('') }}">
-                            <img src="images/logo/logo cetakno hitam.png" alt="eCommerce HTML " width="180" height="30" class="img-fluid d-block mx-auto">
+                            <img src="images/logo/logo cetakno hitam.png" alt="eCommerce HTML " width="180"
+                                height="30" class="img-fluid d-block mx-auto">
 
                         </a>
 
@@ -104,8 +136,11 @@
                             <div class="list-inline me-4">
                                 <div class="list-inline-item">
 
-                                    <a href="#!" class="text-muted" data-bs-toggle="modal" data-bs-target="#modal-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
+                                    <a href="#!" class="text-muted" data-bs-toggle="modal"
+                                        data-bs-target="#modal-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
                                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                             <circle cx="12" cy="7" r="4"></circle>
                                         </svg>
@@ -113,15 +148,25 @@
                                 </div>
                                 <div class="list-inline-item">
 
-                                    <a class="text-muted position-relative " data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" href="#offcanvasExample" role="button" aria-controls="offcanvasRight">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag">
+                                    <a class="text-muted position-relative " data-bs-toggle="offcanvas"
+                                        data-bs-target="#offcanvasRight" href="#offcanvasExample" role="button"
+                                        aria-controls="offcanvasRight">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="feather feather-shopping-bag">
                                             <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
                                             <line x1="3" y1="6" x2="21" y2="6">
                                             </line>
                                             <path d="M16 10a4 4 0 0 1-8 0"></path>
                                         </svg>
-                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
-                                            5
+                                        <span
+                                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                                            @if (Auth::check())
+                                                <span id="cartQty"></span>
+                                            @else
+                                                0
+                                            @endif
                                             <span class="visually-hidden">unread messages</span>
                                         </span>
                                     </a>
@@ -129,9 +174,13 @@
 
                             </div>
                             <!-- Button -->
-                            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-text-indent-left text-primary" viewBox="0 0 16 16">
-                                    <path d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm.646 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8 2.646 6.354a.5.5 0 0 1 0-.708zM7 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+                            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="offcanvas"
+                                data-bs-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                    fill="currentColor" class="bi bi-text-indent-left text-primary" viewBox="0 0 16 16">
+                                    <path
+                                        d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm.646 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8 2.646 6.354a.5.5 0 0 1 0-.708zM7 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
                                 </svg>
                             </button>
 
@@ -145,8 +194,12 @@
                         <div class="input-group ">
                             <input class="form-control rounded" type="search" placeholder="Search for products">
                             <span class="input-group-append">
-                                <button class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end" type="button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                                <button class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end"
+                                    type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-search">
                                         <circle cx="11" cy="11" r="8"></circle>
                                         <line x1="21" y1="21" x2="16.65" y2="16.65">
                                         </line>
@@ -159,7 +212,8 @@
                 </div>
                 <div class="col-md-2 col-xxl-3 d-none d-lg-block mt-lg-4">
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn  btn-outline-gray-400 text-muted" data-bs-toggle="modal" data-bs-target="#locationModal">
+                    <button type="button" class="btn  btn-outline-gray-400 text-muted" data-bs-toggle="modal"
+                        data-bs-target="#locationModal">
                         <i class="feather-icon icon-map-pin me-2"></i>Location
                     </button>
 
@@ -170,14 +224,23 @@
                     <div class="list-inline">
                         <div class="list-inline-item">
 
-                            <a href="{{ url('wishlist') }}" class="text-muted position-relative">
+                            <a href="{{ route('wishlist') }}" class="text-muted position-relative">
 
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
-                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+                                    <path
+                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
                                     </path>
                                 </svg>
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
-                                    5
+                                <span
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                                    <span id="wishlistQty"></span>
+                                    @if (Auth::check())
+                                        <span id="wishlistQty"></span>
+                                    @else
+                                        0
+                                    @endif
                                     <span class="visually-hidden">unread messages</span>
                                 </span>
                             </a>
@@ -185,7 +248,9 @@
                         <div class="list-inline-item">
                             {{-- ini button trigger modal untuk akunnya --}}
                             <a href="#!" class="text-muted" data-bs-toggle="modal" data-bs-target="#modal-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
                                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                     <circle cx="12" cy="7" r="4"></circle>
                                 </svg>
@@ -193,14 +258,24 @@
                         </div>
                         <div class="list-inline-item">
 
-                            <a class="text-muted position-relative " data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" href="#offcanvasExample" role="button" aria-controls="offcanvasRight">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag">
+                            <a class="text-muted position-relative " data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasRight" href="#offcanvasExample" role="button"
+                                aria-controls="offcanvasRight">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="feather feather-shopping-bag">
                                     <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
                                     <line x1="3" y1="6" x2="21" y2="6"></line>
                                     <path d="M16 10a4 4 0 0 1-8 0"></path>
                                 </svg>
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
-                                    5
+                                <span
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                                    @if (Auth::check())
+                                        <span id="cartQty"></span>
+                                    @else
+                                        0
+                                    @endif
                                     <span class="visually-hidden">unread messages</span>
                                 </span>
                             </a>
@@ -221,9 +296,12 @@
     <nav class="navbar navbar-expand-lg navbar-light navbar-default py-0 py-lg-4">
         <div class="container px-0 px-md-3">
             <div class="dropdown me-3 d-none d-lg-block">
-                <button class="btn btn-primary px-6 " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-primary px-6 " type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="me-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
+                            stroke-linejoin="round" class="feather feather-grid">
                             <rect x="3" y="3" width="7" height="7"></rect>
                             <rect x="14" y="3" width="7" height="7"></rect>
                             <rect x="14" y="14" width="7" height="7"></rect>
@@ -249,16 +327,22 @@
             </div>
             <div class="offcanvas offcanvas-start p-4 p-lg-0" id="navbar-default">
                 <div class="d-flex justify-content-between align-items-center mb-2 d-block d-lg-none">
-                    <a href="./index.html"><img src="images/logo/logo-cetakno-hitam.svg" alt="eCommerce HTML Template"></a>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    <a href="./index.html"><img src="images/logo/logo-cetakno-hitam.svg"
+                            alt="eCommerce HTML Template"></a>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
                 </div>
                 <div class="d-block d-lg-none my-4">
                     <form action="#">
                         <div class="input-group ">
                             <input class="form-control rounded" type="search" placeholder="Search for products">
                             <span class="input-group-append">
-                                <button class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end" type="button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                                <button class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end"
+                                    type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-search">
                                         <circle cx="11" cy="11" r="8"></circle>
                                         <line x1="21" y1="21" x2="16.65" y2="16.65">
                                         </line>
@@ -268,14 +352,19 @@
                         </div>
                     </form>
                     <div class="mt-2">
-                        <button type="button" class="btn  btn-outline-gray-400 text-muted w-100 " data-bs-toggle="modal" data-bs-target="#locationModal">
+                        <button type="button" class="btn  btn-outline-gray-400 text-muted w-100 "
+                            data-bs-toggle="modal" data-bs-target="#locationModal">
                             <i class="feather-icon icon-map-pin me-2"></i>Pick Location
                         </button>
                     </div>
                 </div>
                 <div class="d-block d-lg-none mb-4">
-                    <a class="btn btn-primary w-100 d-flex justify-content-center align-items-center" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                        <span class="me-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid">
+                    <a class="btn btn-primary w-100 d-flex justify-content-center align-items-center"
+                        data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+                        aria-controls="collapseExample">
+                        <span class="me-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid">
                                 <rect x="3" y="3" width="7" height="7"></rect>
                                 <rect x="14" y="3" width="7" height="7"></rect>
                                 <rect x="14" y="14" width="7" height="7"></rect>
@@ -342,7 +431,7 @@
                         </li>
                     </ul>
                     </li> --}}
-                    {{-- <li class="nav-item dropdown">
+                        {{-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Stores
@@ -354,7 +443,7 @@
                                     </li>
                                 </ul>
                             </li> --}}
-                    {{-- <li class="nav-item dropdown dropdown-fullwidth">
+                        {{-- <li class="nav-item dropdown dropdown-fullwidth">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Mega menu
@@ -413,7 +502,7 @@
                                     </div>
                                 </div>
                             </li> --}}
-                    {{-- <li class="nav-item dropdown">
+                        {{-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Pages
@@ -428,60 +517,62 @@
                                     <li><a class="dropdown-item" href="./pages/contact.html">Contact</a></li>
                                 </ul>
                             </li> --}}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Account
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ url('signin') }}">Sign in</a></li>
-                            <li><a class="dropdown-item" href="{{ url('signup') }}">Signup</a></li>
-                            <li><a class="dropdown-item" href="{{ url('forgot') }}">Forgot
-                                    Password</a></li>
-                            <li class="dropdown-submenu dropend">
-                                <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">
-                                    My Account
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{ url('account-orders') }}">Orders</a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="{{ url('account') }}">Settings</a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="{{ url('account-address') }}">Address</a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="{{ url('account-payment') }}">Payment
-                                            Method</a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="{{ url('account-notification') }}">Notification</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="{{ url('products') }}">
-                            Products
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="{{ url('stores') }}">
-                            Stores
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="{{ url('about-us') }}">
-                            About Us
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="{{ url('contact-us') }}">
-                            Contact Us
-                        </a>
-                    </li>
-                    {{-- <li class="nav-item ">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Account
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ url('signin') }}">Sign in</a></li>
+                                <li><a class="dropdown-item" href="{{ url('signup') }}">Signup</a></li>
+                                <li><a class="dropdown-item" href="{{ url('forgot') }}">Forgot
+                                        Password</a></li>
+                                <li class="dropdown-submenu dropend">
+                                    <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">
+                                        My Account
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="{{ url('account-orders') }}">Orders</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="{{ url('account') }}">Settings</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="{{ url('account-address') }}">Address</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="{{ url('account-payment') }}">Payment
+                                                Method</a>
+                                        </li>
+                                        <li><a class="dropdown-item"
+                                                href="{{ url('account-notification') }}">Notification</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{ url('products') }}">
+                                Products
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{ url('stores') }}">
+                                Stores
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{ url('about-us') }}">
+                                About Us
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{ url('contact-us') }}">
+                                Contact Us
+                            </a>
+                        </li>
+                        {{-- <li class="nav-item ">
                                 <a class="nav-link" href="./dashboard/index.html">
                                     Dashboard
                                 </a>
                             </li> --}}
-                    {{-- <li class="nav-item dropdown dropdown-flyout">
+                        {{-- <li class="nav-item dropdown dropdown-flyout">
                                 <a class="nav-link" href="#" id="navbarDropdownDocs" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Docs
@@ -528,7 +619,7 @@
                 <div class="d-block d-lg-none h-100" data-simplebar="">
                     <ul class="navbar-nav ">
                         <li class="nav-item ">
-                            <a class="nav-link" href="{{ url('wishlist') }}">
+                            <a class="nav-link" href="{{ route('wishlist') }}">
                                 Wishlist
                             </a>
                         </li>
@@ -571,7 +662,7 @@
                         </li>
                     </ul>
                     </li> --}}
-                    {{-- <li class="nav-item dropdown">
+                        {{-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Stores
@@ -583,7 +674,7 @@
                                     </li>
                                 </ul>
                             </li> --}}
-                    {{-- <li class="nav-item dropdown">
+                        {{-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Mega Menu
@@ -650,7 +741,7 @@
                                     </li>
                                 </ul>
                             </li> --}}
-                    {{-- <li class="nav-item dropdown">
+                        {{-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Pages
@@ -665,60 +756,62 @@
                                     <li><a class="dropdown-item" href="./pages/contact.html">Contact</a></li>
                                 </ul>
                             </li> --}}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            My Account
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ url('signin') }}">Sign in</a></li>
-                            <li><a class="dropdown-item" href="{{ url('signup') }}">Signup</a></li>
-                            <li><a class="dropdown-item" href="{{ url('forgot') }}">Forgot
-                                    Password</a></li>
-                            <li class="dropdown-submenu dropend">
-                                <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">
-                                    My Account
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{ url('account-orders') }}">Orders</a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="{{ url('account') }}">Settings</a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="{{ url('account-address') }}">Address</a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="{{ url('account-payment') }}">Payment
-                                            Method</a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="{{ url('account-notification') }}">Notification</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="{{ url('products') }}">
-                            Products
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="{{ url('stores') }}">
-                            Stores
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="{{ url('about-us') }}">
-                            About Us
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="{{ url('contact-us') }}">
-                            Contact Us
-                        </a>
-                    </li>
-                    {{-- <li class="nav-item ">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                My Account
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ url('signin') }}">Sign in</a></li>
+                                <li><a class="dropdown-item" href="{{ url('signup') }}">Signup</a></li>
+                                <li><a class="dropdown-item" href="{{ url('forgot') }}">Forgot
+                                        Password</a></li>
+                                <li class="dropdown-submenu dropend">
+                                    <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">
+                                        My Account
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="{{ url('account-orders') }}">Orders</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="{{ url('account') }}">Settings</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="{{ url('account-address') }}">Address</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="{{ url('account-payment') }}">Payment
+                                                Method</a>
+                                        </li>
+                                        <li><a class="dropdown-item"
+                                                href="{{ url('account-notification') }}">Notification</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{ url('products') }}">
+                                Products
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{ url('stores') }}">
+                                Stores
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{ url('about-us') }}">
+                                About Us
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{ url('contact-us') }}">
+                                Contact Us
+                            </a>
+                        </li>
+                        {{-- <li class="nav-item ">
                                 <a class="nav-link" href="./dashboard/index.html">
                                     Dashboard
                                 </a>
                             </li> --}}
-                    {{-- <li class="nav-item dropdown dropdown-flyout">
+                        {{-- <li class="nav-item dropdown dropdown-flyout">
                                 <a class="nav-link" href="#" id="navbarDropdownDocs2" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Docs
@@ -780,89 +873,154 @@
             <div class="modal-body">
                 <div>
                     <ul class="nav nav-tabs" role="tablist" style="border-width: 1px;">
-                        <li class="nav-item text-center" role="presentation" style="width: 120px;background: #e6ebf1;">
-                            <a class="nav-link " role="tab" data-bs-toggle="tab" href="#tab-1" style="color: var(--bs-nav-tabs-link-active-color);background: #f4f9f9;border-bottom-color: #f4f9f9;">Customer</a>
+                        <li class="nav-item text-center" role="presentation"
+                            style="width: 120px;background: #e6ebf1;">
+                            <a class="nav-link " role="tab" data-bs-toggle="tab" href="#tab-1"
+                                style="color: var(--bs-nav-tabs-link-active-color);background: #f4f9f9;border-bottom-color: #f4f9f9;">Customer</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-2" style="color: var(--bs-nav-tabs-link-active-color);width: 120px;background: #fef9f9;border-bottom-color: #fef9f9;">Vendor</a>
+                            <a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-2"
+                                style="color: var(--bs-nav-tabs-link-active-color);width: 120px;background: #fef9f9;border-bottom-color: #fef9f9;">Vendor</a>
                         </li>
                     </ul>
                     <div class="tab-content">
-                        {{-- @if(Session::has('id_user')) --}}
-                        @if(Auth::check())
-                        <div class="tab-pane" role="tabpanel" id="tab-1" style="border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;">
-                            <!-- Content for logged-in users -->
-                            <p>Welcome,
-                                <strong>{{Auth::user()->NAME_CUST   }}</strong>
-                            </p>
-                            <form action="{{route('logout')}}" method="post">
-                                @csrf
-                                <div class="d-xl-flex justify-content-xl-start form-group" style="margin-right: 0px;margin-left: 20px;">
-                                    <button class="btn btn-primary btn-block btn-lg" type="submit" value="Login" style="margin-top: 6px;margin-bottom: 12px;;">Logout</button>
-                                </div>
-                            </form>
-                        </div>
+                        {{-- @if (Session::has('id_user')) --}}
+                        @if (Auth::check())
+                            <div class="tab-pane" role="tabpanel" id="tab-1"
+                                style="border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;">
+                                <!-- Content for logged-in users -->
+                                <p>Welcome,
+                                    <strong>{{ Auth::user()->NAME_CUST }}</strong>
+                                </p>
+                                <form action="{{ route('logout') }}" method="post">
+                                    @csrf
+                                    <div class="d-xl-flex justify-content-xl-start form-group"
+                                        style="margin-right: 0px;margin-left: 20px;">
+                                        <button class="btn btn-primary btn-block btn-lg" type="submit"
+                                            value="Login"
+                                            style="margin-top: 6px;margin-bottom: 12px;;">Logout</button>
+                                    </div>
+                                </form>
+                            </div>
                         @else
-                        <div class="tab-pane" role="tabpanel" id="tab-1" style="border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;">
-                            <div class="d-xl-flex justify-content-xl-center" id="myModal" style="margin: 0px;padding-bottom: 318px;border-width: 0px;background: #f4f9f9;height: 303px;">
-                                <div class="d-xl-flex justify-content-xl-center modal-dialog modal-login" style="width: 400px;margin: 18px 33px;">
-                                    <div class="modal-content" style="background: #f4f9f9;padding: 0px;height: 200px;width: 400px;padding-bottom: 0px;">
-                                        <div class="modal-body" style="padding: 16px;padding-bottom: 0px;background: #f4f9f9;">
-                                            @if(Session::has('fail'))
-                                            <div class="alert alert-danger">{{ session('fail') }}</div>
-                                            @endif
-                                            @if(Session::has('success'))
-                                            <div class="alert alert-danger">{{ session('success') }}</div>
-                                            @endif
-                                            <form id="signin-form" action="{{route('signin-customer')}}" method="post">
-                                                @csrf
-                                                <div class="form-group"><i class="fa fa-star fa-user"></i><input class="form-control" type="text" placeholder="Username" required="required" style="margin: 0px;margin-bottom: 8px;" name="USERNAME_CUST" value="{{old('username')}}"></div>
-                                                <span class="text-danger">@error('username_cust'){{$message}} @enderror</span>
-                                                <div class="form-group"><i class="fa fa-star fa-lock"></i><input class="form-control" type="password" placeholder="Password" required="required" style="margin-bottom: 6px;margin-top: 8px;" name="PASSWORD_CUST"></div>
-                                                <span class="text-danger">@error('password_cust'){{$message}} @enderror</span>
-                                                <div class="d-xl-flex justify-content-xl-start form-group" style="margin-right: 0px;margin-left: 20px;"><button class="btn btn-primary btn-block btn-lg" type="submit" value="Login" style="margin-top: 6px;margin-bottom: 12px;;">Login</button>
-                                                </div>
-                                                <div class="text-start" style="padding-top: 0px; margin-bottom: 0px"><input type="checkbox" name="REMEMBER_ME">
-                                                    <p class="d-inline-block" style="margin-left: 6px;">Remember me Customer
-                                                    </p>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="d-xl-flex justify-content-xl-center modal-footer" style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -20px;background: rgb(222,226,227);">
-                                            <a href="{{url('forgot')}}" style="margin: 0px;color: rgb(153, 153, 153);">Forgot Password?</a>
-                                        </div>
-                                        <div class="d-xl-flex justify-content-xl-center modal-footer" style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -12px;background: rgb(222,226,227);margin-top: 30px;">
-                                            <a style="margin: 0px;color: rgb(153,153,153);" href="index.html" data-bs-target="#modal-2" data-bs-toggle="modal">Dont have any acount? Sign up</a>
+                            <div class="tab-pane" role="tabpanel" id="tab-1"
+                                style="border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;">
+                                <div class="d-xl-flex justify-content-xl-center" id="myModal"
+                                    style="margin: 0px;padding-bottom: 318px;border-width: 0px;background: #f4f9f9;height: 303px;">
+                                    <div class="d-xl-flex justify-content-xl-center modal-dialog modal-login"
+                                        style="width: 400px;margin: 18px 33px;">
+                                        <div class="modal-content"
+                                            style="background: #f4f9f9;padding: 0px;height: 200px;width: 400px;padding-bottom: 0px;">
+                                            <div class="modal-body"
+                                                style="padding: 16px;padding-bottom: 0px;background: #f4f9f9;">
+                                                @if (session('fail'))
+                                                    <div class="alert alert-danger">
+                                                        {{ session('fail') }}
+                                                    </div>
+                                                @endif
+
+                                                <form id="signin-form" action="{{ route('signin-customer') }}"
+                                                    method="post">
+                                                    @csrf
+                                                    <div class="form-group"><i class="fa fa-star fa-user"></i><input
+                                                            class="form-control" type="text"
+                                                            placeholder="Username" required="required"
+                                                            style="margin: 0px;margin-bottom: 8px;"
+                                                            name="USERNAME_CUST" value="{{ old('username') }}"></div>
+                                                    <span class="text-danger">
+                                                        @error('username_cust')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
+                                                    <div class="form-group"><i class="fa fa-star fa-lock"></i><input
+                                                            class="form-control" type="password"
+                                                            placeholder="Password" required="required"
+                                                            style="margin-bottom: 6px;margin-top: 8px;"
+                                                            name="PASSWORD_CUST"></div>
+                                                    <span class="text-danger">
+                                                        @error('password_cust')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
+                                                    <div class="d-xl-flex justify-content-xl-start form-group"
+                                                        style="margin-right: 0px;margin-left: 20px;"><button
+                                                            class="btn btn-primary btn-block btn-lg" type="submit"
+                                                            value="Login"
+                                                            style="margin-top: 6px;margin-bottom: 12px;;">Login</button>
+                                                    </div>
+                                                    <div class="text-start"
+                                                        style="padding-top: 0px; margin-bottom: 0px"><input
+                                                            type="checkbox" name="remember_me">
+                                                        <p class="d-inline-block" style="margin-left: 6px;">Remember
+                                                            me Customer
+                                                        </p>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="d-xl-flex justify-content-xl-center modal-footer"
+                                                style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -20px;background: rgb(222,226,227);">
+                                                <a href="{{ url('forgot') }}"
+                                                    style="margin: 0px;color: rgb(153, 153, 153);">Forgot Password?</a>
+                                            </div>
+                                            <div class="d-xl-flex justify-content-xl-center modal-footer"
+                                                style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -12px;background: rgb(222,226,227);margin-top: 30px;">
+                                                <a style="margin: 0px;color: rgb(153,153,153);" href="index.html"
+                                                    data-bs-target="#modal-2" data-bs-toggle="modal">Dont have any
+                                                    acount? Sign up</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="tab-pane active" role="tabpanel" id="tab-2" style="background: #efecec;">
-                            <div class="d-xl-flex justify-content-xl-center" id="myModal-1" style="background: #fef9f9;padding-bottom: 28px;">
-                                <div class="d-xl-flex justify-content-xl-center modal-dialog modal-login" style="width: 400px;margin: 18px 33px;">
-                                    <div class="modal-content" style="padding: 0px;background: #fef9f9;">
-                                        <div class="modal-body" style="padding: 16px;padding-bottom: 0px;background: #fef9f9;">
-                                            <form action="{{route('signin-customer')}}" method="post">
-                                                <div class="form-group"><i class="fa fa-envelope-square fa-user"></i><input class="form-control" type="text" placeholder="Email" required="required" style="margin: 0px;margin-bottom: 8px;" name="EMAIL_SHOP"></div>
-                                                <div class="form-group"><i class="fa fa-lock fa-lock"></i><input class="form-control" type="password" placeholder="Password" required="required" style="margin-bottom: 6px;margin-top: 8px;"></div>
-                                                <div class="d-xl-flex justify-content-xl-start form-group" style="margin-right: 0px;margin-left: 20px;"><button class="btn btn-primary btn-block btn-lg" type="submit" value="Login" style="margin-top: 6px;margin-bottom: 12px;">Login</button>
-                                                </div>
-                                                <div class="text-start" style="background: #fef9f9;width: 368px;margin-left: 16px;"><input type="checkbox" name="Remember me">
-                                                    <p class="d-inline-block" style="margin-left: 6px;">Remember me Vendor</p>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="d-xl-flex justify-content-xl-center modal-footer" style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -20px;background: rgb(222,226,227);">
-                                            <a href="{{url('forgot')}}" style="margin: 0px;color: rgb(153, 153, 153);">Forgot Password?</a>
-                                        </div>
-                                        <div class="d-xl-flex justify-content-xl-center modal-footer" style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -20px;background: rgb(222,226,227);margin-top: 30px;">
-                                            <a style="margin: 0px;color: rgb(153,153,153);" href="index.html" data-bs-target="#modal-2" data-bs-toggle="modal">Dont have any acount? Sign up</a>
+                            <div class="tab-pane active" role="tabpanel" id="tab-2"
+                                style="background: #efecec;">
+                                <div class="d-xl-flex justify-content-xl-center" id="myModal-1"
+                                    style="background: #fef9f9;padding-bottom: 28px;">
+                                    <div class="d-xl-flex justify-content-xl-center modal-dialog modal-login"
+                                        style="width: 400px;margin: 18px 33px;">
+                                        <div class="modal-content" style="padding: 0px;background: #fef9f9;">
+                                            <div class="modal-body"
+                                                style="padding: 16px;padding-bottom: 0px;background: #fef9f9;">
+                                                <form action="{{ route('signin-customer') }}" method="post">
+                                                    <div class="form-group"><i
+                                                            class="fa fa-envelope-square fa-user"></i><input
+                                                            class="form-control" type="text" placeholder="Email"
+                                                            required="required"
+                                                            style="margin: 0px;margin-bottom: 8px;" name="EMAIL_SHOP">
+                                                    </div>
+                                                    <div class="form-group"><i class="fa fa-lock fa-lock"></i><input
+                                                            class="form-control" type="password"
+                                                            placeholder="Password" required="required"
+                                                            style="margin-bottom: 6px;margin-top: 8px;"></div>
+                                                    <div class="d-xl-flex justify-content-xl-start form-group"
+                                                        style="margin-right: 0px;margin-left: 20px;"><button
+                                                            class="btn btn-primary btn-block btn-lg" type="submit"
+                                                            value="Login"
+                                                            style="margin-top: 6px;margin-bottom: 12px;">Login</button>
+                                                    </div>
+                                                    <div class="text-start"
+                                                        style="background: #fef9f9;width: 368px;margin-left: 16px;">
+                                                        <input type="checkbox" name="Remember me">
+                                                        <p class="d-inline-block" style="margin-left: 6px;">Remember
+                                                            me Vendor</p>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="d-xl-flex justify-content-xl-center modal-footer"
+                                                style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -20px;background: rgb(222,226,227);">
+                                                <a href="{{ url('forgot') }}"
+                                                    style="margin: 0px;color: rgb(153, 153, 153);">Forgot Password?</a>
+                                            </div>
+                                            <div class="d-xl-flex justify-content-xl-center modal-footer"
+                                                style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -20px;background: rgb(222,226,227);margin-top: 30px;">
+                                                <a style="margin: 0px;color: rgb(153,153,153);" href="index.html"
+                                                    data-bs-target="#modal-2" data-bs-toggle="modal">Dont have any
+                                                    acount? Sign up</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         @endif
 
                     </div>
@@ -877,12 +1035,15 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom-width: 0px;">
-                <h2 class="modal-title">Register as</h2><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                <h2 class="modal-title">Register as</h2><button class="btn-close" type="button" aria-label="Close"
+                    data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <div style="margin-bottom: 0px;margin-top: 0px;">
                     <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3" style="color: var(--bs-nav-tabs-link-active-color);background: #f4f9f9;border-bottom-color: #f4f9f9;">Customer</a>
+                        <li class="nav-item" role="presentation"><a class="nav-link" role="tab"
+                                data-bs-toggle="tab" href="#tab-3"
+                                style="color: var(--bs-nav-tabs-link-active-color);background: #f4f9f9;border-bottom-color: #f4f9f9;">Customer</a>
                         </li>
                         <!-- <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-4" style="color: var(--bs-nav-tabs-link-active-color);background: #fef9f9;border-bottom-color: #fef9f9;">Vendor</a> -->
                         </li>
@@ -890,21 +1051,52 @@
                     <div class="tab-content">
                         <div class="tab-pane" role="tabpanel" id="tab-3">
                             <div id="myModal-2" style="background: #f4f9f9;margin-top: -18px;">
-                                <div class="modal-dialog modal-login" style="width: 400px;margin: 18px 33px;height: AUTO;background: #f4f9f9;">
+                                <div class="modal-dialog modal-login"
+                                    style="width: 400px;margin: 18px 33px;height: AUTO;background: #f4f9f9;">
                                     <div class="modal-content" style="padding: 0px;width: 100%;background: #f4f9f9;">
-                                        <div class="modal-body" style="width: AUTO;height: AUTO;padding: 16px;background: #f4f9f9;padding-left: 16px;padding-bottom: 0px;">
+                                        <div class="modal-body"
+                                            style="width: AUTO;height: AUTO;padding: 16px;background: #f4f9f9;padding-left: 16px;padding-bottom: 0px;">
                                             <form action="" method="post">
-                                                <div class="form-group"><i class="fa fa-star fa-user"></i><input class="form-control" type="text" placeholder="Full Name" required="required" style="margin-bottom: 8px;" name="NAME_CUST"></div>
-                                                <div class="form-group"><i class="fa fa-star fa-user"></i><input class="form-control" type="text" placeholder="Username" required="required" style="margin-bottom: 8px;" name="USERNAME_CUST"></div>
-                                                <div class="form-group"><i class="fa fa-envelope-square fa-user"></i><input class="form-control" type="text" placeholder="Email" required="required" style="margin-bottom: 8px;" name="EMAIL_CUST"></div>
-                                                <div class="form-group"><i class="fa fa-phone-square fa-user"></i><input class="form-control" type="text" placeholder="No Telp" required="required" style="margin-bottom: 8px;" name="TELP_CUST"></div>
-                                                <div class="form-group"><i class="fa fa-home fa-user"></i><input class="form-control" type="text" placeholder="Kota" required="required" style="margin-bottom: 8px;" name="CITY_CUST"></div>
-                                                <div class="form-group"><i class="fa fa-home fa-user"></i><input class="form-control" type="text" placeholder="Alamat" required="required" style="margin-bottom: 8px;" name="ADDRESS_CUST"></div>
-                                                <div class="form-group"><i class="fa fa-home fa-user"></i><input class="form-control" type="text" placeholder="Postal Code" required="required" style="margin-bottom: 8px;" name="POSTAL_CUST"></div>
+                                                <div class="form-group"><i class="fa fa-star fa-user"></i><input
+                                                        class="form-control" type="text" placeholder="Full Name"
+                                                        required="required" style="margin-bottom: 8px;"
+                                                        name="NAME_CUST"></div>
+                                                <div class="form-group"><i class="fa fa-star fa-user"></i><input
+                                                        class="form-control" type="text" placeholder="Username"
+                                                        required="required" style="margin-bottom: 8px;"
+                                                        name="USERNAME_CUST"></div>
+                                                <div class="form-group"><i
+                                                        class="fa fa-envelope-square fa-user"></i><input
+                                                        class="form-control" type="text" placeholder="Email"
+                                                        required="required" style="margin-bottom: 8px;"
+                                                        name="EMAIL_CUST"></div>
+                                                <div class="form-group"><i
+                                                        class="fa fa-phone-square fa-user"></i><input
+                                                        class="form-control" type="text" placeholder="No Telp"
+                                                        required="required" style="margin-bottom: 8px;"
+                                                        name="TELP_CUST"></div>
+                                                <div class="form-group"><i class="fa fa-home fa-user"></i><input
+                                                        class="form-control" type="text" placeholder="Kota"
+                                                        required="required" style="margin-bottom: 8px;"
+                                                        name="CITY_CUST"></div>
+                                                <div class="form-group"><i class="fa fa-home fa-user"></i><input
+                                                        class="form-control" type="text" placeholder="Alamat"
+                                                        required="required" style="margin-bottom: 8px;"
+                                                        name="ADDRESS_CUST"></div>
+                                                <div class="form-group"><i class="fa fa-home fa-user"></i><input
+                                                        class="form-control" type="text" placeholder="Postal Code"
+                                                        required="required" style="margin-bottom: 8px;"
+                                                        name="POSTAL_CUST"></div>
                                                 <div class="form-group"><i class="fa fa-star fa-user"></i></div>
                                                 <div class="form-group"><i class="fa fa-star fa-user"></i></div>
-                                                <div class="form-group"><i class="fa fa-star fa-lock"></i><input class="form-control" type="password" placeholder="Password" required="required" style="margin-bottom: 8px;" name="PASSWORD_CUST"></div>
-                                                <div class="form-group" style="margin-left: 20px;"><button class="btn btn-primary btn-block btn-lg" type="submit" value="Login" style="margin-bottom: 12px;margin-top: 6px;">Register</button>
+                                                <div class="form-group"><i class="fa fa-star fa-lock"></i><input
+                                                        class="form-control" type="password" placeholder="Password"
+                                                        required="required" style="margin-bottom: 8px;"
+                                                        name="PASSWORD_CUST"></div>
+                                                <div class="form-group" style="margin-left: 20px;"><button
+                                                        class="btn btn-primary btn-block btn-lg" type="submit"
+                                                        value="Login"
+                                                        style="margin-bottom: 12px;margin-top: 6px;">Register</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -972,10 +1164,15 @@
                             </a>
                             <span><small class="text-muted">Kecil</small></span>
                             <!-- text -->
-                            <div class="mt-2 small lh-1"> <a href="#!" class="text-decoration-none text-inherit"> <span class="me-1 align-text-bottom">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-success">
+                            <div class="mt-2 small lh-1"> <a href="#!"
+                                    class="text-decoration-none text-inherit"> <span class="me-1 align-text-bottom">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            class="feather feather-trash-2 text-success">
                                             <polyline points="3 6 5 6 21 6"></polyline>
-                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                            <path
+                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
                                             </path>
                                             <line x1="10" y1="11" x2="10" y2="17">
                                             </line>
@@ -988,9 +1185,12 @@
                             <!-- input -->
                             <!-- input -->
                             <div class="input-group input-spinner  ">
-                                <input type="button" value="-" class="button-minus  btn  btn-sm " data-field="quantity">
-                                <input type="number" step="1" max="10" value="1" name="quantity" class="quantity-field form-control-sm form-input   ">
-                                <input type="button" value="+" class="button-plus btn btn-sm " data-field="quantity">
+                                <input type="button" value="-" class="button-minus  btn  btn-sm "
+                                    data-field="quantity">
+                                <input type="number" step="1" max="10" value="1" name="quantity"
+                                    class="quantity-field form-control-sm form-input   ">
+                                <input type="button" value="+" class="button-plus btn btn-sm "
+                                    data-field="quantity">
                             </div>
 
                         </div>
@@ -1016,10 +1216,15 @@
                             </a>
                             <span><small class="text-muted">40 Lembar</small></span>
                             <!-- text -->
-                            <div class="mt-2 small lh-1"> <a href="#!" class="text-decoration-none text-inherit"> <span class="me-1 align-text-bottom">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-success">
+                            <div class="mt-2 small lh-1"> <a href="#!"
+                                    class="text-decoration-none text-inherit"> <span class="me-1 align-text-bottom">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            class="feather feather-trash-2 text-success">
                                             <polyline points="3 6 5 6 21 6"></polyline>
-                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                            <path
+                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
                                             </path>
                                             <line x1="10" y1="11" x2="10" y2="17">
                                             </line>
@@ -1032,9 +1237,12 @@
                             <!-- input -->
                             <!-- input -->
                             <div class="input-group input-spinner  ">
-                                <input type="button" value="-" class="button-minus  btn  btn-sm " data-field="quantity">
-                                <input type="number" step="1" max="10" value="1" name="quantity" class="quantity-field form-control-sm form-input   ">
-                                <input type="button" value="+" class="button-plus btn btn-sm " data-field="quantity">
+                                <input type="button" value="-" class="button-minus  btn  btn-sm "
+                                    data-field="quantity">
+                                <input type="number" step="1" max="10" value="1" name="quantity"
+                                    class="quantity-field form-control-sm form-input   ">
+                                <input type="button" value="+" class="button-plus btn btn-sm "
+                                    data-field="quantity">
                             </div>
                         </div>
                         <!-- price -->
@@ -1060,10 +1268,15 @@
                             </a>
                             <span><small class="text-muted">1 Rim</small></span>
                             <!-- text -->
-                            <div class="mt-2 small lh-1"> <a href="#!" class="text-decoration-none text-inherit"> <span class="me-1 align-text-bottom">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-success">
+                            <div class="mt-2 small lh-1"> <a href="#!"
+                                    class="text-decoration-none text-inherit"> <span class="me-1 align-text-bottom">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            class="feather feather-trash-2 text-success">
                                             <polyline points="3 6 5 6 21 6"></polyline>
-                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                            <path
+                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
                                             </path>
                                             <line x1="10" y1="11" x2="10" y2="17">
                                             </line>
@@ -1076,9 +1289,12 @@
                             <!-- input -->
                             <!-- input -->
                             <div class="input-group input-spinner  ">
-                                <input type="button" value="-" class="button-minus  btn  btn-sm " data-field="quantity">
-                                <input type="number" step="1" max="10" value="1" name="quantity" class="quantity-field form-control-sm form-input   ">
-                                <input type="button" value="+" class="button-plus btn btn-sm " data-field="quantity">
+                                <input type="button" value="-" class="button-minus  btn  btn-sm "
+                                    data-field="quantity">
+                                <input type="number" step="1" max="10" value="1" name="quantity"
+                                    class="quantity-field form-control-sm form-input   ">
+                                <input type="button" value="+" class="button-plus btn btn-sm "
+                                    data-field="quantity">
                             </div>
                         </div>
                         <!-- price -->
@@ -1104,10 +1320,15 @@
                             </a>
                             <span><small class="text-muted">Sedang</small></span>
                             <!-- text -->
-                            <div class="mt-2 small lh-1"> <a href="#!" class="text-decoration-none text-inherit"> <span class="me-1 align-text-bottom">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-success">
+                            <div class="mt-2 small lh-1"> <a href="#!"
+                                    class="text-decoration-none text-inherit"> <span class="me-1 align-text-bottom">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            class="feather feather-trash-2 text-success">
                                             <polyline points="3 6 5 6 21 6"></polyline>
-                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                            <path
+                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
                                             </path>
                                             <line x1="10" y1="11" x2="10" y2="17">
                                             </line>
@@ -1120,9 +1341,12 @@
                             <!-- input -->
                             <!-- input -->
                             <div class="input-group input-spinner  ">
-                                <input type="button" value="-" class="button-minus  btn  btn-sm " data-field="quantity">
-                                <input type="number" step="1" max="10" value="1" name="quantity" class="quantity-field form-control-sm form-input   ">
-                                <input type="button" value="+" class="button-plus btn btn-sm " data-field="quantity">
+                                <input type="button" value="-" class="button-minus  btn  btn-sm "
+                                    data-field="quantity">
+                                <input type="number" step="1" max="10" value="1" name="quantity"
+                                    class="quantity-field form-control-sm form-input   ">
+                                <input type="button" value="+" class="button-plus btn btn-sm "
+                                    data-field="quantity">
                             </div>
                         </div>
                         <!-- price -->
@@ -1148,10 +1372,15 @@
                             </a>
                             <span><small class="text-muted">Besar</small></span>
                             <!-- text -->
-                            <div class="mt-2 small lh-1"> <a href="#!" class="text-decoration-none text-inherit"> <span class="me-1 align-text-bottom">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-success">
+                            <div class="mt-2 small lh-1"> <a href="#!"
+                                    class="text-decoration-none text-inherit"> <span class="me-1 align-text-bottom">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            class="feather feather-trash-2 text-success">
                                             <polyline points="3 6 5 6 21 6"></polyline>
-                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                            <path
+                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
                                             </path>
                                             <line x1="10" y1="11" x2="10" y2="17">
                                             </line>
@@ -1164,9 +1393,12 @@
                             <!-- input -->
                             <!-- input -->
                             <div class="input-group input-spinner  ">
-                                <input type="button" value="-" class="button-minus  btn  btn-sm " data-field="quantity">
-                                <input type="number" step="1" max="10" value="1" name="quantity" class="quantity-field form-control-sm form-input   ">
-                                <input type="button" value="+" class="button-plus btn btn-sm " data-field="quantity">
+                                <input type="button" value="-" class="button-minus  btn  btn-sm "
+                                    data-field="quantity">
+                                <input type="number" step="1" max="10" value="1"
+                                    name="quantity" class="quantity-field form-control-sm form-input   ">
+                                <input type="button" value="+" class="button-plus btn btn-sm "
+                                    data-field="quantity">
                             </div>
                         </div>
                         <!-- price -->
@@ -1191,7 +1423,8 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel" aria-hidden="true">
+<div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered">
         <div class="modal-content">
 
@@ -1201,7 +1434,8 @@
                         <h5 class="mb-1" id="locationModalLabel">Choose your Delivery Location</h5>
                         <p class="mb-0 small">Enter your address and we will specify the offer you area. </p>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="my-5">
                     <input type="search" class="form-control" placeholder="Search your area">
@@ -1216,43 +1450,53 @@
                     <div data-simplebar style="height:300px;">
                         <div class="list-group list-group-flush">
 
-                            <a href="#" class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action active">
+                            <a href="#"
+                                class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action active">
                                 <span>Surabaya</span>
                                 {{-- <span>Min:$20</span> --}}
                             </a>
-                            <a href="#" class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
+                            <a href="#"
+                                class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
                                 <span>Makassar</span>
                                 {{-- <span>Min:$30</span> --}}
                             </a>
-                            <a href="#" class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
+                            <a href="#"
+                                class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
                                 <span>Jember</span>
                                 {{-- <span>Min:$50</span> --}}
                             </a>
-                            <a href="#" class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
+                            <a href="#"
+                                class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
                                 <span>Sorong</span>
                                 {{-- <span>Min:$29</span> --}}
                             </a>
-                            <a href="#" class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
+                            <a href="#"
+                                class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
                                 <span>Sidoarjo</span>
                                 {{-- <span>Min:$80</span> --}}
                             </a>
-                            <a href="#" class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
+                            <a href="#"
+                                class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
                                 <span>Bone</span>
                                 {{-- <span>Min:$90</span> --}}
                             </a>
-                            <a href="#" class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
+                            <a href="#"
+                                class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
                                 <span>Ketintang</span>
                                 {{-- <span>Min:$50</span> --}}
                             </a>
-                            <a href="#" class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
+                            <a href="#"
+                                class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
                                 <span>Bali</span>
                                 {{-- <span>Min:$29</span> --}}
                             </a>
-                            <a href="#" class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
+                            <a href="#"
+                                class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
                                 <span>Yogyakarta</span>
                                 {{-- <span>Min:$80</span> --}}
                             </a>
-                            <a href="#" class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
+                            <a href="#"
+                                class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
                                 <span>Jakarta</span>
                                 {{-- <span>Min:$90</span> --}}
                             </a>
