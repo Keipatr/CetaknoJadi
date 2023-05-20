@@ -1,52 +1,3 @@
-{{-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <title>Cetakno - Printing Provider</title>
-    <link href="{{ asset('libs/slick-carousel/slick/slick.css') }}" rel="stylesheet" />
-<link href="{{ asset('libs/slick-carousel/slick/slick-theme.css') }}" rel="stylesheet" />
-<link href="{{ asset('libs/tiny-slider/dist/tiny-slider.css') }}" rel="stylesheet">
-<link href="libs/dropzone/dist/min/dropzone.min.css" rel="stylesheet" />
-<link href="libs/tiny-slider/dist/tiny-slider.css" rel="stylesheet">
-<link href="libs/nouislider/dist/nouislider.min.css" rel="stylesheet">
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta content="Codescandy" name="author">
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-M8S4MT3EYG"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-
-    gtag('config', 'G-M8S4MT3EYG');
-</script>
-
-<!-- Favicon icon-->
-<link rel="shortcut icon" type="image/x-icon" href="images/favicon/logoTitleCetakno.ico">
-
-
-<!-- Libs CSS -->
-<link href="libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-<link href="libs/feather-webfont/dist/feather-icons.css" rel="stylesheet">
-<link href="libs/simplebar/dist/simplebar.min.css" rel="stylesheet">
-
-
-<!-- Theme CSS -->
-<link rel="stylesheet" href="{{ asset('css/theme.min.css') }}">
-
-
-</head> --}}
-
-{{-- <body> --}}
-
 <div class="border-bottom ">
 
     <div class="bg-light py-1">
@@ -138,15 +89,13 @@
             <div class="row w-100 align-items-center gx-lg-2 gx-0">
                 <div class="col-xxl-2 col-lg-3">
                     <a class="navbar-brand d-none d-lg-block " href="{{ url('/index') }}">
-                        <img src="images/logo/logo cetakno hitam.png" alt="eCommerce HTML " 
-                        width="180" height="30" class="img-fluid d-block mx-auto" >
-                        
+                        <img src="images/logo/logo cetakno hitam.png" alt="eCommerce HTML " width="180" height="30" class="img-fluid d-block mx-auto">
+
 
                     </a>
                     <div class="d-flex justify-content-between w-100 d-lg-none">
                         <a class="navbar-brand" href="{{ url('') }}">
-                            <img src="images/logo/logo cetakno hitam.png" alt="eCommerce HTML " 
-                            width="180" height="30" class="img-fluid d-block mx-auto">
+                            <img src="images/logo/logo cetakno hitam.png" alt="eCommerce HTML " width="180" height="30" class="img-fluid d-block mx-auto">
 
                         </a>
 
@@ -820,7 +769,6 @@
     </nav>
 </div>
 <!-- Modal -->
-{{-- modal di taro di sini ya jing --}}
 <!-- Start: Login -->
 <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
     <div class="modal-dialog" role="document">
@@ -832,25 +780,47 @@
             <div class="modal-body">
                 <div>
                     <ul class="nav nav-tabs" role="tablist" style="border-width: 1px;">
-                        <li class="nav-item text-center" role="presentation" style="width: 120px;background: #e6ebf1;"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-1" style="color: var(--bs-nav-tabs-link-active-color);background: #f4f9f9;border-bottom-color: #f4f9f9;">Customer</a>
+                        <li class="nav-item text-center" role="presentation" style="width: 120px;background: #e6ebf1;">
+                            <a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-1" style="color: var(--bs-nav-tabs-link-active-color);background: #f4f9f9;border-bottom-color: #f4f9f9;">Customer</a>
                         </li>
-                        <li class="nav-item" role="presentation"><a class="nav-link active text-center" role="tab" data-bs-toggle="tab" href="#tab-2" style="color: var(--bs-nav-tabs-link-active-color);width: 120px;background: #fef9f9;border-bottom-color: #fef9f9;">Vendor</a>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2" style="color: var(--bs-nav-tabs-link-active-color);width: 120px;background: #fef9f9;border-bottom-color: #fef9f9;">Vendor</a>
                         </li>
                     </ul>
                     <div class="tab-content">
+                        @if(Session::has('id_user'))
                         <div class="tab-pane" role="tabpanel" id="tab-1" style="border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;">
-                            <!-- Start: Modal Login form -->
+                            <!-- Content for logged-in users -->
+                            <p>Welcome, user!</p>
+                            <form action="{{route('logout')}}" method="post">
+                                @csrf
+                                <div class="d-xl-flex justify-content-xl-start form-group" style="margin-right: 0px;margin-left: 20px;">
+                                    <button class="btn btn-primary btn-block btn-lg" type="submit" value="Login" style="margin-top: 6px;margin-bottom: 12px;;">Logout</button>
+                                </div>
+                            </form>
+                        </div>
+                        @else
+                        <div class="tab-pane" role="tabpanel" id="tab-1" style="border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;">
                             <div class="d-xl-flex justify-content-xl-center" id="myModal" style="margin: 0px;padding-bottom: 318px;border-width: 0px;background: #f4f9f9;height: 303px;">
                                 <div class="d-xl-flex justify-content-xl-center modal-dialog modal-login" style="width: 400px;margin: 18px 33px;">
                                     <div class="modal-content" style="background: #f4f9f9;padding: 0px;height: 200px;width: 400px;padding-bottom: 0px;">
                                         <div class="modal-body" style="padding: 16px;padding-bottom: 0px;background: #f4f9f9;">
-                                            <form action="confirmation" method="post">
-                                                <div class="form-group"><i class="fa fa-star fa-user"></i><input class="form-control" type="text" placeholder="Username" required="required" style="margin: 0px;margin-bottom: 8px;" name="USERNAME_CUST"></div>
+                                            @if(Session::has('fail'))
+                                            <div class="alert alert-danger">{{ session('fail') }}</div>
+                                            @endif
+                                            @if(Session::has('success'))
+                                            <div class="alert alert-danger">{{ session('success') }}</div>
+                                            @endif
+                                            <form id="signin-form" action="{{route('signin-customer')}}" method="post">
+                                                @csrf
+                                                <div class="form-group"><i class="fa fa-star fa-user"></i><input class="form-control" type="text" placeholder="Username" required="required" style="margin: 0px;margin-bottom: 8px;" name="USERNAME_CUST" value="{{old('username')}}"></div>
+                                                <span class="text-danger">@error('username_cust'){{$message}} @enderror</span>
                                                 <div class="form-group"><i class="fa fa-star fa-lock"></i><input class="form-control" type="password" placeholder="Password" required="required" style="margin-bottom: 6px;margin-top: 8px;" name="PASSWORD_CUST"></div>
+                                                <span class="text-danger">@error('password_cust'){{$message}} @enderror</span>
                                                 <div class="d-xl-flex justify-content-xl-start form-group" style="margin-right: 0px;margin-left: 20px;"><button class="btn btn-primary btn-block btn-lg" type="submit" value="Login" style="margin-top: 6px;margin-bottom: 12px;;">Login</button>
                                                 </div>
                                                 <div class="text-start" style="padding-top: 0px; margin-bottom: 0px"><input type="checkbox" name="Remember me">
-                                                    <p class="d-inline-block" style="margin-left: 6px;">Remember me
+                                                    <p class="d-inline-block" style="margin-left: 6px;">Remember me Customer
                                                     </p>
                                                 </div>
                                             </form>
@@ -859,46 +829,46 @@
                                             <a href="{{url('forgot')}}" style="margin: 0px;color: rgb(153, 153, 153);">Forgot Password?</a>
                                         </div>
                                         <div class="d-xl-flex justify-content-xl-center modal-footer" style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -12px;background: rgb(222,226,227);margin-top: 30px;">
-                                            <!-- Start: Register --><a style="margin: 0px;color: rgb(153,153,153);" href="index.html" data-bs-target="#modal-2" data-bs-toggle="modal">Dont have any acount? Sign up</a>
-                                            <!-- End: Register -->
+                                            <a style="margin: 0px;color: rgb(153,153,153);" href="index.html" data-bs-target="#modal-2" data-bs-toggle="modal">Dont have any acount? Sign up</a>
                                         </div>
                                     </div>
                                 </div>
-                            </div><!-- End: Modal Login form -->
+                            </div>
                         </div>
                         <div class="tab-pane active" role="tabpanel" id="tab-2" style="background: #efecec;">
-                            <!-- Start: Modal Login form -->
                             <div class="d-xl-flex justify-content-xl-center" id="myModal-1" style="background: #fef9f9;padding-bottom: 28px;">
                                 <div class="d-xl-flex justify-content-xl-center modal-dialog modal-login" style="width: 400px;margin: 18px 33px;">
                                     <div class="modal-content" style="padding: 0px;background: #fef9f9;">
                                         <div class="modal-body" style="padding: 16px;padding-bottom: 0px;background: #fef9f9;">
-                                            <form action="confirmation" method="post">
+                                            <form action="{{route('signin-customer')}}" method="post">
                                                 <div class="form-group"><i class="fa fa-envelope-square fa-user"></i><input class="form-control" type="text" placeholder="Email" required="required" style="margin: 0px;margin-bottom: 8px;" name="EMAIL_SHOP"></div>
                                                 <div class="form-group"><i class="fa fa-lock fa-lock"></i><input class="form-control" type="password" placeholder="Password" required="required" style="margin-bottom: 6px;margin-top: 8px;"></div>
                                                 <div class="d-xl-flex justify-content-xl-start form-group" style="margin-right: 0px;margin-left: 20px;"><button class="btn btn-primary btn-block btn-lg" type="submit" value="Login" style="margin-top: 6px;margin-bottom: 12px;">Login</button>
                                                 </div>
+                                                <div class="text-start" style="background: #fef9f9;width: 368px;margin-left: 16px;"><input type="checkbox" name="Remember me">
+                                                    <p class="d-inline-block" style="margin-left: 6px;">Remember me Vendor</p>
+                                                </div>
                                             </form>
-                                        </div>
-                                        <div class="text-start" style="background: #fef9f9;width: 368px;margin-left: 16px;"><input type="checkbox" name="Remember me">
-                                            <p class="d-inline-block" style="margin-left: 6px;">Remember me</p>
                                         </div>
                                         <div class="d-xl-flex justify-content-xl-center modal-footer" style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -20px;background: rgb(222,226,227);">
                                             <a href="{{url('forgot')}}" style="margin: 0px;color: rgb(153, 153, 153);">Forgot Password?</a>
                                         </div>
                                         <div class="d-xl-flex justify-content-xl-center modal-footer" style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -20px;background: rgb(222,226,227);margin-top: 30px;">
-                                            <!-- Start: Register --><a style="margin: 0px;color: rgb(153,153,153);" href="index.html" data-bs-target="#modal-2" data-bs-toggle="modal">Dont have any acount? Sign up</a>
-                                            <!-- End: Register -->
+                                            <a style="margin: 0px;color: rgb(153,153,153);" href="index.html" data-bs-target="#modal-2" data-bs-toggle="modal">Dont have any acount? Sign up</a>
                                         </div>
                                     </div>
                                 </div>
-                            </div><!-- End: Modal Login form -->
+                            </div>
                         </div>
+                        @endif
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div><!-- End: Login -->
+</div>
+<!-- End: Login -->
 <!-- Start: Regis -->
 <div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
     <div class="modal-dialog" role="document">
@@ -911,17 +881,16 @@
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3" style="color: var(--bs-nav-tabs-link-active-color);background: #f4f9f9;border-bottom-color: #f4f9f9;">Customer</a>
                         </li>
-                        <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-4" style="color: var(--bs-nav-tabs-link-active-color);background: #fef9f9;border-bottom-color: #fef9f9;">Vendor</a>
+                        <!-- <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-4" style="color: var(--bs-nav-tabs-link-active-color);background: #fef9f9;border-bottom-color: #fef9f9;">Vendor</a> -->
                         </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane" role="tabpanel" id="tab-3">
-                            <!-- Start: Modal Login form -->
                             <div id="myModal-2" style="background: #f4f9f9;margin-top: -18px;">
                                 <div class="modal-dialog modal-login" style="width: 400px;margin: 18px 33px;height: AUTO;background: #f4f9f9;">
                                     <div class="modal-content" style="padding: 0px;width: 100%;background: #f4f9f9;">
                                         <div class="modal-body" style="width: AUTO;height: AUTO;padding: 16px;background: #f4f9f9;padding-left: 16px;padding-bottom: 0px;">
-                                            <form action="confirmation" method="post">
+                                            <form action="" method="post">
                                                 <div class="form-group"><i class="fa fa-star fa-user"></i><input class="form-control" type="text" placeholder="Full Name" required="required" style="margin-bottom: 8px;" name="NAME_CUST"></div>
                                                 <div class="form-group"><i class="fa fa-star fa-user"></i><input class="form-control" type="text" placeholder="Username" required="required" style="margin-bottom: 8px;" name="USERNAME_CUST"></div>
                                                 <div class="form-group"><i class="fa fa-envelope-square fa-user"></i><input class="form-control" type="text" placeholder="Email" required="required" style="margin-bottom: 8px;" name="EMAIL_CUST"></div>
@@ -938,10 +907,9 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div><!-- End: Modal Login form -->
+                            </div>
                         </div>
-                        <div class="tab-pane active" role="tabpanel" id="tab-4">
-                            <!-- Start: Modal Login form -->
+                        <!-- <div class="tab-pane active" role="tabpanel" id="tab-4">
                             <div id="myModal-3" style="background: #fef9f9;margin-top: -18px;height: 440px;">
                                 <div class="d-xl-flex justify-content-xl-center modal-dialog modal-login" style="width: 400px;margin: 18px 33px;">
                                     <div class="modal-content" style="padding: 0px;background: #fef9f9;">
@@ -960,8 +928,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div><!-- End: Modal Login form -->
-                        </div>
+                            </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

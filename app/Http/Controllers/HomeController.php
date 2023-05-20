@@ -5,12 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use App\Models\Customer;
 
-class ProductController extends Controller
+class HomeController extends Controller
 {
     public function index()
     {
-        // $products = Product::where('status_delete', 0)->get();
+        $data = array();
+        if (Session::has('id_user')) {
+            $id_user = Session::get('id_user');
+            $data = DB::select("
+        SELECT NAME_CUST as name, USERNAME_CUST AS username, PASSWORD_CUST AS password FROM customer c WHERE ID_CUSTOMER = '$id_user';
+    ");
+        }
+
 
         $products = DB::select("
         select PRODUCT_NAME, NAME_CATEGORY, PRICE_PRODUCT as price, avg(RATING_REVIEW) as rating, image, COUNT(r.ID_REVIEW) AS rating_count
@@ -26,7 +36,7 @@ class ProductController extends Controller
         foreach ($products as $product) {
             $product->formatted_price = 'Rp ' . number_format($product->price, 0, ',', '.');
         }
-        // dd($products);
-        return view('index', compact('products'));
+
+        return view('index', compact('products', 'data'));
     }
 }
