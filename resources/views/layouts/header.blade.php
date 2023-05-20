@@ -781,17 +781,20 @@
                 <div>
                     <ul class="nav nav-tabs" role="tablist" style="border-width: 1px;">
                         <li class="nav-item text-center" role="presentation" style="width: 120px;background: #e6ebf1;">
-                            <a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-1" style="color: var(--bs-nav-tabs-link-active-color);background: #f4f9f9;border-bottom-color: #f4f9f9;">Customer</a>
+                            <a class="nav-link " role="tab" data-bs-toggle="tab" href="#tab-1" style="color: var(--bs-nav-tabs-link-active-color);background: #f4f9f9;border-bottom-color: #f4f9f9;">Customer</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2" style="color: var(--bs-nav-tabs-link-active-color);width: 120px;background: #fef9f9;border-bottom-color: #fef9f9;">Vendor</a>
+                            <a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-2" style="color: var(--bs-nav-tabs-link-active-color);width: 120px;background: #fef9f9;border-bottom-color: #fef9f9;">Vendor</a>
                         </li>
                     </ul>
                     <div class="tab-content">
-                        @if(Session::has('id_user'))
+                        {{-- @if(Session::has('id_user')) --}}
+                        @if(Auth::check())
                         <div class="tab-pane" role="tabpanel" id="tab-1" style="border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;">
                             <!-- Content for logged-in users -->
-                            <p>Welcome, user!</p>
+                            <p>Welcome,
+                                <strong>{{Auth::user()->NAME_CUST   }}</strong>
+                            </p>
                             <form action="{{route('logout')}}" method="post">
                                 @csrf
                                 <div class="d-xl-flex justify-content-xl-start form-group" style="margin-right: 0px;margin-left: 20px;">
@@ -819,7 +822,7 @@
                                                 <span class="text-danger">@error('password_cust'){{$message}} @enderror</span>
                                                 <div class="d-xl-flex justify-content-xl-start form-group" style="margin-right: 0px;margin-left: 20px;"><button class="btn btn-primary btn-block btn-lg" type="submit" value="Login" style="margin-top: 6px;margin-bottom: 12px;;">Login</button>
                                                 </div>
-                                                <div class="text-start" style="padding-top: 0px; margin-bottom: 0px"><input type="checkbox" name="Remember me">
+                                                <div class="text-start" style="padding-top: 0px; margin-bottom: 0px"><input type="checkbox" name="REMEMBER_ME">
                                                     <p class="d-inline-block" style="margin-left: 6px;">Remember me Customer
                                                     </p>
                                                 </div>
