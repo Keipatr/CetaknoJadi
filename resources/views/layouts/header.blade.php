@@ -885,7 +885,7 @@
                     </ul>
                     <div class="tab-content">
                         {{-- @if (Session::has('id_user')) --}}
-                        @if (Auth::check())
+                        @if (Auth::check() || Cookie::has('remember_web_xxx'))
                             <div class="tab-pane" role="tabpanel" id="tab-1"
                                 style="border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;">
                                 <!-- Content for logged-in users -->
