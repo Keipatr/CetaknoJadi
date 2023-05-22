@@ -11,9 +11,11 @@
                 console.log(response);
 
                 // Update cart quantity in the HTML
+                $('#cartQty').html(response.cart_quantity);
                 $('#cartQty').text(response.cartQty);
 
                 // Update wishlist quantity in the HTML
+                $('#wishlistQty').html(response.wishlist_quantity);
                 $('#wishlistQty').text(response.wishlistQty);
             },
             error: function(xhr, status, error) {

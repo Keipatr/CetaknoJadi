@@ -65,7 +65,7 @@ class LoginController extends Controller
         ]);
 
         $user = Customer::where('USERNAME_CUST', '=', $request->USERNAME_CUST)->first();
-
+        // dd($user);
         if ($user) {
             if ($request->PASSWORD_CUST == $user->PASSWORD_CUST) {
                 if ($request->has('remember_me')) {
