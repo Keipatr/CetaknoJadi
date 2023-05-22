@@ -1,118 +1,10 @@
-{{-- <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script> --}}
-<script>
-    // Function to fetch cart and wishlist quantities
-    function fetchQuantities() {
-        // AJAX request to fetch quantities
-        $.ajax({
-            url: '/qty', // Replace with your route URL
-            method: 'GET',
-            success: function(response) {
-                // Log the response to the console
-                console.log(response);
 
-                // Update cart quantity in the HTML
-                $('#cartQty').html(response.cart_quantity);
-                $('#cartQty').text(response.cartQty);
-
-                // Update wishlist quantity in the HTML
-                $('#wishlistQty').html(response.wishlist_quantity);
-                $('#wishlistQty').text(response.wishlistQty);
-            },
-            error: function(xhr, status, error) {
-                console.error(error);
-            }
-        });
-    }
-
-    // Call fetchQuantities when the page is loaded
-    $(document).ready(function() {
-        fetchQuantities();
-    });
-</script>
 
 <div class="border-bottom ">
 
     <div class="bg-light py-1">
         <div class="container">
             <div class="row">
-                {{-- <div class="col-md-6 col-12 text-center text-md-start"><span> Super Value Deals - Save more with
-                            coupons</span>
-                    </div>
-                    <div class="col-6 text-end d-none d-md-block">
-                        <div class="dropdown">
-                            <a class="dropdown-toggle text-decoration-none  text-muted" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="me-1">
-                                    <svg width="16" height="13" viewBox="0 0 16 13" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <g clip-path="url(#selectedlang)">
-                                            <path d="M0 0.5H16V12.5H0V0.5Z" fill="#012169" />
-                                            <path
-                                                d="M1.875 0.5L7.975 5.025L14.05 0.5H16V2.05L10 6.525L16 10.975V12.5H14L8 8.025L2.025 12.5H0V11L5.975 6.55L0 2.1V0.5H1.875Z"
-                                                fill="white" />
-                                            <path
-                                                d="M10.6 7.525L16 11.5V12.5L9.225 7.525H10.6ZM6 8.025L6.15 8.9L1.35 12.5H0L6 8.025ZM16 0.5V0.575L9.775 5.275L9.825 4.175L14.75 0.5H16ZM0 0.5L5.975 4.9H4.475L0 1.55V0.5Z"
-                                                fill="#C8102E" />
-                                            <path d="M6.025 0.5V12.5H10.025V0.5H6.025ZM0 4.5V8.5H16V4.5H0Z"
-                                                fill="white" />
-                                            <path d="M0 5.325V7.725H16V5.325H0ZM6.825 0.5V12.5H9.225V0.5H6.825Z"
-                                                fill="#C8102E" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="selectedlang">
-                                                <rect width="16" height="12" fill="white"
-                                                    transform="translate(0 0.5)" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                </span>English
-                            </a>
-
-                            <ul class="dropdown-menu">
-
-                                <li><a class="dropdown-item " href="#"><span class="me-2">
-
-                                            <svg width="16" height="13" viewBox="0 0 16 13" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <g clip-path="url(#clip0_5543_19744)">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M0 0.5H16V12.5H0V0.5Z" fill="white" />
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M0 0.5H5.3325V12.5H0V0.5Z" fill="#002654" />
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M10.668 0.5H16.0005V12.5H10.668V0.5Z" fill="#CE1126" />
-                                                </g>
-                                                <defs>
-                                                    <clipPath id="clip0_5543_19744">
-                                                        <rect width="16" height="12" fill="white"
-                                                            transform="translate(0 0.5)" />
-                                                    </clipPath>
-                                                </defs>
-                                            </svg>
-
-                                        </span>Français</a></li>
-                                <li><a class="dropdown-item " href="#"><span class="me-2">
-
-                                            <svg width="16" height="13" viewBox="0 0 16 13" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <g clip-path="url(#clip0_5543_19751)">
-                                                    <path d="M0 8.5H16V12.5H0V8.5Z" fill="#FFCE00" />
-                                                    <path d="M0 0.5H16V4.5H0V0.5Z" fill="black" />
-                                                    <path d="M0 4.5H16V8.5H0V4.5Z" fill="#DD0000" />
-                                                </g>
-                                                <defs>
-                                                    <clipPath id="clip0_5543_19751">
-                                                        <rect width="16" height="12" fill="white"
-                                                            transform="translate(0 0.5)" />
-                                                    </clipPath>
-                                                </defs>
-                                            </svg>
-
-                                        </span>Deutsch</a></li>
-
-                            </ul>
-                        </div>
-                    </div> --}}
             </div>
         </div>
     </div>
@@ -120,26 +12,27 @@
         <div class="container">
             <div class="row w-100 align-items-center gx-lg-2 gx-0">
                 <div class="col-xxl-2 col-lg-3">
-                    <a class="navbar-brand d-none d-lg-block " href="{{ url('/index') }}">
+                    <a class="navbar-brand d-none d-lg-block " href="{{ route('home') }}">
                         <img src="images/logo/logo cetakno hitam.png" alt="eCommerce HTML " width="180"
                             height="30" class="img-fluid d-block mx-auto">
 
 
                     </a>
                     <div class="d-flex justify-content-between w-100 d-lg-none">
-                        <a class="navbar-brand" href="{{ url('') }}">
+                        <a class="navbar-brand" href="{{ route('home') }}">
                             <img src="images/logo/logo cetakno hitam.png" alt="eCommerce HTML " width="180"
                                 height="30" class="img-fluid d-block mx-auto">
 
                         </a>
-
+                        {{-- resolusi kecil --}}
                         <div class="d-flex align-items-center lh-1">
-
                             <div class="list-inline me-4">
                                 <div class="list-inline-item">
 
-                                    <a href="#!" class="text-muted" data-bs-toggle="modal"
-                                        data-bs-target="#modal-1">
+                                    <a href="{{ route('loginpage') }}" class="text-muted"
+                                    {{-- data-bs-toggle="modal" --}}
+                                        {{-- data-bs-target="#modal-1" --}}
+                                        >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
@@ -165,7 +58,7 @@
                                         <span
                                             class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
                                             @if (Auth::check())
-                                                <span id="cartQty"></span>
+                                                <span id="cartQty">00</span>
                                             @else
                                                 0
                                             @endif
@@ -221,13 +114,11 @@
 
 
                 </div>
+                {{-- resolusi besar --}}
                 <div class="col-md-2 col-xxl-1 text-end d-none d-lg-block">
-
                     <div class="list-inline">
                         <div class="list-inline-item">
-
                             <a href="{{ route('wishlist') }}" class="text-muted position-relative">
-
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
@@ -249,7 +140,10 @@
                         </div>
                         <div class="list-inline-item">
                             {{-- ini button trigger modal untuk akunnya --}}
-                            <a href="#!" class="text-muted" data-bs-toggle="modal" data-bs-target="#modal-1">
+                            <a href="{{ route('loginpage') }}" class="text-muted"
+                            {{-- data-bs-toggle="modal" --}}
+                            {{-- data-bs-target="#modal-1" --}}
+                            >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">

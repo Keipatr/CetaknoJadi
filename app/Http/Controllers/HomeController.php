@@ -48,7 +48,7 @@ class HomeController extends Controller
             LEFT JOIN wishlist w ON cu.ID_WISHLIST = w.ID_WISHLIST
             LEFT JOIN cart c ON cu.ID_CART = c.ID_CART
             WHERE cu.ID_CUSTOMER = '$userId'");
-        dd($quantities);
+        // dd($quantities);
         if ($quantities) {
             $wishlistQty = $quantities[0]->QTY_WISHLIST;
             $cartQty = $quantities[0]->QTY_CART;
@@ -61,5 +61,10 @@ class HomeController extends Controller
         } else {
             return response('Quantities not found', 404);
         }
+    }
+
+    public function loginpage()
+    {
+        return view('signin');
     }
 }

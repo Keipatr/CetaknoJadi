@@ -28,7 +28,6 @@ Route::post('/signup', [LoginController::class, 'signup'])
 
 Route::middleware('auth')->group(function () {
     // Routes that require authentication
-    // ...
 
 });
 
@@ -39,6 +38,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/wishlist', [WishlistController::class, 'fetch'])->name('wishlist');
 Route::get('/fetch-cart-quantity', [CartController::class, 'fetch'])->name('fetch-cart-quantity');
 Route::get('/qty', [HomeController::class, 'fetchQuantities'])->name('qty');
+Route::get('/signin', [HomeController::class, 'loginpage'])->name('loginpage');
 
 
 // not riil
