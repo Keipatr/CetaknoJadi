@@ -1,5 +1,7 @@
 <?php
-
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\CRegisController;
+use App\Http\Controllers\Auth\VRegisController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +39,10 @@ Route::get('/cart', function () {
 Route::get('/checkout', function () {
     return view('shop-checkout');
 });
+
+Route::post('/confirmation-customer', [CRegisController::class, 'custregister']);
+Route::post('/confirmation-vendor', [VRegisController::class, 'vendregister']);
+
 Route::get('/account', function () {
     return view('account-settings');
 });

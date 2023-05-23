@@ -885,7 +885,7 @@
                                 <div class="d-xl-flex justify-content-xl-center modal-dialog modal-login" style="width: 400px;margin: 18px 33px;">
                                     <div class="modal-content" style="padding: 0px;background: #fffdfd;">
                                         <div class="modal-body" style="padding: 16px;padding-bottom: 0px;background: #fffdfd;">
-                                            <form action="confirmation" method="post">
+                                            <form action="/confirmation" method="post">
                                                 <div class="form-group"><i class="fa fa-envelope-square fa-user"></i><input class="form-control" type="text" placeholder="Email" required="required" style="margin: 0px;margin-bottom: 8px;" name="EMAIL_SHOP"></div>
                                                 <div class="form-group"><i class="fa fa-lock fa-lock"></i><input class="form-control" type="password" placeholder="Password" required="required" style="margin-bottom: 6px;margin-top: 8px;"></div>
                                                 <div class="d-xl-flex justify-content-xl-start form-group" style="margin-right: 0px;margin-left: 20px;"><button class="btn btn-primary btn-block btn-lg" type="submit" value="Login" style="margin-top: 6px;margin-bottom: 12px;">Login</button>
@@ -927,19 +927,20 @@
                     </ul>
                     <div class="tab-content">
                         <div id="tab-3" class="tab-pane" role="tabpanel">
-                            <div id="myModal-2" style="background: #fdffff;margin-top: -18px;height: 272px;">
+                            <div id="myModal-2" style="background: #fdffff;margin-top: -18px;height: 482px;">
                                 <div class="modal-dialog modal-login" style="width: 400px;margin: 18px 33px;height: AUTO;background: #f4f9f9;">
                                     <div class="modal-content" style="padding: 0px;width: 100%;background: #f4f9f9;">
                                         <div class="modal-body" style="width: AUTO;height: AUTO;padding: 16px;background: #fdffff;padding-left: 16px;padding-bottom: 0px;">
-                                            <form action="confirmation" method="post">
-                                                <div class="form-group"><i class="fa fa-star fa-user"></i><input class="form-control" type="text" placeholder="First Name" required="required" style="margin-bottom: 8px;width: 48%;display: inline;" name="FIRST_NAME_CUST" /><input class="form-control" type="text" placeholder="Last Name" required="required" style="margin-bottom: 8px;width: 48%;display: inline;margin-left: 14px;" name="NAME_CUST" /></div>
+                                            <form action="/confirmation-customer" method="post">
+                                                @csrf <!-- Add this line to include the CSRF token -->
+                                                <div class="form-group"><i class="fa fa-star fa-user"></i><input class="form-control" type="text" placeholder="Full Name" required="required" style="margin-bottom: 8px;display: inline;" name="NAME_CUST" /></div>
                                                 <div class="form-group"><i class="fa fa-star fa-user"></i><input class="form-control" type="text" placeholder="Username" required="required" style="margin-bottom: 8px;" name="USERNAME_CUST" /></div>
                                                 <div class="form-group"><i class="fa fa-envelope-square fa-user"></i><input class="form-control" type="text" placeholder="Email" required="required" style="margin-bottom: 8px;" name="EMAIL_CUST" /></div>
-                                                <div class="form-group"><i class="fa fa-phone-square fa-user"></i></div>
-                                                <div class="form-group"><i class="fa fa-home fa-user"></i></div>
-                                                <div class="form-group"><i class="fa fa-star fa-user"></i></div>
-                                                <div class="form-group"><i class="fa fa-star fa-user"></i></div>
                                                 <div class="form-group"><i class="fa fa-star fa-lock"></i><input class="form-control" type="password" placeholder="Password" required="required" style="margin-bottom: 8px;" name="PASSWORD_CUST" /></div>
+                                                <div class="form-group"><i class="fa fa-phone-square fa-user"></i><input class="form-control" type="text" placeholder="Telephone" required="required" style="margin-bottom: 8px;" name="TELP_CUST" /></div>
+                                                <div class="form-group"><i class="fa fa-home fa-user"></i><input class="form-control" type="text" placeholder="Address" required="required" style="margin-bottom: 8px;" name="ADDRESS_CUST" /></div>
+                                                <div class="form-group"><i class="fa fa-star fa-user"></i><input class="form-control" type="text" placeholder="City" required="required" style="margin-bottom: 8px;" name="CITY_CUST" /></div>
+                                                <div class="form-group"><i class="fa fa-star fa-user"></i><input class="form-control" type="text" placeholder="Postal Code" required="required" style="margin-bottom: 8px;" name="POSTAL_CUST" /></div>
                                                 <div class="form-group" style="margin-left: 20px;"><button class="btn btn-primary btn-block btn-lg" type="submit" value="Login" style="margin-bottom: 12px;margin-top: 6px;">Register</button></div>
                                             </form>
                                         </div>
@@ -947,20 +948,49 @@
                                 </div>
                             </div>
                         </div>
+                    
                         <div id="tab-4" class="tab-pane active" role="tabpanel">
-                            <div id="myModal-3" style="background: #fffdfd;margin-top: -18px;height: 224px;">
+                            <div id="myModal-3" style="background: #fffdfd;margin-top: -18px;height: 432px;">
                                 <div class="d-xl-flex justify-content-xl-center modal-dialog modal-login" style="width: 400px;margin: 18px 33px;">
                                     <div class="modal-content" style="padding: 0px;background: #fef9f9;">
                                         <div class="modal-body" style="padding: 16px;padding-bottom: 0px;background: #fffdfd;">
-                                            <form action="confirmation" method="post">
-                                                <div class="form-group"><i class="fa fa-building-o fa-user"></i><input class="form-control" type="text" placeholder="Nama Toko" required="required" style="margin: 0px;margin-bottom: 8px;" name="NAME_SHOP" /></div>
-                                                <div class="form-group"><i class="fa fa-envelope-square fa-user"></i><input class="form-control" type="text" placeholder="Email" required="required" style="margin: 0px;margin-bottom: 8px;" name="EMAIL_SHOP" /></div>
-                                                <div class="form-group"><i class="fa fa-building-o fa-user"></i></div>
-                                                <div class="form-group"><i class="fa fa-building-o fa-user"></i></div>
-                                                <div class="form-group"><i class="fa fa-building-o fa-user"></i></div>
-                                                <div class="form-group"><i class="fa fa-star fa-lock"></i><input class="form-control" type="password" placeholder="Password" required="required" style="margin-bottom: 8px;margin-top: 8px;" /></div>
-                                                <div class="d-xl-flex justify-content-xl-start form-group" style="margin-right: 0px;margin-left: 20px;"><button class="btn btn-primary btn-block btn-lg" type="submit" value="Login" style="margin-top: 6px;margin-bottom: 12px;">Register</button></div>
+                                            <form action="/confirmation-vendor" method="post">
+                                                @csrf <!-- Add this line to include the CSRF token -->
+                                                <div class="form-group">
+                                                    <i class="fa fa-building-o fa-user"></i>
+                                                    <input class="form-control" type="text" placeholder="Nama Toko" required="required" style="margin: 0px;margin-bottom: 8px;" name="NAME_SHOP" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <i class="fa fa-envelope-square fa-user"></i>
+                                                    <input class="form-control" type="text" placeholder="Email" required="required" style="margin: 0px;margin-bottom: 8px;" name="EMAIL_SHOP" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <i class="fa fa-star fa-lock"></i>
+                                                    <!-- Add name attribute for password field -->
+                                                    <input class="form-control" type="password" placeholder="Password" required="required" style="margin-bottom: 8px;margin-top: 8px;" name="PASSWORD_SHOP" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <i class="fa fa-building-o fa-user"></i>
+                                                    <!-- Add name attribute for other fields -->
+                                                    <input class="form-control" type="text" placeholder="Telephone" required="required" style="margin: 0px;margin-bottom: 8px;" name="TELP_SHOP" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <i class="fa fa-building-o fa-user"></i>
+                                                    <input class="form-control" type="text" placeholder="City" required="required" style="margin: 0px;margin-bottom: 8px;" name="CITY_SHOP" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <i class="fa fa-building-o fa-user"></i>
+                                                    <input class="form-control" type="text" placeholder="Address" required="required" style="margin: 0px;margin-bottom: 8px;" name="ADDRESS_SHOP" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <i class="fa fa-building-o fa-user"></i>
+                                                    <input class="form-control" type="text" placeholder="Postal Code" required="required" style="margin: 0px;margin-bottom: 8px;" name="POSTAL_SHOP" />
+                                                </div>
+                                                <div class="d-xl-flex justify-content-xl-start form-group" style="margin-right: 0px;margin-left: 20px;">
+                                                    <button class="btn btn-primary btn-block btn-lg" type="submit" value="Login" style="margin-top: 6px;margin-bottom: 12px;">Register</button>
+                                                </div>
                                             </form>
+                                            
                                         </div>
                                     </div>
                                 </div>
