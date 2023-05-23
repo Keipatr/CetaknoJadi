@@ -2,7 +2,7 @@
 
 return [
     'remember' => [
-        'expire' => 10080, 
+        'expire' => 10080,
     ],
 
 
@@ -19,7 +19,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'customer',
     ],
 
     /*
@@ -66,12 +66,14 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Customer::class,
+            'table' => 'customer',
+            'username' => 'username_cust',
         ],
 
         // 'users' => [
         //     'driver' => 'database',
-        //     'table' => 'users',
+        //     'table' => 'customer',
         // ],
     ],
 
@@ -96,7 +98,7 @@ return [
 
     'passwords' => [
         'users' => [
-            'provider' => 'users',
+            'provider' => 'customer',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,

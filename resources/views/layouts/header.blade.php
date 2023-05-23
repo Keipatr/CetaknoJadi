@@ -28,7 +28,6 @@
                         <div class="d-flex align-items-center lh-1">
                             <div class="list-inline me-4">
                                 <div class="list-inline-item">
-
                                     <a href="{{ route('loginpage') }}" class="text-muted"
                                     {{-- data-bs-toggle="modal" --}}
                                         {{-- data-bs-target="#modal-1" --}}
@@ -58,7 +57,7 @@
                                         <span
                                             class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
                                             @if (Auth::check())
-                                                <span id="cartQty">00</span>
+                                                <span id="cartQty">2</span>
                                             @else
                                                 0
                                             @endif

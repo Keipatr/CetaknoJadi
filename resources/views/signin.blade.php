@@ -75,44 +75,64 @@
                     <div class="col-12 col-md-6 offset-lg-1 col-lg-4 order-lg-2 order-1">
                         <div class="mb-lg-9 mb-5">
                             <h1 class="mb-1 h2 fw-bold">Sign in to Cetakno</h1>
-                            <p>Welcome back to Cetakno! Enter your email to get started.</p>
+                            <p>Welcome back to Cetakno! Enter your username and password to get started.</p>
                         </div>
-
-                        <form action="{{ route('signin-customer') }}" method = "post">
+                        <form action="{{ route('signin-customer') }}" method="post">
+                            @csrf
                             <div class="row g-3">
                                 <!-- row -->
-
-                                <div class="col-12">
-                                    <!-- input -->
-                                    <input type="email" class="form-control" id="inputEmail4" placeholder="Email"
-                                        required>
-                                </div>
-                                <div class="col-12">
-                                    <!-- input -->
-                                    <div class="password-field position-relative">
-                                        <input type="password" id="fakePassword" placeholder="Enter Password"
-                                            class="form-control" required>
-                                        <span><i id="passwordToggler"class="bi bi-eye-slash"></i></span>
+                                @if (Session::has('error'))
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ Session::get('error') }}
                                     </div>
-
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <!-- form check -->
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            id="flexCheckDefault">
-                                        <!-- label --> <label class="form-check-label" for="flexCheckDefault">
-                                            Remember me
-                                        </label>
+                                @endif
+                                @if (Auth::check())
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <label for="floatingInput">
+                                                <h6>
+                                                    <strong>
+                                                        {{ Auth::user()->NAME_CUST }}
+                                                    </strong>
+                                                </h6>
+                                            </label>
+                                        </div>
                                     </div>
-                                    <div> Forgot password? <a href="{{ url('forgot') }}">Reset It</a></div>
-                                </div>
-                                <!-- btn -->
-                                <div class="col-12 d-grid"> <button type="submit" class="btn btn-primary">Sign
-                                        In</button>
-                                </div>
-                                <!-- link -->
-                                <div>Don’t have an account? <a href="{{ url('signup') }}"> Sign Up</a></div>
+                                    <div
+                                        class="col-12 col-md-6 d-flex justify-content-center align-items-center mb-3">
+                                        <a href="{{ route('logout') }}" class="btn btn-danger">Logout</a>
+                                    </div>
+                                @else
+                                    <div class="col-12">
+                                        <!-- input -->
+                                        <input type="text" class="form-control" id="inputEmail4"
+                                            placeholder="Enter Username" name="username_cust" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <!-- input -->
+                                        <div class="password-field position-relative">
+                                            <input type="password" id="fakePassword" placeholder="Enter Password"
+                                                class="form-control" name="password" required>
+                                            <span><i id="passwordToggler"class="bi bi-eye-slash"></i></span>
+                                        </div>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <!-- form check -->
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckDefault" name="remember"> <label class="form-check-label"
+                                                for="flexCheckDefault"> Remember me </label>
+                                        </div>
+                                        <div> Forgot password? <a href="{{ route('forgot') }}">Reset It</a></div>
+                                    </div>
+                                    <!-- btn -->
+                                    <div class="col-12 d-grid"> <button type="submit" class="btn btn-primary">Sign
+                                            In</button>
+                                    </div>
+                                    <!-- link -->
+                                    <div>Don’t have an account? <a href="{{ route('signup') }}"> Sign Up</a></div>
+                                @endif
                             </div>
                         </form>
                     </div>

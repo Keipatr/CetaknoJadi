@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Models\Customer;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Auth;
+use App\Providers\Auth\CustomUserProvider;
+use Illuminate\Support\Str;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -23,11 +25,11 @@ class AuthServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {
-        $this->registerPolicies();
+{
+    $this->registerPolicies();
 
-        Auth::provider('customer', function ($app, array $config) {
-            return new CustomerAuthProvider($app['hash'], Customer::class);
-        });
-    }
+    Auth::provider('custom', function ($app, array $config) {
+        return new CustomUserProvider($app['hash'], $config['model']);
+    });
+}
 }

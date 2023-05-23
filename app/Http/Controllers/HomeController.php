@@ -67,4 +67,13 @@ class HomeController extends Controller
     {
         return view('signin');
     }
+    public function forgot()
+    {
+        return view('forgot-password');
+    }
+    public function signup()
+    {
+        return view('signup');
+    }
+
 }

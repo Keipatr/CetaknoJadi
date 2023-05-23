@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Customer;
@@ -59,62 +60,74 @@ class LoginController extends Controller
         //     return back()->with('fail', 'Username/Password is not registered/wrong');
         // }
 
-        $request->validate([
-            'USERNAME_CUST' => 'required',
-            'PASSWORD_CUST' => 'required|min:8'
+        //
+        $remember = ($request->has('remember')) ? true : false;
+        $credentials = $request->validate([
+            'username_cust' => ['required'],
+            'password' => ['required'],
         ]);
+        $userData = DB::select("SELECT * FROM customer WHERE USERNAME_CUST = :username_cust", ['username_cust' => $credentials['username_cust']]);
 
-        $user = Customer::where('USERNAME_CUST', '=', $request->USERNAME_CUST)->first();
-        // dd($user);
-        if ($user) {
-            if ($request->PASSWORD_CUST == $user->PASSWORD_CUST) {
-                if ($request->has('remember_me')) {
-                    Auth::login($user, true); // Set the "remember me" cookie for one week
-                    $rememberToken = Auth::getRecallerName();
-                    $expiration = now()->addWeeks(1)->getTimestamp(); // Get the timestamp value of the expiration time
-                    $cookie = cookie($rememberToken, $user->getRememberToken(), $expiration);
-                    return redirect('/')->withCookie($cookie);
+        if (!empty($userData)) {
+            $user = new Customer();
+            $user->fill((array) $userData[0]);
+
+            // dd($user[0]);
+            // dd(Hash::make($user[0]->PASSWORD_CUST));
+            // dd($credentials, Auth::attempt($credentials));
+
+            if (Auth::attempt($credentials,$remember)) {
+                if ($remember == true) {
+                    // Cookie::queue('username', $credentials['username'], 60);
+                    // Cookie::queue('password', $credentials['password'], 60);
+                    Auth::login($user, $remember);
+                    return redirect()->intended('/');
                 } else {
-                    Auth::login($user); // Log in without "remember me"
-                    $request->session()->regenerate(); // Regenerate the session ID to prevent session fixation
+                    Auth::login($user, $remember);
+                    $request->session()->regenerate();
+                    return redirect()->intended('/');
                 }
 
-                return redirect('/');
+            } else {
+                return view('shop-wishlist');
             }
+        } else {
+            return view('shop-wishlist');
         }
 
-        return back()->with('fail', 'Username/Password is not registered/wrong');
+
+
 
     }
-    public function signup(Request $request){
-        $request ->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:customer',
-            'password' => 'required|min:8'
-        ]);
-        $user = new Customer();
-        $user->name = $request-> name;
-        $user->email = $request-> email;
-        $user->password = Hash::make($request-> password);
-        $res = $user->save();
-        if($res){
-            return back()->with('success','Signup Successfully');
-        }else{
-            return back() -> with('fail','Something wrong');
-        }
+    public function signup(Request $request)
+    {
+        // $request ->validate([
+        //     'name' => 'required',
+        //     'email' => 'required|email|unique:customer',
+        //     'password' => 'required|min:8'
+        // ]);
+        // $user = new Customer();
+        // $user->name = $request-> name;
+        // $user->email = $request-> email;
+        // $user->password = Hash::make($request-> password);
+        // $res = $user->save();
+        // if($res){
+        //     return back()->with('success','Signup Successfully');
+        // }else{
+        //     return back() -> with('fail','Something wrong');
+        // }
     }
 
-    public function logout(){
+    public function logout()
+    {
         // if(session()->has('id_user')){
         //     session()->pull('id_user');
         //     return redirect('/');
         // }
-
-
         Auth::logout();
         Session::invalidate();
         Session::regenerateToken();
 
-        return redirect('/');
+        return redirect()->intended('/');
     }
 }
