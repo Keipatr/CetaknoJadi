@@ -8,19 +8,29 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Models\Customer;
+use Illuminate\Support\Facades\Cookie;
 
 class HomeController extends Controller
 {
     public function index()
     {
         $data = array();
-        if (Session::has('id_user')) {
-            $id_user = Session::get('id_user');
-            $data = DB::select("
-        SELECT NAME_CUST as name, USERNAME_CUST AS username, PASSWORD_CUST AS password FROM customer c WHERE ID_CUSTOMER = '$id_user';
-    ");
-        }
+        if (Session::has('USERNAME_CUST') || isset($_COOKIE['USERNAME_CUST'])) {
+            if (Session::has('USERNAME_CUST')) {
+                $username = Session::get('USERNAME_CUST');
+            } else {
+                // $username = $_COOKIE['USERNAME_CUST'];
+                $username = Cookie::get('USERNAME_CUST');
+                // dd($username);
+            }
 
+            $data = DB::select("
+            SELECT c.NAME_CUST, QTY_WISHLIST,  QTY_CART
+            FROM customer c, wishlist w, cart ca
+            WHERE w.ID_WISHLIST= c.ID_WISHLIST
+            AND ca.ID_CART= c.ID_CART AND
+             USERNAME_CUST = '$username';");
+        }
 
         $products = DB::select("
         select PRODUCT_NAME, NAME_CATEGORY, PRICE_PRODUCT as price, avg(RATING_REVIEW) as rating, image, COUNT(r.ID_REVIEW) AS rating_count
@@ -32,12 +42,12 @@ class HomeController extends Controller
         and c.ID_CATEGORY = co.ID_CATEGORY
         group by p.product_name, c.name_category, p.PRICE_PRODUCT, image;
         ");
+        $categories = DB::select("select NAME_CATEGORY from category where status_delete = 0;");
 
         foreach ($products as $product) {
             $product->formatted_price = 'Rp ' . number_format($product->price, 0, ',', '.');
         }
-
-        return view('index', compact('products', 'data'));
+        return view('index', compact('products','categories'))->with('data', $data);
     }
     public function fetchQuantities()
     {

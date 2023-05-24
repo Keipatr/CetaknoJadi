@@ -64,11 +64,9 @@
                     <div class="col-12">
                         <div class="position-relative">
                             <div class="slider-8-columns " id="slider-8-columns">
-                                <!-- item -->
+                                @foreach ($categories as $category)
                                 <div class="item">
-                                    <!-- item -->
                                     <a href="{{ url('products') }}" class="text-decoration-none text-inherit">
-                                        <!-- card -->
                                         <div class="card mb-3 card-lift">
                                             <div class="card-body text-center py-6 text-center">
                                                 <div class="my-5">
@@ -76,100 +74,12 @@
                                                         <img width="56" height="56" src="images/icons/calendar.svg">
                                                     </div>
                                                 </div>
-                                                <!-- text -->
-                                                <div>Kalender</div>
+                                                <div>{{$category->NAME_CATEGORY}}</div>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
-                                <div class="item">
-                                    <!-- item -->
-                                    <a href="{{ url('products') }}" class="text-decoration-none text-inherit">
-                                        <!-- card -->
-                                        <div class="card mb-3 card-lift">
-                                            <div class="card-body text-center py-6">
-                                                <!-- img -->
-                                                <div class="my-5">
-                                                    <div class="my-5">
-                                                        <img width="56" height="56" src="images/icons/card.svg">
-                                                    </div>
-                                                </div>
-                                                <!-- text -->
-                                                <div class="text-truncate">Kartu</div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <!-- item -->
-                                    <a href="{{ url('products') }}" class="text-decoration-none text-inherit">
-                                        <!-- card -->
-                                        <div class="card mb-3 card-lift">
-                                            <div class="card-body text-center py-6">
-                                                <!-- img -->
-                                                <div class="my-5">
-                                                    <img width="56" height="56" src="images/icons/banner.svg">
-                                                </div>
-                                                <!-- text -->
-                                                <div class="text-truncate">Banner</div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <!-- item -->
-                                    <a href="{{ url('products') }}" class="text-decoration-none text-inherit">
-                                        <!-- card -->
-                                        <div class="card mb-3 card-lift">
-                                            <div class="card-body text-center py-6">
-                                                <!-- img -->
-                                                <div class="my-5">
-                                                    <div class="my-5">
-                                                        <img width="56" height="56" src="images/icons/clothes.svg">
-                                                    </div>
-                                                </div>
-                                                <!-- text -->
-                                                <div class="text-truncate">Kaos & Kain</div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <!-- item -->
-                                    <a href="{{ url('products') }}" class="text-decoration-none text-inherit">
-                                        <!-- card -->
-                                        <div class="card mb-3 card-lift">
-                                            <div class="card-body text-center py-6">
-                                                <!-- img -->
-                                                <div class="my-5">
-                                                    <img width="56" height="56" src="images/icons/document.svg">
-                                                </div>
-                                                <!-- text -->
-                                                <div class="text-truncate">Dokumen</div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <!-- item -->
-                                    <a href="{{ url('products') }}" class="text-decoration-none text-inherit">
-                                        <!-- card -->
-                                        <div class="card mb-3 card-lift">
-                                            <div class="card-body text-center py-6">
-                                                <!-- img -->
-                                                <div class="my-5">
-                                                    <div class="my-5">
-                                                        <img width="56" height="56"
-                                                            src="images/icons/promotion.svg">
-                                                    </div>
-                                                </div>
-                                                <!-- text -->
-                                                <div class="text-truncate">Media Promosi</div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -370,11 +280,6 @@
                                     </h2>
                                     <div>
                                         <small class="text-warning">
-                                            {{-- <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-half"></i>
-                                        <i class="bi bi-star"></i> --}}
                                             @php
                                                 $fullStars = floor($product->rating);
                                                 $halfStar = ceil($product->rating - $fullStars);
