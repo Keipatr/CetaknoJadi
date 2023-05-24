@@ -46,14 +46,10 @@
         <nav class="navbar navbar-light py-2">
             <div class="container justify-content-center justify-content-lg-between">
                 <a class="navbar-brand" href="{{ route('home') }}">
-                    <img src="images/logo/logo cetakno hitam.png"
-                        style="width: 250px !important; height: 100px !important;" alt=""
-                        class="d-inline-block align-text-top">
+                    <img src="images/logo/logo cetakno hitam.png" style="width: 250px !important; height: 100px !important;" alt="" class="d-inline-block align-text-top">
                 </a>
                 <span class="navbar-text">
-                    Dont have an account? <a href="{{ url('signup') }}" style="color: black; text-decoration: none;"
-                        onmouseover="this.style.color='green'; this.style.textDecoration='underline';"
-                        onmouseout="this.style.color='black'; this.style.textDecoration='none';">Sign up</a>
+                    Dont have an account? <a href="{{ url('signup') }}" style="color: black; text-decoration: none;" onmouseover="this.style.color='green'; this.style.textDecoration='underline';" onmouseout="this.style.color='black'; this.style.textDecoration='none';">Sign up</a>
 
                 </span>
             </div>
@@ -82,56 +78,54 @@
                             <div class="row g-3">
                                 <!-- row -->
                                 @if (Session::has('error'))
-                                    <div class="alert alert-danger" role="alert">
-                                        {{ Session::get('error') }}
-                                    </div>
+                                <div class="alert alert-danger" role="alert">
+                                    {{ Session::get('error') }}
+                                </div>
                                 @endif
                                 @if (Auth::check())
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-floating mb-3">
-                                            <label for="floatingInput">
-                                                <h6>
-                                                    <strong>
-                                                        {{ Auth::user()->NAME_CUST }}
-                                                    </strong>
-                                                </h6>
-                                            </label>
-                                        </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <label for="floatingInput">
+                                            <h6>
+                                                <strong>
+                                                    {{ Auth::user()->NAME_CUST }}
+                                                </strong>
+                                            </h6>
+                                        </label>
                                     </div>
-                                    <div
-                                        class="col-12 col-md-6 d-flex justify-content-center align-items-center mb-3">
-                                        <a href="{{ route('logout') }}" class="btn btn-danger">Logout</a>
+                                </div>
+                                <form method="post" action="{{ route('logout') }}">
+                                    @csrf
+                                    <div class="col-12 col-md-6 d-flex justify-content-center align-items-center mb-3">
+                                        <button class="btn btn-primary btn-block btn-lg" type="submit" style="margin-top: 6px;margin-bottom: 12px;">Logout</button>
                                     </div>
+                                </form>
                                 @else
-                                    <div class="col-12">
-                                        <!-- input -->
-                                        <input type="text" class="form-control" id="inputEmail4"
-                                            placeholder="Enter Username" name="username_cust" required>
+                                <div class="col-12">
+                                    <!-- input -->
+                                    <input type="text" class="form-control" id="inputEmail4" placeholder="Enter Username" name="username_cust" required>
+                                </div>
+                                <div class="col-12">
+                                    <!-- input -->
+                                    <div class="password-field position-relative">
+                                        <input type="password" id="fakePassword" placeholder="Enter Password" class="form-control" name="password" required>
+                                        <span><i id="passwordToggler" class="bi bi-eye-slash"></i></span>
                                     </div>
-                                    <div class="col-12">
-                                        <!-- input -->
-                                        <div class="password-field position-relative">
-                                            <input type="password" id="fakePassword" placeholder="Enter Password"
-                                                class="form-control" name="password" required>
-                                            <span><i id="passwordToggler"class="bi bi-eye-slash"></i></span>
-                                        </div>
 
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <!-- form check -->
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="remember"> <label class="form-check-label" for="flexCheckDefault"> Remember me </label>
                                     </div>
-                                    <div class="d-flex justify-content-between">
-                                        <!-- form check -->
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckDefault" name="remember"> <label class="form-check-label"
-                                                for="flexCheckDefault"> Remember me </label>
-                                        </div>
-                                        <div> Forgot password? <a href="{{ route('forgot') }}">Reset It</a></div>
-                                    </div>
-                                    <!-- btn -->
-                                    <div class="col-12 d-grid"> <button type="submit" class="btn btn-primary">Sign
-                                            In</button>
-                                    </div>
-                                    <!-- link -->
-                                    <div>Don’t have an account? <a href="{{ route('signup') }}"> Sign Up</a></div>
+                                    <div> Forgot password? <a href="{{ route('forgot') }}">Reset It</a></div>
+                                </div>
+                                <!-- btn -->
+                                <div class="col-12 d-grid"> <button type="submit" class="btn btn-primary">Sign
+                                        In</button>
+                                </div>
+                                <!-- link -->
+                                <div>Don’t have an account? <a href="{{ route('signup') }}"> Sign Up</a></div>
                                 @endif
                             </div>
                         </form>

@@ -61,31 +61,33 @@ class LoginController extends Controller
         // }
 
         //
+        // dd($request->all());
         $remember = ($request->has('remember')) ? true : false;
         $credentials = $request->validate([
             'username_cust' => ['required'],
             'password' => ['required'],
         ]);
-        $userData = DB::select("SELECT * FROM customer WHERE USERNAME_CUST = :username_cust", ['username_cust' => $credentials['username_cust']]);
-
+        // $userData = DB::select("SELECT * FROM customer WHERE USERNAME_CUST = :username_cust", ['username_cust' => $credentials['username_cust']]);
+        $userData = Customer::where('USERNAME_CUST', '=', $credentials['username_cust'])->first();
         if (!empty($userData)) {
-            $user = new Customer();
-            $user->fill((array) $userData[0]);
+            dd($request->all());
+            // $user = new Customer();
+            // $user->fill((array) $userData[0]);
 
             // dd($user[0]);
-            // dd(Hash::make($user[0]->PASSWORD_CUST));
+            //  dd(Hash::make($user->PASSWORD_CUST));
             // dd($credentials, Auth::attempt($credentials));
 
-            if (Auth::attempt($credentials,$remember)) {
+            if (Auth::attempt($credentials)) {
                 if ($remember == true) {
                     // Cookie::queue('username', $credentials['username'], 60);
                     // Cookie::queue('password', $credentials['password'], 60);
-                    Auth::login($user, $remember);
-                    return redirect()->intended('/');
+                    Auth::login($userData, $remember);
+                    return redirect()->back();
                 } else {
-                    Auth::login($user, $remember);
+                    Auth::login($userData);
                     $request->session()->regenerate();
-                    return redirect()->intended('/');
+                    return redirect()->back();
                 }
 
             } else {
@@ -94,7 +96,6 @@ class LoginController extends Controller
         } else {
             return view('shop-wishlist');
         }
-
 
 
 
@@ -125,6 +126,7 @@ class LoginController extends Controller
         //     return redirect('/');
         // }
         Auth::logout();
+        Session::flush();
         Session::invalidate();
         Session::regenerateToken();
 
