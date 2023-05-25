@@ -43,11 +43,16 @@ class HomeController extends Controller
         group by p.product_name, c.name_category, p.PRICE_PRODUCT, image;
         ");
         $categories = DB::select("select NAME_CATEGORY from category where status_delete = 0;");
+        $stores = DB::select("select NAME_SHOP, TELP_SHOP, ADDRESS_SHOP,POSTAL_SHOP,CITY_SHOP,STATUS_SHOP
+        from shop s
+        where STATUS_DELETE=0
+        and STATUS_SHOP = 'Y';");
+
 
         foreach ($products as $product) {
             $product->formatted_price = 'Rp ' . number_format($product->price, 0, ',', '.');
         }
-        return view('index', compact('products','categories'))->with('data', $data);
+        return view('index', compact('products','categories','data','stores'));
     }
     public function fetchQuantities()
     {
@@ -84,6 +89,54 @@ class HomeController extends Controller
     public function signup()
     {
         return view('signup');
+    }
+    public function about()
+    {
+        return view('about');
+    }
+    public function contact()
+    {
+        return view('contact');
+    }
+    public function viewAccount()
+    {
+        if(!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST']))
+        {
+            return redirect()->route('loginpage');
+        }
+        return view('account-settings');
+    }
+    public function orders()
+    {
+        if(!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST']))
+        {
+            return redirect()->route('loginpage');
+        }
+        return view('account-orders');
+    }
+    public function address()
+    {
+        if(!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST']))
+        {
+            return redirect()->route('loginpage');
+        }
+        return view('account-address');
+    }
+    public function payment()
+    {
+        if(!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST']))
+        {
+            return redirect()->route('loginpage');
+        }
+        return view('account-payment-method');
+    }
+    public function notification()
+    {
+        if(!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST']))
+        {
+            return redirect()->route('loginpage');
+        }
+        return view('account-notification');
     }
 
 }

@@ -14,6 +14,9 @@ class LoginController extends Controller
 {
     public function signinCustomer(Request $request)
     {
+        if (session()->has('ID_CUSTOMER') || Cookie::get('ID_CUSTOMER') != null) {
+            return redirect()->route('my-account');
+        }
         $remember = ($request->has('remember')) ? true : false;
         $request->validate([
             'username_cust' => 'required',
@@ -151,10 +154,6 @@ class LoginController extends Controller
             Cookie::queue(Cookie::forget('PASSWORD_CUST'));
             return redirect()->route('loginpage');
         }
-
-
-
-
         // $user = Auth::user();
         // if ($user && $user->getRememberToken()) {
         //     $user->setRememberToken(null);
@@ -168,6 +167,6 @@ class LoginController extends Controller
         // Auth::logout();
         // $request->session()->invalidate();
         // $request->session()->regenerateToken();
-
+        return redirect()->route('home');
     }
 }

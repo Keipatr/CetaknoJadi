@@ -27,10 +27,6 @@ Route::post('/signup', [LoginController::class, 'signup'])
     ->name('signup');
 
 
-Route::middleware('auth')->group(function () {
-    // Routes that require authentication
-
-});
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -41,8 +37,15 @@ Route::get('/fetch-cart-quantity', [CartController::class, 'fetch'])->name('fetc
 Route::get('/qty', [HomeController::class, 'fetchQuantities'])->name('qty');
 Route::get('/signin', [HomeController::class, 'loginpage'])->name('loginpage');
 Route::get('/forgot-password', [HomeController::class, 'forgot'])->name('forgot');
-Route::get('/signup', [HomeController::class, 'signup'])->name('forgot');
+Route::get('/signup', [HomeController::class, 'signup'])->name('signup');
+Route::get('/about-us', [HomeController::class, 'about'])->name('about-us');
+Route::get('/contact-us', [HomeController::class, 'contact'])->name('contact-us');
 
+Route::get('/my-account', [HomeController::class, 'viewAccount'])->name('my-account');
+Route::get('/account-orders', [HomeController::class, 'orders'])->name('account-orders');
+Route::get('/account-address', [HomeController::class, 'address'])->name('account-address');
+Route::get('/account-payment', [HomeController::class, 'payment'])->name('account-payment');
+Route::get('/account-notification', [HomeController::class, 'notification'])->name('account-notification');
 // not riil
 
 // Route::get('/', function () {

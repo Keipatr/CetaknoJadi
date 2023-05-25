@@ -26,7 +26,7 @@
                         <div class="d-flex align-items-center lh-1">
                             <div class="list-inline me-4">
                                 <div class="list-inline-item">
-                                    <a href="{{ route('loginpage') }}" class="text-muted" {{-- data-bs-toggle="modal" --}}
+                                    <a href="{{ (session('USERNAME_CUST') || Cookie::has('USERNAME_CUST')) ? route('my-account') : route('loginpage') }}" class="text-muted" {{-- data-bs-toggle="modal" --}}
                                         {{-- data-bs-target="#modal-1" --}}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -134,7 +134,7 @@
                         </div>
                         <div class="list-inline-item">
                             {{-- ini button trigger modal untuk akunnya --}}
-                            <a href="{{ route('loginpage') }}" class="text-muted" {{-- data-bs-toggle="modal" --}}
+                            <a href="{{ (session('USERNAME_CUST') || Cookie::has('USERNAME_CUST')) ? route('my-account') : route('loginpage') }}" class="text-muted" {{-- data-bs-toggle="modal" --}}
                                 {{-- data-bs-target="#modal-1" --}}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -446,12 +446,12 @@
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="{{ url('about-us') }}">
+                            <a class="nav-link" href="{{ route('about-us') }}">
                                 About Us
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="{{ url('contact-us') }}">
+                            <a class="nav-link" href="{{ route('contact-us') }}">
                                 Contact Us
                             </a>
                         </li>
@@ -685,12 +685,12 @@
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="{{ url('about-us') }}">
+                            <a class="nav-link" href="{{ route('about-us') }}">
                                 About Us
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="{{ url('contact-us') }}">
+                            <a class="nav-link" href="{{ route('contact-us') }}">
                                 Contact Us
                             </a>
                         </li>

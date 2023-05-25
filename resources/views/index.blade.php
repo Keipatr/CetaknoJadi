@@ -65,20 +65,21 @@
                         <div class="position-relative">
                             <div class="slider-8-columns " id="slider-8-columns">
                                 @foreach ($categories as $category)
-                                <div class="item">
-                                    <a href="{{ url('products') }}" class="text-decoration-none text-inherit">
-                                        <div class="card mb-3 card-lift">
-                                            <div class="card-body text-center py-6 text-center">
-                                                <div class="my-5">
+                                    <div class="item">
+                                        <a href="{{ url('products') }}" class="text-decoration-none text-inherit">
+                                            <div class="card mb-3 card-lift">
+                                                <div class="card-body text-center py-6 text-center">
                                                     <div class="my-5">
-                                                        <img width="56" height="56" src="images/icons/calendar.svg">
+                                                        <div class="my-5">
+                                                            <img width="56" height="56"
+                                                                src="images/icons/calendar.svg">
+                                                        </div>
                                                     </div>
+                                                    <div>{{ $category->NAME_CATEGORY }}</div>
                                                 </div>
-                                                <div>{{$category->NAME_CATEGORY}}</div>
                                             </div>
-                                        </div>
-                                    </a>
-                                </div>
+                                        </a>
+                                    </div>
                                 @endforeach
                             </div>
                         </div>
@@ -98,8 +99,8 @@
                     <div class="col-md-8 col-12">
                         <div class="d-flex">
                             <div class="mt-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    fill="currentColor" class="bi bi-shop text-primary" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    class="bi bi-shop text-primary" viewBox="0 0 16 16">
                                     <path
                                         d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z" />
                                 </svg>
@@ -126,21 +127,20 @@
                 </div>
                 <!-- row -->
                 <div class="row row-cols-1 row-cols-lg-3 row-cols-md-3 g-4 g-lg-4">
-                    <!-- col -->
+                    @php
+                        shuffle($stores);
+                        $randomStores = array_slice($stores, 0, 3);
+                    @endphp
+                    @foreach ($randomStores as $store)
                     <div class="col">
-                        <!-- card -->
                         <div class="card p-6 card-product">
                             <div>
-                                <!-- img --><img src="images/stores-logo/stores-logo-1.svg" alt=""
+                                <img src="images/stores-logo/stores-logo-1.svg" alt=""
                                     class="rounded-circle icon-shape icon-xl">
                             </div>
                             <div class="mt-4">
-                                <!-- content -->
-                                <h2 class="mb-1 h5"><a href="#!" class="text-inherit">D'Raya Jember</a></h2>
+                                <h2 class="mb-1 h5"><a href="#!" class="text-inherit">{{$store->NAME_SHOP}}</a></h2>
                                 <div class="small text-muted">
-                                    {{-- <span class="me-2">Organic </span><span
-                        class="me-2">Groceries</span>
-                        <span>Butcher Shop</span> --}}
                                 </div>
                                 <div class="py-3">
                                     <ul class="list-unstyled mb-0 small">
@@ -150,57 +150,28 @@
                                     </ul>
                                 </div>
                                 <div>
-                                    <!-- badge -->
                                     <div class="badge text-bg-light border">7.5 km away</div>
-                                    <!-- badge -->
-                                    {{-- <div class="badge text-bg-light border">In-store prices </div> --}}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
+                    @endforeach
+                    {{-- <div class="col"> --}}
                         <!-- card -->
-                        <div class="card p-6 card-product">
-                            <div>
-                                <!-- img --><img src="images/stores-logo/stores-logo-2.svg" alt=""
-                                    class="rounded-circle icon-shape icon-xl">
-                            </div>
-                            <div class="mt-4">
+                        {{-- <div class="card p-6 card-product"> --}}
+                            {{-- <div> --}}
+                                <!-- img -->
+                                {{-- <img src="images/stores-logo/stores-logo-3.svg" alt="" --}}
+                                    {{-- class="rounded-circle icon-shape icon-xl"> --}}
+                            {{-- </div> --}}
+                            {{-- <div class="mt-4"> --}}
                                 <!-- content -->
-                                <h2 class="mb-1 h5"><a href="#!" class="text-inherit">Aneka Niaga</a></h2>
-                                <div class="small text-muted">
-                                    {{-- <span class="me-2">Alcohol</span><span
-                        class="me-2">Groceries</span> --}}
-                                </div>
-                                <div class="py-3">
-                                    <ul class="list-unstyled mb-0 small">
-                                        <li><span class="text-primary">Delivery</span>
-                                        </li>
-                                        <li>Pickup available</li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <!-- badge -->
-                                    <div class="badge text-bg-light border">9.3 km away</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <!-- card -->
-                        <div class="card p-6 card-product">
-                            <div>
-                                <!-- img --><img src="images/stores-logo/stores-logo-3.svg" alt=""
-                                    class="rounded-circle icon-shape icon-xl">
-                            </div>
-                            <div class="mt-4">
-                                <!-- content -->
-                                <h2 class="mb-1 h5"><a href="#!" class="text-inherit">Wiyung Printing</a></h2>
-                                <div class="small text-muted">
+                                {{-- <h2 class="mb-1 h5"><a href="#!" class="text-inherit">Wiyung Printing</a></h2> --}}
+                                {{-- <div class="small text-muted"> --}}
                                     {{-- <span class="me-2">Groceries</span><span
                         class="me-2">Bakery</span>
                         <span>Deli</span> --}}
-                                </div>
+                                {{-- </div>
                                 <div class="py-3">
                                     <ul class="list-unstyled mb-0 small">
                                         <li><span class="text-primary">Delivery</span>
@@ -208,13 +179,15 @@
                                         <li>Pickup available</li>
                                     </ul>
                                 </div>
-                                <div>
+                                <div> --}}
                                     <!-- badge -->
-                                    <div class="badge text-bg-light border">7.1 km away</div>
+                                    {{-- <div class="badge text-bg-light border">7.1 km away</div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
+
+
                 </div>
             </div>
         </section>
@@ -230,7 +203,7 @@
 
           </div>
         </div> --}}
-                <div class="row align-items-center mb-6">
+                {{-- <div class="row align-items-center mb-6">
                     <div class="col-lg-10 col-10 ">
                         <!-- heading -->
                         <h3 class="align-items-center d-flex mb-0 h4">
@@ -247,9 +220,48 @@
                     <div class="col-lg-2 col-2">
                         <div class="slider-arrow  " id="slider-second-arrows"></div>
                     </div>
+
+                </div> --}}
+                <div class="row align-items-center mb-8">
+                    <!-- store -->
+                    <div class="col-md-8 col-12">
+                        <div class="d-flex">
+                            <div class="mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="feather feather-star text-primary">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                    </polygon>
+                                </svg>
+                            </div>
+                            <div class="ms-3">
+                                <h3 class=" mb-0">Products</h3>
+                                {{-- <p class="mb-0">Find the best store products in your area with discount.</p> --}}
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- all product -->
+                    <div class="col-md-4 text-end col-12 d-none d-md-block">
+                        <a href="{{ url('products') }}">
+                            All products
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-chevron-right">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
                 <div class="row g-4 row-cols-lg-5 row-cols-2 row-cols-md-3">
-                    @foreach ($products as $product)
+                    @php
+                        shuffle($products);
+                        $randomProducts = array_slice($products, 0, 10);
+                    @endphp
+                    @foreach ($randomProducts as $product)
                         <div class="col">
                             <div class="card card-product">
                                 <div class="card-body">
@@ -259,13 +271,13 @@
                                         </div>
                                         <a href=""> <img
                                                 src="{{ $product->image ?: 'images/products/product-img-18.jpg' }}"
-                                                alt="Grocery Ecommerce Template" class="mb-3 img-fluid"></a>
+                                                alt="Grocery Ecommerce Template" class="mb-3 img-fluid rounded fixed-size-image w-1100 h-1000"></a>
 
                                         <div class="card-product-action">
-                                            <a href="#!" class="btn-action" data-bs-toggle="modal"
+                                            {{-- <a href="#!" class="btn-action" data-bs-toggle="modal"
                                                 data-bs-target="#quickViewModal"><i class="bi bi-eye"
                                                     data-bs-toggle="tooltip" data-bs-html="true"
-                                                    title="Quick View"></i></a>
+                                                    title="Quick View"></i></a> --}}
 
                                             <a href="#!" class="btn-action" data-bs-toggle="tooltip"
                                                 data-bs-html="true" title="Wishlist"><i class="bi bi-heart"></i></a>
@@ -299,7 +311,9 @@
                                             @endfor
 
                                         </small>
-                                        <span class="text-muted small">{{ $product->rating != 0 ? ($product->rating != round($product->rating) ? number_format($product->rating, 1) : round($product->rating)) : '0' }} ({{$product->rating_count}})</span>
+                                        <span
+                                            class="text-muted small">{{ $product->rating != 0 ? ($product->rating != round($product->rating) ? number_format($product->rating, 1) : round($product->rating)) : '0' }}
+                                            ({{ $product->rating_count }})</span>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center mt-3">
                                         <div><span class="text-dark">{{ $product->formatted_price }}</span>

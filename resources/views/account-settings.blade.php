@@ -14,9 +14,8 @@
                             <!-- heading -->
                             <h3 class="fs-5 mb-0">Account Setting</h3>
                             <!-- button -->
-                            <button class="btn btn-outline-gray-400 text-muted d-md-none btn-icon btn-sm ms-3 "
-                                type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAccount"
-                                aria-controls="offcanvasAccount">
+                            <button class="btn btn-outline-gray-400 text-muted d-md-none btn-icon btn-sm ms-3 " type="button"
+                                data-bs-toggle="offcanvas" data-bs-target="#offcanvasAccount" aria-controls="offcanvasAccount">
                                 <i class="bi bi-text-indent-left fs-3"></i>
                             </button>
                         </div>
@@ -28,27 +27,27 @@
                             <ul class="nav flex-column nav-pills nav-pills-dark">
                                 <li class="nav-item">
                                     <!-- nav link -->
-                                    <a class="nav-link " aria-current="page" href="{{url('account-orders')}}"><i
+                                    <a class="nav-link " aria-current="page" href="{{ route('account-orders') }}"><i
                                             class="feather-icon icon-shopping-bag me-2"></i>Your Orders</a>
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="{{url('account')}}"><i
+                                    <a class="nav-link active" href="{{ route('my-account') }}"><i
                                             class="feather-icon icon-settings me-2"></i>Settings</a>
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link " href="{{url('account-address')}}"><i
+                                    <a class="nav-link " href="{{ route('account-address') }}"><i
                                             class="feather-icon icon-map-pin me-2"></i>Address</a>
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link " href="{{url('account-payment')}}"><i
+                                    <a class="nav-link " href="{{ route('account-payment') }}"><i
                                             class="feather-icon icon-credit-card me-2"></i>Payment Method</a>
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{url('account-notification')}}"><i
+                                    <a class="nav-link" href="{{ route('account-notification') }}"><i
                                             class="feather-icon icon-bell me-2"></i>Notification</a>
                                 </li>
                                 <!-- nav item -->
@@ -57,8 +56,12 @@
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link " href="{{url('')}}"><i
-                                            class="feather-icon icon-log-out me-2"></i>Log out</a>
+                                    <form method="post" action="{{ route('logout') }}">
+                                        @csrf
+                                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
+                                            <i class="feather-icon icon-log-out me-2"></i>Log out
+                                        </a>
+                                    </form>
                                 </li>
                             </ul>
                         </div>
@@ -79,20 +82,17 @@
                                             <!-- input -->
                                             <div class="mb-3">
                                                 <label class="form-label">Name</label>
-                                                <input type="text" class="form-control"
-                                                    placeholder="jitu chauhan">
+                                                <input type="text" class="form-control" placeholder="jitu chauhan">
                                             </div>
                                             <!-- input -->
                                             <div class="mb-3">
                                                 <label class="form-label">Email</label>
-                                                <input type="email" class="form-control"
-                                                    placeholder="example@gmail.com">
+                                                <input type="email" class="form-control" placeholder="example@gmail.com">
                                             </div>
                                             <!-- input -->
                                             <div class="mb-5">
                                                 <label class="form-label">Phone</label>
-                                                <input type="text" class="form-control"
-                                                    placeholder="Phone number">
+                                                <input type="text" class="form-control" placeholder="Phone number">
                                             </div>
                                             <!-- button -->
                                             <div class="mb-3">
@@ -144,8 +144,7 @@
     </main>
 
     <!-- modal -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasAccount"
-        aria-labelledby="offcanvasAccountLabel">
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasAccount" aria-labelledby="offcanvasAccountLabel">
         <!-- offcanvas header -->
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasAccountLabel">Offcanvas</h5>
@@ -156,27 +155,27 @@
             <ul class="nav flex-column nav-pills nav-pills-dark">
                 <!-- nav item -->
                 <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="{{url('account-orders')}}"><i
+                    <a class="nav-link " aria-current="page" href="{{ route('account-orders') }}"><i
                             class="feather-icon icon-shopping-bag me-2"></i>Your Orders</a>
                 </li>
                 <!-- nav item -->
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{url('account')}}"><i
+                    <a class="nav-link active" href="{{ route('my-account') }}"><i
                             class="feather-icon icon-settings me-2"></i>Settings</a>
                 </li>
                 <!-- nav item -->
                 <li class="nav-item">
-                    <a class="nav-link " href="{{url('account-address')}}"><i
+                    <a class="nav-link " href="{{ route('account-address') }}"><i
                             class="feather-icon icon-map-pin me-2"></i>Address</a>
                 </li>
                 <!-- nav item -->
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url('account-payment')}}"><i
+                    <a class="nav-link" href="{{ route('account-payment') }}"><i
                             class="feather-icon icon-credit-card me-2"></i>Payment Method</a>
                 </li>
                 <!-- nav item -->
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url('account-notification')}}"><i
+                    <a class="nav-link" href="{{ route('account-notification') }}"><i
                             class="feather-icon icon-bell me-2"></i>Notification</a>
                 </li>
             </ul>
@@ -186,8 +185,12 @@
                 <ul class="nav flex-column nav-pills nav-pills-dark">
                     <!-- nav item -->
                     <li class="nav-item">
-                        <a class="nav-link " href="../index.html"><i
-                                class="feather-icon icon-log-out me-2"></i>Log out</a>
+                        <form method="post" action="{{ route('logout') }}">
+                            @csrf
+                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
+                                <i class="feather-icon icon-log-out me-2"></i>Log out
+                            </a>
+                        </form>
                     </li>
                 </ul>
             </div>
@@ -208,6 +211,6 @@
 
 
 
-{{-- </body> --}}
+    {{-- </body> --}}
 @endsection
 {{-- </html> --}}
