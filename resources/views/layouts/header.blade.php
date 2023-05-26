@@ -26,8 +26,8 @@
                         <div class="d-flex align-items-center lh-1">
                             <div class="list-inline me-4">
                                 <div class="list-inline-item">
-                                    <a href="{{ (session('USERNAME_CUST') || Cookie::has('USERNAME_CUST')) ? route('my-account') : route('loginpage') }}" class="text-muted" {{-- data-bs-toggle="modal" --}}
-                                        {{-- data-bs-target="#modal-1" --}}>
+                                    <a href="{{ session('USERNAME_CUST') || Cookie::has('USERNAME_CUST') ? route('my-account') : route('loginpage') }}"
+                                        class="text-muted" {{-- data-bs-toggle="modal" --}} {{-- data-bs-target="#modal-1" --}}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
@@ -38,37 +38,54 @@
                                 </div>
                                 <div class="list-inline-item">
 
-                                    <a class="text-muted position-relative " data-bs-toggle="offcanvas"
-                                        data-bs-target="#offcanvasRight" href="#offcanvasExample" role="button"
-                                        aria-controls="offcanvasRight">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-shopping-bag">
-                                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                                            <line x1="3" y1="6" x2="21" y2="6">
-                                            </line>
-                                            <path d="M16 10a4 4 0 0 1-8 0"></path>
-                                        </svg>
-                                        <span
-                                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
-                                            @if (Session::has('ID_CUSTOMER') || isset($_COOKIE['ID_CUSTOMER']))
-                                                <span id="cartQty">{{ $data[0]->QTY_CART }}</span>
-                                            @else
-                                                0
-                                            @endif
-                                            <span class="visually-hidden">unread messages</span>
-                                        </span>
-                                    </a>
+                                    @if (Session::has('ID_CUSTOMER') || isset($_COOKIE['ID_CUSTOMER']))
+                                        <a class="text-muted position-relative " data-bs-toggle="offcanvas"
+                                            data-bs-target="#offcanvasRight" href="#offcanvasExample" role="button"
+                                            aria-controls="offcanvasRight">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-shopping-bag">
+                                                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                                                <line x1="3" y1="6" x2="21" y2="6">
+                                                </line>
+                                                <path d="M16 10a4 4 0 0 1-8 0"></path>
+                                            </svg>
+                                            <span
+                                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success"><span
+                                                    id="cartQty">{{ $data[0]->QTY_CART }}</span>
+                                                <span class="visually-hidden">unread messages</span>
+                                            </span>
+                                        </a>
+                                    @else
+                                        <a class="text-muted position-relative "
+                                            href="{{route('loginpage')}}" role="button"
+                                            aria-controls="offcanvasRight">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-shopping-bag">
+                                                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                                                <line x1="3" y1="6" x2="21" y2="6">
+                                                </line>
+                                                <path d="M16 10a4 4 0 0 1-8 0"></path>
+                                            </svg>
+                                            <span
+                                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success"><span
+                                                    id="cartQty">0</span>
+                                                <span class="visually-hidden">unread messages</span>
+                                            </span>
+                                        </a>
+                                    @endif
                                 </div>
-
                             </div>
                             <!-- Button -->
                             <button class="navbar-toggler collapsed" type="button" data-bs-toggle="offcanvas"
                                 data-bs-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false"
                                 aria-label="Toggle navigation">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                                    fill="currentColor" class="bi bi-text-indent-left text-primary" viewBox="0 0 16 16">
+                                    fill="currentColor" class="bi bi-text-indent-left text-primary"
+                                    viewBox="0 0 16 16">
                                     <path
                                         d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm.646 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8 2.646 6.354a.5.5 0 0 1 0-.708zM7 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
                                 </svg>
@@ -88,7 +105,8 @@
                                     type="button">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-search">
                                         <circle cx="11" cy="11" r="8"></circle>
                                         <line x1="21" y1="21" x2="16.65" y2="16.65">
                                         </line>
@@ -112,6 +130,7 @@
                 <div class="col-md-2 col-xxl-1 text-end d-none d-lg-block">
                     <div class="list-inline">
                         <div class="list-inline-item">
+
                             <a href="{{ route('wishlist') }}" class="text-muted position-relative">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -131,11 +150,12 @@
                                     <span class="visually-hidden">unread messages</span>
                                 </span>
                             </a>
+
                         </div>
                         <div class="list-inline-item">
                             {{-- ini button trigger modal untuk akunnya --}}
-                            <a href="{{ (session('USERNAME_CUST') || Cookie::has('USERNAME_CUST')) ? route('my-account') : route('loginpage') }}" class="text-muted" {{-- data-bs-toggle="modal" --}}
-                                {{-- data-bs-target="#modal-1" --}}>
+                            <a href="{{ session('USERNAME_CUST') || Cookie::has('USERNAME_CUST') ? route('my-account') : route('loginpage') }}"
+                                class="text-muted" {{-- data-bs-toggle="modal" --}} {{-- data-bs-target="#modal-1" --}}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
@@ -146,34 +166,46 @@
                         </div>
                         <div class="list-inline-item">
 
+                            @if (Session::has('ID_CUSTOMER') || isset($_COOKIE['ID_CUSTOMER']))
                             <a class="text-muted position-relative " data-bs-toggle="offcanvas"
                                 data-bs-target="#offcanvasRight" href="#offcanvasExample" role="button"
                                 aria-controls="offcanvasRight">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                     class="feather feather-shopping-bag">
                                     <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                                    <line x1="3" y1="6" x2="21" y2="6">
+                                    </line>
                                     <path d="M16 10a4 4 0 0 1-8 0"></path>
                                 </svg>
                                 <span
-                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
-                                    @if (Session::has('ID_CUSTOMER') || isset($_COOKIE['ID_CUSTOMER']))
-                                        <span id="cartQty">{{ $data[0]->QTY_CART }}</span>
-                                    @else
-                                        0
-                                    @endif
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success"><span
+                                        id="cartQty">{{ $data[0]->QTY_CART }}</span>
                                     <span class="visually-hidden">unread messages</span>
                                 </span>
                             </a>
-
+                        @else
+                            <a class="text-muted position-relative "
+                                href="{{route('loginpage')}}" role="button"
+                                aria-controls="offcanvasRight">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                    class="feather feather-shopping-bag">
+                                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                                    <line x1="3" y1="6" x2="21" y2="6">
+                                    </line>
+                                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                                </svg>
+                                <span
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success"><span
+                                        id="cartQty">0</span>
+                                    <span class="visually-hidden">unread messages</span>
+                                </span>
+                            </a>
+                        @endif
                         </div>
-
-
-
-
-
                     </div>
                 </div>
             </div>
@@ -1036,20 +1068,18 @@
                     You’ve got FREE delivery. Start <a href="#!" class="alert-link">checkout now!</a>
                 </div> --}}
             <ul class="list-group list-group-flush">
-                <!-- list group -->
+
+                @foreach ($cart as $list)
                 <li class="list-group-item py-3 ps-0 border-top">
-                    <!-- row -->
                     <div class="row align-items-center">
                         <div class="col-3 col-md-2">
-                            <!-- img --> <img src="images/products/Banner.jpg" alt="Ecommerce" class="img-fluid">
+                            <img src="images/products/Banner.jpg" alt="Ecommerce" class="img-fluid">
                         </div>
                         <div class="col-4 col-md-6 col-lg-5">
-                            <!-- title -->
                             <a href="./pages/shop-single.html" class="text-inherit">
-                                <h6 class="mb-0">Print Spanduk</h6>
+                                <h6 class="mb-0">{{$list->PRODUCT_NAME}}</h6>
                             </a>
-                            <span><small class="text-muted">Kecil</small></span>
-                            <!-- text -->
+                            <span><small class="text-muted">{{$list->NAME_CATEGORY}}</small></span>
                             <div class="mt-2 small lh-1"> <a href="#!"
                                     class="text-decoration-none text-inherit"> <span class="me-1 align-text-bottom">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
@@ -1066,10 +1096,7 @@
                                             </line>
                                         </svg></span><span class="text-muted">Remove</span></a></div>
                         </div>
-                        <!-- input group -->
                         <div class="col-3 col-md-3 col-lg-3">
-                            <!-- input -->
-                            <!-- input -->
                             <div class="input-group input-spinner  ">
                                 <input type="button" value="-" class="button-minus  btn  btn-sm "
                                     data-field="quantity">
@@ -1080,29 +1107,30 @@
                             </div>
 
                         </div>
-                        <!-- price -->
                         <div class="col-2 text-lg-end text-start text-md-end col-md-2">
-                            <span class="fw-bold">Rp. 3,000</span>
-
+                            <span class="fw-bold">{{$list->formatted_price}}</span>
                         </div>
                     </div>
-
                 </li>
+                @endforeach
+
+
                 <!-- list group -->
-                <li class="list-group-item py-3 ps-0">
+                {{-- <li class="list-group-item py-3 ps-0"> --}}
                     <!-- row -->
-                    <div class="row align-items-center">
-                        <div class="col-3 col-md-2">
-                            <!-- img --> <img src="images/products/dokumen.jpg" alt="Ecommerce" class="img-fluid">
+                    {{-- <div class="row align-items-center">
+                        <div class="col-3 col-md-2"> --}}
+                            <!-- img -->
+                            {{-- <img src="images/products/dokumen.jpg" alt="Ecommerce" class="img-fluid">
                         </div>
-                        <div class="col-4 col-md-6 col-lg-5">
+                        <div class="col-4 col-md-6 col-lg-5"> --}}
                             <!-- title -->
-                            <a href="./pages/shop-single.html" class="text-inherit">
+                            {{-- <a href="./pages/shop-single.html" class="text-inherit">
                                 <h6 class="mb-0">Kertas A4 </h6>
                             </a>
-                            <span><small class="text-muted">40 Lembar</small></span>
+                            <span><small class="text-muted">40 Lembar</small></span> --}}
                             <!-- text -->
-                            <div class="mt-2 small lh-1"> <a href="#!"
+                            {{-- <div class="mt-2 small lh-1"> <a href="#!"
                                     class="text-decoration-none text-inherit"> <span class="me-1 align-text-bottom">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1117,12 +1145,12 @@
                                             <line x1="14" y1="11" x2="14" y2="17">
                                             </line>
                                         </svg></span><span class="text-muted">Remove</span></a></div>
-                        </div>
+                        </div> --}}
                         <!-- input group -->
-                        <div class="col-3 col-md-3 col-lg-3">
+                        {{-- <div class="col-3 col-md-3 col-lg-3"> --}}
                             <!-- input -->
                             <!-- input -->
-                            <div class="input-group input-spinner  ">
+                            {{-- <div class="input-group input-spinner  ">
                                 <input type="button" value="-" class="button-minus  btn  btn-sm "
                                     data-field="quantity">
                                 <input type="number" step="1" max="10" value="1" name="quantity"
@@ -1130,178 +1158,24 @@
                                 <input type="button" value="+" class="button-plus btn btn-sm "
                                     data-field="quantity">
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- price -->
-                        <div class="col-2 text-lg-end text-start text-md-end col-md-2">
-                            <span class="fw-bold">Rp. 20,000</span>
+                        {{-- <div class="col-2 text-lg-end text-start text-md-end col-md-2">
+                            <span class="fw-bold">Rp. 20,000</span> --}}
                             {{-- <span class="fw-bold text-danger">$20.00</span>
                                 <div class="text-decoration-line-through text-muted small">$26.00</div> --}}
-                        </div>
+                        {{-- </div>
                     </div>
+                </li> --}}
 
-                </li>
-                <!-- list group -->
-                <li class="list-group-item py-3 ps-0">
-                    <!-- row -->
-                    <div class="row align-items-center">
-                        <div class="col-3 col-md-2">
-                            <!-- img --> <img src="images/products/dokumen.jpg" alt="Ecommerce" class="img-fluid">
-                        </div>
-                        <div class="col-4 col-md-6 col-lg-5">
-                            <!-- title -->
-                            <a href="./pages/shop-single.html" class="text-inherit">
-                                <h6 class="mb-0">Kertas A4</h6>
-                            </a>
-                            <span><small class="text-muted">1 Rim</small></span>
-                            <!-- text -->
-                            <div class="mt-2 small lh-1"> <a href="#!"
-                                    class="text-decoration-none text-inherit"> <span class="me-1 align-text-bottom">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-trash-2 text-success">
-                                            <polyline points="3 6 5 6 21 6"></polyline>
-                                            <path
-                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                            </path>
-                                            <line x1="10" y1="11" x2="10" y2="17">
-                                            </line>
-                                            <line x1="14" y1="11" x2="14" y2="17">
-                                            </line>
-                                        </svg></span><span class="text-muted">Remove</span></a></div>
-                        </div>
-                        <!-- input group -->
-                        <div class="col-3 col-md-3 col-lg-3">
-                            <!-- input -->
-                            <!-- input -->
-                            <div class="input-group input-spinner  ">
-                                <input type="button" value="-" class="button-minus  btn  btn-sm "
-                                    data-field="quantity">
-                                <input type="number" step="1" max="10" value="1" name="quantity"
-                                    class="quantity-field form-control-sm form-input   ">
-                                <input type="button" value="+" class="button-plus btn btn-sm "
-                                    data-field="quantity">
-                            </div>
-                        </div>
-                        <!-- price -->
-                        <div class="col-2 text-lg-end text-start text-md-end col-md-2">
-                            <span class="fw-bold">Rp. 45,000</span>
-                            {{-- <span class="fw-bold">$15.00</span>
-                                <div class="text-decoration-line-through text-muted small">$20.00</div> --}}
-                        </div>
-                    </div>
 
-                </li>
-                <!-- list group -->
-                <li class="list-group-item py-3 ps-0">
-                    <!-- row -->
-                    <div class="row align-items-center">
-                        <div class="col-3 col-md-2">
-                            <!-- img --> <img src="images/products/banner.jpg" alt="Ecommerce" class="img-fluid">
-                        </div>
-                        <div class="col-4 col-md-6 col-lg-5">
-                            <!-- title -->
-                            <a href="./pages/shop-single.html" class="text-inherit">
-                                <h6 class="mb-0">Print Spanduk</h6>
-                            </a>
-                            <span><small class="text-muted">Sedang</small></span>
-                            <!-- text -->
-                            <div class="mt-2 small lh-1"> <a href="#!"
-                                    class="text-decoration-none text-inherit"> <span class="me-1 align-text-bottom">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-trash-2 text-success">
-                                            <polyline points="3 6 5 6 21 6"></polyline>
-                                            <path
-                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                            </path>
-                                            <line x1="10" y1="11" x2="10" y2="17">
-                                            </line>
-                                            <line x1="14" y1="11" x2="14" y2="17">
-                                            </line>
-                                        </svg></span><span class="text-muted">Remove</span></a></div>
-                        </div>
-                        <!-- input group -->
-                        <div class="col-3 col-md-3 col-lg-3">
-                            <!-- input -->
-                            <!-- input -->
-                            <div class="input-group input-spinner  ">
-                                <input type="button" value="-" class="button-minus  btn  btn-sm "
-                                    data-field="quantity">
-                                <input type="number" step="1" max="10" value="1" name="quantity"
-                                    class="quantity-field form-control-sm form-input   ">
-                                <input type="button" value="+" class="button-plus btn btn-sm "
-                                    data-field="quantity">
-                            </div>
-                        </div>
-                        <!-- price -->
-                        <div class="col-2 text-lg-end text-start text-md-end col-md-2">
-                            <span class="fw-bold">Rp. 15,000</span>
-                            {{-- <span class="fw-bold">$15.00</span>
-                                <div class="text-decoration-line-through text-muted small">$20.00</div> --}}
-                        </div>
-                    </div>
-
-                </li>
-                <!-- list group -->
-                <li class="list-group-item py-3 ps-0 border-bottom">
-                    <!-- row -->
-                    <div class="row align-items-center">
-                        <div class="col-3 col-md-2">
-                            <!-- img --> <img src="images/products/banner.jpg" alt="Ecommerce" class="img-fluid">
-                        </div>
-                        <div class="col-4 col-md-6 col-lg-5">
-                            <!-- title -->
-                            <a href="./pages/shop-single.html" class="text-inherit">
-                                <h6 class="mb-0">Print Spanduk </h6>
-                            </a>
-                            <span><small class="text-muted">Besar</small></span>
-                            <!-- text -->
-                            <div class="mt-2 small lh-1"> <a href="#!"
-                                    class="text-decoration-none text-inherit"> <span class="me-1 align-text-bottom">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-trash-2 text-success">
-                                            <polyline points="3 6 5 6 21 6"></polyline>
-                                            <path
-                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                            </path>
-                                            <line x1="10" y1="11" x2="10" y2="17">
-                                            </line>
-                                            <line x1="14" y1="11" x2="14" y2="17">
-                                            </line>
-                                        </svg></span><span class="text-muted">Remove</span></a></div>
-                        </div>
-                        <!-- input group -->
-                        <div class="col-3 col-md-3 col-lg-3">
-                            <!-- input -->
-                            <!-- input -->
-                            <div class="input-group input-spinner  ">
-                                <input type="button" value="-" class="button-minus  btn  btn-sm "
-                                    data-field="quantity">
-                                <input type="number" step="1" max="10" value="1"
-                                    name="quantity" class="quantity-field form-control-sm form-input   ">
-                                <input type="button" value="+" class="button-plus btn btn-sm "
-                                    data-field="quantity">
-                            </div>
-                        </div>
-                        <!-- price -->
-                        <div class="col-2 text-lg-end text-start text-md-end col-md-2">
-                            <span class="fw-bold">Rp. 32,000</span>
-                            {{-- <span class="fw-bold">$15.00</span>
-                                <div class="text-decoration-line-through text-muted small">$25.00</div> --}}
-                        </div>
-                    </div>
-
-                </li>
 
             </ul>
             <!-- btn -->
             <div class="d-flex justify-content-between mt-4">
-                <a href="{{ url('cart') }}" class="btn btn-primary">Go To Cart</a> {{-- Continue Shopping --}}
-                <a href="#!" class="btn btn-dark">Update Cart</a>
+                <a href="{{ url('cart') }}" class="btn btn-primary">Go To Cart</a>
+                {{-- Continue Shopping --}}
+                <a href="" data-bs-dismiss="offcanvas" class="btn btn-dark">Continue Shopping</a>
             </div>
 
         </div>

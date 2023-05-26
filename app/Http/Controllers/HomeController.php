@@ -15,6 +15,7 @@ class HomeController extends Controller
     public function index()
     {
         $data = array();
+        $cart = array();
         if (Session::has('USERNAME_CUST') || isset($_COOKIE['USERNAME_CUST'])) {
             if (Session::has('USERNAME_CUST')) {
                 $username = Session::get('USERNAME_CUST');
@@ -33,26 +34,40 @@ class HomeController extends Controller
         }
 
         $products = DB::select("
-        select PRODUCT_NAME, NAME_CATEGORY, PRICE_PRODUCT as price, avg(RATING_REVIEW) as rating, image, COUNT(r.ID_REVIEW) AS rating_count
-	    from product p, category c, container co
-        left join review r
-		on r.ID_CONTAINER = co.ID_CONTAINER
-        where p.STATUS_DELETE=0
-        and p.id_container = co.ID_CONTAINER
-        and c.ID_CATEGORY = co.ID_CATEGORY
-        group by p.product_name, c.name_category, p.PRICE_PRODUCT, image;
+        SELECT co.ID_CONTAINER, s.NAME_SHOP, PRODUCT_NAME, NAME_CATEGORY, PRICE_PRODUCT AS price,
+       AVG(RATING_REVIEW) AS rating, image, COUNT(r.ID_REVIEW) AS rating_count
+FROM product p
+JOIN container co ON p.id_container = co.ID_CONTAINER
+JOIN category c ON c.ID_CATEGORY = co.ID_CATEGORY
+JOIN shop s ON s.ID_SHOP = co.ID_SHOP
+LEFT JOIN review r ON r.ID_CONTAINER = co.ID_CONTAINER
+WHERE co.STATUS_DELETE = 0
+  AND co.STATUS = 1
+  AND s.STATUS_SHOP = 'Y'
+GROUP BY s.NAME_SHOP, p.product_name, c.name_category, p.PRICE_PRODUCT, image, co.ID_CONTAINER;
         ");
         $categories = DB::select("select NAME_CATEGORY from category where status_delete = 0;");
         $stores = DB::select("select NAME_SHOP, TELP_SHOP, ADDRESS_SHOP,POSTAL_SHOP,CITY_SHOP,STATUS_SHOP
         from shop s
         where STATUS_DELETE=0
         and STATUS_SHOP = 'Y';");
-
-
+        $cart = DB::select("
+            select PRODUCT_NAME, NAME_CATEGORY,PRICE_PRODUCT as price FROM product p, container c, cart cr,category ca, customer cu, cart_product cw
+        where p.ID_CONTAINER = c.ID_CONTAINER
+        and cr.ID_CART = cu.ID_CART
+        and ca.ID_CATEGORY = c.ID_CATEGORY
+        and cr.ID_CART= cw.ID_CART
+        and cw.ID_CONTAINER = c.ID_CONTAINER
+        and cw.STATUS_DELETE = 0 AND
+             USERNAME_CUST = '$username';");
+        foreach ($cart as $list) {
+            $list->formatted_price = 'Rp ' . number_format($list->price, 0, ',', '.');
+        }
         foreach ($products as $product) {
             $product->formatted_price = 'Rp ' . number_format($product->price, 0, ',', '.');
         }
-        return view('index', compact('products', 'categories', 'data', 'stores'));
+
+        return view('index', compact('products', 'categories', 'data', 'stores', 'cart'));
     }
     public function fetchQuantities()
     {
@@ -154,7 +169,7 @@ class HomeController extends Controller
         and pw.ID_CONTAINER = c.ID_CONTAINER
         and pw.STATUS_DELETE = 0 AND
              USERNAME_CUST = '$username';");
-             foreach ($wishlist as $list) {
+            foreach ($wishlist as $list) {
                 $list->formatted_price = 'Rp ' . number_format($list->price, 0, ',', '.');
             }
         }

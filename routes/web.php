@@ -6,6 +6,9 @@ use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProductController;
+use App\Models\Product;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,6 +50,9 @@ Route::get('/account-orders', [HomeController::class, 'orders'])->name('account-
 Route::get('/account-address', [HomeController::class, 'address'])->name('account-address');
 Route::get('/account-payment', [HomeController::class, 'payment'])->name('account-payment');
 Route::get('/account-notification', [HomeController::class, 'notification'])->name('account-notification');
+
+Route::get('/{store_url}/{product_url}', [ProductController::class, 'productShow'])->name('product-show');
+
 // not riil
 
 // Route::get('/', function () {

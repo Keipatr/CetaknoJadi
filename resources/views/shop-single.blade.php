@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('main-content')
-{{-- <body> --}}
+    {{-- <body> --}}
     <main>
         <div class="mt-4">
             <div class="container">
@@ -12,10 +12,10 @@
                         <!-- breadcrumb -->
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb mb-0">
-                                <li class="breadcrumb-item"><a href="{{url('')}}">Home</a></li>
-                                <li class="breadcrumb-item"><a href="{{url('products')}}">Spanduk & Banner</a></li>
+                                <li class="breadcrumb-item"><a href="{{ url('') }}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{ url('products') }}">Spanduk & Banner</a></li>
 
-                                <li class="breadcrumb-item active" aria-current="page">Banner</li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ $products[0]->PRODUCT_NAME }}</li>
                             </ol>
                         </nav>
                     </div>
@@ -88,52 +88,54 @@
                     </div>
                     <div class="col-md-6">
                         <div class="ps-lg-10 mt-6 mt-md-0">
-                            <!-- content -->
                             <a href="#!" class="mb-4 d-block">Spanduk & Banner</a>
-                            <!-- heading -->
-                            <h1 class="mb-1">Banner </h1>
+                            <h1 class="mb-1">{{ $products[0]->PRODUCT_NAME }} </h1>
                             <div class="mb-4">
-                                <!-- rating -->
-                                <!-- rating --> <small class="text-warning"> <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-half"></i></small><a href="#" class="ms-2">(30
-                                    reviews)</a>
+                                <small class="text-warning">
+                                    @php
+                                        $fullStars = floor($products[0]->rating);
+                                        $halfStar = ceil($products[0]->rating - $fullStars);
+                                        $emptyStars = 5 - $fullStars - $halfStar;
+                                    @endphp
+
+                                    @for ($i = 0; $i < $fullStars; $i++)
+                                        <i class="bi bi-star-fill"></i>
+                                    @endfor
+
+                                    @for ($i = 0; $i < $halfStar; $i++)
+                                        <i class="bi bi-star-half"></i>
+                                    @endfor
+
+                                    @for ($i = 0; $i < $emptyStars; $i++)
+                                        <i class="bi bi-star"></i>
+                                    @endfor
+                                </small><a href="#" class="ms-2">({{$products[0]->rating_count}} Reviews)</a>
                             </div>
                             <div class="fs-4">
-                                <!-- price --><span class="fw-bold text-dark">Rp. 32,000</span>
-                                {{-- <span class="text-decoration-line-through text-muted">$35</span> --}}
-                                {{-- <span><small class="fs-6 ms-2 text-danger">26% Off</small></span> --}}
+                                <span class="fw-bold text-dark">{{$products[0]->formatted_price}}</span>
                             </div>
-                            <!-- hr -->
                             <hr class="my-6">
-                            <div class="mb-5"><button type="button"
-                                    class="btn btn-outline-secondary">Kecil</button>
-                                <!-- btn -->
+                            <div class="mb-5">
+                                <button type="button" class="btn btn-outline-secondary">Kecil</button>
                                 <button type="button" class="btn btn-outline-secondary">Sedang</button>
-                                <!-- btn -->
-                                 <button type="button" class="btn btn-outline-secondary">Besar</button>
+                                <button type="button" class="btn btn-outline-secondary">Besar</button>
                             </div>
                             <div>
-
-
-                                <!-- input -->
                                 <div class="input-group input-spinner  ">
                                     <input type="button" value="-" class="button-minus  btn  btn-sm "
                                         data-field="quantity">
-                                    <input type="number" step="1" max="10" value="1"
-                                        name="quantity" class="quantity-field form-control-sm form-input   ">
+                                    <input type="number" step="1" max="10" value="1" name="quantity"
+                                        class="quantity-field form-control-sm form-input   ">
                                     <input type="button" value="+" class="button-plus btn btn-sm "
                                         data-field="quantity">
                                 </div>
-
                             </div>
                             <div class="mt-3 row justify-content-start g-2 align-items-center">
 
                                 <div class="col-xxl-4 col-lg-4 col-md-5 col-5 d-grid">
                                     <!-- button -->
-                                    <!-- btn --> <button type="button" class="btn btn-primary"><i
+                                    <!-- btn -->
+                                    <button type="button" class="btn btn-primary"><i
                                             class="feather-icon icon-shopping-bag me-2"></i>Add to
                                         cart</button>
                                 </div>
@@ -142,7 +144,7 @@
                                     {{-- <a class="btn btn-light " href="#" data-bs-toggle="tooltip"
                                         data-bs-html="true" aria-label="Compare"><i
                                             class="bi bi-arrow-left-right"></i></a> --}}
-                                    <a class="btn btn-light " href="{{url('wishlist')}}" data-bs-toggle="tooltip"
+                                    <a class="btn btn-light " href="{{ url('wishlist') }}" data-bs-toggle="tooltip"
                                         data-bs-html="true" aria-label="Wishlist"><i
                                             class="feather-icon icon-heart"></i></a>
                                 </div>
@@ -243,8 +245,8 @@
                                 <div class="my-8">
                                     <div class="mb-5">
                                         <!-- text -->
-                                        <h4 class="mb-1">Cetak Banner</h4>
-                                        <p class="mb-0"> Kami menyediakan beragam ukuran dan jenis banner, baik untuk keperluan indoor maupun outdoor, dengan kualitas cetakan yang terjamin. Banner merupakan media promosi yang efektif dan dapat menarik perhatian banyak orang, sehingga cocok digunakan untuk promosi acara, produk, atau jasa bisnis Anda. Dengan harga yang terjangkau dan pengerjaan yang cepat, kami siap membantu Anda untuk mencetak banner sesuai dengan kebutuhan Anda. </p>
+                                        <h4 class="mb-1">{{$products[0]->PRODUCT_NAME}}</h4>
+                                        <p class="mb-0">{{$products[0]->DESC_PRODUCT}}</p>
                                     </div>
                                     {{-- <div class="mb-5">
                                         <h5 class="mb-1">Storage Tips</h5>
@@ -370,8 +372,8 @@
                                                             <i class="bi bi-star-fill"></i>
                                                             <i class="bi bi-star-fill"></i>
                                                             <i class="bi bi-star-half"></i></small><span
-                                                            class="ms-3">4.1 out of 5</span><small
-                                                            class="ms-3">11,130 global ratings</small>
+                                                            class="ms-3">4.1 out of 5</span><small class="ms-3">11,130
+                                                            global ratings</small>
                                                     </span>
                                                 </div>
                                                 <div class="mb-8">
@@ -383,10 +385,9 @@
                                                         </div>
                                                         <div class="w-100">
                                                             <div class="progress" style="height: 6px;">
-                                                                <div class="progress-bar bg-warning"
-                                                                    role="progressbar" style="width: 60%;"
-                                                                    aria-valuenow="60" aria-valuemin="0"
-                                                                    aria-valuemax="100"></div>
+                                                                <div class="progress-bar bg-warning" role="progressbar"
+                                                                    style="width: 60%;" aria-valuenow="60"
+                                                                    aria-valuemin="0" aria-valuemax="100"></div>
                                                             </div>
                                                         </div><span class="text-muted ms-3">53%</span>
                                                     </div>
@@ -398,10 +399,9 @@
                                                         </div>
                                                         <div class="w-100">
                                                             <div class="progress" style="height: 6px;">
-                                                                <div class="progress-bar bg-warning"
-                                                                    role="progressbar" style="width: 50%;"
-                                                                    aria-valuenow="50" aria-valuemin="0"
-                                                                    aria-valuemax="50"></div>
+                                                                <div class="progress-bar bg-warning" role="progressbar"
+                                                                    style="width: 50%;" aria-valuenow="50"
+                                                                    aria-valuemin="0" aria-valuemax="50"></div>
                                                             </div>
                                                         </div><span class="text-muted ms-3">22%</span>
                                                     </div>
@@ -413,10 +413,9 @@
                                                         </div>
                                                         <div class="w-100">
                                                             <div class="progress" style="height: 6px;">
-                                                                <div class="progress-bar bg-warning"
-                                                                    role="progressbar" style="width: 35%;"
-                                                                    aria-valuenow="35" aria-valuemin="0"
-                                                                    aria-valuemax="35"></div>
+                                                                <div class="progress-bar bg-warning" role="progressbar"
+                                                                    style="width: 35%;" aria-valuenow="35"
+                                                                    aria-valuemin="0" aria-valuemax="35"></div>
                                                             </div>
                                                         </div><span class="text-muted ms-3">14%</span>
                                                     </div>
@@ -428,10 +427,9 @@
                                                         </div>
                                                         <div class="w-100">
                                                             <div class="progress" style="height: 6px;">
-                                                                <div class="progress-bar bg-warning"
-                                                                    role="progressbar" style="width: 22%;"
-                                                                    aria-valuenow="22" aria-valuemin="0"
-                                                                    aria-valuemax="22"></div>
+                                                                <div class="progress-bar bg-warning" role="progressbar"
+                                                                    style="width: 22%;" aria-valuenow="22"
+                                                                    aria-valuemin="0" aria-valuemax="22"></div>
                                                             </div>
                                                         </div><span class="text-muted ms-3">5%</span>
                                                     </div>
@@ -443,10 +441,9 @@
                                                         </div>
                                                         <div class="w-100">
                                                             <div class="progress" style="height: 6px;">
-                                                                <div class="progress-bar bg-warning"
-                                                                    role="progressbar" style="width: 14%;"
-                                                                    aria-valuenow="14" aria-valuemin="0"
-                                                                    aria-valuemax="14"></div>
+                                                                <div class="progress-bar bg-warning" role="progressbar"
+                                                                    style="width: 14%;" aria-valuenow="14"
+                                                                    aria-valuemin="0" aria-valuemax="14"></div>
                                                             </div>
                                                         </div><span class="text-muted ms-3">7%</span>
                                                     </div>
@@ -481,8 +478,8 @@
                                                 </div>
                                                 <div class="d-flex border-bottom pb-6 mb-6">
                                                     <!-- img -->
-                                                    <!-- img --><img src="images/avatar/avatar-10.jpg"
-                                                        alt="" class="rounded-circle avatar-lg">
+                                                    <!-- img --><img src="images/avatar/avatar-10.jpg" alt=""
+                                                        class="rounded-circle avatar-lg">
                                                     <div class="ms-5">
                                                         <h6 class="mb-1">
                                                             Jeffri
@@ -514,18 +511,15 @@
                                                             weight etc. .</p>
                                                         <div>
                                                             <div class="border icon-shape icon-lg border-2 ">
-                                                                <!-- img --><img
-                                                                    src="images/products/banner.jpg"
+                                                                <!-- img --><img src="images/products/banner.jpg"
                                                                     alt="" class="img-fluid ">
                                                             </div>
                                                             <div class="border icon-shape icon-lg border-2 ms-1 ">
-                                                                <!-- img --><img
-                                                                    src="images/products/banner.jpg"
+                                                                <!-- img --><img src="images/products/banner.jpg"
                                                                     alt="" class="img-fluid ">
                                                             </div>
                                                             <div class="border icon-shape icon-lg border-2 ms-1 ">
-                                                                <!-- img --><img
-                                                                    src="images/products/banner.jpg"
+                                                                <!-- img --><img src="images/products/banner.jpg"
                                                                     alt="" class="img-fluid ">
                                                             </div>
 
@@ -541,8 +535,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="d-flex border-bottom pb-6 mb-6 pt-4">
-                                                    <!-- img --><img src="images/avatar/avatar-12.jpg"
-                                                        alt="" class="rounded-circle avatar-lg">
+                                                    <!-- img --><img src="images/avatar/avatar-12.jpg" alt=""
+                                                        class="rounded-circle avatar-lg">
                                                     <div class="ms-5">
                                                         <h6 class="mb-1">
                                                             Yves
@@ -658,8 +652,8 @@
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <a href="#"
-                                                        class="btn btn-outline-gray-400 text-muted">Read More
+                                                    <a href="#" class="btn btn-outline-gray-400 text-muted">Read
+                                                        More
                                                         Reviews</a>
                                                 </div>
                                             </div>
@@ -1047,8 +1041,7 @@
             <div class="modal-content">
                 <div class="modal-body p-8">
                     <div class="position-absolute top-0 end-0 me-3 mt-3">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
@@ -1129,8 +1122,8 @@
                                         <i class="bi bi-star-fill"></i>
                                         <i class="bi bi-star-fill"></i>
                                         <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-half"></i></small><a href="#"
-                                        class="ms-2">(30 reviews)</a>
+                                        <i class="bi bi-star-half"></i></small><a href="#" class="ms-2">(30
+                                        reviews)</a>
                                 </div>
                                 <div class="fs-4">
                                     <span class="fw-bold text-dark">$32</span>
@@ -1239,6 +1232,6 @@
 
 
 
-{{-- </body> --}}
+    {{-- </body> --}}
 @endsection
 {{-- </html> --}}

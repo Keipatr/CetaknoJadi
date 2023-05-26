@@ -287,8 +287,14 @@
                                     <div class="text-small mb-1"><a href="#!"
                                             class="text-decoration-none text-muted"><small>{{ $product->NAME_CATEGORY }}</small></a>
                                     </div>
-                                    <h2 class="fs-6"><a href="{{ $product->PRODUCT_NAME }}"
+                                    <h2 class="fs-6">
+                                        {{-- <a href=" --}}
+                                        {{-- {{url($product->NAME_SHOP.'/'.$product->PRODUCT_NAME)}} --}}
+                                        {{-- {{ url($product->NAME_SHOP.'/'.$product->PRODUCT_NAME) . '?id=' . $product->ID_CONTAINER }} --}}
+                                        {{-- " class="text-inherit text-decoration-none">{{ $product->PRODUCT_NAME }}</a> --}}
+                                        <a href="{{ url($product->NAME_SHOP.'/'.$product->PRODUCT_NAME) . '?id=' . Crypt::encryptString($product->ID_CONTAINER) }}"
                                             class="text-inherit text-decoration-none">{{ $product->PRODUCT_NAME }}</a>
+
                                     </h2>
                                     <div>
                                         <small class="text-warning">
