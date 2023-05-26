@@ -52,7 +52,7 @@ class HomeController extends Controller
         foreach ($products as $product) {
             $product->formatted_price = 'Rp ' . number_format($product->price, 0, ',', '.');
         }
-        return view('index', compact('products','categories','data','stores'));
+        return view('index', compact('products', 'categories', 'data', 'stores'));
     }
     public function fetchQuantities()
     {
@@ -72,7 +72,6 @@ class HomeController extends Controller
                 'wishlistQty' => $wishlistQty,
                 'cartQty' => $cartQty,
             ]);
-
         } else {
             return response('Quantities not found', 404);
         }
@@ -100,43 +99,62 @@ class HomeController extends Controller
     }
     public function viewAccount()
     {
-        if(!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST']))
-        {
+        if (!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST'])) {
             return redirect()->route('loginpage');
         }
         return view('account-settings');
     }
     public function orders()
     {
-        if(!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST']))
-        {
+        if (!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST'])) {
             return redirect()->route('loginpage');
         }
         return view('account-orders');
     }
     public function address()
     {
-        if(!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST']))
-        {
+        if (!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST'])) {
             return redirect()->route('loginpage');
         }
         return view('account-address');
     }
     public function payment()
     {
-        if(!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST']))
-        {
+        if (!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST'])) {
             return redirect()->route('loginpage');
         }
         return view('account-payment-method');
     }
     public function notification()
     {
-        if(!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST']))
-        {
+        if (!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST'])) {
             return redirect()->route('loginpage');
         }
         return view('account-notification');
     }
+    public function wishlist()
+    {
+        if (!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST'])) {
+            return redirect()->route('loginpage');
+        }
+        $wishlist = array();
+        if (Session::has('USERNAME_CUST') || isset($_COOKIE['USERNAME_CUST'])) {
+            if (Session::has('USERNAME_CUST')) {
+                $username = Session::get('USERNAME_CUST');
+            } else {
+                $username = Cookie::get('USERNAME_CUST');
+            }
 
+            $wishlist = DB::select("
+            select PRODUCT_NAME, NAME_CATEGORY,PRICE_PRODUCT FROM product p, container c, wishlist w,category ca, customer cu, product_wishlist pw
+        where p.ID_CONTAINER = c.ID_CONTAINER
+        and w.ID_WISHLIST = cu.ID_WISHLIST
+        and ca.ID_CATEGORY = c.ID_CATEGORY
+        and w.ID_WISHLIST = pw.ID_WISHLIST
+        and pw.ID_CONTAINER = c.ID_CONTAINER
+        and pw.STATUS_DELETE = 0 AND
+             USERNAME_CUST = '$username';");
+        }
+        return view('shop-wishlist',compact('wishlist'));
+    }
 }
