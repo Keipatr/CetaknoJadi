@@ -33,7 +33,7 @@
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="{{ route('my-account') }}"><i
+                                    <a class="nav-link " href="{{ route('my-account') }}"><i
                                             class="feather-icon icon-settings me-2"></i>Settings</a>
                                 </li>
                                 <!-- nav item -->
@@ -47,8 +47,8 @@
                                             class="feather-icon icon-credit-card me-2"></i>Payment Method</a>
                                 </li>
                                 <!-- nav item -->
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('account-notification') }}"><i
+                                <li class="nav-item ">
+                                    <a class="nav-link active" href="{{ route('account-notification') }}"><i
                                             class="feather-icon icon-bell me-2"></i>Notification</a>
                                 </li>
                                 <!-- nav item -->
@@ -229,7 +229,7 @@
                 </li>
                 <!-- nav item -->
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('my-account') }}"><i
+                    <a class="nav-link " href="{{ route('my-account') }}"><i
                             class="feather-icon icon-settings me-2"></i>Settings</a>
                 </li>
                 <!-- nav item -->
@@ -244,7 +244,7 @@
                 </li>
                 <!-- nav item -->
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('account-notification') }}"><i
+                    <a class="nav-link active" href="{{ route('account-notification') }}"><i
                             class="feather-icon icon-bell me-2"></i>Notification</a>
                 </li>
             </ul>

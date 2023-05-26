@@ -33,6 +33,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 Route::get('/wishlist', [HomeController::class, 'wishlist'])->name('wishlist');
+Route::get('/cart', [HomeController::class, 'cart'])->name('cart');
 Route::get('/fetch-cart-quantity', [CartController::class, 'fetch'])->name('fetch-cart-quantity');
 Route::get('/qty', [HomeController::class, 'fetchQuantities'])->name('qty');
 Route::get('/signin', [HomeController::class, 'loginpage'])->name('loginpage');

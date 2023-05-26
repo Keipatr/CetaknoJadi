@@ -29,27 +29,27 @@
                                 <!-- nav item -->
                                 <li class="nav-item">
                                     <!-- nav link -->
-                                    <a class="nav-link " aria-current="page" href="{{url('account-orders')}}"><i
+                                    <a class="nav-link " aria-current="page" href="{{route('account-orders')}}"><i
                                             class="feather-icon icon-shopping-bag me-2"></i>Your Orders</a>
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link " href="{{url('account')}}"><i
+                                    <a class="nav-link " href="{{route('my-account')}}"><i
                                             class="feather-icon icon-settings me-2"></i>Settings</a>
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="{{url('account-address')}}"><i
+                                    <a class="nav-link active" href="{{route('account-address')}}"><i
                                             class="feather-icon icon-map-pin me-2"></i>Address</a>
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{url('account-payment')}}"><i
+                                    <a class="nav-link" href="{{route('account-payment')}}"><i
                                             class="feather-icon icon-credit-card me-2"></i>Payment Method</a>
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{url('account-notification')}}"><i
+                                    <a class="nav-link" href="{{route('account-notification')}}"><i
                                             class="feather-icon icon-bell me-2"></i>Notification</a>
                                 </li>
                                 <!-- nav item -->
@@ -58,7 +58,7 @@
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link " href="{{url('')}}"><i
+                                    <a class="nav-link " href="{{route('logout')}}"><i
                                             class="feather-icon icon-log-out me-2"></i>Log out</a>
                                 </li>
 
@@ -301,12 +301,12 @@
                 </li>
                 <!-- nav item -->
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('my-account') }}"><i
+                    <a class="nav-link " href="{{ route('my-account') }}"><i
                             class="feather-icon icon-settings me-2"></i>Settings</a>
                 </li>
                 <!-- nav item -->
                 <li class="nav-item">
-                    <a class="nav-link " href="{{ route('account-address') }}"><i
+                    <a class="nav-link active" href="{{ route('account-address') }}"><i
                             class="feather-icon icon-map-pin me-2"></i>Address</a>
                 </li>
                 <!-- nav item -->
@@ -335,7 +335,7 @@
                     </li>
                 </ul>
             </div>
-        </div>  
+        </div>
     </div>
 
 

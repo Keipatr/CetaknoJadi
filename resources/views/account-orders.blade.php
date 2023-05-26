@@ -27,12 +27,12 @@
                             <ul class="nav flex-column nav-pills nav-pills-dark">
                                 <li class="nav-item">
                                     <!-- nav link -->
-                                    <a class="nav-link " aria-current="page" href="{{ route('account-orders') }}"><i
+                                    <a class="nav-link active" aria-current="page" href="{{ route('account-orders') }}"><i
                                             class="feather-icon icon-shopping-bag me-2"></i>Your Orders</a>
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="{{ route('my-account') }}"><i
+                                    <a class="nav-link " href="{{ route('my-account') }}"><i
                                             class="feather-icon icon-settings me-2"></i>Settings</a>
                                 </li>
                                 <!-- nav item -->
@@ -219,12 +219,12 @@
             <ul class="nav flex-column nav-pills nav-pills-dark">
                 <!-- nav item -->
                 <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="{{ route('account-orders') }}"><i
+                    <a class="nav-link active" aria-current="page" href="{{ route('account-orders') }}"><i
                             class="feather-icon icon-shopping-bag me-2"></i>Your Orders</a>
                 </li>
                 <!-- nav item -->
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('my-account') }}"><i
+                    <a class="nav-link " href="{{ route('my-account') }}"><i
                             class="feather-icon icon-settings me-2"></i>Settings</a>
                 </li>
                 <!-- nav item -->

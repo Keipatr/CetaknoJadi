@@ -79,11 +79,11 @@
                                             <td class="align-middle">
                                                 <div>
                                                     <h5 class="fs-6 mb-0"><a href="#"
-                                                            class="text-inherit">$list->PRODUCT_NAME</a></h5>
-                                                    <small>$list->NAME_CATEGORY</small>
+                                                            class="text-inherit">{{$list->PRODUCT_NAME}}</a></h5>
+                                                    <small>{{$list->NAME_CATEGORY}}</small>
                                                 </div>
                                             </td>
-                                            <td class="align-middle">$list->PRICE_PRODUCT</td>
+                                            <td class="align-middle">{{$list->formatted_price}}</td>
                                             <td class="align-middle"><span class="badge bg-success">In Stock</span>
                                             </td>
                                             <td class="align-middle">

@@ -146,7 +146,7 @@ class HomeController extends Controller
             }
 
             $wishlist = DB::select("
-            select PRODUCT_NAME, NAME_CATEGORY,PRICE_PRODUCT FROM product p, container c, wishlist w,category ca, customer cu, product_wishlist pw
+            select PRODUCT_NAME, NAME_CATEGORY,PRICE_PRODUCT as price FROM product p, container c, wishlist w,category ca, customer cu, product_wishlist pw
         where p.ID_CONTAINER = c.ID_CONTAINER
         and w.ID_WISHLIST = cu.ID_WISHLIST
         and ca.ID_CATEGORY = c.ID_CATEGORY
@@ -154,7 +154,38 @@ class HomeController extends Controller
         and pw.ID_CONTAINER = c.ID_CONTAINER
         and pw.STATUS_DELETE = 0 AND
              USERNAME_CUST = '$username';");
+             foreach ($wishlist as $list) {
+                $list->formatted_price = 'Rp ' . number_format($list->price, 0, ',', '.');
+            }
         }
-        return view('shop-wishlist',compact('wishlist'));
+        return view('shop-wishlist', compact('wishlist'));
+    }
+    public function cart()
+    {
+        if (!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST'])) {
+            return redirect()->route('loginpage');
+        }
+        $cart = array();
+        if (Session::has('USERNAME_CUST') || isset($_COOKIE['USERNAME_CUST'])) {
+            if (Session::has('USERNAME_CUST')) {
+                $username = Session::get('USERNAME_CUST');
+            } else {
+                $username = Cookie::get('USERNAME_CUST');
+            }
+
+            $cart = DB::select("
+            select PRODUCT_NAME, NAME_CATEGORY,PRICE_PRODUCT as price FROM product p, container c, cart cr,category ca, customer cu, cart_product cw
+        where p.ID_CONTAINER = c.ID_CONTAINER
+        and cr.ID_CART = cu.ID_CART
+        and ca.ID_CATEGORY = c.ID_CATEGORY
+        and cr.ID_CART= cw.ID_CART
+        and cw.ID_CONTAINER = c.ID_CONTAINER
+        and cw.STATUS_DELETE = 0 AND
+             USERNAME_CUST = '$username';");
+            foreach ($cart as $list) {
+                $list->formatted_price = 'Rp ' . number_format($list->price, 0, ',', '.');
+            }
+        }
+        return view('shop-cart', compact('cart'));
     }
 }

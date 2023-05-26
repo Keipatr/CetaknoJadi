@@ -32,7 +32,7 @@
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="{{ route('my-account') }}"><i
+                                    <a class="nav-link " href="{{ route('my-account') }}"><i
                                             class="feather-icon icon-settings me-2"></i>Settings</a>
                                 </li>
                                 <!-- nav item -->
@@ -41,8 +41,8 @@
                                             class="feather-icon icon-map-pin me-2"></i>Address</a>
                                 </li>
                                 <!-- nav item -->
-                                <li class="nav-item">
-                                    <a class="nav-link " href="{{ route('account-payment') }}"><i
+                                <li class="nav-item ">
+                                    <a class="nav-link active" href="{{ route('account-payment') }}"><i
                                             class="feather-icon icon-credit-card me-2"></i>Payment Method</a>
                                 </li>
                                 <!-- nav item -->
@@ -203,7 +203,7 @@
                 </li>
                 <!-- nav item -->
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('my-account') }}"><i
+                    <a class="nav-link " href="{{ route('my-account') }}"><i
                             class="feather-icon icon-settings me-2"></i>Settings</a>
                 </li>
                 <!-- nav item -->
@@ -213,7 +213,7 @@
                 </li>
                 <!-- nav item -->
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('account-payment') }}"><i
+                    <a class="nav-link active" href="{{ route('account-payment') }}"><i
                             class="feather-icon icon-credit-card me-2"></i>Payment Method</a>
                 </li>
                 <!-- nav item -->
