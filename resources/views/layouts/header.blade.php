@@ -154,7 +154,6 @@
 
                             <div class="list-inline me-4">
                                 <div class="list-inline-item">
-
                                     <a href="#!" class="text-muted" data-bs-toggle="modal" data-bs-target="#modal-1">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
                                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -233,15 +232,121 @@
                                 </span>
                             </a>
                         </div>
-                        <div class="list-inline-item">
-                            {{-- ini button trigger modal untuk akunnya --}}
+                        {{-- icon trigger login modal --}}
+                        {{-- <div class="list-inline-item">
                             <a href="#!" class="text-muted" data-bs-toggle="modal" data-bs-target="#modal-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
                                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                     <circle cx="12" cy="7" r="4"></circle>
                                 </svg>
                             </a>
+                        </div> --}}
+                        <a href="#!" class="text-muted" data-bs-toggle="modal" 
+@if (Auth::check())
+    data-bs-target="#dropdown-menu"
+@else
+    data-bs-target="#modal-1"
+@endif>
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+    </svg>
+</a>
+
+@if (Auth::check())
+    <!-- Code for the post-login dropdown menu -->
+    <div class="modal fade" role="dialog" tabindex="-1" id="dropdown-menu">
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ url('account-orders') }}">Orders</a></li>
+            <li><a class="dropdown-item" href="{{ url('account') }}">Settings</a></li>
+            <li><a class="dropdown-item" href="{{ url('account-address') }}">Address</a></li>
+            <li><a class="dropdown-item" href="{{ url('account-payment') }}">Payment Method</a></li>
+            <li><a class="dropdown-item" href="{{ url('account-notification') }}">Notification</a></li>
+            <div class="dropdown-divider"></div>
+            <li><a class="dropdown-item" href="{{ url('logout') }}">Logout</a></li>
+        </ul>
+    </div>
+@else
+    <!-- Code for the login modal -->
+    <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom-color: var(--bs-modal-bg);padding: 16px;">
+                <h2 style="margin: 0px;margin-bottom: 0px;margin-left: 6px;padding: 0px;margin-right: 0px;">Login as
+                </h2><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <ul class="nav nav-tabs" role="tablist" style="border-width: 1px;">
+                        <li class="nav-item text-center" role="presentation" style="width: 120px;background: #e6ebf1;"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-1" style="color: var(--bs-nav-tabs-link-active-color);background: #fdffff;border-bottom-color: #f4f9f9;">Customer</a>
+                        </li>
+                        <li class="nav-item" role="presentation"><a class="nav-link active text-center" role="tab" data-bs-toggle="tab" href="#tab-2" style="color: var(--bs-nav-tabs-link-active-color);width: 120px;background: #fef9f9;border-bottom-color: #fef9f9;">Vendor</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane" role="tabpanel" id="tab-1" style="border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;">
+                            <!-- Start: Modal Login form -->
+                            <div class="d-xl-flex justify-content-xl-center" id="myModal" style="margin: 0px;padding-bottom: 14px;border-width: 0px;background: #fdffff;height: 300px;">
+                                <div class="d-xl-flex justify-content-xl-center modal-dialog modal-login" style="width: 400px;margin: 18px 33px;">
+                                    <div class="modal-content" style="background: #fdffff;padding: 0px;height: 200px;width: 400px;padding-bottom: 0px;">
+                                        <div class="modal-body" style="padding: 16px;padding-bottom: 0px;background: #fdffff;">
+                                            <form action="confirmation" method="post">
+                                                <div class="form-group"><i class="fa fa-star fa-user"></i><input class="form-control" type="text" placeholder="Username" required="required" style="margin: 0px;margin-bottom: 8px;" name="USERNAME_CUST"></div>
+                                                <div class="form-group"><i class="fa fa-star fa-lock"></i><input class="form-control" type="password" placeholder="Password" required="required" style="margin-bottom: 6px;margin-top: 8px;" name="PASSWORD_CUST"></div>
+                                                <div class="d-xl-flex justify-content-xl-start form-group" style="margin-right: 0px;margin-left: 20px;"><button class="btn btn-primary btn-block btn-lg" type="submit" value="Login" style="margin-top: 6px;margin-bottom: 12px;;">Login</button>
+                                                </div>
+                                                <div class="text-start" style="padding-top: 0px; margin-bottom: 0px"><input type="checkbox" name="Remember me">
+                                                    <p class="d-inline-block" style="margin-left: 6px;">Remember me
+                                                    </p>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="d-xl-flex justify-content-xl-center modal-footer" style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -20px;background: rgb(222,226,227);">
+                                            <a href="forgot.html" style="margin: 0px;">Forgot Password?</a>
+                                        </div>
+                                        <div class="d-xl-flex justify-content-xl-center modal-footer" style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -12px;background: rgb(222,226,227);margin-top: 30px;">
+                                            <!-- Start: Register --><a style="margin: 0px;" href="index.html" data-bs-target="#modal-2" data-bs-toggle="modal">Dont have any acount? Sign up</a>
+                                            <!-- End: Register -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- End: Modal Login form -->
                         </div>
+                        <div class="tab-pane active" role="tabpanel" id="tab-2" style="background: #efecec;">
+                            <!-- Start: Modal Login form -->
+                            <div class="d-xl-flex justify-content-xl-center" id="myModal-1" style="margin: 0px;padding-bottom: 14px;border-width: 0px;background: #fdffff;height: 300px;">
+                                <div class="d-xl-flex justify-content-xl-center modal-dialog modal-login" style="width: 400px;margin: 18px 33px;">
+                                    <div class="modal-content" style="padding: 0px;background: #fffdfd;">
+                                        <div class="modal-body" style="padding: 16px;padding-bottom: 0px;background: #fffdfd;">
+                                            <form action="/confirmation" method="post">
+                                                <div class="form-group"><i class="fa fa-envelope-square fa-user"></i><input class="form-control" type="text" placeholder="Email" required="required" style="margin: 0px;margin-bottom: 8px;" name="EMAIL_SHOP"></div>
+                                                <div class="form-group"><i class="fa fa-lock fa-lock"></i><input class="form-control" type="password" placeholder="Password" required="required" style="margin-bottom: 6px;margin-top: 8px;"></div>
+                                                <div class="d-xl-flex justify-content-xl-start form-group" style="margin-right: 0px;margin-left: 20px;"><button class="btn btn-primary btn-block btn-lg" type="submit" value="Login" style="margin-top: 6px;margin-bottom: 12px;">Login</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="text-start" style="background: #fffdfd;width: 368px;margin-left: 16px;"><input type="checkbox" name="Remember me">
+                                            <p class="d-inline-block" style="margin-left: 6px;">Remember me</p>
+                                        </div>
+                                        <div class="d-xl-flex justify-content-xl-center modal-footer" style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -20px;background: rgb(222,226,227);">
+                                            <a href="forgot.html" style="margin: 0px;">Forgot Password?</a>
+                                        </div>
+                                        <div class="d-xl-flex justify-content-xl-center modal-footer" style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -20px;background: rgb(222,226,227);margin-top: 30px;">
+                                            <!-- Start: Register --><a style="margin: 0px;" href="index.html" data-bs-target="#modal-2" data-bs-toggle="modal">Dont have any acount? Sign up</a>
+                                            <!-- End: Register -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- End: Modal Login form -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+
                         <div class="list-inline-item">
 
                             <a class="text-muted position-relative " data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" href="#offcanvasExample" role="button" aria-controls="offcanvasRight">
@@ -255,13 +360,7 @@
                                     <span class="visually-hidden">unread messages</span>
                                 </span>
                             </a>
-
                         </div>
-
-
-
-
-
                     </div>
                 </div>
             </div>
@@ -479,6 +578,8 @@
                                     <li><a class="dropdown-item" href="./pages/contact.html">Contact</a></li>
                                 </ul>
                             </li> --}}
+
+                    {{-- ini my account drop down --}}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Account
@@ -835,7 +936,7 @@
 <!-- Modal -->
 {{-- modal di taro di sini ya jing --}}
 <!-- Start: Login -->
-<div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
+{{-- <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom-color: var(--bs-modal-bg);padding: 16px;">
@@ -911,7 +1012,7 @@
             </div>
         </div>
     </div>
-</div><!-- End: Login -->
+</div><!-- End: Login --> --}}
 <!-- Start: Regis -->
 <div id="modal-2" class="modal fade" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
