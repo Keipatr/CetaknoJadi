@@ -31,6 +31,15 @@ class HomeController extends Controller
             WHERE w.ID_WISHLIST= c.ID_WISHLIST
             AND ca.ID_CART= c.ID_CART AND
              USERNAME_CUST = '$username';");
+            $cart = DB::select("
+            select PRODUCT_NAME, NAME_CATEGORY,PRICE_PRODUCT as price FROM product p, container c, cart cr,category ca, customer cu, cart_product cw
+        where p.ID_CONTAINER = c.ID_CONTAINER
+        and cr.ID_CART = cu.ID_CART
+        and ca.ID_CATEGORY = c.ID_CATEGORY
+        and cr.ID_CART= cw.ID_CART
+        and cw.ID_CONTAINER = c.ID_CONTAINER
+        and cw.STATUS_DELETE = 0 AND
+             USERNAME_CUST = '$username';");
         }
 
         $products = DB::select("
@@ -44,22 +53,16 @@ LEFT JOIN review r ON r.ID_CONTAINER = co.ID_CONTAINER
 WHERE co.STATUS_DELETE = 0
   AND co.STATUS = 1
   AND s.STATUS_SHOP = 'Y'
+  and CITY_SHOP like '%%'
 GROUP BY s.NAME_SHOP, p.product_name, c.name_category, p.PRICE_PRODUCT, image, co.ID_CONTAINER;
         ");
         $categories = DB::select("select NAME_CATEGORY from category where status_delete = 0;");
         $stores = DB::select("select NAME_SHOP, TELP_SHOP, ADDRESS_SHOP,POSTAL_SHOP,CITY_SHOP,STATUS_SHOP
         from shop s
         where STATUS_DELETE=0
-        and STATUS_SHOP = 'Y';");
-        $cart = DB::select("
-            select PRODUCT_NAME, NAME_CATEGORY,PRICE_PRODUCT as price FROM product p, container c, cart cr,category ca, customer cu, cart_product cw
-        where p.ID_CONTAINER = c.ID_CONTAINER
-        and cr.ID_CART = cu.ID_CART
-        and ca.ID_CATEGORY = c.ID_CATEGORY
-        and cr.ID_CART= cw.ID_CART
-        and cw.ID_CONTAINER = c.ID_CONTAINER
-        and cw.STATUS_DELETE = 0 AND
-             USERNAME_CUST = '$username';");
+        and STATUS_SHOP = 'Y'
+        and CITY_SHOP like '%%';");
+
         foreach ($cart as $list) {
             $list->formatted_price = 'Rp ' . number_format($list->price, 0, ',', '.');
         }

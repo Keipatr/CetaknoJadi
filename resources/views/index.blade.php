@@ -66,7 +66,7 @@
                             <div class="slider-8-columns " id="slider-8-columns">
                                 @foreach ($categories as $category)
                                     <div class="item">
-                                        <a href="{{ url('products') }}" class="text-decoration-none text-inherit">
+                                        <a href="{{ url('/categories/'.$category->NAME_CATEGORY) }}" class="text-decoration-none text-inherit">
                                             <div class="card mb-3 card-lift">
                                                 <div class="card-body text-center py-6 text-center">
                                                     <div class="my-5">
@@ -115,7 +115,7 @@
                     </div>
                     <!-- all store -->
                     <div class="col-md-4 text-end col-12 d-none d-md-block">
-                        <a href="{{ url('stores') }}">
+                        <a href="{{ url('/stores') }}">
                             All stores
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -139,7 +139,7 @@
                                     class="rounded-circle icon-shape icon-xl">
                             </div>
                             <div class="mt-4">
-                                <h2 class="mb-1 h5"><a href="#!" class="text-inherit">{{$store->NAME_SHOP}}</a></h2>
+                                <h2 class="mb-1 h5"><a href="{{url('/stores/'.$store->NAME_SHOP)}}" class="text-inherit">{{$store->NAME_SHOP}}</a></h2>
                                 <div class="small text-muted">
                                 </div>
                                 <div class="py-3">
@@ -269,7 +269,7 @@
                                     <div class="text-center position-relative ">
                                         <div class=" position-absolute top-0 start-0">
                                         </div>
-                                        <a href=""> <img
+                                        <a href="{{'/products/'.$product->NAME_SHOP.'/'.$product->PRODUCT_NAME.'?id='.Crypt::encryptString($product->ID_CONTAINER)}}"> <img
                                                 src="{{ $product->image ?: 'images/products/product-img-18.jpg' }}"
                                                 alt="Grocery Ecommerce Template" class="mb-3 img-fluid rounded fixed-size-image w-1100 h-1000"></a>
 
@@ -288,11 +288,7 @@
                                             class="text-decoration-none text-muted"><small>{{ $product->NAME_CATEGORY }}</small></a>
                                     </div>
                                     <h2 class="fs-6">
-                                        {{-- <a href=" --}}
-                                        {{-- {{url($product->NAME_SHOP.'/'.$product->PRODUCT_NAME)}} --}}
-                                        {{-- {{ url($product->NAME_SHOP.'/'.$product->PRODUCT_NAME) . '?id=' . $product->ID_CONTAINER }} --}}
-                                        {{-- " class="text-inherit text-decoration-none">{{ $product->PRODUCT_NAME }}</a> --}}
-                                        <a href="{{ url($product->NAME_SHOP.'/'.$product->PRODUCT_NAME) . '?id=' . Crypt::encryptString($product->ID_CONTAINER) }}"
+                                        <a href="{{'/products/'.$product->NAME_SHOP.'/'.$product->PRODUCT_NAME.'?id='.Crypt::encryptString($product->ID_CONTAINER)}}"
                                             class="text-inherit text-decoration-none">{{ $product->PRODUCT_NAME }}</a>
 
                                     </h2>

@@ -11,14 +11,14 @@
             <div class="row w-100 align-items-center gx-lg-2 gx-0">
                 <div class="col-xxl-2 col-lg-3">
                     <a class="navbar-brand d-none d-lg-block " href="{{ route('home') }}">
-                        <img src="images/logo/logo cetakno hitam.png" alt="eCommerce HTML " width="180"
+                        <img src="{{asset('images/logo/logo cetakno hitam.png')}}" alt="eCommerce HTML " width="180"
                             height="30" class="img-fluid d-block mx-auto">
 
 
                     </a>
                     <div class="d-flex justify-content-between w-100 d-lg-none">
                         <a class="navbar-brand" href="{{ route('home') }}">
-                            <img src="images/logo/logo cetakno hitam.png" alt="eCommerce HTML " width="180"
+                            <img src="{{asset('images/logo/logo cetakno hitam.png')}}" alt="eCommerce HTML " width="180"
                                 height="30" class="img-fluid d-block mx-auto">
 
                         </a>
@@ -247,7 +247,7 @@
             </div>
             <div class="offcanvas offcanvas-start p-4 p-lg-0" id="navbar-default">
                 <div class="d-flex justify-content-between align-items-center mb-2 d-block d-lg-none">
-                    <a href="./index.html"><img src="images/logo/logo-cetakno-hitam.svg"
+                    <a href="{{route('home')}}"><img src="{{asset('images/logo/logo-cetakno-hitam.svg')}}"
                             alt="eCommerce HTML Template"></a>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
@@ -1073,7 +1073,7 @@
                 <li class="list-group-item py-3 ps-0 border-top">
                     <div class="row align-items-center">
                         <div class="col-3 col-md-2">
-                            <img src="images/products/Banner.jpg" alt="Ecommerce" class="img-fluid">
+                            <img src="{{asset('images/products/Banner.jpg')}}" alt="Ecommerce" class="img-fluid">
                         </div>
                         <div class="col-4 col-md-6 col-lg-5">
                             <a href="./pages/shop-single.html" class="text-inherit">
@@ -1183,88 +1183,158 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel"
-    aria-hidden="true">
+{{-- <div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered">
         <div class="modal-content">
-
             <div class="modal-body p-6">
-                <div class="d-flex justify-content-between align-items-start ">
+                <div class="d-flex justify-content-between align-items-start">
                     <div>
-                        <h5 class="mb-1" id="locationModalLabel">Choose your Delivery Location</h5>
-                        <p class="mb-0 small">Enter your address and we will specify the offer you area. </p>
+                        <h5 class="mb-1" id="locationModalLabel">Choose your Location</h5>
+                        <p class="mb-0 small">Enter your area.</p>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="my-5">
-                    <input type="search" class="form-control" placeholder="Search your area">
+                    <input type="search" class="form-control" id="areaSearchInput" placeholder="Search your area">
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <h6 class="mb-0">Select Location</h6>
                     <a href="#" class="btn btn-outline-gray-400 text-muted btn-sm">Clear All</a>
-
-
                 </div>
                 <div>
-                    <div data-simplebar style="height:300px;">
-                        <div class="list-group list-group-flush">
-
-                            <a href="#"
-                                class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action active">
+                    <div data-simplebar style="height: 300px;">
+                        <div id="areaList" class="list-group list-group-flush">
+                            <a href="#" class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action active">
                                 <span>Surabaya</span>
-                                {{-- <span>Min:$20</span> --}}
-                            </a>
-                            <a href="#"
-                                class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-                                <span>Makassar</span>
-                                {{-- <span>Min:$30</span> --}}
-                            </a>
-                            <a href="#"
-                                class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-                                <span>Jember</span>
-                                {{-- <span>Min:$50</span> --}}
-                            </a>
-                            <a href="#"
-                                class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-                                <span>Sorong</span>
-                                {{-- <span>Min:$29</span> --}}
-                            </a>
-                            <a href="#"
-                                class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-                                <span>Sidoarjo</span>
-                                {{-- <span>Min:$80</span> --}}
-                            </a>
-                            <a href="#"
-                                class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-                                <span>Bone</span>
-                                {{-- <span>Min:$90</span> --}}
-                            </a>
-                            <a href="#"
-                                class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-                                <span>Ketintang</span>
-                                {{-- <span>Min:$50</span> --}}
-                            </a>
-                            <a href="#"
-                                class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-                                <span>Bali</span>
-                                {{-- <span>Min:$29</span> --}}
-                            </a>
-                            <a href="#"
-                                class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-                                <span>Yogyakarta</span>
-                                {{-- <span>Min:$80</span> --}}
-                            </a>
-                            <a href="#"
-                                class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action">
-                                <span>Jakarta</span>
-                                {{-- <span>Min:$90</span> --}}
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
-
+        </div>
+    </div>
+</div> --}}
+<div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body p-6">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h5 class="mb-1" id="locationModalLabel">Choose your Location</h5>
+                        <p class="mb-0 small">Enter your area.</p>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="my-5">
+                    <input type="search" class="form-control" id="searchInput" placeholder="Search your area">
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h6 class="mb-0">Select Location</h6>
+                    <a href="#" class="btn btn-outline-gray-400 text-muted btn-sm" id="clearAllBtn">Clear All</a>
+                </div>
+                <div>
+                    <div data-simplebar style="height: 300px;">
+                        <div class="list-group list-group-flush" id="locationList">
+                            <!-- Area items will be dynamically added here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+{{-- <script>
+    // Function to fetch areas based on search query
+    function fetchAreas(search) {
+        // Make the AJAX request to the Laravel route
+        $.ajax({
+            url: '/search',
+            type: 'GET',
+            data: {
+                search: search
+            },
+            success: function (response) {
+                // Clear the previous area list
+                $('#locationList').empty();
+
+                // Append the new area items to the list
+                $.each(response, function (index, area) {
+                    var listItem = $('<a>').attr('href', '#')
+                        .addClass('list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action')
+                        .text(area.name);
+                    $('#locationList').append(listItem);
+                });
+            },
+            error: function (xhr, status, error) {
+                console.log('Error fetching areas:', error);
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        // Event listener for search input
+        $('#searchInput').on('input', function () {
+            var searchQuery = $(this).val();
+            fetchAreas(searchQuery);
+        });
+    });
+</script> --}}
+<script>
+    // Function to fetch areas based on search query
+    function fetchAreas(search) {
+        // Make the AJAX request to the Laravel route
+        $.ajax({
+            url: '/search',
+            type: 'GET',
+            data: {
+                search: search
+            },
+            success: function (response) {
+                // Clear the previous area list
+                $('#locationList').empty();
+
+                // Append the new area items to the list
+                $.each(response, function (index, area) {
+                    var listItem = $('<a>').attr('href', '#')
+                        .addClass('list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action')
+                        .text(area.name)
+                        .on('click', function () {
+                            // Set the clicked area as the value of the search input
+                            $('#searchInput').val(area.name);
+
+                            // Clear the area list
+                            $('#locationList').empty();
+
+                            // Dismiss the modal
+                            $('#locationModal').modal('hide');
+                        });
+
+                    $('#locationList').append(listItem);
+                });
+            },
+            error: function (xhr, status, error) {
+                console.log('Error fetching areas:', error);
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        // Event listener for search input
+        $('#searchInput').on('input', function () {
+            var searchQuery = $(this).val();
+
+            if (searchQuery.trim() !== '') {
+                fetchAreas(searchQuery);
+            } else {
+                // Clear the area list
+                $('#locationList').empty();
+            }
+        });
+    });
+</script>
+
+
+
+

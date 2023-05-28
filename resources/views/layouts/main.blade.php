@@ -11,13 +11,13 @@
     <link href="{{ asset('libs/slick-carousel/slick/slick.css') }}" rel="stylesheet" />
     <link href="{{ asset('libs/slick-carousel/slick/slick-theme.css') }}" rel="stylesheet" />
     <link href="{{ asset('libs/tiny-slider/dist/tiny-slider.css') }}" rel="stylesheet">
-    <link href="libs/dropzone/dist/min/dropzone.min.css" rel="stylesheet" />
-    <link href="libs/tiny-slider/dist/tiny-slider.css" rel="stylesheet">
-    <link href="libs/nouislider/dist/nouislider.min.css" rel="stylesheet">
+    <link href="{{asset('libs/dropzone/dist/min/dropzone.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('libs/tiny-slider/dist/tiny-slider.css')}}" rel="stylesheet">
+    <link href="{{asset('libs/nouislider/dist/nouislider.min.css')}}" rel="stylesheet">
 
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-        <script src="{{ asset('libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -39,13 +39,13 @@
     </script>
 
     <!-- Favicon icon-->
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon/logoTitleCetakno.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('images/favicon/logoTitleCetakno.ico')}}">
 
 
     <!-- Libs CSS -->
-    <link href="libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="libs/feather-webfont/dist/feather-icons.css" rel="stylesheet">
-    <link href="libs/simplebar/dist/simplebar.min.css" rel="stylesheet">
+    <link href="{{asset('libs/bootstrap-icons/font/bootstrap-icons.css')}}" rel="stylesheet">
+    <link href="{{asset('libs/feather-webfont/dist/feather-icons.css')}}" rel="stylesheet">
+    <link href="{{asset('libs/simplebar/dist/simplebar.min.css')}}" rel="stylesheet">
 
 
     <!-- Theme CSS -->

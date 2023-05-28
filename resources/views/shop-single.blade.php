@@ -30,29 +30,29 @@
                         <!-- img slide -->
                         <div class="product" id="product">
                             <div class="zoom" onmousemove="zoom(event)"
-                                style="background-image: url(images/products/banner.jpg)">
+                                style="background-image: url({{asset('images/products/banner.jpg')}})">
                                 <!-- img -->
-                                <!-- img --><img src="images/products/banner.jpg" alt="">
+                                <img src="{{asset('images/products/banner.jpg')}}" alt="">
                             </div>
                             <div>
                                 <div class="zoom" onmousemove="zoom(event)"
-                                    style="background-image: url(images/products/banner.jpg)">
+                                    style="background-image: url(/images/products/banner.jpg)">
                                     <!-- img -->
-                                    <img src="images/products/banner.jpg" alt="">
+                                    <img src="{{asset('images/products/banner.jpg')}}" alt="">
                                 </div>
                             </div>
                             <div>
                                 <div class="zoom" onmousemove="zoom(event)"
-                                    style="background-image: url(images/products/banner.jpg)">
+                                    style="background-image: url(/images/products/banner.jpg)">
                                     <!-- img -->
-                                    <img src="images/products/banner.jpg" alt="">
+                                    <img src="{{asset('images/products/banner.jpg')}}" alt="">
                                 </div>
                             </div>
                             <div>
                                 <div class="zoom" onmousemove="zoom(event)"
-                                    style="background-image: url(images/products/banner.jpg)">
+                                    style="background-image: url(/images/products/banner.jpg)">
                                     <!-- img -->
-                                    <img src="images/products/banner.jpg" alt="">
+                                    <img src="{{asset('images/products/banner.jpg')}}" alt="">
                                 </div>
                             </div>
                         </div>
@@ -62,25 +62,25 @@
                                 <div class="col-3">
                                     <div class="thumbnails-img">
                                         <!-- img -->
-                                        <img src="images/products/banner.jpg" alt="">
+                                        <img src="{{asset('images/products/banner.jpg')}}" alt="">
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="thumbnails-img">
                                         <!-- img -->
-                                        <img src="images/products/banner.jpg" alt="">
+                                        <img src="{{asset('images/products/banner.jpg')}}" alt="">
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="thumbnails-img">
                                         <!-- img -->
-                                        <img src="images/products/banner.jpg" alt="">
+                                        <img src="{{asset('images/products/banner.jpg')}}" alt="">
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="thumbnails-img">
                                         <!-- img -->
-                                        <img src="images/products/banner.jpg" alt="">
+                                        <img src="{{asset('images/products/banner.jpg')}}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -511,143 +511,18 @@
                                                             weight etc. .</p>
                                                         <div>
                                                             <div class="border icon-shape icon-lg border-2 ">
-                                                                <!-- img --><img src="images/products/banner.jpg"
+                                                                <!-- img --><img src="{{asset('/images/products/banner.jpg')}}"
                                                                     alt="" class="img-fluid ">
                                                             </div>
                                                             <div class="border icon-shape icon-lg border-2 ms-1 ">
-                                                                <!-- img --><img src="images/products/banner.jpg"
+                                                                <!-- img --><img src="{{asset('/images/products/banner.jpg')}}"
                                                                     alt="" class="img-fluid ">
                                                             </div>
                                                             <div class="border icon-shape icon-lg border-2 ms-1 ">
-                                                                <!-- img --><img src="images/products/banner.jpg"
+                                                                <!-- img --><img src="{{asset('/images/products/banner.jpg')}}"
                                                                     alt="" class="img-fluid ">
                                                             </div>
 
-                                                        </div>
-                                                        <!-- icon -->
-                                                        {{-- <div class="d-flex justify-content-end mt-4">
-                                                            <a href="#" class="text-muted"><i
-                                                                    class="feather-icon icon-thumbs-up me-1"></i>Helpful</a>
-                                                            <a href="#" class="text-muted ms-4"><i
-                                                                    class="feather-icon icon-flag me-2"></i>Report
-                                                                abuse</a>
-                                                        </div> --}}
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex border-bottom pb-6 mb-6 pt-4">
-                                                    <!-- img --><img src="images/avatar/avatar-12.jpg" alt=""
-                                                        class="rounded-circle avatar-lg">
-                                                    <div class="ms-5">
-                                                        <h6 class="mb-1">
-                                                            Yves
-
-                                                        </h6>
-                                                        <!-- content -->
-                                                        <p class="small"> <span class="text-muted">29 December
-                                                                2022</span>
-                                                            {{-- <span class="text-primary ms-3 fw-bold">Verified
-                                                                Purchase</span> --}}
-                                                        </p>
-                                                        <!-- rating -->
-                                                        <div class=" mb-2">
-                                                            <i class="bi bi-star-fill text-warning"></i>
-                                                            <i class="bi bi-star-fill text-warning"></i>
-                                                            <i class="bi bi-star-fill text-warning"></i>
-                                                            <i class="bi bi-star-fill text-warning"></i>
-                                                            <i class="bi bi-star text-warning"></i>
-                                                            <span class="ms-3 text-dark fw-bold">Need to recheck the
-                                                                weight at delivery point</span>
-                                                        </div>
-
-                                                        <p>Product quality is good. But, weight seemed less than 1kg.
-                                                            Since it is being sent in open
-                                                            package, there is a possibility of pilferage in between.
-                                                            FreshCart sends the veggies and
-                                                            fruits through sealed plastic covers and Barcode on the
-                                                            weight etc. .</p>
-
-                                                        <!-- icon -->
-                                                        <div class="d-flex justify-content-end mt-4">
-                                                            {{-- <a href="#" class="text-muted"><i
-                                                                    class="feather-icon icon-thumbs-up me-1"></i>Helpful</a>
-                                                            <a href="#" class="text-muted ms-4"><i
-                                                                    class="feather-icon icon-flag me-2"></i>Report
-                                                                abuse</a> --}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex border-bottom pb-6 mb-6 pt-4">
-                                                    <!-- img --><img src="images/avatar/avatar-9.jpg" alt=""
-                                                        class="rounded-circle avatar-lg">
-                                                    <div class="ms-5">
-                                                        <h6 class="mb-1">
-                                                            Trisha
-
-                                                        </h6>
-                                                        <!-- content -->
-                                                        <p class="small"> <span class="text-muted">28 December
-                                                                2022</span>
-                                                            {{-- <span class="text-danger ms-3 fw-bold">Unverified
-                                                                Purchase</span> --}}
-                                                        </p>
-                                                        <!-- rating -->
-                                                        <div class=" mb-2">
-                                                            <i class="bi bi-star-fill text-warning"></i>
-                                                            <i class="bi bi-star-fill text-warning"></i>
-                                                            <i class="bi bi-star-fill text-warning"></i>
-                                                            <i class="bi bi-star-fill text-warning"></i>
-                                                            <i class="bi bi-star text-warning"></i>
-                                                            <span class="ms-3 text-dark fw-bold">Need to recheck the
-                                                                weight at delivery point</span>
-                                                        </div>
-
-                                                        <p>Everytime i ordered from fresh i got greenish yellow bananas
-                                                            just like i wanted so go for
-                                                            it , its happens very rare that u get over riped ones.</p>
-
-                                                        <!-- icon -->
-                                                        <div class="d-flex justify-content-end mt-4">
-                                                            {{-- <a href="#" class="text-muted"><i
-                                                                    class="feather-icon icon-thumbs-up me-1"></i>Helpful</a>
-                                                            <a href="#" class="text-muted ms-4"><i
-                                                                    class="feather-icon icon-flag me-2"></i>Report
-                                                                abuse</a> --}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex border-bottom pb-6 mb-6 pt-4">
-                                                    <!-- img --><img src="images/avatar/avatar-8.jpg" alt=""
-                                                        class="rounded-circle avatar-lg">
-                                                    <div class="ms-5 flex-grow-1">
-                                                        <h6 class="mb-1">
-                                                            Kei
-
-                                                        </h6>
-                                                        <!-- content -->
-                                                        <p class="small"> <span class="text-muted">8 December
-                                                                2022</span>
-                                                            {{-- <span class="text-danger ms-3 fw-bold">Unverified
-                                                                Purchase</span> --}}
-                                                        </p>
-                                                        <!-- rating -->
-                                                        <div class=" mb-2">
-                                                            <i class="bi bi-star-fill text-warning"></i>
-                                                            <i class="bi bi-star-fill text-warning"></i>
-                                                            <i class="bi bi-star-fill text-warning"></i>
-                                                            <i class="bi bi-star-fill text-warning"></i>
-                                                            <i class="bi bi-star text-warning"></i>
-                                                            <span class="ms-3 text-dark fw-bold">Great product</span>
-                                                        </div>
-
-                                                        <p>Great product & package. Delivery can be expedited. </p>
-
-                                                        <!-- icon -->
-                                                        <div class="d-flex justify-content-end mt-4">
-                                                            {{-- <a href="#" class="text-muted"><i
-                                                                    class="feather-icon icon-thumbs-up me-1"></i>Helpful</a>
-                                                            <a href="#" class="text-muted ms-4"><i
-                                                                    class="feather-icon icon-flag me-2"></i>Report
-                                                                abuse</a> --}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1212,21 +1087,21 @@
 
 
     <!-- Javascript-->
-    <script src="libs/rater-js/index.js"></script>
-    <script src="libs/dropzone/dist/min/dropzone.min.js"></script>
+    <script src="{{asset('libs/rater-js/index.js')}}"></script>
+    <script src="{{asset('libs/dropzone/dist/min/dropzone.min.js')}}"></script>
 
     <!-- Libs JS -->
-    <script src="libs/jquery/dist/jquery.min.js"></script>
-    <script src="libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="libs/simplebar/dist/simplebar.min.js"></script>
+    <script src="{{asset('libs/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{asset('libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('libs/simplebar/dist/simplebar.min.js')}}"></script>
 
     <!-- Theme JS -->
-    <script src="js/theme.min.js"></script>
+    <script src="{{asset('js/theme.min.js')}}"></script>
 
-    <script src="libs/tiny-slider/dist/min/tiny-slider.js"></script>
-    <script src="js/vendors/tns-slider.js"></script>
-    <script src="js/vendors/zoom.js"></script>
-    <script src="js/vendors/increment-value.js"></script>
+    <script src="{{asset('libs/tiny-slider/dist/min/tiny-slider.js')}}"></script>
+    <script src="{{asset('js/vendors/tns-slider.js')}}"></script>
+    <script src="{{asset('js/vendors/zoom.js')}}"></script>
+    <script src="{{asset('js/vendors/increment-value.js')}}"></script>
 
 
 

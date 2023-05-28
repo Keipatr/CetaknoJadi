@@ -145,17 +145,6 @@
                                 </div>
                             </form>
                         @endif
-                        @if (isset($remembered))
-                            <div class="col-12">
-                                <p>
-                                    @if ($remembered)
-                                        You are remembered!
-                                    @else
-                                        You are not remembered.
-                                    @endif
-                                </p>
-                            </div>
-                        @endif
                     </div>
                 </div>
             </div>

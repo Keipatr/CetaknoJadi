@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Crypt;
 
 class ProductController extends Controller
 {
-    public function productShow($store_url, $product_url, Request $request)
+    public function productShow(string $store_url, string $product_url, Request $request)
     {
         //                 $products = DB::select("
 //         SELECT co.ID_CONTAINER, s.NAME_SHOP, PRODUCT_NAME, NAME_CATEGORY, PRICE_PRODUCT AS price,
@@ -30,7 +30,7 @@ class ProductController extends Controller
 //         }
 //         dd($products);
 //         return view('shop-single',compact('products'));
-
+        //dd($store_url, $product_url);
         $id_container = $request->query('id');
 
         $products = DB::select("
@@ -54,5 +54,18 @@ class ProductController extends Controller
         }
 
         return view('shop-single', compact('products'));
+    }
+
+    public function categoryShow($category_url)
+    {
+        return view('shop-grid');
+    }
+    public function storeShow($store_url)
+    {
+        return view('store-single');
+    }
+    public function allStoreShow()
+    {
+        return view('store-list');
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SearchController;
 use App\Models\Product;
 
 /*
@@ -34,6 +35,9 @@ Route::post('/signup', [LoginController::class, 'signup'])
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
+Route::get('/search', [SearchController::class, 'search']);
+
+
 
 Route::get('/wishlist', [HomeController::class, 'wishlist'])->name('wishlist');
 Route::get('/cart', [HomeController::class, 'cart'])->name('cart');
@@ -51,7 +55,10 @@ Route::get('/account-address', [HomeController::class, 'address'])->name('accoun
 Route::get('/account-payment', [HomeController::class, 'payment'])->name('account-payment');
 Route::get('/account-notification', [HomeController::class, 'notification'])->name('account-notification');
 
-Route::get('/{store_url}/{product_url}', [ProductController::class, 'productShow'])->name('product-show');
+Route::get('/products/{store_url}/{product_url}', [ProductController::class, 'productShow'])->name('product-show');
+Route::get('/categories/{category_url}', [ProductController::class, 'categoryShow'])->name('category-show');
+Route::get('/stores/{store_url}', [ProductController::class, 'storeShow'])->name('store-show');
+Route::get('/stores', [ProductController::class, 'allStoreShow'])->name('allStore-show');
 
 // not riil
 
