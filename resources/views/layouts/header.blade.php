@@ -437,7 +437,7 @@
                                     <li><a class="dropdown-item" href="./pages/contact.html">Contact</a></li>
                                 </ul>
                             </li> --}}
-                        <li class="nav-item dropdown">
+                        {{-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Account
@@ -466,7 +466,7 @@
                                     </ul>
                                 </li>
                             </ul>
-                        </li>
+                        </li> --}}
                         <li class="nav-item ">
                             <a class="nav-link" href="{{ url('products') }}">
                                 Products

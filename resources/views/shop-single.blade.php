@@ -29,27 +29,30 @@
                     <div class="col-md-6">
                         <!-- img slide -->
                         <div class="product" id="product">
-                            <div class="zoom" onmousemove="zoom(event)"
+                            <div class="zoom"
+                            {{-- onmousemove="zoom(event)" --}}
                                 style="background-image: url({{asset('images/products/banner.jpg')}})">
-                                <!-- img -->
                                 <img src="{{asset('images/products/banner.jpg')}}" alt="">
                             </div>
                             <div>
-                                <div class="zoom" onmousemove="zoom(event)"
+                                <div class="zoom"
+                                {{-- onmousemove="zoom(event)" --}}
                                     style="background-image: url(/images/products/banner.jpg)">
                                     <!-- img -->
                                     <img src="{{asset('images/products/banner.jpg')}}" alt="">
                                 </div>
                             </div>
                             <div>
-                                <div class="zoom" onmousemove="zoom(event)"
+                                <div class="zoom"
+                                {{-- onmousemove="zoom(event)" --}}
                                     style="background-image: url(/images/products/banner.jpg)">
                                     <!-- img -->
                                     <img src="{{asset('images/products/banner.jpg')}}" alt="">
                                 </div>
                             </div>
                             <div>
-                                <div class="zoom" onmousemove="zoom(event)"
+                                <div class="zoom"
+                                {{-- onmousemove="zoom(event)" --}}
                                     style="background-image: url(/images/products/banner.jpg)">
                                     <!-- img -->
                                     <img src="{{asset('images/products/banner.jpg')}}" alt="">
@@ -922,7 +925,8 @@
                         <div class="col-lg-6">
                             <!-- img slide -->
                             <div class="product productModal" id="productModal">
-                                <div class="zoom" onmousemove="zoom(event)"
+                                <div class="zoom"
+                                {{-- onmousemove="zoom(event)" --}}
                                     style="
                   background-image: url(images/products/product-single-img-1.jpg);
                 ">
@@ -930,7 +934,8 @@
                                     <img src="images/products/product-single-img-1.jpg" alt="">
                                 </div>
                                 <div>
-                                    <div class="zoom" onmousemove="zoom(event)"
+                                    <div class="zoom"
+                                    {{-- onmousemove="zoom(event)" --}}
                                         style="
                     background-image: url(images/products/product-single-img-2.jpg);
                   ">
@@ -939,7 +944,8 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="zoom" onmousemove="zoom(event)"
+                                    <div class="zoom"
+                                    {{-- onmousemove="zoom(event)" --}}
                                         style="
                     background-image: url(images/products/product-single-img-3.jpg);
                   ">
@@ -948,7 +954,8 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="zoom" onmousemove="zoom(event)"
+                                    <div class="zoom"
+                                    {{-- onmousemove="zoom(event)" --}}
                                         style="
                     background-image: url(images/products/product-single-img-4.jpg);
                   ">

@@ -86,6 +86,11 @@
                                         {{ session('success') }}
                                     </div>
                                 @endif
+                                @if (session('error'))
+                                    <div class="alert alert-danger">
+                                        {{ session('error') }}
+                                    </div>
+                                @endif
                                 <div class="col">
                                     <div class="form-group">
                                         <i class="fa fa-star fa-user"></i>

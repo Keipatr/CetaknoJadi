@@ -58,109 +58,40 @@ class LoginController extends Controller
         {
             return back()->with('fail', 'Username/Password is not registered');
         }
-
-
-        // $request->validate([
-        //     'USERNAME_CUST' => 'required',
-        //     'PASSWORD_CUST' => 'required|min:8'
-        // ]);
-
-        // $user = Customer::where('USERNAME_CUST', '=', $request->USERNAME_CUST)->first();
-
-        // if ($user) {
-        //     if ($request->PASSWORD_CUST == $user->PASSWORD_CUST) {
-        //         if ($request->has('REMEMBER_ME')) {
-        //             Auth::login($user, true); // Set the "remember me" cookie for one week
-        //         } else {
-        //             Auth::login($user); // Log in without "remember me"
-        //             $request->session()->regenerate(); // Regenerate the session ID to prevent session fixation
-        //         }
-
-        //         return redirect('/');
-        //     } else {
-        //         return back()->with('fail', 'Username/Password is not registered/wrong');
-        //     }
-        // } else {
-        //     return back()->with('fail', 'Username/Password is not registered/wrong');
-        // }
-
-        //
-        // dd($request->all());
-        // $remember = ($request->has('remember')) ? true : false;
-        // $credentials = $request->validate([
-        //     'username_cust' => ['required'],
-        //     'password' => ['required'],
-        // ]);
-        // // $userData = DB::select("SELECT * FROM customer WHERE USERNAME_CUST = :username_cust", ['username_cust' => $credentials['username_cust']]);
-        // $user = Customer::where('USERNAME_CUST', '=', $credentials['username_cust'])->first();
-        // // if (!empty($userData)) {
-        // //dd($request->all());
-        // // $user = new Customer();
-        // // $user->fill((array) $userData[0]);
-
-        // // dd($user[0]);
-        // //   dd(Hash::make($user->PASSWORD_CUST));
-        // // dd($credentials, Auth::attempt($credentials));
-
-        // if (Auth::attempt($credentials, $remember)) {
-        //     if ($remember == true) {
-        //         // Cookie::queue('username', $credentials['username'], 60);
-        //         // Cookie::queue('password', $credentials['password'], 60);
-        //         // dd($userData, $remember);
-        //         Auth::login($user, $remember);
-        //         return redirect()->route('home');
-        //     } else {
-        //         // dd($userData);
-        //         Auth::login($user);
-        //         $request->session()->regenerate();
-        //         return redirect()->back();
-        //     }
-        // } else {
-        //     return view('shop-wishlist');
-        // }
-
-
-
     }
     public function signup(Request $request)
     {
-         // Validate the form data
-         $validatedData = $request->validate([
-            'NAME_CUST' => 'required',
-            'USERNAME_CUST' => 'required',
+        $validatedData = $request->validate([
+            'FIRST_NAME' => 'required',
+            'LAST_NAME' => 'required',
             'EMAIL_CUST' => 'required|email',
             'PASSWORD_CUST' => 'required',
+            'TELP_CUST' => 'required',
+            'ADDRESS_CUST' => 'required',
+            'CITY_CUST' => 'required',
+            'POSTAL_CUST' => 'required',
+            'USERNAME_CUST' => 'required',
         ]);
 
-        // Generate IDs for wishlist and cart
-        $customerid = 'CUST' . date('ymd') . mt_rand(1, 999);
-        $wishlistId = 'WISH' . date('ymd') . mt_rand(1, 999);
-        $cartId = 'CART' . date('ymd') . mt_rand(1, 999);
-
-
-        // Insert data into the database
-        $insert = DB::table('CUSTOMER')->insert([
-            'ID_CUSTOMER' => $customerid,
-            'ID_WISHLIST' => $wishlistId,
-            'ID_CART' => $cartId,
-            'NAME_CUST' => $validatedData['NAME_CUST'],
-            'TEL_CUST' => $request['TEL_CUST'],
-            'ADDRESS_CUST' => $request['ADDRESS_CUST'],
-            'CITY_CUST' => $request['CITY_CUST'],
-            'POSTAL_CUST' => $request ['POSTAL_CUST'],
+        $insert = DB::table('customer')->insert([
+            'ID_CUSTOMER' => 'AUTO',
+            'ID_WISHLIST' => 'AUTO',
+            'ID_CART' => 'AUTO',
+            'NAME_CUST' => $validatedData['FIRST_NAME'] . ' ' . $validatedData['LAST_NAME'],
+            'TELP_CUST' => $validatedData['TELP_CUST'],
+            'ADDRESS_CUST' => $validatedData['ADDRESS_CUST'],
+            'CITY_CUST' => $validatedData['CITY_CUST'],
+            'POSTAL_CUST' => $validatedData['POSTAL_CUST'],
             'USERNAME_CUST' => $validatedData['USERNAME_CUST'],
-            'PASSWORD_CUST' => $validatedData['PASSWORD_CUST'],
+            'PASSWORD_CUST' => Hash::make($validatedData['PASSWORD_CUST']),
             'EMAIL_CUST' => $validatedData['EMAIL_CUST'],
-            'STATUS_DELETE' => 'O',
+            'STATUS_DELETE' => 0,
         ]);
 
-        // Provide a response
         if ($insert) {
-
             return redirect()->back()->with('success', 'Registration successful!');
-        }
-        else{
-            session()->flash('error', "Error Blok");
+        } else {
+            return redirect()->back()->with('error', 'Error occurred during registration.');
         }
     }
 
@@ -176,19 +107,6 @@ class LoginController extends Controller
             Cookie::queue(Cookie::forget('PASSWORD_CUST'));
             return redirect()->route('loginpage');
         }
-        // $user = Auth::user();
-        // if ($user && $user->getRememberToken()) {
-        //     $user->setRememberToken(null);
-        //     $rememberTokenCookie = Auth::guard('web')->getRecallerName();
-        //     Cookie::queue(Cookie::forget($rememberTokenCookie));
-        // }
-        // Auth::logout();
-        // $request->session()->invalidate();
-        // $request->session()->regenerateToken();
-        // return redirect('/');
-        // Auth::logout();
-        // $request->session()->invalidate();
-        // $request->session()->regenerateToken();
         return redirect()->route('home');
     }
 }
