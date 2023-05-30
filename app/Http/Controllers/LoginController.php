@@ -65,7 +65,7 @@ class LoginController extends Controller
             'FIRST_NAME' => 'required',
             'LAST_NAME' => 'required',
             'EMAIL_CUST' => 'required|email',
-            'PASSWORD_CUST' => 'required',
+            'PASSWORD_CUST' => 'required|min:8',
             'TELP_CUST' => 'required',
             'ADDRESS_CUST' => 'required',
             'CITY_CUST' => 'required',

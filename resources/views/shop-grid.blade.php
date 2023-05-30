@@ -45,6 +45,16 @@
                                     <h5 class="mb-3">Categories</h5>
                                     <!-- nav -->
                                     <ul class="nav nav-category" id="categoryCollapseMenu">
+                                        <li class="nav-item border-bottom w-100 collapsed"
+                                        {{-- data-bs-toggle="collapse"
+                                            data-bs-target="#categoryFlushOne" aria-expanded="false"
+                                            aria-controls="categoryFlushOne" --}}
+                                            >
+                                            <a href="{{ route('category-show', ['category_url' => 'all-product']) }}"
+                                                class="nav-link">All Products</a>
+                                        </li>
+
+
                                         <li class="nav-item border-bottom w-100 collapsed" data-bs-toggle="collapse"
                                             data-bs-target="#categoryFlushOne" aria-expanded="false"
                                             aria-controls="categoryFlushOne"><a href="{{ url('products') }}"
@@ -393,81 +403,63 @@
                                     </ul>
                                 </div>
 
-                                <div class="mb-8">
-
+                                {{-- <div class="mb-8">
                                     <h5 class="mb-3">Stores</h5>
                                     <div class="my-4">
-                                        <!-- input -->
                                         <input type="search" class="form-control" placeholder="Search by store">
                                     </div>
-                                    <!-- form check -->
                                     <div class="form-check mb-2">
-                                        <!-- input -->
                                         <input class="form-check-input" type="checkbox" value="" id="eGrocery"
                                             checked>
                                         <label class="form-check-label" for="eGrocery">
                                             D'Raya Jember
                                         </label>
                                     </div>
-                                    <!-- form check -->
                                     <div class="form-check mb-2">
-                                        <!-- input -->
                                         <input class="form-check-input" type="checkbox" value="" id="DealShare">
                                         <label class="form-check-label" for="DealShare">
                                             Kosko Printing
                                         </label>
                                     </div>
-                                    <!-- form check -->
                                     <div class="form-check mb-2">
-                                        <!-- input -->
                                         <input class="form-check-input" type="checkbox" value="" id="Dmart">
                                         <label class="form-check-label" for="Dmart">
                                             Aneka Niaga
                                         </label>
                                     </div>
-                                    <!-- form check -->
                                     <div class="form-check mb-2">
-                                        <!-- input -->
                                         <input class="form-check-input" type="checkbox" value="" id="Blinkit">
                                         <label class="form-check-label" for="Blinkit">
                                             Aneka Niaga
                                         </label>
                                     </div>
-                                    <!-- form check -->
                                     <div class="form-check mb-2">
-                                        <!-- input -->
                                         <input class="form-check-input" type="checkbox" value="" id="BigBasket">
                                         <label class="form-check-label" for="BigBasket">
                                             Digital Printing
                                         </label>
                                     </div>
-                                    <!-- form check -->
                                     <div class="form-check mb-2">
-                                        <!-- input -->
                                         <input class="form-check-input" type="checkbox" value="" id="StoreFront">
                                         <label class="form-check-label" for="StoreFront">
                                             Wiyung Printing
                                         </label>
                                     </div>
-                                    <!-- form check -->
                                     <div class="form-check mb-2">
-                                        <!-- input -->
                                         <input class="form-check-input" type="checkbox" value="" id="Spencers">
                                         <label class="form-check-label" for="Spencers">
                                             Spectrum
                                         </label>
                                     </div>
-                                    <!-- form check -->
                                     <div class="form-check mb-2">
-                                        <!-- input -->
                                         <input class="form-check-input" type="checkbox" value=""
                                             id="onlineGrocery">
                                         <label class="form-check-label" for="onlineGrocery">
                                             Spencers
                                         </label>
                                     </div>
+                                </div> --}}
 
-                                </div>
                                 <div class="mb-8">
                                     <!-- price -->
                                     <h5 class="mb-3">Price</h5>
@@ -482,14 +474,11 @@
 
 
                                 </div>
-                                <!-- rating -->
                                 <div class="mb-8">
 
                                     <h5 class="mb-3">Rating</h5>
                                     <div>
-                                        <!-- form check -->
                                         <div class="form-check mb-2">
-                                            <!-- input -->
                                             <input class="form-check-input" type="checkbox" value=""
                                                 id="ratingFive">
                                             <label class="form-check-label" for="ratingFive">
@@ -575,19 +564,21 @@
                         </div>
                     </aside>
                     <section class="col-lg-9 col-md-12">
-                        <!-- card -->
+
                         <div class="card mb-4 bg-light border-0">
-                            <!-- card body -->
                             <div class=" card-body p-9">
-                                <h2 class="mb-0 fs-1">
-                                    {{$category_url === 'all-product' ? 'All Products' : $category_url}}
+                                <h2 class="mb-0 fs-1 text-start">
+                                    {{ $category_url === 'all-product' ? 'All Products' : $category_url }}
                                 </h2>
                             </div>
                         </div>
-                        <!-- list icon -->
+
+
                         <div class="d-lg-flex justify-content-between align-items-center">
                             <div class="mb-3 mb-lg-0">
-                                <p class="mb-0"> <span class="text-dark">{{ count($products) }} </span> Products found </p>
+                                <p class="mb-0"> <span class="text-dark">Show {{ $paginator->firstItem() }} -
+                                        {{ $paginator->lastItem() }} of {{ $paginator->total() }} Products found</span>
+                                </p>
                             </div>
 
                             <!-- icon -->
@@ -628,7 +619,7 @@
                         </div>
                         <!-- row -->
                         <div class="row g-4 row-cols-xl-4 row-cols-lg-3 row-cols-2 row-cols-md-2 mt-2">
-                            @foreach ($products as $product)
+                            @foreach ($paginator as $product)
                                 <div class="col">
                                     <div class="card card-product">
                                         <div class="card-body">
@@ -636,14 +627,10 @@
                                                 <div class=" position-absolute top-0 start-0"></div>
                                                 <a
                                                     href="{{ '/products/' . $product->NAME_SHOP . '/' . $product->PRODUCT_NAME . '?id=' . Crypt::encryptString($product->ID_CONTAINER) }}">
-                                                    <img src="/images/products/dokumen.jpg"
+                                                    <img src="{{ $product->image ? '/images/all/' . $product->image : 'images/products/product-img-18.jpg' }}"
                                                         alt="Grocery Ecommerce Template" class="mb-3 img-fluid">
                                                 </a>
                                                 <div class="card-product-action">
-                                                    <a href="#!" class="btn-action" data-bs-toggle="modal"
-                                                        data-bs-target="#quickViewModal"><i class="bi bi-eye"
-                                                            data-bs-toggle="tooltip" data-bs-html="true"
-                                                            title="Quick View"></i></a>
                                                     <a href="{{ url('wishlist') }}" class="btn-action"
                                                         data-bs-toggle="tooltip" data-bs-html="true" title="Wishlist"><i
                                                             class="bi bi-heart"></i></a>
@@ -651,16 +638,16 @@
                                             </div>
                                             <div class="text-small mb-1"><a
                                                     href="{{ url('/categories/' . $product->NAME_CATEGORY . '?id=' . Crypt::encryptString($product->ID_CATEGORY)) }}"
-                                                    class="text-decoration-none text-muted"><small>{{$product->NAME_CATEGORY}}</small></a>
+                                                    class="text-decoration-none text-muted"><small>{{ $product->NAME_CATEGORY }}</small></a>
                                             </div>
                                             <h2 class="fs-6"><a
                                                     href="{{ '/products/' . $product->NAME_SHOP . '/' . $product->PRODUCT_NAME . '?id=' . Crypt::encryptString($product->ID_CONTAINER) }}"
-                                                    class="text-inherit text-decoration-none">{{$product->PRODUCT_NAME}}</a>
+                                                    class="text-inherit text-decoration-none">{{ $product->PRODUCT_NAME }}</a>
                                             </h2>
                                             <div class="text-small mb-1"><a
-                                                href="{{ url('/stores/' . $product->NAME_SHOP . '?id=' . Crypt::encryptString($product->ID_CATEGORY)) }}"
-                                                class="text-decoration-none text-muted"><small>{{$product->NAME_SHOP}}</small></a>
-                                        </div>
+                                                    href="{{ url('/stores/' . $product->NAME_SHOP . '?id=' . Crypt::encryptString($product->ID_CATEGORY)) }}"
+                                                    class="text-decoration-none text-muted"><small>{{ $product->NAME_SHOP }}</small></a>
+                                            </div>
                                             <div>
                                                 <small class="text-warning">
                                                     @php
@@ -681,11 +668,13 @@
                                                         <i class="bi bi-star"></i>
                                                     @endfor
                                                 </small>
-                                                <span class="text-muted small">{{ $product->rating != 0 ? ($product->rating != round($product->rating) ? number_format($product->rating, 1) : round($product->rating)) : '0' }}
-                                                    ({{ $product->rating_count }})</span>
+                                                <span
+                                                    class="text-muted small">{{ $product->rating != 0 ? ($product->rating != round($product->rating) ? number_format($product->rating, 1) : round($product->rating)) : '0' }}
+                                                    ({{ $product->rating_count }})
+                                                </span>
                                             </div>
                                             <div class="d-flex justify-content-between align-items-center mt-3">
-                                                <div><span class="text-dark">{{$product->formatted_price}}</span>
+                                                <div><span class="text-dark">{{ $product->formatted_price }}</span>
                                                 </div>
                                                 <div><a href="#!" class="btn btn-primary btn-sm">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -702,97 +691,36 @@
                                     </div>
                                 </div>
                             @endforeach
-                            <!-- col -->
-                            {{-- <div class="col"> --}}
-                            <!-- card -->
-                            {{-- <div class="card card-product">
-                                    <div class="card-body"> --}}
-
-                            <!-- badge -->
-                            {{-- <div class="text-center position-relative ">
-                                            <div class=" position-absolute top-0 start-0"></div>
-                                            <a href="{{ url('products-banner') }}">
-                                                <img src="/images/products/dokumen.jpg" --}}
-                            {{-- alt="Grocery Ecommerce Template" class="mb-3 img-fluid">
-                                            </a> --}}
-                            <!-- action btn -->
-                            {{-- <div class="card-product-action">
-                                                <a href="#!" class="btn-action" data-bs-toggle="modal"
-                                                    data-bs-target="#quickViewModal"><i class="bi bi-eye"
-                                                        data-bs-toggle="tooltip" data-bs-html="true"
-                                                        title="Quick View"></i></a>
-                                                <a href="{{ url('wishlist') }}" class="btn-action"
-                                                    data-bs-toggle="tooltip" data-bs-html="true" title="Wishlist"><i
-                                                        class="bi bi-heart"></i></a>
-                                            </div>
-                                        </div> --}}
-                            <!-- heading -->
-                            {{-- <div class="text-small mb-1"><a href="#!"
-                                                class="text-decoration-none text-muted"><small>Dokumen</small></a></div>
-                                        <h2 class="fs-6"><a href="shop-single.html"
-                                                class="text-inherit text-decoration-none">Print A4</a>
-                                        </h2>
-                                        <div> --}}
-                            <!-- rating -->
-                            {{-- <small class="text-warning"> <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-half"></i></small> <span
-                                                class="text-muted small">4.5(149)</span>
-                                        </div> --}}
-                            <!-- price -->
-                            {{-- <div class="d-flex justify-content-between align-items-center mt-3">
-                                            <div><span class="text-dark">Rp. 18,000</span>
-                                            </div> --}}
-                            <!-- btn -->
-                            {{-- <div><a href="#!" class="btn btn-primary btn-sm">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-plus">
-                                                        <line x1="12" y1="5" x2="12"
-                                                            y2="19"></line>
-                                                        <line x1="5" y1="12" x2="19"
-                                                            y2="12"></line>
-                                                    </svg> Add</a></div>
-                                        </div>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="row mt-8">
+                            <div class="col">
+                                <nav>
+                                    <ul class="pagination">
+                                        <li class="page-item{{ $paginator->currentPage() === 1 ? ' disabled' : '' }}">
+                                            <a class="page-link mx-1" href="{{ $paginator->previousPageUrl() }}"
+                                                aria-label="Previous">
+                                                <i class="feather-icon icon-chevron-left"></i>
+                                            </a>
+                                        </li>
+                                        @foreach ($paginator->getUrlRange(1, $paginator->lastPage()) as $page => $url)
+                                            <li
+                                                class="page-item{{ $page === $paginator->currentPage() ? ' active' : '' }}">
+                                                <a class="page-link mx-1"
+                                                    href="{{ $url }}">{{ $page }}</a>
+                                            </li>
+                                        @endforeach
+                                        <li
+                                            class="page-item{{ $paginator->currentPage() === $paginator->lastPage() ? ' disabled' : '' }}">
+                                            <a class="page-link mx-1" href="{{ $paginator->nextPageUrl() }}"
+                                                aria-label="Next">
+                                                <i class="feather-icon icon-chevron-right"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
                             </div>
-                        </div> --}}
+                        </div>
 
-                            <div class="row mt-8">
-                                <div class="col">
-                                    <!-- nav -->
-                                    <nav>
-                                        <ul class="pagination">
-                                            <li class="page-item disabled">
-                                                <a class="page-link  mx-1 " href="#" aria-label="Previous">
-                                                    <i class="feather-icon icon-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li class="page-item "><a class="page-link  mx-1 active" href="#">1</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link mx-1 text-body"
-                                                    href="#">2</a>
-                                            </li>
-
-                                            <li class="page-item"><a class="page-link mx-1 text-body"
-                                                    href="#">...</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link mx-1 text-body"
-                                                    href="#">12</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link mx-1 text-body" href="#" aria-label="Next">
-                                                    <i class="feather-icon icon-chevron-right"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
                     </section>
                 </div>
             </div>
@@ -808,7 +736,7 @@
 
     <!-- Javascript-->
     <script src="/libs/nouislider/dist/nouislider.min.js"></script>
-    <script src="libs/wnumb/wNumb.min.js"></script>
+    <script src="/libs/wnumb/wNumb.min.js"></script>
     <!-- Libs JS -->
     <script src="/libs/jquery/dist/jquery.min.js"></script>
     <script src="/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

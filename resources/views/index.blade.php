@@ -270,14 +270,10 @@
                                         <div class=" position-absolute top-0 start-0">
                                         </div>
                                         <a href="{{'/products/'.$product->NAME_SHOP.'/'.$product->PRODUCT_NAME.'?id='.Crypt::encryptString($product->ID_CONTAINER)}}"> <img
-                                                src="{{ $product->image ?: 'images/products/product-img-18.jpg' }}"
+                                                src="{{ $product->image ? '/images/all/' . $product->image : 'images/products/product-img-18.jpg' }}"
                                                 alt="Grocery Ecommerce Template" class="mb-3 img-fluid rounded fixed-size-image w-1100 h-1000"></a>
 
                                         <div class="card-product-action">
-                                            {{-- <a href="#!" class="btn-action" data-bs-toggle="modal"
-                                                data-bs-target="#quickViewModal"><i class="bi bi-eye"
-                                                    data-bs-toggle="tooltip" data-bs-html="true"
-                                                    title="Quick View"></i></a> --}}
 
                                             <a href="#!" class="btn-action" data-bs-toggle="tooltip"
                                                 data-bs-html="true" title="Wishlist"><i class="bi bi-heart"></i></a>
