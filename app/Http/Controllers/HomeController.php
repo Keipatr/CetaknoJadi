@@ -56,7 +56,7 @@ WHERE co.STATUS_DELETE = 0
   and CITY_SHOP like '%%'
 GROUP BY s.NAME_SHOP, p.product_name, c.name_category, p.PRICE_PRODUCT, image, co.ID_CONTAINER;
         ");
-        $categories = DB::select("select NAME_CATEGORY from category where status_delete = 0;");
+        $categories = DB::select("select ID_CATEGORY,NAME_CATEGORY from category where status_delete = 0;");
         $stores = DB::select("select NAME_SHOP, TELP_SHOP, ADDRESS_SHOP,POSTAL_SHOP,CITY_SHOP,STATUS_SHOP
         from shop s
         where STATUS_DELETE=0

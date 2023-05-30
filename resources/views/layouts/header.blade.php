@@ -468,7 +468,7 @@
                             </ul>
                         </li> --}}
                         <li class="nav-item ">
-                            <a class="nav-link" href="{{ url('products') }}">
+                            <a class="nav-link" href="{{ url('/categories/all-product') }}">
                                 Products
                             </a>
                         </li>

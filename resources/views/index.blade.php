@@ -66,7 +66,7 @@
                             <div class="slider-8-columns " id="slider-8-columns">
                                 @foreach ($categories as $category)
                                     <div class="item">
-                                        <a href="{{ url('/categories/'.$category->NAME_CATEGORY) }}" class="text-decoration-none text-inherit">
+                                        <a href="{{ url('/categories/'.$category->NAME_CATEGORY .'?id='.Crypt::encryptString($category->ID_CATEGORY)) }}" class="text-decoration-none text-inherit">
                                             <div class="card mb-3 card-lift">
                                                 <div class="card-body text-center py-6 text-center">
                                                     <div class="my-5">
@@ -246,7 +246,7 @@
                     </div>
                     <!-- all product -->
                     <div class="col-md-4 text-end col-12 d-none d-md-block">
-                        <a href="{{ url('products') }}">
+                        <a href="{{ url('/categories/all-product') }}">
                             All products
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
