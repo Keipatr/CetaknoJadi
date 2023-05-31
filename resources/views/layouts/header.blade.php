@@ -1245,42 +1245,6 @@
         </div>
     </div>
 </div>
-{{-- <script>
-    // Function to fetch areas based on search query
-    function fetchAreas(search) {
-        // Make the AJAX request to the Laravel route
-        $.ajax({
-            url: '/search',
-            type: 'GET',
-            data: {
-                search: search
-            },
-            success: function (response) {
-                // Clear the previous area list
-                $('#locationList').empty();
-
-                // Append the new area items to the list
-                $.each(response, function (index, area) {
-                    var listItem = $('<a>').attr('href', '#')
-                        .addClass('list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action')
-                        .text(area.name);
-                    $('#locationList').append(listItem);
-                });
-            },
-            error: function (xhr, status, error) {
-                console.log('Error fetching areas:', error);
-            }
-        });
-    }
-
-    $(document).ready(function () {
-        // Event listener for search input
-        $('#searchInput').on('input', function () {
-            var searchQuery = $(this).val();
-            fetchAreas(searchQuery);
-        });
-    });
-</script> --}}
 <script>
     // Function to fetch areas based on search query
     function fetchAreas(search) {
@@ -1332,6 +1296,13 @@
                 $('#locationList').empty();
             }
         });
+        $('#clearAllBtn').on('click', function () {
+        // Clear the search input
+        $('#searchInput').val('');
+
+        // Clear the area list
+        $('#locationList').empty();
+    });
     });
 </script>
 
