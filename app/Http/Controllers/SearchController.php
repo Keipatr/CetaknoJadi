@@ -27,4 +27,5 @@ class SearchController extends Controller
             return response()->json(['error' => 'Failed to fetch areas'], $response->status());
         }
     }
+    
 }
