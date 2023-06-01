@@ -11,15 +11,15 @@
             <div class="row w-100 align-items-center gx-lg-2 gx-0">
                 <div class="col-xxl-2 col-lg-3">
                     <a class="navbar-brand d-none d-lg-block " href="{{ route('home') }}">
-                        <img src="{{asset('images/logo/logo cetakno hitam.png')}}" alt="eCommerce HTML " width="180"
-                            height="30" class="img-fluid d-block mx-auto">
+                        <img src="{{ asset('images/logo/logo cetakno hitam.png') }}" alt="eCommerce HTML "
+                            width="180" height="30" class="img-fluid d-block mx-auto">
 
 
                     </a>
                     <div class="d-flex justify-content-between w-100 d-lg-none">
                         <a class="navbar-brand" href="{{ route('home') }}">
-                            <img src="{{asset('images/logo/logo cetakno hitam.png')}}" alt="eCommerce HTML " width="180"
-                                height="30" class="img-fluid d-block mx-auto">
+                            <img src="{{ asset('images/logo/logo cetakno hitam.png') }}" alt="eCommerce HTML "
+                                width="180" height="30" class="img-fluid d-block mx-auto">
 
                         </a>
                         {{-- resolusi kecil --}}
@@ -58,9 +58,8 @@
                                             </span>
                                         </a>
                                     @else
-                                        <a class="text-muted position-relative "
-                                            href="{{route('loginpage')}}" role="button"
-                                            aria-controls="offcanvasRight">
+                                        <a class="text-muted position-relative " href="{{ route('loginpage') }}"
+                                            role="button" aria-controls="offcanvasRight">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -118,8 +117,64 @@
 
                     </form>
                 </div> --}}
+
+
+                <div class="col-xxl-6 col-lg-5 d-none d-lg-block mt-lg-4">
+                    <form id="searchForm">
+                        <div class="search-bar">
+                            <input class="form-control rounded" type="search" placeholder="Search for products" id="searchProduct"
+                                autocomplete="off">
+                            <div class="search-results" id="searchResults">
+                                <!-- Search results will be dynamically added here -->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <style>
+                    .search-bar {
+                        position: relative;
+                    }
+
+                    .search-bar .search-results {
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        right: 0;
+                        background-color: #fff;
+                        border: 1px solid #ccc;
+                        border-top: none;
+                        max-height: 300px;
+                        overflow-y: auto;
+                        z-index: 10;
+                        display: none;
+                    }
+
+                    .search-bar .search-results.active {
+                        display: block;
+                    }
+
+                    .search-result-item {
+                        display: block;
+                        padding: 8px;
+                        border-bottom: 1px solid #ccc;
+                        text-decoration: none;
+                        color: #333;
+                    }
+
+                    .search-result-item:last-child {
+                        border-bottom: none;
+                    }
+
+                    .product-not-found {
+                        padding: 8px;
+                        color: #333;
+                        font-style: italic;
+                    }
+                </style>
+
                 <script>
-                    $(document).ready(function () {
+                    $(document).ready(function() {
                         // Function to fetch product search results
                         function fetchProductResults(searchQuery) {
                             // Make the AJAX request to fetch product search results
@@ -127,78 +182,83 @@
                                 url: '/search-products',
                                 type: 'GET',
                                 data: {
-                                    search: searchQuery
+                                    searchProduct: searchQuery
                                 },
-                                success: function (response) {
+                                success: function(response) {
                                     // Clear the previous results
-                                    $('#productResultsContainer').empty();
+                                    $('#searchResults').empty();
 
-                                    // Display the product results
+                                    // Display the product results or "Product Not Found" message
                                     if (response.length > 0) {
-                                        $.each(response, function (index, product) {
-                                            var productItem = $('<div>').addClass('product-item')
-                                                .append($('<a>').attr('href', product.url)
-                                                    .append($('<h4>').text(product.name))
-                                                    .append($('<p>').text(product.price))
-                                                );
+                                        $.each(response, function(index, product) {
+                                            var listItem = $('<a>').attr('href', product.url)
+                                                .addClass('search-result-item')
+                                                .text(product.name);
 
-                                            $('#productResultsContainer').append(productItem);
+                                            $('#searchResults').append(listItem);
                                         });
+
+                                        $('.search-results').addClass('active');
                                     } else {
-                                        $('#productResultsContainer').append($('<p>').text('No results found'));
+                                        var notFoundMessage = $('<div>').addClass('product-not-found')
+                                            .text('Product Not Found');
+
+                                        $('#searchResults').append(notFoundMessage);
+                                        $('.search-results').addClass('active');
                                     }
                                 },
-                                error: function (xhr, status, error) {
+                                error: function(xhr, status, error) {
                                     console.log('Error fetching product results:', error);
                                 }
                             });
                         }
 
-                        // Event listener for product search button
-                        $('#productSearchButton').on('click', function () {
-                            var searchQuery = $('#productSearchInput').val().trim();
-
-                            if (searchQuery !== '') {
-                                fetchProductResults(searchQuery);
-                            } else {
-                                // Clear the product results
-                                $('#productResultsContainer').empty();
-                            }
-                        });
-
                         // Event listener for product search input
-                        $('#productSearchInput').on('input', function () {
+                        $('#searchProduct').on('input', function() {
                             var searchQuery = $(this).val().trim();
 
                             if (searchQuery !== '') {
                                 fetchProductResults(searchQuery);
                             } else {
-                                // Clear the product results
-                                $('#productResultsContainer').empty();
+                                $('.search-results').removeClass('active');
+                            }
+                        });
+
+                        // Submit the search form or navigate to a result page on Enter key press
+                        $('#searchProduct').on('keydown', function(event) {
+                            if (event.keyCode === 13) {
+                                event.preventDefault();
+                                var searchQuery = $(this).val().trim();
+                                if (searchQuery !== '') {
+                                    // Update the form action dynamically
+                                    $('#searchForm').attr('action', '/search-results');
+                                    $('#searchForm').submit(); // Submit the form
+                                }
+                            }
+                        });
+
+                        // Hide search results when clicking outside the search bar
+                        $(document).on('click', function(event) {
+                            if (!$(event.target).closest('.search-bar').length) {
+                                $('.search-results').removeClass('active');
                             }
                         });
                     });
                 </script>
-                <div class="col-xxl-6 col-lg-5 d-none d-lg-block mt-lg-4">
-                    <form id="productSearchForm" action="#">
-                        <div class="input-group">
-                            <input id="productSearchInput" class="form-control rounded" type="search"
-                                placeholder="Search for products">
-                            <span class="input-group-append">
-                                <button id="productSearchButton" class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end"
-                                    type="button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                        class="feather feather-search">
-                                        <circle cx="11" cy="11" r="8"></circle>
-                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                                    </svg>
-                                </button>
-                            </span>
-                        </div>
-                    </form>
-                    <div id="productResultsContainer" class="mt-3"></div>
-                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <div class="col-md-2 col-xxl-3 d-none d-lg-block mt-lg-4">
                     <!-- Button trigger modal -->
                     <button type="button" class="btn  btn-outline-gray-400 text-muted" data-bs-toggle="modal"
@@ -249,44 +309,43 @@
                         <div class="list-inline-item">
 
                             @if (Session::has('ID_CUSTOMER') || isset($_COOKIE['ID_CUSTOMER']))
-                            <a class="text-muted position-relative " data-bs-toggle="offcanvas"
-                                data-bs-target="#offcanvasRight" href="#offcanvasExample" role="button"
-                                aria-controls="offcanvasRight">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                    class="feather feather-shopping-bag">
-                                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                                    <line x1="3" y1="6" x2="21" y2="6">
-                                    </line>
-                                    <path d="M16 10a4 4 0 0 1-8 0"></path>
-                                </svg>
-                                <span
-                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success"><span
-                                        id="cartQty">{{ $data[0]->QTY_CART }}</span>
-                                    <span class="visually-hidden">unread messages</span>
-                                </span>
-                            </a>
-                        @else
-                            <a class="text-muted position-relative "
-                                href="{{route('loginpage')}}" role="button"
-                                aria-controls="offcanvasRight">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                    class="feather feather-shopping-bag">
-                                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                                    <line x1="3" y1="6" x2="21" y2="6">
-                                    </line>
-                                    <path d="M16 10a4 4 0 0 1-8 0"></path>
-                                </svg>
-                                <span
-                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success"><span
-                                        id="cartQty">0</span>
-                                    <span class="visually-hidden">unread messages</span>
-                                </span>
-                            </a>
-                        @endif
+                                <a class="text-muted position-relative " data-bs-toggle="offcanvas"
+                                    data-bs-target="#offcanvasRight" href="#offcanvasExample" role="button"
+                                    aria-controls="offcanvasRight">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-shopping-bag">
+                                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                                        <line x1="3" y1="6" x2="21" y2="6">
+                                        </line>
+                                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                                    </svg>
+                                    <span
+                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success"><span
+                                            id="cartQty">{{ $data[0]->QTY_CART }}</span>
+                                        <span class="visually-hidden">unread messages</span>
+                                    </span>
+                                </a>
+                            @else
+                                <a class="text-muted position-relative " href="{{ route('loginpage') }}"
+                                    role="button" aria-controls="offcanvasRight">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-shopping-bag">
+                                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                                        <line x1="3" y1="6" x2="21" y2="6">
+                                        </line>
+                                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                                    </svg>
+                                    <span
+                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success"><span
+                                            id="cartQty">0</span>
+                                        <span class="visually-hidden">unread messages</span>
+                                    </span>
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -329,7 +388,7 @@
             </div>
             <div class="offcanvas offcanvas-start p-4 p-lg-0" id="navbar-default">
                 <div class="d-flex justify-content-between align-items-center mb-2 d-block d-lg-none">
-                    <a href="{{route('home')}}"><img src="{{asset('images/logo/logo-cetakno-hitam.svg')}}"
+                    <a href="{{ route('home') }}"><img src="{{ asset('images/logo/logo-cetakno-hitam.svg') }}"
                             alt="eCommerce HTML Template"></a>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
@@ -1152,67 +1211,69 @@
             <ul class="list-group list-group-flush">
 
                 @foreach ($cart as $list)
-                <li class="list-group-item py-3 ps-0 border-top">
-                    <div class="row align-items-center">
-                        <div class="col-3 col-md-2">
-                            <img src="{{asset('images/products/Banner.jpg')}}" alt="Ecommerce" class="img-fluid">
-                        </div>
-                        <div class="col-4 col-md-6 col-lg-5">
-                            <a href="./pages/shop-single.html" class="text-inherit">
-                                <h6 class="mb-0">{{$list->PRODUCT_NAME}}</h6>
-                            </a>
-                            <span><small class="text-muted">{{$list->NAME_CATEGORY}}</small></span>
-                            <div class="mt-2 small lh-1"> <a href="#!"
-                                    class="text-decoration-none text-inherit"> <span class="me-1 align-text-bottom">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-trash-2 text-success">
-                                            <polyline points="3 6 5 6 21 6"></polyline>
-                                            <path
-                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                            </path>
-                                            <line x1="10" y1="11" x2="10" y2="17">
-                                            </line>
-                                            <line x1="14" y1="11" x2="14" y2="17">
-                                            </line>
-                                        </svg></span><span class="text-muted">Remove</span></a></div>
-                        </div>
-                        <div class="col-3 col-md-3 col-lg-3">
-                            <div class="input-group input-spinner  ">
-                                <input type="button" value="-" class="button-minus  btn  btn-sm "
-                                    data-field="quantity">
-                                <input type="number" step="1" max="10" value="1" name="quantity"
-                                    class="quantity-field form-control-sm form-input   ">
-                                <input type="button" value="+" class="button-plus btn btn-sm "
-                                    data-field="quantity">
+                    <li class="list-group-item py-3 ps-0 border-top">
+                        <div class="row align-items-center">
+                            <div class="col-3 col-md-2">
+                                <img src="{{ asset('images/products/Banner.jpg') }}" alt="Ecommerce"
+                                    class="img-fluid">
                             </div>
+                            <div class="col-4 col-md-6 col-lg-5">
+                                <a href="./pages/shop-single.html" class="text-inherit">
+                                    <h6 class="mb-0">{{ $list->PRODUCT_NAME }}</h6>
+                                </a>
+                                <span><small class="text-muted">{{ $list->NAME_CATEGORY }}</small></span>
+                                <div class="mt-2 small lh-1"> <a href="#!"
+                                        class="text-decoration-none text-inherit"> <span
+                                            class="me-1 align-text-bottom">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-trash-2 text-success">
+                                                <polyline points="3 6 5 6 21 6"></polyline>
+                                                <path
+                                                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                </path>
+                                                <line x1="10" y1="11" x2="10" y2="17">
+                                                </line>
+                                                <line x1="14" y1="11" x2="14" y2="17">
+                                                </line>
+                                            </svg></span><span class="text-muted">Remove</span></a></div>
+                            </div>
+                            <div class="col-3 col-md-3 col-lg-3">
+                                <div class="input-group input-spinner  ">
+                                    <input type="button" value="-" class="button-minus  btn  btn-sm "
+                                        data-field="quantity">
+                                    <input type="number" step="1" max="10" value="1"
+                                        name="quantity" class="quantity-field form-control-sm form-input   ">
+                                    <input type="button" value="+" class="button-plus btn btn-sm "
+                                        data-field="quantity">
+                                </div>
 
+                            </div>
+                            <div class="col-2 text-lg-end text-start text-md-end col-md-2">
+                                <span class="fw-bold">{{ $list->formatted_price }}</span>
+                            </div>
                         </div>
-                        <div class="col-2 text-lg-end text-start text-md-end col-md-2">
-                            <span class="fw-bold">{{$list->formatted_price}}</span>
-                        </div>
-                    </div>
-                </li>
+                    </li>
                 @endforeach
 
 
                 <!-- list group -->
                 {{-- <li class="list-group-item py-3 ps-0"> --}}
-                    <!-- row -->
-                    {{-- <div class="row align-items-center">
+                <!-- row -->
+                {{-- <div class="row align-items-center">
                         <div class="col-3 col-md-2"> --}}
-                            <!-- img -->
-                            {{-- <img src="images/products/dokumen.jpg" alt="Ecommerce" class="img-fluid">
+                <!-- img -->
+                {{-- <img src="images/products/dokumen.jpg" alt="Ecommerce" class="img-fluid">
                         </div>
                         <div class="col-4 col-md-6 col-lg-5"> --}}
-                            <!-- title -->
-                            {{-- <a href="./pages/shop-single.html" class="text-inherit">
+                <!-- title -->
+                {{-- <a href="./pages/shop-single.html" class="text-inherit">
                                 <h6 class="mb-0">Kertas A4 </h6>
                             </a>
                             <span><small class="text-muted">40 Lembar</small></span> --}}
-                            <!-- text -->
-                            {{-- <div class="mt-2 small lh-1"> <a href="#!"
+                <!-- text -->
+                {{-- <div class="mt-2 small lh-1"> <a href="#!"
                                     class="text-decoration-none text-inherit"> <span class="me-1 align-text-bottom">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1228,11 +1289,11 @@
                                             </line>
                                         </svg></span><span class="text-muted">Remove</span></a></div>
                         </div> --}}
-                        <!-- input group -->
-                        {{-- <div class="col-3 col-md-3 col-lg-3"> --}}
-                            <!-- input -->
-                            <!-- input -->
-                            {{-- <div class="input-group input-spinner  ">
+                <!-- input group -->
+                {{-- <div class="col-3 col-md-3 col-lg-3"> --}}
+                <!-- input -->
+                <!-- input -->
+                {{-- <div class="input-group input-spinner  ">
                                 <input type="button" value="-" class="button-minus  btn  btn-sm "
                                     data-field="quantity">
                                 <input type="number" step="1" max="10" value="1" name="quantity"
@@ -1241,12 +1302,12 @@
                                     data-field="quantity">
                             </div>
                         </div> --}}
-                        <!-- price -->
-                        {{-- <div class="col-2 text-lg-end text-start text-md-end col-md-2">
+                <!-- price -->
+                {{-- <div class="col-2 text-lg-end text-start text-md-end col-md-2">
                             <span class="fw-bold">Rp. 20,000</span> --}}
-                            {{-- <span class="fw-bold text-danger">$20.00</span>
+                {{-- <span class="fw-bold text-danger">$20.00</span>
                                 <div class="text-decoration-line-through text-muted small">$26.00</div> --}}
-                        {{-- </div>
+                {{-- </div>
                     </div>
                 </li> --}}
 
@@ -1296,8 +1357,7 @@
         </div>
     </div>
 </div> --}}
-<div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body p-6">
@@ -1306,15 +1366,16 @@
                         <h5 class="mb-1" id="locationModalLabel">Choose your Location</h5>
                         <p class="mb-0 small">Enter your area.</p>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="my-5">
-                    <input type="search" class="form-control" id="searchInput" placeholder="Search your area">
+                    <input type="search" class="form-control" id="searchLocationInput"
+                        placeholder="Search your area">
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <h6 class="mb-0">Select Location</h6>
-                    <a href="#" class="btn btn-outline-gray-400 text-muted btn-sm" id="clearAllBtn">Clear All</a>
+                    <a href="#" class="btn btn-outline-gray-400 text-muted btn-sm" id="clearAllBtn">Clear
+                        All</a>
                 </div>
                 <div>
                     <div data-simplebar style="height: 300px;">
@@ -1327,77 +1388,59 @@
         </div>
     </div>
 </div>
+
 <script>
-    // Function to fetch areas based on search query with a delay
     function fetchAreasWithDelay(search) {
-        // Add a delay of 500ms
-        setTimeout(function () {
+        setTimeout(function() {
             fetchAreas(search);
-        }, 300);
+        }, 100);
     }
 
-    // Function to fetch areas based on search query
     function fetchAreas(search) {
-        // Make the AJAX request to the Laravel route
         $.ajax({
             url: '/search',
             type: 'GET',
             data: {
-                search: search
+                searchLocation: search
             },
-            success: function (response) {
-                // Clear the previous area list
+            success: function(response) {
                 $('#locationList').empty();
 
-                // Append the new area items to the list
-                $.each(response, function (index, area) {
+                $.each(response, function(index, area) {
                     var listItem = $('<a>').attr('href', '#')
-                        .addClass('list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action')
+                        .addClass(
+                            'list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action'
+                        )
                         .text(area.name)
-                        .on('click', function () {
-                            // Set the clicked area as the value of the search input
-                            $('#searchInput').val(area.name);
-
-                            // Clear the area list
+                        .on('click', function() {
+                            $('#searchLocationInput').val(area.name);
                             $('#locationList').empty();
-
-                            // Dismiss the modal
                             $('#locationModal').modal('hide');
                         });
 
                     $('#locationList').append(listItem);
                 });
             },
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
                 console.log('Error fetching areas:', error);
             }
         });
     }
 
-    $(document).ready(function () {
-        // Event listener for search input
-        $('#searchInput').on('input', function () {
+    $(document).ready(function() {
+        $('#searchLocationInput').on('input', function() {
             var searchQuery = $(this).val();
 
             if (searchQuery.trim() !== '') {
-                // Call fetchAreasWithDelay instead of fetchAreas
                 fetchAreasWithDelay(searchQuery);
             } else {
-                // Clear the area list
                 $('#locationList').empty();
             }
         });
 
-        $('#clearAllBtn').on('click', function () {
-            // Clear the search input
-            $('#searchInput').val('');
-
-            // Clear the area list
+        $('#clearAllBtn').on('click', function() {
+            $('#searchLocationInput').val('');
             $('#locationList').empty();
         });
     });
 </script>
-
-
-
-
