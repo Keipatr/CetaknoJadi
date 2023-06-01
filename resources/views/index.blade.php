@@ -64,7 +64,8 @@
                             <div class="slider-8-columns " id="slider-8-columns">
                                 @foreach ($categories as $category)
                                     <div class="item">
-                                        <a href="{{ url('/categories/'.$category->NAME_CATEGORY .'?id='.Crypt::encryptString($category->ID_CATEGORY)) }}" class="text-decoration-none text-inherit">
+                                        <a href="{{ url('/categories/' . $category->NAME_CATEGORY . '?id=' . Crypt::encryptString($category->ID_CATEGORY)) }}"
+                                            class="text-decoration-none text-inherit">
                                             <div class="card mb-3 card-lift">
                                                 <div class="card-body text-center py-6 text-center">
                                                     <div class="my-5">
@@ -130,29 +131,30 @@
                         $randomStores = array_slice($stores, 0, 3);
                     @endphp
                     @foreach ($randomStores as $store)
-                    <div class="col">
-                        <div class="card p-6 card-product">
-                            <div>
-                                <img src="images/stores-logo/stores-logo-1.svg" alt=""
-                                    class="rounded-circle icon-shape icon-xl">
-                            </div>
-                            <div class="mt-4">
-                                <h2 class="mb-1 h5"><a href="{{url('/stores/'.$store->NAME_SHOP)}}" class="text-inherit">{{$store->NAME_SHOP}}</a></h2>
-                                <div class="small text-muted">
-                                </div>
-                                <div class="py-3">
-                                    <ul class="list-unstyled mb-0 small">
-                                        <li><span class="text-primary">Delivery</span>
-                                        </li>
-                                        <li>Pickup available</li>
-                                    </ul>
-                                </div>
+                        <div class="col">
+                            <div class="card p-6 card-product">
                                 <div>
-                                    <div class="badge text-bg-light border">7.5 km away</div>
+                                    <img src="images/stores-logo/stores-logo-1.svg" alt=""
+                                        class="rounded-circle icon-shape icon-xl">
+                                </div>
+                                <div class="mt-4">
+                                    <h2 class="mb-1 h5"><a href="{{ url('/stores/' . $store->NAME_SHOP) }}"
+                                            class="text-inherit">{{ $store->NAME_SHOP }}</a></h2>
+                                    <div class="small text-muted">
+                                    </div>
+                                    <div class="py-3">
+                                        <ul class="list-unstyled mb-0 small">
+                                            <li><span class="text-primary">Delivery</span>
+                                            </li>
+                                            <li>Pickup available</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <div class="badge text-bg-light border">7.5 km away</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
 
 
@@ -200,7 +202,7 @@
                         shuffle($products);
                         $randomProducts = array_slice($products, 0, 10);
                     @endphp
-                    @foreach ($randomProducts as $product)
+                    {{-- @foreach ($randomProducts as $product)
                         <div class="col">
                             <div class="card card-product">
                                 <div class="card-body">
@@ -264,15 +266,154 @@
                                                     </line>
                                                     <line x1="5" y1="12" x2="19" y2="12">
                                                     </line>
-                                                </svg> Add</a></div>
+                                                </svg> Add To Cart</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach --}}
+
+                    @foreach ($randomProducts as $product)
+                        <div class="col">
+                            <div class="card card-product">
+                                <div class="card-body">
+                                    <div class="text-center position-relative">
+                                        <div class="position-absolute top-0 start-0">
+                                        </div>
+                                        <a
+                                            href="{{ '/products/' . $product->NAME_SHOP . '/' . $product->PRODUCT_NAME . '?id=' . Crypt::encryptString($product->ID_CONTAINER) }}">
+                                            <img src="{{ $product->image ? '/images/all/' . $product->image : 'images/products/product-img-18.jpg' }}"
+                                                alt="Grocery Ecommerce Template"
+                                                class="mb-3 img-fluid rounded fixed-size-image w-1100 h-1000">
+                                        </a>
+                                        <div class="card-product-action">
+                                            <a href="#!" class="btn-action add-to-wishlist" data-bs-toggle="tooltip"
+                                                data-bs-html="true" title="Wishlist"
+                                                data-product-id="{{ $product->ID_CONTAINER }}">
+                                                <i class="bi bi-heart"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="text-small mb-1">
+                                        <a href="#!" class="text-decoration-none text-muted">
+                                            <small>{{ $product->NAME_CATEGORY }}</small>
+                                        </a>
+                                    </div>
+                                    <h2 class="fs-6">
+                                        <a href="{{ '/products/' . $product->NAME_SHOP . '/' . $product->PRODUCT_NAME . '?id=' . Crypt::encryptString($product->ID_CONTAINER) }}"
+                                            class="text-inherit text-decoration-none">{{ $product->PRODUCT_NAME }}</a>
+                                    </h2>
+                                    <div>
+                                        <small class="text-warning">
+                                            @php
+                                                $fullStars = floor($product->rating);
+                                                $halfStar = ceil($product->rating - $fullStars);
+                                                $emptyStars = 5 - $fullStars - $halfStar;
+                                            @endphp
+
+                                            @for ($i = 0; $i < $fullStars; $i++)
+                                                <i class="bi bi-star-fill"></i>
+                                            @endfor
+
+                                            @for ($i = 0; $i < $halfStar; $i++)
+                                                <i class="bi bi-star-half"></i>
+                                            @endfor
+
+                                            @for ($i = 0; $i < $emptyStars; $i++)
+                                                <i class="bi bi-star"></i>
+                                            @endfor
+                                        </small>
+                                        <span
+                                            class="text-muted small">{{ $product->rating != 0 ? ($product->rating != round($product->rating) ? number_format($product->rating, 1) : round($product->rating)) : '0' }}
+                                            ({{ $product->rating_count }})
+                                        </span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mt-3">
+                                        <div>
+                                            <span class="text-dark">{{ $product->formatted_price }}</span>
+                                        </div>
+                                        <div>
+                                            <a href="#!" class="btn btn-primary btn-sm add-to-cart"
+                                                data-product-id="{{ $product->ID_PRODUCT }}"
+                                                data-container-id="{{ $product->ID_CONTAINER }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="feather feather-plus">
+                                                    <line x1="12" y1="5" x2="12" y2="19">
+                                                    </line>
+                                                    <line x1="5" y1="12" x2="19" y2="12">
+                                                    </line>
+                                                </svg> Add To Cart
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     @endforeach
+
+                    <script>
+                        $(document).ready(function() {
+                            $('.add-to-cart').click(function(e) {
+                                e.preventDefault();
+                                var productId = $(this).data('product-id');
+                                var containerId = $(this).data('container-id');
+
+                                $.ajax({
+                                    url: '/add-to-cart',
+                                    type: 'POST',
+                                    data: {
+                                        productId: productId,
+                                        containerId: containerId,
+                                        _token: '{{ csrf_token() }}'
+                                    },
+                                    success: function(response) {
+                                        // Handle success response
+                                        alert('Product added to cart successfully!');
+                                    },
+                                    error: function(xhr) {
+                                        // Handle error response
+                                        alert('Failed to add product to cart. Please try again.');
+                                    }
+                                });
+                            });
+
+                            $('.add-to-wishlist').click(function(e) {
+                                e.preventDefault();
+                                var productId = $(this).data('product-id');
+
+                                $.ajax({
+                                    url: '/add-to-wishlist',
+                                    type: 'POST',
+                                    data: {
+                                        containerId: containerId,
+                                        productId: productId,
+                                        _token: '{{ csrf_token() }}'
+                                    },
+                                    success: function(response) {
+                                        // Handle success response
+                                        alert('Product added to wishlist successfully!');
+                                    },
+                                    error: function(xhr) {
+                                        // Handle error response
+                                        alert('Failed to add product to wishlist. Please try again.');
+                                    }
+                                });
+                            });
+                        });
+                    </script>
+
+
+
+
                 </div>
             </div>
         </section>
+
+
+
+
 
         <section class=" pt-lg-16 pt-8 my-lg-14 my-8">
             <div class="container">

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
@@ -106,5 +108,69 @@ class ProductController extends Controller
     public function allStoreShow()
     {
         return view('store-list');
+    }
+    public function addToCart(Request $request)
+    {
+        if (!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST'])) {
+            return redirect()->route('loginpage');
+        }
+        if (Session::has('USERNAME_CUST') || isset($_COOKIE['USERNAME_CUST'])) {
+            if (Session::has('USERNAME_CUST')) {
+                $username = Session::get('USERNAME_CUST');
+            } else {
+                $username = Cookie::get('USERNAME_CUST');
+            }
+
+            $info = DB::select("
+            select ID_CART
+        where cr.ID_CART= cw.ID_CART
+        and cw.STATUS_DELETE = 0 AND
+             USERNAME_CUST = '$username';");
+        }
+
+
+        // Retrieve the product ID from the request
+        $productId = $request->input('productId');
+
+        // Check if the product already exists in the cart
+        $existingProduct = DB::select("");
+
+        if ($existingProduct) {
+            // If the product exists, update the quantity and subtotal
+            DB::table('cart_products')
+                ->where('id_container', $productId)
+                ->increment('qty', 1, ['subtotal_cart' => DB::raw('qty * price')]);
+        } else {
+            // If the product does not exist, create a new cart product
+            DB::table('cart_products')->insert([
+                'id_container' => $productId,
+                'qty' => 1,
+                'price' => 0, // Set the actual price of the product
+                'subtotal_cart' => DB::raw('qty * price')
+            ]);
+        }
+
+        return response()->json(['success' => true]);
+    }
+
+    public function addToWishlist(Request $request)
+    {
+        // Retrieve the product ID from the request
+        $productId = $request->input('productId');
+
+        // Check if the product already exists in the wishlist
+        $existingProduct = DB::table('wishlist_products')->where('id_container', $productId)->first();
+
+        if ($existingProduct) {
+            return response()->json(['success' => false, 'message' => 'Item has already been added to wishlist.']);
+        } else {
+            // If the product does not exist, create a new wishlist product
+            DB::table('wishlist_products')->insert([
+                'id_container' => $productId,
+                // Set other properties of the wishlist product
+            ]);
+
+            return response()->json(['success' => true]);
+        }
     }
 }
