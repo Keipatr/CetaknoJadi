@@ -36,6 +36,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 Route::get('/search', [SearchController::class, 'search']);
+Route::get('/search-products', [SearchController::class,'searchProducts']);
 
 
 

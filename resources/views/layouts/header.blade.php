@@ -95,7 +95,8 @@
                     </div>
 
                 </div>
-                <div class="col-xxl-6 col-lg-5 d-none d-lg-block mt-lg-4">
+                {{-- JANGAN HAPUS DEFAULT SEARCH FORM --}}
+                {{-- <div class="col-xxl-6 col-lg-5 d-none d-lg-block mt-lg-4">
 
                     <form action="#">
                         <div class="input-group ">
@@ -116,6 +117,87 @@
                         </div>
 
                     </form>
+                </div> --}}
+                <script>
+                    $(document).ready(function () {
+                        // Function to fetch product search results
+                        function fetchProductResults(searchQuery) {
+                            // Make the AJAX request to fetch product search results
+                            $.ajax({
+                                url: '/search-products',
+                                type: 'GET',
+                                data: {
+                                    search: searchQuery
+                                },
+                                success: function (response) {
+                                    // Clear the previous results
+                                    $('#productResultsContainer').empty();
+
+                                    // Display the product results
+                                    if (response.length > 0) {
+                                        $.each(response, function (index, product) {
+                                            var productItem = $('<div>').addClass('product-item')
+                                                .append($('<a>').attr('href', product.url)
+                                                    .append($('<h4>').text(product.name))
+                                                    .append($('<p>').text(product.price))
+                                                );
+
+                                            $('#productResultsContainer').append(productItem);
+                                        });
+                                    } else {
+                                        $('#productResultsContainer').append($('<p>').text('No results found'));
+                                    }
+                                },
+                                error: function (xhr, status, error) {
+                                    console.log('Error fetching product results:', error);
+                                }
+                            });
+                        }
+
+                        // Event listener for product search button
+                        $('#productSearchButton').on('click', function () {
+                            var searchQuery = $('#productSearchInput').val().trim();
+
+                            if (searchQuery !== '') {
+                                fetchProductResults(searchQuery);
+                            } else {
+                                // Clear the product results
+                                $('#productResultsContainer').empty();
+                            }
+                        });
+
+                        // Event listener for product search input
+                        $('#productSearchInput').on('input', function () {
+                            var searchQuery = $(this).val().trim();
+
+                            if (searchQuery !== '') {
+                                fetchProductResults(searchQuery);
+                            } else {
+                                // Clear the product results
+                                $('#productResultsContainer').empty();
+                            }
+                        });
+                    });
+                </script>
+                <div class="col-xxl-6 col-lg-5 d-none d-lg-block mt-lg-4">
+                    <form id="productSearchForm" action="#">
+                        <div class="input-group">
+                            <input id="productSearchInput" class="form-control rounded" type="search"
+                                placeholder="Search for products">
+                            <span class="input-group-append">
+                                <button id="productSearchButton" class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end"
+                                    type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-search">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    </svg>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                    <div id="productResultsContainer" class="mt-3"></div>
                 </div>
                 <div class="col-md-2 col-xxl-3 d-none d-lg-block mt-lg-4">
                     <!-- Button trigger modal -->
@@ -1246,6 +1328,14 @@
     </div>
 </div>
 <script>
+    // Function to fetch areas based on search query with a delay
+    function fetchAreasWithDelay(search) {
+        // Add a delay of 500ms
+        setTimeout(function () {
+            fetchAreas(search);
+        }, 300);
+    }
+
     // Function to fetch areas based on search query
     function fetchAreas(search) {
         // Make the AJAX request to the Laravel route
@@ -1290,19 +1380,21 @@
             var searchQuery = $(this).val();
 
             if (searchQuery.trim() !== '') {
-                fetchAreas(searchQuery);
+                // Call fetchAreasWithDelay instead of fetchAreas
+                fetchAreasWithDelay(searchQuery);
             } else {
                 // Clear the area list
                 $('#locationList').empty();
             }
         });
-        $('#clearAllBtn').on('click', function () {
-        // Clear the search input
-        $('#searchInput').val('');
 
-        // Clear the area list
-        $('#locationList').empty();
-    });
+        $('#clearAllBtn').on('click', function () {
+            // Clear the search input
+            $('#searchInput').val('');
+
+            // Clear the area list
+            $('#locationList').empty();
+        });
     });
 </script>
 
