@@ -38,8 +38,9 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/search', [SearchController::class, 'search']);
 Route::get('/search-products', [SearchController::class,'searchProducts']);
 
-Route::post('/add-to-cart', [ProductController::class, 'addToWishlist']);
-Route::post('/add-to-wishlist', [ProductController::class, 'addToCart']);
+Route::post('/add-to-cart', [ProductController::class, 'addToCart']);
+Route::post('/add-to-wishlist', [ProductController::class, 'addToWishlist']);
+
 
 
 Route::get('/wishlist', [HomeController::class, 'wishlist'])->name('wishlist');

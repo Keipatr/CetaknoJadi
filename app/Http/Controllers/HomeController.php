@@ -43,7 +43,7 @@ class HomeController extends Controller
         }
 
         $products = DB::select("
-        SELECT co.ID_CONTAINER, s.NAME_SHOP, PRODUCT_NAME, NAME_CATEGORY, PRICE_PRODUCT AS price,
+        SELECT co.ID_CONTAINER, s.NAME_SHOP, p.ID_PRODUCT,PRODUCT_NAME, NAME_CATEGORY, PRICE_PRODUCT AS price,
        AVG(RATING_REVIEW) AS rating, image, COUNT(r.ID_REVIEW) AS rating_count
 FROM product p
 JOIN container co ON p.id_container = co.ID_CONTAINER
@@ -54,7 +54,7 @@ WHERE co.STATUS_DELETE = 0
   AND co.STATUS = 1
   AND s.STATUS_SHOP = 'Y'
   and CITY_SHOP like '%%'
-GROUP BY s.NAME_SHOP, p.product_name, c.name_category, p.PRICE_PRODUCT, image, co.ID_CONTAINER;
+GROUP BY p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category, p.PRICE_PRODUCT, image, co.ID_CONTAINER;
         ");
         $categories = DB::select("select ID_CATEGORY,NAME_CATEGORY from category where status_delete = 0;");
         $stores = DB::select("select NAME_SHOP, TELP_SHOP, ADDRESS_SHOP,POSTAL_SHOP,CITY_SHOP,STATUS_SHOP

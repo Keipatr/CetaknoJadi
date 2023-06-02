@@ -323,8 +323,8 @@
                                                 <i class="bi bi-star"></i>
                                             @endfor
                                         </small>
-                                        <span
-                                            class="text-muted small">{{ $product->rating != 0 ? ($product->rating != round($product->rating) ? number_format($product->rating, 1) : round($product->rating)) : '0' }}
+                                        <span class="text-muted small">
+                                            {{ $product->rating != 0 ? ($product->rating != round($product->rating) ? number_format($product->rating, 1) : round($product->rating)) : '0' }}
                                             ({{ $product->rating_count }})
                                         </span>
                                     </div>
@@ -353,6 +353,7 @@
                         </div>
                     @endforeach
 
+
                     <script>
                         $(document).ready(function() {
                             $('.add-to-cart').click(function(e) {
@@ -369,19 +370,30 @@
                                         _token: '{{ csrf_token() }}'
                                     },
                                     success: function(response) {
-                                        // Handle success response
-                                        alert('Product added to cart successfully!');
+                                        if (response.login) {
+                                            alert('Please login to add a product to the cart.');
+                                        } else if (response.success) {
+                                            alert('Product added to cart successfully!');
+                                        } else {
+                                            alert('Failed to add the product to the cart. Please try again.');
+                                        }
                                     },
                                     error: function(xhr) {
-                                        // Handle error response
-                                        alert('Failed to add product to cart. Please try again.');
+                                        if (xhr.responseJSON && xhr.responseJSON.login) {
+                                            alert('Please login to add a product to the cart.');
+                                        } else {
+                                            alert('Failed to add the product to the cart. Please try again.');
+                                        }
                                     }
                                 });
                             });
 
+
+
                             $('.add-to-wishlist').click(function(e) {
                                 e.preventDefault();
                                 var productId = $(this).data('product-id');
+                                var containerId = $(this).data('container-id');
 
                                 $.ajax({
                                     url: '/add-to-wishlist',
