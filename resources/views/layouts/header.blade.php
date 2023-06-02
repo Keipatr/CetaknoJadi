@@ -1,3 +1,14 @@
+<script>
+    function updateCartQuantity(quantity) {
+        $('#cartQtySmall').text(quantity);
+        $('#cartQtyLarge').text(quantity);
+    }
+
+    function updateWishlistQuantity(quantity) {
+        $('#wishlistQty').text(quantity);
+    }
+</script>
+
 <div class="border-bottom ">
 
     <div class="bg-light py-1">
@@ -39,8 +50,11 @@
                                 <div class="list-inline-item">
 
                                     @if (Session::has('ID_CUSTOMER') || isset($_COOKIE['ID_CUSTOMER']))
-                                        <a class="text-muted position-relative " data-bs-toggle="offcanvas"
-                                            data-bs-target="#offcanvasRight" href="#offcanvasExample" role="button"
+                                        <a class="text-muted position-relative "
+                                         {{-- data-bs-toggle="offcanvas"
+                                            data-bs-target="#offcanvasRight" --}}
+                                            href="{{url('cart')}}"
+                                            role="button"
                                             aria-controls="offcanvasRight">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -52,8 +66,8 @@
                                                 <path d="M16 10a4 4 0 0 1-8 0"></path>
                                             </svg>
                                             <span
-                                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success"><span
-                                                    id="cartQty">{{ $data[0]->QTY_CART }}</span>
+                                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                                                <span id="cartQtySmall">{{ $data[0]->QTY_CART }}</span>
                                                 <span class="visually-hidden">unread messages</span>
                                             </span>
                                         </a>
@@ -70,8 +84,8 @@
                                                 <path d="M16 10a4 4 0 0 1-8 0"></path>
                                             </svg>
                                             <span
-                                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success"><span
-                                                    id="cartQty">0</span>
+                                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                                                <span>0</span>
                                                 <span class="visually-hidden">unread messages</span>
                                             </span>
                                         </a>
@@ -122,8 +136,8 @@
                 <div class="col-xxl-6 col-lg-5 d-none d-lg-block mt-lg-4">
                     <form id="searchForm">
                         <div class="search-bar">
-                            <input class="form-control rounded" type="search" placeholder="Search for products" id="searchProduct"
-                                autocomplete="off">
+                            <input class="form-control rounded" type="search" placeholder="Search for products"
+                                id="searchProduct" autocomplete="off">
                             <div class="search-results" id="searchResults">
                                 <!-- Search results will be dynamically added here -->
                             </div>
@@ -247,18 +261,6 @@
                 </script>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
                 <div class="col-md-2 col-xxl-3 d-none d-lg-block mt-lg-4">
                     <!-- Button trigger modal -->
                     <button type="button" class="btn  btn-outline-gray-400 text-muted" data-bs-toggle="modal"
@@ -283,9 +285,8 @@
                                 </svg>
                                 <span
                                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
-                                    <span id="wishlistQty"></span>
                                     @if (Session::has('ID_CUSTOMER') || isset($_COOKIE['ID_CUSTOMER']))
-                                        <span id="cartQty">{{ $data[0]->QTY_WISHLIST }}</span>
+                                        <span id="wishlistQty">{{ $data[0]->QTY_WISHLIST }}</span>
                                     @else
                                         0
                                     @endif
@@ -309,8 +310,10 @@
                         <div class="list-inline-item">
 
                             @if (Session::has('ID_CUSTOMER') || isset($_COOKIE['ID_CUSTOMER']))
-                                <a class="text-muted position-relative " data-bs-toggle="offcanvas"
-                                    data-bs-target="#offcanvasRight" href="#offcanvasExample" role="button"
+                                <a class="text-muted position-relative "
+                                {{-- data-bs-toggle="offcanvas" --}}
+                                    {{-- data-bs-target="#offcanvasRight"  --}}
+                                    href="{{url('cart')}}" role="button"
                                     aria-controls="offcanvasRight">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -322,8 +325,8 @@
                                         <path d="M16 10a4 4 0 0 1-8 0"></path>
                                     </svg>
                                     <span
-                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success"><span
-                                            id="cartQty">{{ $data[0]->QTY_CART }}</span>
+                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                                        <span id="cartQtyLarge">{{ $data[0]->QTY_CART }}</span>
                                         <span class="visually-hidden">unread messages</span>
                                     </span>
                                 </a>
@@ -922,274 +925,6 @@
 
     </nav>
 </div>
-<!-- Modal -->
-<!-- Start: Login -->
-<div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header" style="border-bottom-color: var(--bs-modal-bg);padding: 16px;">
-                <h2 style="margin: 0px;margin-bottom: 0px;margin-left: 6px;padding: 0px;margin-right: 0px;">Login as
-                </h2><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <div>
-                    <ul class="nav nav-tabs" role="tablist" style="border-width: 1px;">
-                        <li class="nav-item text-center" role="presentation"
-                            style="width: 120px;background: #e6ebf1;">
-                            <a class="nav-link " role="tab" data-bs-toggle="tab" href="#tab-1"
-                                style="color: var(--bs-nav-tabs-link-active-color);background: #f4f9f9;border-bottom-color: #f4f9f9;">Customer</a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-2"
-                                style="color: var(--bs-nav-tabs-link-active-color);width: 120px;background: #fef9f9;border-bottom-color: #fef9f9;">Vendor</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        {{-- @if (Session::has('id_user')) --}}
-                        @if (Auth::check() || Cookie::has('remember_web_xxx'))
-                            <div class="tab-pane" role="tabpanel" id="tab-1"
-                                style="border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;">
-                                <!-- Content for logged-in users -->
-                                <p>Welcome,
-                                    <strong>{{ Auth::user()->NAME_CUST }}</strong>
-                                </p>
-                                <form method="post" action="{{ route('logout') }}">
-                                    @csrf
-                                    <div class="col-12 col-md-6 d-flex justify-content-center align-items-center mb-3">
-                                        <button class="btn btn-primary btn-block btn-lg" type="submit"
-                                            style="margin-top: 6px;margin-bottom: 12px;">Logout</button>
-                                    </div>
-                                </form>
-                            </div>
-                        @else
-                            <div class="tab-pane" role="tabpanel" id="tab-1"
-                                style="border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;">
-                                <div class="d-xl-flex justify-content-xl-center" id="myModal"
-                                    style="margin: 0px;padding-bottom: 318px;border-width: 0px;background: #f4f9f9;height: 303px;">
-                                    <div class="d-xl-flex justify-content-xl-center modal-dialog modal-login"
-                                        style="width: 400px;margin: 18px 33px;">
-                                        <div class="modal-content"
-                                            style="background: #f4f9f9;padding: 0px;height: 200px;width: 400px;padding-bottom: 0px;">
-                                            <div class="modal-body"
-                                                style="padding: 16px;padding-bottom: 0px;background: #f4f9f9;">
-                                                @if (session('fail'))
-                                                    <div class="alert alert-danger">
-                                                        {{ session('fail') }}
-                                                    </div>
-                                                @endif
-
-                                                <form id="signin-form" action="{{ route('signin-customer') }}"
-                                                    method="post">
-                                                    @csrf
-                                                    <div class="form-group"><i class="fa fa-star fa-user"></i><input
-                                                            class="form-control" type="text"
-                                                            placeholder="Username" required="required"
-                                                            style="margin: 0px;margin-bottom: 8px;"
-                                                            name="USERNAME_CUST" value="{{ old('username') }}"></div>
-                                                    <span class="text-danger">
-                                                        @error('username_cust')
-                                                            {{ $message }}
-                                                        @enderror
-                                                    </span>
-                                                    <div class="form-group"><i class="fa fa-star fa-lock"></i><input
-                                                            class="form-control" type="password"
-                                                            placeholder="Password" required="required"
-                                                            style="margin-bottom: 6px;margin-top: 8px;"
-                                                            name="PASSWORD_CUST"></div>
-                                                    <span class="text-danger">
-                                                        @error('password_cust')
-                                                            {{ $message }}
-                                                        @enderror
-                                                    </span>
-                                                    <div class="d-xl-flex justify-content-xl-start form-group"
-                                                        style="margin-right: 0px;margin-left: 20px;"><button
-                                                            class="btn btn-primary btn-block btn-lg" type="submit"
-                                                            value="Login"
-                                                            style="margin-top: 6px;margin-bottom: 12px;;">Login</button>
-                                                    </div>
-                                                    <div class="text-start"
-                                                        style="padding-top: 0px; margin-bottom: 0px"><input
-                                                            type="checkbox" name="remember_me">
-                                                        <p class="d-inline-block" style="margin-left: 6px;">Remember
-                                                            me Customer
-                                                        </p>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="d-xl-flex justify-content-xl-center modal-footer"
-                                                style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -20px;background: rgb(222,226,227);">
-                                                <a href="{{ url('forgot') }}"
-                                                    style="margin: 0px;color: rgb(153, 153, 153);">Forgot Password?</a>
-                                            </div>
-                                            <div class="d-xl-flex justify-content-xl-center modal-footer"
-                                                style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -12px;background: rgb(222,226,227);margin-top: 30px;">
-                                                <a style="margin: 0px;color: rgb(153,153,153);" href="index.html"
-                                                    data-bs-target="#modal-2" data-bs-toggle="modal">Dont have any
-                                                    acount? Sign up</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane active" role="tabpanel" id="tab-2"
-                                style="background: #efecec;">
-                                <div class="d-xl-flex justify-content-xl-center" id="myModal-1"
-                                    style="background: #fef9f9;padding-bottom: 28px;">
-                                    <div class="d-xl-flex justify-content-xl-center modal-dialog modal-login"
-                                        style="width: 400px;margin: 18px 33px;">
-                                        <div class="modal-content" style="padding: 0px;background: #fef9f9;">
-                                            <div class="modal-body"
-                                                style="padding: 16px;padding-bottom: 0px;background: #fef9f9;">
-                                                <form action="{{ route('signin-customer') }}" method="post">
-                                                    <div class="form-group"><i
-                                                            class="fa fa-envelope-square fa-user"></i><input
-                                                            class="form-control" type="text" placeholder="Email"
-                                                            required="required"
-                                                            style="margin: 0px;margin-bottom: 8px;" name="EMAIL_SHOP">
-                                                    </div>
-                                                    <div class="form-group"><i class="fa fa-lock fa-lock"></i><input
-                                                            class="form-control" type="password"
-                                                            placeholder="Password" required="required"
-                                                            style="margin-bottom: 6px;margin-top: 8px;"></div>
-                                                    <div class="d-xl-flex justify-content-xl-start form-group"
-                                                        style="margin-right: 0px;margin-left: 20px;"><button
-                                                            class="btn btn-primary btn-block btn-lg" type="submit"
-                                                            value="Login"
-                                                            style="margin-top: 6px;margin-bottom: 12px;">Login</button>
-                                                    </div>
-                                                    <div class="text-start"
-                                                        style="background: #fef9f9;width: 368px;margin-left: 16px;">
-                                                        <input type="checkbox" name="Remember me">
-                                                        <p class="d-inline-block" style="margin-left: 6px;">Remember
-                                                            me Vendor</p>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="d-xl-flex justify-content-xl-center modal-footer"
-                                                style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -20px;background: rgb(222,226,227);">
-                                                <a href="{{ url('forgot') }}"
-                                                    style="margin: 0px;color: rgb(153, 153, 153);">Forgot Password?</a>
-                                            </div>
-                                            <div class="d-xl-flex justify-content-xl-center modal-footer"
-                                                style="padding: 0px;width: 370px;margin-right: -20px;margin-left: 15px;margin-bottom: -20px;background: rgb(222,226,227);margin-top: 30px;">
-                                                <a style="margin: 0px;color: rgb(153,153,153);" href="index.html"
-                                                    data-bs-target="#modal-2" data-bs-toggle="modal">Dont have any
-                                                    acount? Sign up</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End: Login -->
-<!-- Start: Regis -->
-<div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header" style="border-bottom-width: 0px;">
-                <h2 class="modal-title">Register as</h2><button class="btn-close" type="button" aria-label="Close"
-                    data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <div style="margin-bottom: 0px;margin-top: 0px;">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item" role="presentation"><a class="nav-link" role="tab"
-                                data-bs-toggle="tab" href="#tab-3"
-                                style="color: var(--bs-nav-tabs-link-active-color);background: #f4f9f9;border-bottom-color: #f4f9f9;">Customer</a>
-                        </li>
-                        <!-- <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-4" style="color: var(--bs-nav-tabs-link-active-color);background: #fef9f9;border-bottom-color: #fef9f9;">Vendor</a> -->
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane" role="tabpanel" id="tab-3">
-                            <div id="myModal-2" style="background: #f4f9f9;margin-top: -18px;">
-                                <div class="modal-dialog modal-login"
-                                    style="width: 400px;margin: 18px 33px;height: AUTO;background: #f4f9f9;">
-                                    <div class="modal-content" style="padding: 0px;width: 100%;background: #f4f9f9;">
-                                        <div class="modal-body"
-                                            style="width: AUTO;height: AUTO;padding: 16px;background: #f4f9f9;padding-left: 16px;padding-bottom: 0px;">
-                                            <form action="" method="post">
-                                                <div class="form-group"><i class="fa fa-star fa-user"></i><input
-                                                        class="form-control" type="text" placeholder="Full Name"
-                                                        required="required" style="margin-bottom: 8px;"
-                                                        name="NAME_CUST"></div>
-                                                <div class="form-group"><i class="fa fa-star fa-user"></i><input
-                                                        class="form-control" type="text" placeholder="Username"
-                                                        required="required" style="margin-bottom: 8px;"
-                                                        name="USERNAME_CUST"></div>
-                                                <div class="form-group"><i
-                                                        class="fa fa-envelope-square fa-user"></i><input
-                                                        class="form-control" type="text" placeholder="Email"
-                                                        required="required" style="margin-bottom: 8px;"
-                                                        name="EMAIL_CUST"></div>
-                                                <div class="form-group"><i
-                                                        class="fa fa-phone-square fa-user"></i><input
-                                                        class="form-control" type="text" placeholder="No Telp"
-                                                        required="required" style="margin-bottom: 8px;"
-                                                        name="TELP_CUST"></div>
-                                                <div class="form-group"><i class="fa fa-home fa-user"></i><input
-                                                        class="form-control" type="text" placeholder="Kota"
-                                                        required="required" style="margin-bottom: 8px;"
-                                                        name="CITY_CUST"></div>
-                                                <div class="form-group"><i class="fa fa-home fa-user"></i><input
-                                                        class="form-control" type="text" placeholder="Alamat"
-                                                        required="required" style="margin-bottom: 8px;"
-                                                        name="ADDRESS_CUST"></div>
-                                                <div class="form-group"><i class="fa fa-home fa-user"></i><input
-                                                        class="form-control" type="text" placeholder="Postal Code"
-                                                        required="required" style="margin-bottom: 8px;"
-                                                        name="POSTAL_CUST"></div>
-                                                <div class="form-group"><i class="fa fa-star fa-user"></i></div>
-                                                <div class="form-group"><i class="fa fa-star fa-user"></i></div>
-                                                <div class="form-group"><i class="fa fa-star fa-lock"></i><input
-                                                        class="form-control" type="password" placeholder="Password"
-                                                        required="required" style="margin-bottom: 8px;"
-                                                        name="PASSWORD_CUST"></div>
-                                                <div class="form-group" style="margin-left: 20px;"><button
-                                                        class="btn btn-primary btn-block btn-lg" type="submit"
-                                                        value="Login"
-                                                        style="margin-bottom: 12px;margin-top: 6px;">Register</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- <div class="tab-pane active" role="tabpanel" id="tab-4">
-                            <div id="myModal-3" style="background: #fef9f9;margin-top: -18px;height: 440px;">
-                                <div class="d-xl-flex justify-content-xl-center modal-dialog modal-login" style="width: 400px;margin: 18px 33px;">
-                                    <div class="modal-content" style="padding: 0px;background: #fef9f9;">
-                                        <div class="modal-body" style="padding: 16px;padding-bottom: 0px;background: #fef9f9;">
-                                            <form action="confirmation" method="post">
-                                                <div class="form-group"><i class="fa fa-building-o fa-user"></i><input class="form-control" type="text" placeholder="Nama Toko" required="required" style="margin: 0px;margin-bottom: 8px;" name="NAME_SHOP"></div>
-                                                <div class="form-group"><i class="fa fa-envelope-square fa-user"></i><input class="form-control" type="text" placeholder="Email" required="required" style="margin: 0px;margin-bottom: 8px;" name="EMAIL_SHOP"></div>
-                                                <div class="form-group"><i class="fa fa-phone-square fa-user"></i><input class="form-control" type="text" placeholder="No Telp" required="required" style="margin: 0px;margin-bottom: 8px;" name="TELP_SHOP"></div>
-                                                <div class="form-group"><i class="fa fa-building-o fa-user"></i><input class="form-control" type="text" placeholder="Kota" required="required" style="margin: 0px;margin-bottom: 8px;" name="CITY_SHOP"></div>
-                                                <div class="form-group"><i class="fa fa-building-o fa-user"></i><input class="form-control" type="text" placeholder="Alamat" required="required" style="margin: 0px;margin-bottom: 8px;" name="ADDRESS_SHOP"></div>
-                                                <div class="form-group"><i class="fa fa-building-o fa-user"></i><input class="form-control" type="text" placeholder="Postal Code" required="required" style="margin: 0px;margin-bottom: 8px;" name="POSTAL_SHOP"></div>
-                                                <div class="form-group"><i class="fa fa-star fa-lock"></i><input class="form-control" type="password" placeholder="Password" required="required" style="margin-bottom: 6px;margin-top: 8px;"></div>
-                                                <div class="d-xl-flex justify-content-xl-start form-group" style="margin-right: 0px;margin-left: 20px;"><button class="btn btn-primary btn-block btn-lg" type="submit" value="Login" style="margin-top: 6px;margin-bottom: 12px;">Register</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div><!-- End: Regis -->
 
 <!-- Shop Cart -->
 
@@ -1197,25 +932,18 @@
     <div class="offcanvas-header border-bottom">
         <div class="text-start">
             <h5 id="offcanvasRightLabel" class="mb-0 fs-4">Shop Cart</h5>
-            {{-- <small>Location in 382480</small> --}}
         </div>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
 
         <div class="">
-            <!-- alert -->
-            {{-- <div class="alert alert-danger p-2" role="alert">
-                    You’ve got FREE delivery. Start <a href="#!" class="alert-link">checkout now!</a>
-                </div> --}}
             <ul class="list-group list-group-flush">
-
                 @foreach ($cart as $list)
                     <li class="list-group-item py-3 ps-0 border-top">
                         <div class="row align-items-center">
                             <div class="col-3 col-md-2">
-                                <img src="{{ asset('images/products/Banner.jpg') }}" alt="Ecommerce"
-                                    class="img-fluid">
+                                <img src="{{ '/images/all/' . $list->image }}" alt="Ecommerce" class="img-fluid">
                             </div>
                             <div class="col-4 col-md-6 col-lg-5">
                                 <a href="./pages/shop-single.html" class="text-inherit">
@@ -1256,68 +984,9 @@
                         </div>
                     </li>
                 @endforeach
-
-
-                <!-- list group -->
-                {{-- <li class="list-group-item py-3 ps-0"> --}}
-                <!-- row -->
-                {{-- <div class="row align-items-center">
-                        <div class="col-3 col-md-2"> --}}
-                <!-- img -->
-                {{-- <img src="images/products/dokumen.jpg" alt="Ecommerce" class="img-fluid">
-                        </div>
-                        <div class="col-4 col-md-6 col-lg-5"> --}}
-                <!-- title -->
-                {{-- <a href="./pages/shop-single.html" class="text-inherit">
-                                <h6 class="mb-0">Kertas A4 </h6>
-                            </a>
-                            <span><small class="text-muted">40 Lembar</small></span> --}}
-                <!-- text -->
-                {{-- <div class="mt-2 small lh-1"> <a href="#!"
-                                    class="text-decoration-none text-inherit"> <span class="me-1 align-text-bottom">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-trash-2 text-success">
-                                            <polyline points="3 6 5 6 21 6"></polyline>
-                                            <path
-                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                            </path>
-                                            <line x1="10" y1="11" x2="10" y2="17">
-                                            </line>
-                                            <line x1="14" y1="11" x2="14" y2="17">
-                                            </line>
-                                        </svg></span><span class="text-muted">Remove</span></a></div>
-                        </div> --}}
-                <!-- input group -->
-                {{-- <div class="col-3 col-md-3 col-lg-3"> --}}
-                <!-- input -->
-                <!-- input -->
-                {{-- <div class="input-group input-spinner  ">
-                                <input type="button" value="-" class="button-minus  btn  btn-sm "
-                                    data-field="quantity">
-                                <input type="number" step="1" max="10" value="1" name="quantity"
-                                    class="quantity-field form-control-sm form-input   ">
-                                <input type="button" value="+" class="button-plus btn btn-sm "
-                                    data-field="quantity">
-                            </div>
-                        </div> --}}
-                <!-- price -->
-                {{-- <div class="col-2 text-lg-end text-start text-md-end col-md-2">
-                            <span class="fw-bold">Rp. 20,000</span> --}}
-                {{-- <span class="fw-bold text-danger">$20.00</span>
-                                <div class="text-decoration-line-through text-muted small">$26.00</div> --}}
-                {{-- </div>
-                    </div>
-                </li> --}}
-
-
-
             </ul>
-            <!-- btn -->
             <div class="d-flex justify-content-between mt-4">
                 <a href="{{ url('cart') }}" class="btn btn-primary">Go To Cart</a>
-                {{-- Continue Shopping --}}
                 <a href="" data-bs-dismiss="offcanvas" class="btn btn-dark">Continue Shopping</a>
             </div>
 

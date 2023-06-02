@@ -20,11 +20,8 @@ class HomeController extends Controller
             if (Session::has('USERNAME_CUST')) {
                 $username = Session::get('USERNAME_CUST');
             } else {
-                // $username = $_COOKIE['USERNAME_CUST'];
                 $username = Cookie::get('USERNAME_CUST');
-                // dd($username);
             }
-
             $data = DB::select("
             SELECT c.NAME_CUST, QTY_WISHLIST,  QTY_CART
             FROM customer c, wishlist w, cart ca
@@ -32,7 +29,8 @@ class HomeController extends Controller
             AND ca.ID_CART= c.ID_CART AND
              USERNAME_CUST = '$username';");
             $cart = DB::select("
-            select PRODUCT_NAME, NAME_CATEGORY,PRICE_PRODUCT as price FROM product p, container c, cart cr,category ca, customer cu, cart_product cw
+            select ca.ID_CATEGORY,PRODUCT_NAME, NAME_CATEGORY,PRICE_PRODUCT as price
+            FROM product p, container c, cart cr,category ca, customer cu, cart_product cw
         where p.ID_CONTAINER = c.ID_CONTAINER
         and cr.ID_CART = cu.ID_CART
         and ca.ID_CATEGORY = c.ID_CATEGORY
@@ -43,7 +41,7 @@ class HomeController extends Controller
         }
 
         $products = DB::select("
-        SELECT co.ID_CONTAINER, s.NAME_SHOP, p.ID_PRODUCT,PRODUCT_NAME, NAME_CATEGORY, PRICE_PRODUCT AS price,
+        SELECT c.ID_CATEGORY,co.ID_CONTAINER, s.NAME_SHOP, p.ID_PRODUCT,PRODUCT_NAME, NAME_CATEGORY, PRICE_PRODUCT AS price,
        AVG(RATING_REVIEW) AS rating, image, COUNT(r.ID_REVIEW) AS rating_count
 FROM product p
 JOIN container co ON p.id_container = co.ID_CONTAINER
@@ -52,9 +50,10 @@ JOIN shop s ON s.ID_SHOP = co.ID_SHOP
 LEFT JOIN review r ON r.ID_CONTAINER = co.ID_CONTAINER
 WHERE co.STATUS_DELETE = 0
   AND co.STATUS = 1
+  and p.ID_PRODUCT = 1
   AND s.STATUS_SHOP = 'Y'
   and CITY_SHOP like '%%'
-GROUP BY p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category, p.PRICE_PRODUCT, image, co.ID_CONTAINER;
+GROUP BY c.ID_CATEGORY,p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category, p.PRICE_PRODUCT, image, co.ID_CONTAINER;
         ");
         $categories = DB::select("select ID_CATEGORY,NAME_CATEGORY from category where status_delete = 0;");
         $stores = DB::select("select NAME_SHOP, TELP_SHOP, ADDRESS_SHOP,POSTAL_SHOP,CITY_SHOP,STATUS_SHOP
@@ -71,28 +70,6 @@ GROUP BY p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category, p.PRICE_PROD
         }
 
         return view('index', compact('products', 'categories', 'data', 'stores', 'cart'));
-    }
-    public function fetchQuantities()
-    {
-        $userId = Auth::id();
-
-        $quantities = DB::select("SELECT w.QTY_WISHLIST, c.QTY_CART
-            FROM customer cu
-            LEFT JOIN wishlist w ON cu.ID_WISHLIST = w.ID_WISHLIST
-            LEFT JOIN cart c ON cu.ID_CART = c.ID_CART
-            WHERE cu.ID_CUSTOMER = '$userId'");
-        // dd($quantities);
-        if ($quantities) {
-            $wishlistQty = $quantities[0]->QTY_WISHLIST;
-            $cartQty = $quantities[0]->QTY_CART;
-
-            return response()->json([
-                'wishlistQty' => $wishlistQty,
-                'cartQty' => $cartQty,
-            ]);
-        } else {
-            return response('Quantities not found', 404);
-        }
     }
 
     public function loginpage()
@@ -164,14 +141,16 @@ GROUP BY p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category, p.PRICE_PROD
             }
 
             $wishlist = DB::select("
-            select PRODUCT_NAME, NAME_CATEGORY,PRICE_PRODUCT as price FROM product p, container c, wishlist w,category ca, customer cu, product_wishlist pw
+            select c.ID_CONTAINER,p.ID_PRODUCT, image,PRODUCT_NAME, NAME_CATEGORY,PRICE_PRODUCT as price, c.STATUS as container_status, p.STATUS as product_status
+            FROM product p, container c, wishlist w,category ca, customer cu, product_wishlist pw
         where p.ID_CONTAINER = c.ID_CONTAINER
         and w.ID_WISHLIST = cu.ID_WISHLIST
         and ca.ID_CATEGORY = c.ID_CATEGORY
         and w.ID_WISHLIST = pw.ID_WISHLIST
         and pw.ID_CONTAINER = c.ID_CONTAINER
         and pw.STATUS_DELETE = 0 AND
-             USERNAME_CUST = '$username';");
+             USERNAME_CUST = '$username';
+             ");
             foreach ($wishlist as $list) {
                 $list->formatted_price = 'Rp ' . number_format($list->price, 0, ',', '.');
             }

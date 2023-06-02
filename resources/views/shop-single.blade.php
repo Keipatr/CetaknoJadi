@@ -13,7 +13,9 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb mb-0">
                                 <li class="breadcrumb-item"><a href="{{ url('') }}">Home</a></li>
-                                <li class="breadcrumb-item"><a href="{{ url('products') }}">Spanduk & Banner</a></li>
+                                <li class="breadcrumb-item"><a
+                                        href="{{ url('/categories/' . $products[0]->NAME_CATEGORY . '?id=' . Crypt::encryptString($products[0]->ID_CATEGORY)) }}">{{ $products[0]->NAME_CATEGORY }}</a>
+                                </li>
 
                                 <li class="breadcrumb-item active" aria-current="page">{{ $products[0]->PRODUCT_NAME }}</li>
                             </ol>
@@ -29,69 +31,73 @@
                     <div class="col-md-6">
                         <!-- img slide -->
                         <div class="product" id="product">
-                            <div class="zoom"
-                            {{-- onmousemove="zoom(event)" --}}
-                                style="background-image: url({{asset('images/products/banner.jpg')}})">
-                                <img src="{{asset('images/products/banner.jpg')}}" alt="">
+                            @foreach ($products as $item)
+                                <div>
+                                    {{-- <div class="zoom" onmousemove="zoom(event)"
+                                    style="background-image: url({{'/images/all/'.$item->image}})"> --}}
+                                    <img src="{{ '/images/all/' . $item->image }}" alt="">
+                                    {{-- </div> --}}
+                                </div>
+                            @endforeach
+                            {{-- <div class="zoom" onmousemove="zoom(event)"
+                                style="background-image: url({{ asset('images/products/banner.jpg') }})">
+                                <img src="{{ asset('images/products/banner.jpg') }}" alt="">
                             </div>
                             <div>
-                                <div class="zoom"
-                                {{-- onmousemove="zoom(event)" --}}
+                                <div class="zoom" onmousemove="zoom(event)"
                                     style="background-image: url(/images/products/banner.jpg)">
-                                    <!-- img -->
-                                    <img src="{{asset('images/products/banner.jpg')}}" alt="">
+                                    <img src="{{ asset('images/products/banner.jpg') }}" alt="">
                                 </div>
                             </div>
                             <div>
-                                <div class="zoom"
-                                {{-- onmousemove="zoom(event)" --}}
+                                <div class="zoom" onmousemove="zoom(event)"
                                     style="background-image: url(/images/products/banner.jpg)">
-                                    <!-- img -->
-                                    <img src="{{asset('images/products/banner.jpg')}}" alt="">
+                                    <img src="{{ asset('images/products/banner.jpg') }}" alt="">
                                 </div>
-                            </div>
-                            <div>
-                                <div class="zoom"
-                                {{-- onmousemove="zoom(event)" --}}
-                                    style="background-image: url(/images/products/banner.jpg)">
-                                    <!-- img -->
-                                    <img src="{{asset('images/products/banner.jpg')}}" alt="">
-                                </div>
-                            </div>
+                            </div> --}}
+
                         </div>
                         <!-- product tools -->
                         <div class="product-tools">
                             <div class="thumbnails row g-3" id="productThumbnails">
-                                <div class="col-3">
+                                @foreach ($products as $item)
+                                    <div class="col-3">
+                                        <div class="thumbnails-img">
+                                            <img src="{{ '/images/all/' . $item->image }}" alt="">
+                                        </div>
+                                    </div>
+                                @endforeach
+                                {{-- <div class="col-3">
                                     <div class="thumbnails-img">
                                         <!-- img -->
-                                        <img src="{{asset('images/products/banner.jpg')}}" alt="">
+                                        <img src="{{ asset('images/products/banner.jpg') }}" alt="">
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="thumbnails-img">
                                         <!-- img -->
-                                        <img src="{{asset('images/products/banner.jpg')}}" alt="">
+                                        <img src="{{ asset('images/products/banner.jpg') }}" alt="">
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="thumbnails-img">
                                         <!-- img -->
-                                        <img src="{{asset('images/products/banner.jpg')}}" alt="">
+                                        <img src="{{ asset('images/products/banner.jpg') }}" alt="">
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="thumbnails-img">
                                         <!-- img -->
-                                        <img src="{{asset('images/products/banner.jpg')}}" alt="">
+                                        <img src="{{ asset('images/products/banner.jpg') }}" alt="">
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="ps-lg-10 mt-6 mt-md-0">
-                            <a href="#!" class="mb-4 d-block">Spanduk & Banner</a>
+                            <a href="{{ url('/categories/' . $products[0]->NAME_CATEGORY . '?id=' . Crypt::encryptString($products[0]->ID_CATEGORY)) }}"
+                                class="mb-4 d-block">{{ $products[0]->NAME_CATEGORY }}</a>
                             <h1 class="mb-1">{{ $products[0]->PRODUCT_NAME }} </h1>
                             <div class="mb-4">
                                 <small class="text-warning">
@@ -112,16 +118,24 @@
                                     @for ($i = 0; $i < $emptyStars; $i++)
                                         <i class="bi bi-star"></i>
                                     @endfor
-                                </small><a href="#" class="ms-2">({{$products[0]->rating_count}} Reviews)</a>
+                                </small><a href="#" class="ms-2">({{ $products[0]->rating_count }} Reviews)</a>
                             </div>
                             <div class="fs-4">
-                                <span class="fw-bold text-dark">{{$products[0]->formatted_price}}</span>
+                                <span class="fw-bold text-dark">{{ $products[0]->formatted_price }}</span>
                             </div>
                             <hr class="my-6">
                             <div class="mb-5">
-                                <button type="button" class="btn btn-outline-secondary">Kecil</button>
-                                <button type="button" class="btn btn-outline-secondary">Sedang</button>
-                                <button type="button" class="btn btn-outline-secondary">Besar</button>
+                                @foreach ($products as $index => $list)
+                                    @if (!empty($list->JENIS))
+                                        <button type="button"
+                                            class="btn btn-outline-secondary{{ $index === 0 && $list->JENIS ? ' active' : '' }}">
+                                            {{ $list->JENIS }}
+                                        </button>
+                                    @endif
+                                @endforeach
+
+                                {{-- <button type="button" class="btn btn-outline-secondary">Sedang</button>
+                                <button type="button" class="btn btn-outline-secondary">Besar</button> --}}
                             </div>
                             <div>
                                 <div class="input-group input-spinner  ">
@@ -136,17 +150,11 @@
                             <div class="mt-3 row justify-content-start g-2 align-items-center">
 
                                 <div class="col-xxl-4 col-lg-4 col-md-5 col-5 d-grid">
-                                    <!-- button -->
-                                    <!-- btn -->
                                     <button type="button" class="btn btn-primary"><i
                                             class="feather-icon icon-shopping-bag me-2"></i>Add to
                                         cart</button>
                                 </div>
                                 <div class="col-md-4 col-4">
-                                    <!-- btn -->
-                                    {{-- <a class="btn btn-light " href="#" data-bs-toggle="tooltip"
-                                        data-bs-html="true" aria-label="Compare"><i
-                                            class="bi bi-arrow-left-right"></i></a> --}}
                                     <a class="btn btn-light " href="{{ url('wishlist') }}" data-bs-toggle="tooltip"
                                         data-bs-html="true" aria-label="Wishlist"><i
                                             class="feather-icon icon-heart"></i></a>
@@ -248,8 +256,8 @@
                                 <div class="my-8">
                                     <div class="mb-5">
                                         <!-- text -->
-                                        <h4 class="mb-1">{{$products[0]->PRODUCT_NAME}}</h4>
-                                        <p class="mb-0">{{$products[0]->DESC_PRODUCT}}</p>
+                                        <h4 class="mb-1">{{ $products[0]->PRODUCT_NAME }}</h4>
+                                        <p class="mb-0">{{ $products[0]->DESC_PRODUCT }}</p>
                                     </div>
                                     {{-- <div class="mb-5">
                                         <h5 class="mb-1">Storage Tips</h5>
@@ -514,15 +522,18 @@
                                                             weight etc. .</p>
                                                         <div>
                                                             <div class="border icon-shape icon-lg border-2 ">
-                                                                <!-- img --><img src="{{asset('/images/products/banner.jpg')}}"
+                                                                <!-- img --><img
+                                                                    src="{{ asset('/images/products/banner.jpg') }}"
                                                                     alt="" class="img-fluid ">
                                                             </div>
                                                             <div class="border icon-shape icon-lg border-2 ms-1 ">
-                                                                <!-- img --><img src="{{asset('/images/products/banner.jpg')}}"
+                                                                <!-- img --><img
+                                                                    src="{{ asset('/images/products/banner.jpg') }}"
                                                                     alt="" class="img-fluid ">
                                                             </div>
                                                             <div class="border icon-shape icon-lg border-2 ms-1 ">
-                                                                <!-- img --><img src="{{asset('/images/products/banner.jpg')}}"
+                                                                <!-- img --><img
+                                                                    src="{{ asset('/images/products/banner.jpg') }}"
                                                                     alt="" class="img-fluid ">
                                                             </div>
 
@@ -604,315 +615,9 @@
                     </div>
                 </div>
             </div>
-
-
-
         </section>
-
-        <!-- section -->
-        {{-- <section class="my-lg-14 my-14">
-            <div class="container">
-                <!-- row -->
-                <div class="row">
-                    <div class="col-12">
-                        <!-- heading -->
-                        <h3>Related Items</h3>
-                    </div>
-                </div>
-                <!-- row -->
-                <div class="row g-4 row-cols-lg-5 row-cols-2 row-cols-md-2 mt-2">
-                    <!-- col -->
-                    <div class="col">
-                        <div class="card card-product">
-                            <div class="card-body">
-                                <!-- badge -->
-
-                                <div class="text-center position-relative ">
-                                    <div class=" position-absolute top-0 start-0">
-                                        <span class="badge bg-danger">Sale</span>
-                                    </div>
-                                    <a href="#!">
-                                        <!-- img --><img src="images/products/product-img-1.jpg"
-                                            alt="Grocery Ecommerce Template" class="mb-3 img-fluid">
-                                    </a>
-                                    <!-- action btn -->
-                                    <div class="card-product-action">
-                                        <a href="#!" class="btn-action" data-bs-toggle="modal"
-                                            data-bs-target="#quickViewModal"><i class="bi bi-eye"
-                                                data-bs-toggle="tooltip" data-bs-html="true"
-                                                title="Quick View"></i></a>
-                                        <a href="shop-wishlist.html" class="btn-action" data-bs-toggle="tooltip"
-                                            data-bs-html="true" title="Wishlist"><i class="bi bi-heart"></i></a>
-                                        <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-                                            data-bs-html="true" title="Compare"><i
-                                                class="bi bi-arrow-left-right"></i></a>
-                                    </div>
-                                </div>
-                                <!-- heading -->
-                                <div class="text-small mb-1"><a href="#!"
-                                        class="text-decoration-none text-muted"><small>Snack &
-                                            Munchies</small></a></div>
-                                <h2 class="fs-6"><a href="#!"
-                                        class="text-inherit text-decoration-none">Haldiram's Sev Bhujia</a></h2>
-                                <div>
-
-                                    <!-- rating --> <small class="text-warning"> <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-half"></i></small> <span
-                                        class="text-muted small">4.5(149)</span>
-                                </div>
-                                <!-- price -->
-                                <div class="d-flex justify-content-between align-items-center mt-3">
-                                    <div><span class="text-dark">$18</span> <span
-                                            class="text-decoration-line-through text-muted">$24</span>
-                                    </div>
-                                    <!-- btn -->
-                                    <div><a href="#!" class="btn btn-primary btn-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                class="feather feather-plus">
-                                                <line x1="12" y1="5" x2="12"
-                                                    y2="19"></line>
-                                                <line x1="5" y1="12" x2="19"
-                                                    y2="12"></line>
-                                            </svg> Add</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- col -->
-                    <div class="col">
-                        <div class="card card-product">
-                            <div class="card-body">
-                                <!-- badge -->
-                                <div class="text-center position-relative"> <a href="#!"><img
-                                            src="images/products/product-img-2.jpg" alt="Grocery Ecommerce Template"
-                                            class="mb-3 img-fluid"></a>
-                                    <!-- action btn -->
-                                    <div class="card-product-action">
-                                        <a href="#!" class="btn-action" data-bs-toggle="modal"
-                                            data-bs-target="#quickViewModal"><i class="bi bi-eye"
-                                                data-bs-toggle="tooltip" data-bs-html="true"
-                                                title="Quick View"></i></a>
-                                        <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-                                            data-bs-html="true" title="Wishlist"><i class="bi bi-heart"></i></a>
-                                        <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-                                            data-bs-html="true" title="Compare"><i
-                                                class="bi bi-arrow-left-right"></i></a>
-                                    </div>
-                                </div>
-                                <!-- heading -->
-                                <div class="text-small mb-1"><a href="#!"
-                                        class="text-decoration-none text-muted"><small>Bakery &
-                                            Biscuits</small></a></div>
-                                <h2 class="fs-6"><a href="#!"
-                                        class="text-inherit text-decoration-none">NutriChoice Digestive </a></h2>
-                                <div class="text-warning">
-
-                                    <small> <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-half"></i></small> <span class="text-muted small">4.5
-                                        (25)</span>
-                                </div>
-                                <!-- price -->
-                                <div class="d-flex justify-content-between align-items-center mt-3">
-                                    <div><span class="text-dark">$24</span>
-                                    </div>
-                                    <!-- btn -->
-                                    <div><a href="#!" class="btn btn-primary btn-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                class="feather feather-plus">
-                                                <line x1="12" y1="5" x2="12"
-                                                    y2="19"></line>
-                                                <line x1="5" y1="12" x2="19"
-                                                    y2="12"></line>
-                                            </svg> Add</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- col -->
-                    <div class="col">
-                        <div class="card card-product">
-                            <div class="card-body">
-                                <!-- badge -->
-                                <div class="text-center position-relative"> <a href="#!"><img
-                                            src="images/products/product-img-3.jpg" alt="Grocery Ecommerce Template"
-                                            class="mb-3 img-fluid"></a>
-                                    <!-- action btn -->
-                                    <div class="card-product-action">
-                                        <a href="#!" class="btn-action" data-bs-toggle="modal"
-                                            data-bs-target="#quickViewModal"><i class="bi bi-eye"
-                                                data-bs-toggle="tooltip" data-bs-html="true"
-                                                title="Quick View"></i></a>
-                                        <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-                                            data-bs-html="true" title="Wishlist"><i class="bi bi-heart"></i></a>
-                                        <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-                                            data-bs-html="true" title="Compare"><i
-                                                class="bi bi-arrow-left-right"></i></a>
-                                    </div>
-                                </div>
-                                <!-- heading -->
-                                <div class="text-small mb-1"><a href="#!"
-                                        class="text-decoration-none text-muted"><small>Bakery &
-                                            Biscuits</small></a></div>
-                                <h2 class="fs-6"><a href="#!"
-                                        class="text-inherit text-decoration-none">Cadbury 5 Star Chocolate</a></h2>
-                                <div class="text-warning">
-
-                                    <small> <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i></small> <span class="text-muted small">5
-                                        (469)</span>
-                                </div>
-                                <!-- price -->
-                                <div class="d-flex justify-content-between align-items-center mt-3">
-                                    <div><span class="text-dark">$32</span> <span
-                                            class="text-decoration-line-through text-muted">$35</span>
-                                    </div>
-                                    <!-- btn -->
-                                    <div><a href="#!" class="btn btn-primary btn-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                class="feather feather-plus">
-                                                <line x1="12" y1="5" x2="12"
-                                                    y2="19"></line>
-                                                <line x1="5" y1="12" x2="19"
-                                                    y2="12"></line>
-                                            </svg> Add</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- col -->
-                    <div class="col">
-                        <div class="card card-product">
-                            <div class="card-body">
-                                <!-- badge -->
-                                <div class="text-center position-relative"> <a href="#!"><img
-                                            src="images/products/product-img-4.jpg" alt="Grocery Ecommerce Template"
-                                            class="mb-3 img-fluid"></a>
-                                    <!-- action btn -->
-                                    <div class="card-product-action">
-                                        <a href="#!" class="btn-action" data-bs-toggle="modal"
-                                            data-bs-target="#quickViewModal"><i class="bi bi-eye"
-                                                data-bs-toggle="tooltip" data-bs-html="true"
-                                                title="Quick View"></i></a>
-                                        <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-                                            data-bs-html="true" title="Wishlist"><i class="bi bi-heart"></i></a>
-                                        <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-                                            data-bs-html="true" title="Compare"><i
-                                                class="bi bi-arrow-left-right"></i></a>
-                                    </div>
-                                </div>
-                                <!-- heading -->
-                                <div class="text-small mb-1"><a href="#!"
-                                        class="text-decoration-none text-muted"><small>Snack &
-                                            Munchies</small></a></div>
-                                <h2 class="fs-6"><a href="#!"
-                                        class="text-inherit text-decoration-none">Onion Flavour Potato</a></h2>
-                                <div class="text-warning">
-
-                                    <small> <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-half"></i>
-                                        <i class="bi bi-star"></i></small> <span class="text-muted small">3.5
-                                        (456)</span>
-                                </div>
-                                <!-- price -->
-                                <div class="d-flex justify-content-between align-items-center mt-3">
-                                    <div><span class="text-dark">$3</span> <span
-                                            class="text-decoration-line-through text-muted">$5</span>
-                                    </div>
-                                    <!-- btn -->
-                                    <div><a href="#!" class="btn btn-primary btn-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                class="feather feather-plus">
-                                                <line x1="12" y1="5" x2="12"
-                                                    y2="19"></line>
-                                                <line x1="5" y1="12" x2="19"
-                                                    y2="12"></line>
-                                            </svg> Add</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- col -->
-                    <div class="col">
-                        <div class="card card-product">
-                            <div class="card-body">
-                                <!-- badge -->
-                                <div class="text-center position-relative"> <a href="#!"><img
-                                            src="images/products/product-img-9.jpg" alt="Grocery Ecommerce Template"
-                                            class="mb-3 img-fluid"></a>
-                                    <!-- action btn -->
-                                    <div class="card-product-action">
-                                        <a href="#!" class="btn-action" data-bs-toggle="modal"
-                                            data-bs-target="#quickViewModal"><i class="bi bi-eye"
-                                                data-bs-toggle="tooltip" data-bs-html="true"
-                                                title="Quick View"></i></a>
-                                        <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-                                            data-bs-html="true" title="Wishlist"><i class="bi bi-heart"></i></a>
-                                        <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-                                            data-bs-html="true" title="Compare"><i
-                                                class="bi bi-arrow-left-right"></i></a>
-                                    </div>
-                                </div>
-                                <!-- heading -->
-                                <div class="text-small mb-1"><a href="#!"
-                                        class="text-decoration-none text-muted"><small>Snack &
-                                            Munchies</small></a></div>
-                                <h2 class="fs-6"><a href="#!"
-                                        class="text-inherit text-decoration-none">Slurrp Millet Chocolate </a></h2>
-                                <div class="text-warning">
-
-                                    <small> <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-half"></i></small> <span class="text-muted small">4.5
-                                        (67)</span>
-                                </div>
-                                <!-- price -->
-                                <div class="d-flex justify-content-between align-items-center mt-3">
-                                    <div><span class="text-dark">$6</span> <span
-                                            class="text-decoration-line-through text-muted">$10</span>
-                                    </div>
-                                    <!-- btn -->
-                                    <div><a href="#!" class="btn btn-primary btn-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                class="feather feather-plus">
-                                                <line x1="12" y1="5" x2="12"
-                                                    y2="19"></line>
-                                                <line x1="5" y1="12" x2="19"
-                                                    y2="12"></line>
-                                            </svg> Add</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> --}}
-
     </main>
 
-    <!-- modal -->
     <!-- Modal -->
     <div class="modal fade" id="quickViewModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered">
@@ -923,71 +628,57 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
-                            <!-- img slide -->
                             <div class="product productModal" id="productModal">
-                                <div class="zoom"
-                                {{-- onmousemove="zoom(event)" --}}
+                                <div class="zoom" onmousemove="zoom(event)"
                                     style="
                   background-image: url(images/products/product-single-img-1.jpg);
                 ">
-                                    <!-- img -->
                                     <img src="images/products/product-single-img-1.jpg" alt="">
                                 </div>
                                 <div>
-                                    <div class="zoom"
-                                    {{-- onmousemove="zoom(event)" --}}
+                                    <div class="zoom" onmousemove="zoom(event)"
                                         style="
                     background-image: url(images/products/product-single-img-2.jpg);
                   ">
-                                        <!-- img -->
                                         <img src="images/products/product-single-img-2.jpg" alt="">
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="zoom"
-                                    {{-- onmousemove="zoom(event)" --}}
+                                    <div class="zoom" onmousemove="zoom(event)"
                                         style="
                     background-image: url(images/products/product-single-img-3.jpg);
                   ">
-                                        <!-- img -->
                                         <img src="images/products/product-single-img-3.jpg" alt="">
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="zoom"
-                                    {{-- onmousemove="zoom(event)" --}}
+                                    <div class="zoom" onmousemove="zoom(event)"
                                         style="
                     background-image: url(images/products/product-single-img-4.jpg);
                   ">
-                                        <!-- img -->
                                         <img src="images/products/product-single-img-4.jpg" alt="">
                                     </div>
                                 </div>
                             </div>
-                            <!-- product tools -->
                             <div class="product-tools">
                                 <div class="thumbnails row g-3" id="productModalThumbnails">
                                     <div class="col-3" class="tns-nav-active">
                                         <div class="thumbnails-img">
-                                            <!-- img -->
                                             <img src="images/products/product-single-img-1.jpg" alt="">
                                         </div>
                                     </div>
                                     <div class="col-3">
                                         <div class="thumbnails-img">
-                                            <!-- img -->
                                             <img src="images/products/product-single-img-2.jpg" alt="">
                                         </div>
                                     </div>
                                     <div class="col-3">
                                         <div class="thumbnails-img">
-                                            <!-- img -->
                                             <img src="images/products/product-single-img-3.jpg" alt="">
                                         </div>
                                     </div>
                                     <div class="col-3">
                                         <div class="thumbnails-img">
-                                            <!-- img -->
                                             <img src="images/products/product-single-img-4.jpg" alt="">
                                         </div>
                                     </div>
@@ -1025,8 +716,6 @@
                                     </button>
                                 </div>
                                 <div>
-                                    <!-- input -->
-                                    <!-- input -->
                                     <div class="input-group input-spinner  ">
                                         <input type="button" value="-" class="button-minus  btn  btn-sm "
                                             data-field="quantity">
@@ -1039,18 +728,12 @@
                                 <div class="mt-3 row justify-content-start g-2 align-items-center">
 
                                     <div class="col-lg-4 col-md-5 col-6 d-grid">
-                                        <!-- button -->
-                                        <!-- btn -->
                                         <button type="button" class="btn btn-primary">
                                             <i class="feather-icon icon-shopping-bag me-2"></i>Add to
                                             cart
                                         </button>
                                     </div>
                                     <div class="col-md-4 col-5">
-                                        <!-- btn -->
-                                        <a class="btn btn-light" href="#" data-bs-toggle="tooltip"
-                                            data-bs-html="true" aria-label="Compare"><i
-                                                class="bi bi-arrow-left-right"></i></a>
                                         <a class="btn btn-light" href="#!" data-bs-toggle="tooltip"
                                             data-bs-html="true" aria-label="Wishlist"><i
                                                 class="feather-icon icon-heart"></i></a>
@@ -1094,21 +777,21 @@
 
 
     <!-- Javascript-->
-    <script src="{{asset('libs/rater-js/index.js')}}"></script>
-    <script src="{{asset('libs/dropzone/dist/min/dropzone.min.js')}}"></script>
+    <script src="{{ asset('libs/rater-js/index.js') }}"></script>
+    <script src="{{ asset('libs/dropzone/dist/min/dropzone.min.js') }}"></script>
 
     <!-- Libs JS -->
-    <script src="{{asset('libs/jquery/dist/jquery.min.js')}}"></script>
-    <script src="{{asset('libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{asset('libs/simplebar/dist/simplebar.min.js')}}"></script>
+    <script src="{{ asset('libs/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('libs/simplebar/dist/simplebar.min.js') }}"></script>
 
     <!-- Theme JS -->
-    <script src="{{asset('js/theme.min.js')}}"></script>
+    <script src="{{ asset('js/theme.min.js') }}"></script>
 
-    <script src="{{asset('libs/tiny-slider/dist/min/tiny-slider.js')}}"></script>
-    <script src="{{asset('js/vendors/tns-slider.js')}}"></script>
-    <script src="{{asset('js/vendors/zoom.js')}}"></script>
-    <script src="{{asset('js/vendors/increment-value.js')}}"></script>
+    <script src="{{ asset('libs/tiny-slider/dist/min/tiny-slider.js') }}"></script>
+    <script src="{{ asset('js/vendors/tns-slider.js') }}"></script>
+    <script src="{{ asset('js/vendors/zoom.js') }}"></script>
+    <script src="{{ asset('js/vendors/increment-value.js') }}"></script>
 
 
 

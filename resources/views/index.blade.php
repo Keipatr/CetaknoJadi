@@ -289,15 +289,15 @@
                                         <div class="card-product-action">
                                             <a href="#!" class="btn-action add-to-wishlist" data-bs-toggle="tooltip"
                                                 data-bs-html="true" title="Wishlist"
-                                                data-product-id="{{ $product->ID_CONTAINER }}">
+                                                data-product-id="{{ $product->ID_PRODUCT }}"
+                                                data-container-id="{{ $product->ID_CONTAINER }}">
                                                 <i class="bi bi-heart"></i>
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="text-small mb-1">
-                                        <a href="#!" class="text-decoration-none text-muted">
-                                            <small>{{ $product->NAME_CATEGORY }}</small>
-                                        </a>
+                                    <div class="text-small mb-1"><a
+                                            href="{{ url('/categories/' . $product->NAME_CATEGORY . '?id=' . Crypt::encryptString($product->ID_CATEGORY)) }}"
+                                            class="text-decoration-none text-muted"><small>{{ $product->NAME_CATEGORY }}</small></a>
                                     </div>
                                     <h2 class="fs-6">
                                         <a href="{{ '/products/' . $product->NAME_SHOP . '/' . $product->PRODUCT_NAME . '?id=' . Crypt::encryptString($product->ID_CONTAINER) }}"
@@ -356,6 +356,38 @@
 
                     <script>
                         $(document).ready(function() {
+                            // $('.add-to-cart').click(function(e) {
+                            //     e.preventDefault();
+                            //     var productId = $(this).data('product-id');
+                            //     var containerId = $(this).data('container-id');
+
+                            //     $.ajax({
+                            //         url: '/add-to-cart',
+                            //         type: 'POST',
+                            //         data: {
+                            //             productId: productId,
+                            //             containerId: containerId,
+                            //             _token: '{{ csrf_token() }}'
+                            //         },
+                            //         success: function(response) {
+                            //             if (response.login) {
+                            //                 alert('Please login to add a product to the cart.');
+                            //             } else if (response.success) {
+                            //                 alert('Product added to cart successfully!');
+                            //             } else {
+                            //                 alert('Failed to add the product to the cart. Please try again.');
+                            //             }
+                            //         },
+                            //         error: function(xhr) {
+                            //             if (xhr.responseJSON && xhr.responseJSON.login) {
+                            //                 alert('Please login to add a product to the cart.');
+                            //             } else {
+                            //                 alert('Failed to add the product to the cart. Please try again.');
+                            //             }
+                            //         }
+                            //     });
+                            // });
+
                             $('.add-to-cart').click(function(e) {
                                 e.preventDefault();
                                 var productId = $(this).data('product-id');
@@ -374,6 +406,7 @@
                                             alert('Please login to add a product to the cart.');
                                         } else if (response.success) {
                                             alert('Product added to cart successfully!');
+                                            updateCartQuantity(response.quantity);
                                         } else {
                                             alert('Failed to add the product to the cart. Please try again.');
                                         }
@@ -404,16 +437,40 @@
                                         _token: '{{ csrf_token() }}'
                                     },
                                     success: function(response) {
-                                        // Handle success response
-                                        alert('Product added to wishlist successfully!');
+                                        if (response.login) {
+                                            alert('Please login to add a product to the wishlist.');
+                                        } else if (response.success) {
+                                            alert('Product added to wishlist successfully!');
+                                            updateWishlistQuantity(response.quantity);
+                                        } else if (response.exists) {
+                                            alert('Product already exists in the wishlist!');
+                                        } else {
+                                            alert(
+                                                'Failed to add the product to the wishlist. Please try again.'
+                                            );
+                                        }
                                     },
                                     error: function(xhr) {
-                                        // Handle error response
-                                        alert('Failed to add product to wishlist. Please try again.');
+                                        if (xhr.responseJSON && xhr.responseJSON.login) {
+                                            alert('Please login to add a product to the wishlist.');
+                                        } else {
+                                            alert(
+                                                'Failed to add the product to the wishlist. Please try again.'
+                                            );
+                                        }
                                     }
                                 });
                             });
                         });
+
+                        function updateCartQuantity(quantity) {
+                            $('#cartQtySmall').text(quantity);
+                            $('#cartQtyLarge').text(quantity);
+                        }
+
+                        function updateWishlistQuantity(quantity) {
+                            $('#wishlistQty').text(quantity);
+                        }
                     </script>
 
 
@@ -472,6 +529,16 @@
             </div>
         </section>
     </main>
+    <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog"
+        aria-labelledby="notificationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div id="notificationMessage"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- Javascript-->

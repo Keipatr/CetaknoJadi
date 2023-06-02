@@ -2,6 +2,16 @@
 
 @section('main-content')
     {{-- <body> --}}
+    <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div id="notificationMessage"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <main>
         <!-- section-->
@@ -45,11 +55,9 @@
                                     <h5 class="mb-3">Categories</h5>
                                     <!-- nav -->
                                     <ul class="nav nav-category" id="categoryCollapseMenu">
-                                        <li class="nav-item border-bottom w-100 collapsed"
-                                        {{-- data-bs-toggle="collapse"
+                                        <li class="nav-item border-bottom w-100 collapsed" {{-- data-bs-toggle="collapse"
                                             data-bs-target="#categoryFlushOne" aria-expanded="false"
-                                            aria-controls="categoryFlushOne" --}}
-                                            >
+                                            aria-controls="categoryFlushOne" --}}>
                                             <a href="{{ route('category-show', ['category_url' => 'all-product']) }}"
                                                 class="nav-link">All Products</a>
                                         </li>
@@ -631,9 +639,12 @@
                                                         alt="Grocery Ecommerce Template" class="mb-3 img-fluid">
                                                 </a>
                                                 <div class="card-product-action">
-                                                    <a href="{{ url('wishlist') }}" class="btn-action"
-                                                        data-bs-toggle="tooltip" data-bs-html="true" title="Wishlist"><i
-                                                            class="bi bi-heart"></i></a>
+                                                    <a href="#!" class="btn-action add-to-wishlist"
+                                                        data-bs-toggle="tooltip" data-bs-html="true" title="Wishlist"
+                                                        data-product-id="{{ $product->ID_PRODUCT }}"
+                                                        data-container-id="{{ $product->ID_CONTAINER }}">
+                                                        <i class="bi bi-heart"></i>
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div class="text-small mb-1"><a
@@ -676,22 +687,116 @@
                                             <div class="d-flex justify-content-between align-items-center mt-3">
                                                 <div><span class="text-dark">{{ $product->formatted_price }}</span>
                                                 </div>
-                                                <div><a href="#!" class="btn btn-primary btn-sm">
+                                                <div><a href="#!" class="btn btn-primary btn-sm add-to-cart"
+                                                        data-product-id="{{ $product->ID_PRODUCT }}"
+                                                        data-container-id="{{ $product->ID_CONTAINER }}">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                             height="16" viewBox="0 0 24 24" fill="none"
                                                             stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                                             stroke-linejoin="round" class="feather feather-plus">
                                                             <line x1="12" y1="5" x2="12"
-                                                                y2="19"></line>
+                                                                y2="19">
+                                                            </line>
                                                             <line x1="5" y1="12" x2="19"
-                                                                y2="12"></line>
-                                                        </svg> Add</a></div>
+                                                                y2="12">
+                                                            </line>
+                                                        </svg> Add To Cart
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
+
+                        <script>
+                            $(document).ready(function() {
+                                $('.add-to-cart').click(function(e) {
+                                    e.preventDefault();
+                                    var productId = $(this).data('product-id');
+                                    var containerId = $(this).data('container-id');
+
+                                    $.ajax({
+                                        url: '/add-to-cart',
+                                        type: 'POST',
+                                        data: {
+                                            productId: productId,
+                                            containerId: containerId,
+                                            _token: '{{ csrf_token() }}'
+                                        },
+                                        success: function(response) {
+                                            if (response.login) {
+                                                alert('Please login to add a product to the cart.');
+                                            } else if (response.success) {
+                                                alert('Product added to cart successfully!');
+                                                updateCartQuantity(response.quantity);
+                                            } else {
+                                                alert('Failed to add the product to the cart. Please try again.');
+                                            }
+                                        },
+                                        error: function(xhr) {
+                                            if (xhr.responseJSON && xhr.responseJSON.login) {
+                                                alert('Please login to add a product to the cart.');
+                                            } else {
+                                                alert('Failed to add the product to the cart. Please try again.');
+                                            }
+                                        }
+                                    });
+                                });
+
+
+
+                                $('.add-to-wishlist').click(function(e) {
+                                    e.preventDefault();
+                                    var productId = $(this).data('product-id');
+                                    var containerId = $(this).data('container-id');
+
+                                    $.ajax({
+                                        url: '/add-to-wishlist',
+                                        type: 'POST',
+                                        data: {
+                                            containerId: containerId,
+                                            productId: productId,
+                                            _token: '{{ csrf_token() }}'
+                                        },
+                                        success: function(response) {
+                                            if (response.login) {
+                                                alert('Please login to add a product to the wishlist.');
+                                            } else if (response.success) {
+                                                alert('Product added to wishlist successfully!');
+                                                updateWishlistQuantity(response.quantity);
+                                            } else if (response.exists) {
+                                                alert('Product already exists in the wishlist!');
+                                            } else {
+                                                alert(
+                                                    'Failed to add the product to the wishlist. Please try again.'
+                                                );
+                                            }
+                                        },
+                                        error: function(xhr) {
+                                            if (xhr.responseJSON && xhr.responseJSON.login) {
+                                                alert('Please login to add a product to the wishlist.');
+                                            } else {
+                                                alert(
+                                                    'Failed to add the product to the wishlist. Please try again.'
+                                                );
+                                            }
+                                        }
+                                    });
+                                });
+                            });
+
+                            function updateCartQuantity(quantity) {
+                                $('#cartQtySmall').text(quantity);
+                                $('#cartQtyLarge').text(quantity);
+                            }
+
+                            function updateWishlistQuantity(quantity) {
+                                $('#wishlistQty').text(quantity);
+                            }
+                        </script>
+
                         <div class="row mt-8">
                             <div class="col">
                                 <nav>
