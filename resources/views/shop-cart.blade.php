@@ -13,7 +13,6 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb mb-0">
                                 <li class="breadcrumb-item"><a href="{{ url('') }}">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#!">Shop</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Shop Cart</li>
                             </ol>
                         </nav>
@@ -154,56 +153,27 @@
 
                                             <div class="col-3">
                                                 <div class="input-group input-spinner">
-                                                  <button type="button" class="button-minus btn btn-sm">-</button>
-                                                  <input type="number" step="1" min="1" max="{{ $list->QTY_PRODUCT }}" value="{{ $list->QTY_CART }}" name="quantity" class="quantity-field form-control-sm form-input">
-                                                  <button type="button" class="button-plus btn btn-sm">+</button>
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-sm btn-spinner btn-minus"
+                                                            data-product-id="{{ $list->ID_PRODUCT }}"
+                                                            data-container-id="{{ $list->ID_CONTAINER }}">
+                                                            <i class="fas fa-minus"></i>
+                                                        </button>
+                                                    </span>
+                                                    <input type="number" step="1" min="1"
+                                                        max="{{ $list->QTY_PRODUCT }}" value="{{ $list->QTY_CART }}"
+                                                        name="quantity" class="quantity-field form-control-sm form-input"
+                                                        data-product-id="{{ $list->ID_PRODUCT }}"
+                                                        data-container-id="{{ $list->ID_CONTAINER }}">
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-sm btn-spinner btn-plus"
+                                                            data-product-id="{{ $list->ID_PRODUCT }}"
+                                                            data-container-id="{{ $list->ID_CONTAINER }}">
+                                                            <i class="fas fa-plus"></i>
+                                                        </button>
+                                                    </span>
                                                 </div>
-                                              </div>
-
-                                              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                                              <script>
-                                                $(document).ready(function() {
-                                                  var initialStep = 1;
-                                                  var stepAfterPoint = 2;
-                                                  var point = 10; // Adjust this value as needed
-
-                                                  $('.button-minus').click(function() {
-                                                    var inputField = $(this).next('.quantity-field');
-                                                    var currentValue = parseInt(inputField.val());
-                                                    var minQty = 1;
-
-                                                    if (currentValue > minQty) {
-                                                      inputField.val(currentValue - (currentValue > point ? stepAfterPoint : initialStep));
-                                                    }
-                                                  });
-
-                                                  $('.button-plus').click(function() {
-                                                    var inputField = $(this).prev('.quantity-field');
-                                                    var currentValue = parseInt(inputField.val());
-                                                    var maxQty = parseInt("{{ $list->QTY_PRODUCT }}");
-
-                                                    if (currentValue < maxQty) {
-                                                      inputField.val(currentValue + (currentValue >= point ? stepAfterPoint : initialStep));
-                                                    }
-                                                  });
-
-                                                  $('.quantity-field').on('input', function() {
-                                                    var inputField = $(this);
-                                                    var currentValue = parseInt(inputField.val());
-                                                    var maxQty = parseInt("{{ $list->QTY_PRODUCT }}");
-
-                                                    if (currentValue < 1 || isNaN(currentValue)) {
-                                                      inputField.val(1);
-                                                    } else if (currentValue > maxQty) {
-                                                      inputField.val(maxQty);
-                                                    }
-                                                  });
-                                                });
-                                              </script>
-
-
-
-
+                                            </div>
 
 
 
@@ -231,6 +201,152 @@
                             box-shadow: none;
                         }
                     </style>
+
+
+                    <style>
+                        .input-group.input-spinner {
+                            width: 100%;
+                        }
+
+                        .input-group.input-spinner .btn-spinner {
+                            width: 30px;
+                            height: 30px;
+                            font-size: 14px;
+                        }
+
+                        .input-group.input-spinner .quantity-field {
+                            text-align: center;
+                            width: 50px;
+                            padding: 0;
+                        }
+                    </style>
+
+                    {{-- <script>
+                        $(document).ready(function() {
+                            // Handle manual input
+                            $('.quantity-field').on('input', function() {
+                                var min = parseInt($(this).attr('min'));
+                                var max = parseInt($(this).attr('max'));
+                                var value = parseInt($(this).val());
+
+                                // Check if the input is a number
+                                if (isNaN(value)) {
+                                    $(this).val(min); // Set to minimum value if not a number
+                                } else {
+                                    // Adjust the value if it exceeds the minimum or maximum
+                                    if (value < min) {
+                                        $(this).val(min);
+                                    } else if (value > max) {
+                                        $(this).val(max);
+                                    }
+                                }
+                            });
+
+                            // Handle plus button click
+                            $('.btn-plus').on('click', function() {
+                                var inputField = $(this).closest('.input-spinner').find('.quantity-field');
+                                var max = parseInt(inputField.attr('max'));
+                                var value = parseInt(inputField.val());
+
+                                if (value < max) {
+                                    inputField.val(value + 1);
+                                }
+                            });
+
+                            // Handle minus button click
+                            $('.btn-minus').on('click', function() {
+                                var inputField = $(this).closest('.input-spinner').find('.quantity-field');
+                                var min = parseInt(inputField.attr('min'));
+                                var value = parseInt(inputField.val());
+
+                                if (value > min) {
+                                    inputField.val(value - 1);
+                                }
+                            });
+                        });
+                    </script> --}}
+                    <script>
+                        $(document).ready(function() {
+                            // Handle manual input
+                            $('.quantity-field').on('input', function() {
+                                var inputField = $(this);
+                                var min = parseInt(inputField.attr('min'));
+                                var max = parseInt(inputField.attr('max'));
+                                var value = parseInt(inputField.val());
+
+                                // Check if the input is a number
+                                if (isNaN(value)) {
+                                    inputField.val(min); // Set to minimum value if not a number
+                                } else {
+                                    // Adjust the value if it exceeds the minimum or maximum
+                                    if (value < min) {
+                                        inputField.val(min);
+                                    } else if (value > max) {
+                                        inputField.val(max);
+                                    }
+                                }
+
+                                updateCartItem(inputField);
+                            });
+
+                            // Handle plus button click
+                            $(document).on('click', '.btn-plus', function() {
+                                var inputField = $(this).closest('.input-spinner').find('.quantity-field');
+                                var max = parseInt(inputField.attr('max'));
+                                var value = parseInt(inputField.val());
+
+                                if (value < max) {
+                                    inputField.val(value + 1);
+                                    updateCartItem(inputField);
+                                }
+                            });
+
+                            // Handle minus button click
+                            $(document).on('click', '.btn-minus', function() {
+                                var inputField = $(this).closest('.input-spinner').find('.quantity-field');
+                                var min = parseInt(inputField.attr('min'));
+                                var value = parseInt(inputField.val());
+
+                                if (value > min) {
+                                    inputField.val(value - 1);
+                                    updateCartItem(inputField);
+                                }
+                            });
+
+                            // Function to update cart item using AJAX
+                            function updateCartItem(inputField) {
+                                var productId = inputField.data('product-id');
+                                var containerId = inputField.data('container-id');
+                                var qty = inputField.val();
+
+                                $.ajax({
+                                    url: '/cart/update',
+                                    type: 'POST',
+                                    data: {
+                                        productId: productId,
+                                        containerId: containerId,
+                                        qty: qty,
+                                        _token: '{{ csrf_token() }}'
+                                    },
+                                    success: function(response) {
+                                        if (response.success) {
+                                            // Update cart quantity
+                                            $('#cartQtySmall').text(response.quantity);
+                                            $('#cartQtyLarge').text(response.quantity);
+                                        } else if (response.login) {
+                                            // Handle login requirement
+                                            alert('Please log in to update the cart item.');
+                                            // Redirect to login page or perform necessary actions
+                                        }
+                                    },
+                                    error: function(xhr) {
+                                        console.log('Failed to update the cart item. Please try again.');
+                                    }
+                                });
+                            }
+                        });
+                    </script>
+
                     <script>
                         function updateCartQuantity(quantity) {
                             $('#cartQtySmall').text(quantity);
@@ -268,6 +384,74 @@
                         });
                     </script>
 
+
+                    <script>
+                        $(document).ready(function() {
+                            // Event handler for the checkbox change event
+                            $(document).on('change', '.update-subtotal-checkbox', function() {
+                                updateSubtotal();
+                            });
+
+                            // Function to update the subtotal
+                            function updateSubtotal() {
+                                var subtotal = 0;
+
+                                // Iterate through each selected checkbox
+                                $('.update-subtotal-checkbox:checked').each(function() {
+                                    var productId = $(this).data('product-id');
+                                    var containerId = $(this).data('container-id');
+
+                                    // Retrieve the subtotal for the selected item
+                                    var itemSubtotal = parseFloat($('#subtotal_' + productId + '_' + containerId).text());
+
+                                    // Add the subtotal to the total
+                                    subtotal += itemSubtotal;
+                                });
+
+                                // Update the sidebar with the new subtotal
+                                $('#sidebarSubtotal').text(subtotal.toFixed(2));
+                            }
+                        });
+                        // Function to update the subtotal and store selected items for checkout
+                        function updateSubtotal() {
+                            var subtotal = 0;
+                            var selectedItems = [];
+
+                            // Iterate through each selected checkbox
+                            $('.update-subtotal-checkbox:checked').each(function() {
+                                var productId = $(this).data('product-id');
+                                var containerId = $(this).data('container-id');
+                                var itemSubtotal = parseFloat($('#subtotal_' + productId + '_' + containerId).text());
+
+                                subtotal += itemSubtotal;
+
+                                // Add the selected item details to the array
+                                selectedItems.push({
+                                    productId: productId,
+                                    containerId: containerId
+                                });
+                            });
+
+                            $('#sidebarSubtotal').text(subtotal.toFixed(2));
+
+                            // Send the selected items to the server via AJAX
+                            $.ajax({
+                                url: '/checkout',
+                                type: 'POST',
+                                data: {
+                                    selectedItems: selectedItems,
+                                    _token: '{{ csrf_token() }}'
+                                },
+                                success: function(response) {
+                                    // Handle the response from the server
+                                    // Redirect to the checkout page or perform necessary actions
+                                },
+                                error: function(xhr) {
+                                    alert('Failed to process the checkout. Please try again.');
+                                }
+                            });
+                        }
+                    </script>
                     <!-- sidebar -->
                     <div class="col-12 col-lg-4 col-md-5">
                         <!-- card -->
@@ -284,7 +468,7 @@
                                                 <div>Item Subtotal</div>
 
                                             </div>
-                                            <span>Rp. 115,000</span>
+                                            <span id="sidebarSubtotal">0.00</span>
                                         </li>
 
                                         <!-- list group item -->
@@ -301,7 +485,7 @@
                                                 <div class="fw-bold">Subtotal</div>
 
                                             </div>
-                                            <span class="fw-bold">Rp. 116,000</span>
+                                            <span class="fw-bold">Rp 0</span>
                                         </li>
                                     </ul>
 
@@ -323,7 +507,7 @@
                                         and <a href="#!">Privacy Policy.</a> </small></p>
 
                                 <!-- heading -->
-                                <div class="mt-8">
+                                {{-- <div class="mt-8">
                                     <h2 class="h5 mb-3">Add Promo or Gift Card</h2>
                                     <form>
                                         <div class="mb-2">
@@ -338,7 +522,7 @@
                                                 class="btn btn-outline-dark mb-1">Redeem</button></div>
                                         <p class="text-muted mb-0"> <small>Terms & Conditions apply</small></p>
                                     </form>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>

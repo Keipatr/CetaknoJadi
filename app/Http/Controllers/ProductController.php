@@ -283,4 +283,52 @@ GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS,
             return response()->json(['success' => true, 'quantity' => $cartQuantity[0]->QTY_CART]);
         }
     }
+
+    public function updateCartItem(Request $request)
+    {
+        if (!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST'])) {
+            return response()->json(['login' => true]);
+        } else {
+            if (Session::has('USERNAME_CUST')) {
+                $username = Session::get('USERNAME_CUST');
+            } else {
+                $username = Cookie::get('USERNAME_CUST');
+            }
+
+            $productId = $request->productId;
+            $containerId = $request->containerId;
+            $cartIdResult = DB::select("SELECT c.ID_CART FROM cart c, customer cu WHERE c.ID_CART = cu.ID_CART AND cu.USERNAME_CUST ='$username'");
+            $cartId = $cartIdResult[0]->ID_CART;
+            $qty = $request->qty;
+            // dd($request->all());
+            DB::update("
+            UPDATE cart_product
+            SET QTY_CART =  $qty,
+                SUBTOTAL_CART = (SELECT p.PRICE_PRODUCT FROM product p WHERE ID_CONTAINER = '$containerId' and p.ID_PRODUCT = '$productId') * $qty
+            WHERE ID_CART = '$cartId' and ID_CONTAINER = '$containerId' and ID_PRODUCT = '$productId';
+            ");
+
+            DB::update("
+            UPDATE cart
+            SET QTY_CART = COALESCE((SELECT SUM(QTY_CART) FROM cart_product WHERE ID_CART ='$cartId' GROUP BY ID_CART),0),
+                TOTAL_CART = COALESCE((SELECT SUM(SUBTOTAL_CART) FROM cart_product WHERE ID_CART ='$cartId' GROUP BY ID_CART),0)
+            WHERE ID_CART = '$cartId';
+            ");
+            $cartQuantity = DB::select("select QTY_CART from cart c,customer cu where c.ID_CART =cu.ID_CART and cu.USERNAME_CUST = '$username'; ");
+
+
+            return response()->json(['success' => true, 'quantity' => $cartQuantity[0]->QTY_CART]);
+        }
+    }
+    public function checkout(Request $request)
+{
+    // Retrieve the selected items from the request
+    $selectedItems = $request->input('selectedItems');
+
+    // Perform further processing with the selected items
+    // For example, you can store them in the database or perform any other necessary actions
+
+    // Return a response indicating the success of the checkout
+    return response()->json(['success' => true]);
+}
 }

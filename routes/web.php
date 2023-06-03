@@ -42,9 +42,9 @@ Route::post('/add-to-cart', [ProductController::class, 'addToCart']);
 Route::post('/add-to-wishlist', [ProductController::class, 'addToWishlist']);
 Route::post('/wishlist/delete', [ProductController::class, 'deleteWishlistItem']);
 Route::post('/cart/delete', [ProductController::class, 'deleteCartItem']);
-
-
-
+Route::post('/cart/update', [ProductController::class, 'updateCartItem']);
+Route::post('/cart/update', [ProductController::class, 'updateCartItem']);
+Route::post('/checkout', [ProductController::class, 'checkout']);
 
 Route::get('/wishlist', [HomeController::class, 'wishlist'])->name('wishlist');
 Route::get('/cart', [HomeController::class, 'cart'])->name('cart');
