@@ -41,8 +41,9 @@ Route::get('/search-products', [SearchController::class,'searchProducts']);
 Route::post('/add-to-cart', [ProductController::class, 'addToCart']);
 Route::post('/add-to-wishlist', [ProductController::class, 'addToWishlist']);
 Route::post('/wishlist/delete', [ProductController::class, 'deleteWishlistItem']);
+Route::post('/cart/delete', [ProductController::class, 'deleteCartItem']);
 
-Route::get('/get-cart-quantity', [ProductController::class, 'getCartQuantity'])->name('cartQty');
+
 
 
 Route::get('/wishlist', [HomeController::class, 'wishlist'])->name('wishlist');

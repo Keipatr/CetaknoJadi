@@ -171,8 +171,10 @@ GROUP BY c.ID_CATEGORY,p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category
             }
 
             $cart = DB::select("
-            select PRODUCT_NAME, NAME_CATEGORY,PRICE_PRODUCT as price FROM product p, container c, cart cr,category ca, customer cu, cart_product cw
+            select NAME_SHOP,PRODUCT_NAME, NAME_CATEGORY,PRICE_PRODUCT as price, c.ID_CONTAINER,p.ID_PRODUCT,image,jenis,cw.QTY_CART,p.QTY_PRODUCT
+            FROM product p, container c, cart cr,category ca, customer cu, cart_product cw, shop sh
         where p.ID_CONTAINER = c.ID_CONTAINER
+        and sh.ID_SHOP = c.ID_SHOP
         and cr.ID_CART = cu.ID_CART
         and ca.ID_CATEGORY = c.ID_CATEGORY
         and cr.ID_CART= cw.ID_CART

@@ -163,18 +163,6 @@ GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS,
         }
     }
 
-    public function getCartQuantity()
-    {
-        if (Session::has('USERNAME_CUST')) {
-            $username = Session::get('USERNAME_CUST');
-        } else {
-            $username = Cookie::get('USERNAME_CUST');
-        }
-        $cartQuantity = DB::select("select QTY_CART from cart c,customer cu where c.ID_CART =cu.ID_CART and cu.USERNAME_CUST = '$username' ");
-
-        return response()->json(['quantity' => $cartQuantity]);
-    }
-
 
 
 
@@ -225,7 +213,6 @@ GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS,
 
             return response()->json(['success' => true, 'login' => false, 'quantity' => $wishlistQuantity[0]->QTY_WISHLIST]);
         }
-
     }
     public function deleteWishlistItem(Request $request)
     {
@@ -242,21 +229,18 @@ GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS,
             $containerId = $request->containerId;
             $wishIdResult = DB::select("SELECT c.ID_WISHLIST FROM wishlist c, customer cu WHERE c.ID_WISHLIST = cu.ID_WISHLIST AND cu.USERNAME_CUST ='$username'");
             $wishlistId = $wishIdResult[0]->ID_WISHLIST;
-            $checkWish = DB::select("
-            SELECT count(ID_WISHLIST) FROM product_wishlist WHERE ID_WISHLIST ='$wishlistId' GROUP BY ID_WISHLIST;
-            ");
-            // Find the wishlist item by ID
+
             DB::delete("
                 DELETE FROM product_wishlist
                 WHERE ID_WISHLIST = '$wishlistId' and ID_CONTAINER = '$containerId' and ID_PRODUCT = '$productId';
             ");
 
             DB::update("
-    UPDATE wishlist
-    SET QTY_WISHLIST = COALESCE(
-        (SELECT COUNT(ID_WISHLIST) FROM product_wishlist WHERE ID_WISHLIST = '$wishlistId' GROUP BY ID_WISHLIST),0)
-        WHERE ID_WISHLIST = '$wishlistId';
-");
+            UPDATE wishlist
+            SET QTY_WISHLIST = COALESCE(
+            (SELECT COUNT(ID_WISHLIST) FROM product_wishlist WHERE ID_WISHLIST = '$wishlistId' GROUP BY ID_WISHLIST),0)
+            WHERE ID_WISHLIST = '$wishlistId';
+            ");
 
 
 
@@ -266,6 +250,37 @@ GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS,
             return response()->json(['success' => true, 'quantity' => $wishlistQuantity[0]->QTY_WISHLIST]);
         }
     }
+    public function deleteCartItem(Request $request)
+    {
+        if (!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST'])) {
+            return response()->json(['login' => true]);
+        } else {
+            if (Session::has('USERNAME_CUST')) {
+                $username = Session::get('USERNAME_CUST');
+            } else {
+                $username = Cookie::get('USERNAME_CUST');
+            }
+
+            $productId = $request->productId;
+            $containerId = $request->containerId;
+            $cartIdResult = DB::select("SELECT c.ID_CART FROM cart c, customer cu WHERE c.ID_CART = cu.ID_CART AND cu.USERNAME_CUST ='$username'");
+            $cartId = $cartIdResult[0]->ID_CART;
+
+            DB::delete("
+                DELETE FROM cart_product
+                WHERE ID_CART = '$cartId' and ID_CONTAINER = '$containerId' and ID_PRODUCT = '$productId';
+            ");
+
+            DB::update("
+            UPDATE cart
+            SET QTY_CART = COALESCE((SELECT SUM(QTY_CART) FROM cart_product WHERE ID_CART ='$cartId' GROUP BY ID_CART),0),
+                TOTAL_CART = COALESCE((SELECT SUM(SUBTOTAL_CART) FROM cart_product WHERE ID_CART ='$cartId' GROUP BY ID_CART),0)
+            WHERE ID_CART = '$cartId';
+        ");
+            $cartQuantity = DB::select("select QTY_CART from cart c,customer cu where c.ID_CART =cu.ID_CART and cu.USERNAME_CUST = '$username'; ");
 
 
+            return response()->json(['success' => true, 'quantity' => $cartQuantity[0]->QTY_CART]);
+        }
+    }
 }
