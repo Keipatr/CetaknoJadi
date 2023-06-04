@@ -44,8 +44,9 @@ Route::post('/wishlist/delete', [ProductController::class, 'deleteWishlistItem']
 Route::post('/cart/delete', [ProductController::class, 'deleteCartItem']);
 Route::post('/cart/update', [ProductController::class, 'updateCartItem']);
 Route::post('/cart/update', [ProductController::class, 'updateCartItem']);
-Route::post('/checkout', [ProductController::class, 'checkout']);
+Route::post('/updateCheckout', [ProductController::class, 'updateCheckout']);
 
+Route::get('/checkout', [HomeController::class, 'checkoutPage']);
 Route::get('/wishlist', [HomeController::class, 'wishlist'])->name('wishlist');
 Route::get('/cart', [HomeController::class, 'cart'])->name('cart');
 Route::get('/signin', [HomeController::class, 'loginpage'])->name('loginpage');
@@ -64,86 +65,6 @@ Route::get('/products/{store_url}/{product_url}', [ProductController::class, 'pr
 Route::get('/categories/{category_url}', [ProductController::class, 'categoryShow'])->name('category-show');
 Route::get('/stores/{store_url}', [ProductController::class, 'storeShow'])->name('store-show');
 Route::get('/stores', [ProductController::class, 'allStoreShow'])->name('allStore-show');
-
-// not riil
-
-// Route::get('/', function () {
-//     return view('index');
-// });
-// Route::get('/index', function () {
-//     return view('index');
-// });
-
-
-// Route::get('signin', function () {
-//     return view('signin');
-// });
-// Route::get('signup', function () {
-//     return view('signup');
-// });
-// Route::get('forgot', function () {
-//     return view('forgot-password');
-// });
-
-
-// Route::get('store', function () {
-//     return view('store-list');
-// });
-// Route::get('/about-us', function () {
-//     return view('about');
-// });
-// Route::get('/contact-us', function () {
-//     return view('contact');
-// });
-// Route::get('/cart', function () {
-//     return view('shop-cart');
-// });
-// Route::get('/checkout', function () {
-//     return view('shop-checkout');
-// });
-// Route::get('/account', function () {
-//     return view('account-settings');
-// });
-// Route::get('/account-settings', function () {
-//     return view('account-settings');
-// });
-// Route::get('/account-orders', function () {
-//     return view('account-orders');
-// });
-// Route::get('account-notification', function () {
-//     return view('account-notification');
-// });
-// Route::get('/account-address', function () {
-//     return view('account-address');
-// });
-// Route::get('/account-payment', function () {
-//     return view('account-payment-method');
-// });
-// Route::get('/wishlist', function () {
-//     return view('shop-wishlist');
-// });
-
-// Route::get('stores', function () {
-//     return view('store-list');
-// });
-// Route::get('store-draya', function () {
-//     return view('store-single');
-// });
-
-// Route::get('overview', function () {
-//     return view('overview');
-// });
-
-
-// Route::get('products', function () {
-//     return view('shop-grid');
-// });
-// Route::get('product-banner', function () {
-//     return view('shop-single');
-// });
-// Route::get('products-banner', function () {
-//     return view('shop-single');
-// });
 
 Route::fallback(function () {
     return view('404error');

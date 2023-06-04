@@ -127,6 +127,23 @@ GROUP BY c.ID_CATEGORY,p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category
         }
         return view('account-notification');
     }
+    public function checkoutPage()
+    {
+        if (!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST'])) {
+            return redirect()->route('loginpage');
+        }
+        $selectedProducts = Session::get('selectedProducts');
+
+        // If the selected products exist in the session
+        if ($selectedProducts) {
+            $selectedProducts = json_decode($selectedProducts, true);
+        } else {
+            $selectedProducts = []; // Set it as an empty array if no products are found
+        }
+
+        // Pass the selected products to the view
+        return view('checkout', ['selectedProducts' => $selectedProducts]);
+    }
     public function wishlist()
     {
         if (!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST'])) {

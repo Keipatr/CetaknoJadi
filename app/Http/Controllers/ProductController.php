@@ -320,15 +320,18 @@ GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS,
             return response()->json(['success' => true, 'quantity' => $cartQuantity[0]->QTY_CART]);
         }
     }
-    public function checkout(Request $request)
-{
-    // Retrieve the selected items from the request
-    $selectedItems = $request->input('selectedItems');
+    public function updateCheckout(Request $request)
+    {
+        $selectedProducts = $request->input('selectedProducts');
+        dd($selectedProducts);
+        // Save/update the selected products in the session as JSON
+        Session::put('selectedProducts', json_encode($selectedProducts));
 
-    // Perform further processing with the selected items
-    // For example, you can store them in the database or perform any other necessary actions
+        $subtotal = 0;
+        foreach ($selectedProducts as $product) {
+            $subtotal += $product['price'] * $product['quantity'];
+        }
 
-    // Return a response indicating the success of the checkout
-    return response()->json(['success' => true]);
-}
+        return response()->json(['message' => 'Selected products updated']);
+    }
 }
