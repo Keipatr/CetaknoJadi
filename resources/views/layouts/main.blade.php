@@ -41,13 +41,13 @@
     </script>
 
     <!-- Favicon icon-->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('images/favicon/logoTitleCetakno.ico')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('/images/favicon/logoTitleCetakno.ico')}}">
 
 
     <!-- Libs CSS -->
-    <link href="{{asset('libs/bootstrap-icons/font/bootstrap-icons.css')}}" rel="stylesheet">
-    <link href="{{asset('libs/feather-webfont/dist/feather-icons.css')}}" rel="stylesheet">
-    <link href="{{asset('libs/simplebar/dist/simplebar.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/libs/bootstrap-icons/font/bootstrap-icons.css')}}" rel="stylesheet">
+    <link href="{{asset('/libs/feather-webfont/dist/feather-icons.css')}}" rel="stylesheet">
+    <link href="{{asset('/libs/simplebar/dist/simplebar.min.css')}}" rel="stylesheet">
 
 
     <!-- Theme CSS -->

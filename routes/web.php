@@ -31,12 +31,12 @@ Route::post('/signup', [LoginController::class, 'signup'])
     ->name('signup');
 
 
-
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/cancelOrder', [HomeController::class, 'cancelOrder'])->name('cancelOrder');
 
 
-Route::get('/search', [SearchController::class, 'search']);
-Route::get('/search-products', [SearchController::class,'searchProducts']);
+Route::get('/search', [SearchController::class, 'search'])->name('search');
+Route::get('/search-products', [SearchController::class,'searchProducts'])->name('searchProducts');
 
 Route::post('/add-to-cart', [ProductController::class, 'addToCart']);
 Route::post('/add-to-wishlist', [ProductController::class, 'addToWishlist']);
@@ -46,7 +46,7 @@ Route::post('/cart/update', [ProductController::class, 'updateCartItem']);
 Route::post('/cart/update', [ProductController::class, 'updateCartItem']);
 Route::post('/updateCheckout', [ProductController::class, 'updateCheckout']);
 
-Route::get('/checkout', [HomeController::class, 'checkoutPage']);
+Route::get('/checkout', [HomeController::class, 'checkoutPage'])->name('checkoutPage');
 Route::get('/wishlist', [HomeController::class, 'wishlist'])->name('wishlist');
 Route::get('/cart', [HomeController::class, 'cart'])->name('cart');
 Route::get('/signin', [HomeController::class, 'loginpage'])->name('loginpage');

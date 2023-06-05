@@ -322,16 +322,31 @@ GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS,
     }
     public function updateCheckout(Request $request)
     {
-        $selectedProducts = $request->input('selectedProducts');
-        dd($selectedProducts);
-        // Save/update the selected products in the session as JSON
-        Session::put('selectedProducts', json_encode($selectedProducts));
-
+        $totalQuantity = 0;
         $subtotal = 0;
-        foreach ($selectedProducts as $product) {
-            $subtotal += $product['price'] * $product['quantity'];
-        }
+        $selectedProducts = $request->input('selectedProducts');
+        // dd($request->all());
+        if ($selectedProducts) {
 
-        return response()->json(['message' => 'Selected products updated']);
+            Session::put('selectedProducts', json_encode($selectedProducts));
+            $totalQuantity = 0;
+            $subtotal = 0;
+            foreach ($selectedProducts as $product) {
+                $subtotal += intval($product['realPrice']) * intval($product['quantity']);
+                $totalQuantity += intval($product['quantity']);
+            }
+            $subtotal = 'Rp ' . number_format($subtotal, 0, ',', '.');
+
+            return response()->json([
+                'message' => 'Selected products updated',
+                'subtotal' => $subtotal,
+                'totalQuantity' => $totalQuantity
+            ]);
+        }
+        return response()->json([
+            'message' => 'Selected products updated',
+            'subtotal' => 'Rp '. $subtotal,
+            'totalQuantity' => $totalQuantity
+        ]);
     }
 }

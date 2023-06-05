@@ -44,6 +44,7 @@
                                                     data-category-name="{{ $list->NAME_CATEGORY }}"
                                                     data-product-name="{{ $list->PRODUCT_NAME }}"
                                                     data-product-real="{{ $list->price }}"
+                                                    data-product-jenis="{{ $list->jenis }}"
                                                     onchange="updateSelectedProducts(this)">
                                                 </label>
                                             </div>
@@ -440,6 +441,9 @@
                             // Get all checked checkboxes
                             var checkboxes = document.querySelectorAll('.update-subtotal-checkbox:checked');
 
+                            // var totalQuantity = 0;
+                            // var subtotal = 0;
+
                             // Iterate through the checkboxes and add the selected products to the list
                             checkboxes.forEach(function(checkbox) {
                                 var productId = checkbox.dataset.productId;
@@ -449,7 +453,12 @@
                                 var categoryName = checkbox.dataset.categoryName;
                                 var productName = checkbox.dataset.productName;
                                 var realPrice = checkbox.dataset.productReal;
+                                var jenis = checkbox.dataset.productJenis;
                                 var quantity = checkbox.parentNode.parentNode.parentNode.querySelector('.quantity-field').value;
+
+                                // totalQuantity += parseInt(quantity);
+                                // subtotal += parseFloat(price) * parseInt(quantity);
+
                                 selectedProducts.push({
                                     productId: productId,
                                     containerId: containerId,
@@ -457,6 +466,7 @@
                                     price: price,
                                     categoryName: categoryName,
                                     productName: productName,
+                                    jenis: jenis,
                                     realPrice: realPrice,
                                     quantity: quantity
                                 });
@@ -473,12 +483,22 @@
                                 success: function(response) {
                                     // Handle success response
                                     // e.g., show a success message or redirect to a success page
+                                    updateTotalQuantity(response.totalQuantity);
+                                    updateSubtotal(response.subtotal);
                                 },
                                 error: function(xhr) {
                                     // Handle error response
                                     // e.g., display an error message to the user
                                 }
                             });
+                        }
+
+                        function updateTotalQuantity(quantity) {
+                            $('#totalitem').text(quantity);
+                        }
+
+                        function updateSubtotal(subtotal) {
+                            $('#sidebarSubtotal').text(subtotal);
                         }
                     </script>
 
@@ -494,18 +514,29 @@
                                                 <div>Item Subtotal</div>
 
                                             </div>
-                                            <span id="sidebarSubtotal">0.00</span>
+                                            <span id="sidebarSubtotal">Rp 0</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                                            <div class="me-auto">
+                                                <div>Total Quantity</div>
+
+                                            </div>
+                                            <span id="totalitem">0</span>
                                         </li>
                                     </ul>
 
                                 </div>
                                 <form method="" action="{{ url('checkout') }}">
-
+                                    @if (session('fail'))
+                                        <div class="alert alert-danger text-center">
+                                            {{ session('fail') }}
+                                        </div>
+                                    @endif
                                     <div class="d-grid mb-1 mt-4">
                                         <button
                                             class="btn btn-primary btn-lg d-flex justify-content-between align-items-center"
                                             type="submit">
-                                            Go to Checkout
+                                            Checkout
                                         </button>
                                     </div>
                                 </form>

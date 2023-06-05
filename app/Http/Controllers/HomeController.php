@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use App\Models\Customer;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Request as FacadeRequest;
 
 class HomeController extends Controller
 {
@@ -132,18 +132,59 @@ GROUP BY c.ID_CATEGORY,p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category
         if (!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST'])) {
             return redirect()->route('loginpage');
         }
-        $selectedProducts = Session::get('selectedProducts');
-
-        // If the selected products exist in the session
-        if ($selectedProducts) {
-            $selectedProducts = json_decode($selectedProducts, true);
+        if (!Session::has('selectedProducts')) {
+            return back()->with('fail', 'Select a Product ');
         } else {
-            $selectedProducts = []; // Set it as an empty array if no products are found
+            $selectedProducts = Session::get('selectedProducts');
+            // If the selected products exist in the session
+            if ($selectedProducts) {
+                $selectedProducts = json_decode($selectedProducts, true);
+            } else {
+                $selectedProducts = []; // Set it as an empty array if no products are found
+            }
+            if (Session::has('USERNAME_CUST')) {
+                $username = Session::get('USERNAME_CUST');
+            } else {
+                $username = Cookie::get('USERNAME_CUST');
+            }
+            $data = DB::select("
+            select * from customer where USERNAME_CUST='$username';
+            ");
+
+            $totalQuantity = 0;
+            $subtotal = 0;
+            foreach ($selectedProducts as $product) {
+                $subtotal += intval($product['realPrice']) * intval($product['quantity']);
+                $totalQuantity += intval($product['quantity']);
+            }
+            $formatSubtotal = 'Rp ' . number_format($subtotal, 0, ',', '.');
+
+            return view('shop-checkout', ['selectedProducts' => $selectedProducts
+                                        , 'data' => $data[0]
+                                        , 'totalQuantity' => $totalQuantity
+                                        , 'subtotal' => $formatSubtotal]);
+        }
+    }
+    public function cancelOrder()
+    {
+        if (session()->has('selectedProducts')) {
+            session()->pull('selectedProducts');
+            return redirect()->route('home');
+        }
+        return redirect()->route('home');
+    }
+    protected $request;
+    public function __construct(Request $request)
+    {
+        $currentRoute = FacadeRequest::route()->getName();
+        if ($currentRoute !== 'checkoutPage' && !Session::has('selectedProducts')) {
+            // remove the session selectedProducts
+            Session::pull('selectedProducts');
+            session()->forget('selectedProducts');
         }
 
-        // Pass the selected products to the view
-        return view('checkout', ['selectedProducts' => $selectedProducts]);
     }
+
     public function wishlist()
     {
         if (!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST'])) {
