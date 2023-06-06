@@ -29,6 +29,7 @@ LEFT JOIN review r ON r.ID_CONTAINER = co.ID_CONTAINER
 WHERE co.STATUS_DELETE = 0
     AND co.STATUS = 1
     AND s.STATUS_SHOP = 'Y'
+    AND p.ID_PRODUCT =1
     AND product_name = '$product_url'
     AND co.ID_CONTAINER = '" . Crypt::decryptString($id_container) . "'
 GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS, DESC_PRODUCT, NAME_CATEGORY, c.ID_CATEGORY, PRICE_PRODUCT;

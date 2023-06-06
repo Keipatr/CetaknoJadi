@@ -8,7 +8,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb mb-0">
                                 <li class="breadcrumb-item"><a href="{{ url('') }}">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Shop Cart</li>
+                                <li class="breadcrumb-item active" aria-current="page">Cart</li>
                             </ol>
                         </nav>
                     </div>
@@ -45,6 +45,8 @@
                                                     data-product-name="{{ $list->PRODUCT_NAME }}"
                                                     data-product-real="{{ $list->price }}"
                                                     data-product-jenis="{{ $list->jenis }}"
+                                                    data-product-shop="{{ $list->ID_SHOP }}"
+                                                    data-shop-id="{{ $list->ID_SHOP }}"
                                                     onchange="updateSelectedProducts(this)">
                                                 </label>
                                             </div>
@@ -53,7 +55,12 @@
                                                     class="img-fluid">
                                             </div>
                                             <div class="col-3">
-                                                <a href="shop-single.html" class="text-inherit">
+                                                {{-- <a href="{{ '/products/' . $list->NAME_SHOP . '/' . $list->PRODUCT_NAME . '?id=' . Crypt::encryptString($list->ID_CONTAINER) }}" class="text-muted"> --}}
+                                                <i class='fas fa-store-alt' style='font-size:12px'></i>
+                                                <small class="mb-0 text-muted">{{ $list->NAME_SHOP }}</small>
+                                                {{-- </a> --}}
+                                                <a href="{{ '/products/' . $list->NAME_SHOP . '/' . $list->PRODUCT_NAME . '?id=' . Crypt::encryptString($list->ID_CONTAINER) }}"
+                                                    class="text-inherit">
                                                     <h6 class="mb-0">{{ $list->PRODUCT_NAME }}</h6>
                                                 </a>
                                                 <span><small class="text-muted">{{ $list->NAME_CATEGORY }}</small></span>
@@ -115,7 +122,7 @@
 
 
                             <div class="d-flex justify-content-between mt-4">
-                                <a href="{{ url('') }}" class="btn btn-primary">Continue Shopping</a>
+                                <a href="{{ url('') }}" class="btn btn-primary">Back to Shopping</a>
                                 {{-- <a href="{{ url('cart') }}" class="btn btn-dark">Update Cart</a> --}}
                             </div>
 
@@ -435,14 +442,73 @@
                         });
 
                         // Function to update selected products in the session
+                        // function updateSelectedProducts() {
+                        //     var selectedProducts = [];
+
+                        //     // Get all checked checkboxes
+
+                        //     var checkboxes = document.querySelectorAll('.update-subtotal-checkbox:checked');
+
+                        //     // var totalQuantity = 0;
+                        //     // var subtotal = 0;
+
+                        //     // Iterate through the checkboxes and add the selected products to the list
+                        //     checkboxes.forEach(function(checkbox) {
+                        //         var productId = checkbox.dataset.productId;
+                        //         var containerId = checkbox.dataset.containerId;
+                        //         var image = checkbox.dataset.productImage;
+                        //         var price = checkbox.dataset.productPrice;
+                        //         var categoryName = checkbox.dataset.categoryName;
+                        //         var productName = checkbox.dataset.productName;
+                        //         var realPrice = checkbox.dataset.productReal;
+                        //         var jenis = checkbox.dataset.productJenis;
+                        //         var shop = checkbox.dataset.productShop;
+                        //         var quantity = checkbox.parentNode.parentNode.parentNode.querySelector('.quantity-field').value;
+
+                        //         // totalQuantity += parseInt(quantity);
+                        //         // subtotal += parseFloat(price) * parseInt(quantity);
+
+                        //         selectedProducts.push({
+                        //             productId: productId,
+                        //             containerId: containerId,
+                        //             image: image,
+                        //             price: price,
+                        //             categoryName: categoryName,
+                        //             productName: productName,
+                        //             jenis: jenis,
+                        //             realPrice: realPrice,
+                        //             quantity: quantity,
+                        //             shop: shop
+                        //         });
+                        //     });
+
+                        //     // Perform AJAX request to save/update the selected products in the session
+                        //     $.ajax({
+                        //         url: '/updateCheckout',
+                        //         type: 'POST',
+                        //         data: {
+                        //             _token: '{{ csrf_token() }}',
+                        //             selectedProducts: selectedProducts
+                        //         },
+                        //         success: function(response) {
+                        //             // Handle success response
+                        //             // e.g., show a success message or redirect to a success page
+                        //             updateTotalQuantity(response.totalQuantity);
+                        //             updateSubtotal(response.subtotal);
+                        //         },
+                        //         error: function(xhr) {
+                        //             // Handle error response
+                        //             // e.g., display an error message to the user
+                        //         }
+                        //     });
+                        // }
                         function updateSelectedProducts() {
                             var selectedProducts = [];
+                            var shopId = null;
+                            var isAnyCheckboxChecked = false;
 
                             // Get all checked checkboxes
                             var checkboxes = document.querySelectorAll('.update-subtotal-checkbox:checked');
-
-                            // var totalQuantity = 0;
-                            // var subtotal = 0;
 
                             // Iterate through the checkboxes and add the selected products to the list
                             checkboxes.forEach(function(checkbox) {
@@ -454,11 +520,15 @@
                                 var productName = checkbox.dataset.productName;
                                 var realPrice = checkbox.dataset.productReal;
                                 var jenis = checkbox.dataset.productJenis;
+                                var shop = checkbox.dataset.productShop;
                                 var quantity = checkbox.parentNode.parentNode.parentNode.querySelector('.quantity-field').value;
 
-                                // totalQuantity += parseInt(quantity);
-                                // subtotal += parseFloat(price) * parseInt(quantity);
+                                // Store the shop ID from the first selected checkbox
+                                if (shopId === null) {
+                                    shopId = shop;
+                                }
 
+                                // Add the selected product to the list
                                 selectedProducts.push({
                                     productId: productId,
                                     containerId: containerId,
@@ -468,9 +538,26 @@
                                     productName: productName,
                                     jenis: jenis,
                                     realPrice: realPrice,
-                                    quantity: quantity
+                                    quantity: quantity,
+                                    shop: shop
                                 });
+
+                                isAnyCheckboxChecked = true;
                             });
+
+                            // Enable/disable checkboxes based on the shop ID
+                            var checkboxesToUpdate = document.querySelectorAll('.update-subtotal-checkbox');
+                            checkboxesToUpdate.forEach(function(checkbox) {
+                                var checkboxShopId = checkbox.dataset.shopId;
+                                checkbox.disabled = (checkboxShopId !== shopId);
+                            });
+
+                            // Re-enable checkboxes if no checkbox is checked
+                            if (!isAnyCheckboxChecked) {
+                                checkboxesToUpdate.forEach(function(checkbox) {
+                                    checkbox.disabled = false;
+                                });
+                            }
 
                             // Perform AJAX request to save/update the selected products in the session
                             $.ajax({

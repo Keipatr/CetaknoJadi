@@ -104,6 +104,7 @@ GROUP BY c.ID_CATEGORY,p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category
         if (!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST'])) {
             return redirect()->route('loginpage');
         }
+        
         return view('account-orders');
     }
     public function address()
@@ -228,7 +229,7 @@ GROUP BY c.ID_CATEGORY,p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category
             }
 
             $cart = DB::select("
-            select NAME_SHOP,PRODUCT_NAME, NAME_CATEGORY,PRICE_PRODUCT as price, c.ID_CONTAINER,p.ID_PRODUCT,image,jenis,cw.QTY_CART,p.QTY_PRODUCT
+            select sh.ID_SHOP, NAME_SHOP,PRODUCT_NAME, NAME_CATEGORY,PRICE_PRODUCT as price, c.ID_CONTAINER,p.ID_PRODUCT,image,jenis,cw.QTY_CART,p.QTY_PRODUCT
             FROM product p, container c, cart cr,category ca, customer cu, cart_product cw, shop sh
         where p.ID_CONTAINER = c.ID_CONTAINER
         and sh.ID_SHOP = c.ID_SHOP
@@ -237,7 +238,8 @@ GROUP BY c.ID_CATEGORY,p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category
         and cr.ID_CART= cw.ID_CART
         and cw.ID_CONTAINER = c.ID_CONTAINER
         and cw.STATUS_DELETE = 0 AND
-             USERNAME_CUST = '$username';");
+             USERNAME_CUST = '$username'
+             order by sh.ID_SHOP, NAME_SHOP;");
             foreach ($cart as $list) {
                 $list->formatted_price = 'Rp ' . number_format($list->price, 0, ',', '.');
             }

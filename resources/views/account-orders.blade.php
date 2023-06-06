@@ -42,16 +42,6 @@
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link " href="{{ route('account-payment') }}"><i
-                                            class="feather-icon icon-credit-card me-2"></i>Payment Method</a>
-                                </li>
-                                <!-- nav item -->
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('account-notification') }}"><i
-                                            class="feather-icon icon-bell me-2"></i>Notification</a>
-                                </li>
-                                <!-- nav item -->
-                                <li class="nav-item">
                                     <hr>
                                 </li>
                                 <!-- nav item -->
@@ -89,8 +79,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!-- Table body -->
                                         <tr>
+
                                             <td class="align-middle border-top-0 w-0">
                                                 <a href="#"> <img src="images/products/dokumen.jpg"
                                                         alt="Ecommerce" class="icon-shape icon-xl"></a>
@@ -122,77 +112,6 @@
                                             <td class="align-middle border-top-0">
                                                 Rp. 15,000
                                             </td>
-                                            {{-- <td class="text-muted align-middle border-top-0">
-                                                <a href="#" class="text-inherit" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" data-bs-title="View"><i
-                                                        class="feather-icon icon-eye"></i></a>
-                                            </td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td class="align-middle border-top-0 w-0">
-                                                <a href="#"> <img src="images/products/Banner.jpg"
-                                                        alt="Ecommerce" class="icon-shape icon-xl"></a>
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                <a href="#" class="fw-semi-bold text-inherit">
-                                                    <h6 class="mb-0">Banner </h6>
-                                                </a>
-                                                <span><small class="text-muted">Kecil</small></span>
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                <a href="#" class="text-inherit">ID11020302
-                                                </a>
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                July 9, 2023
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                2
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                <span class="badge bg-danger">Cancel</span>
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                Rp. 6,000
-                                            </td>
-                                            {{-- <td class="text-muted align-middle border-top-0">
-                                                <a href="#" class="text-inherit" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" data-bs-title="View"><i
-                                                        class="feather-icon icon-eye"></i></a>
-                                            </td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td class="align-middle border-top-0 w-0">
-                                                <a href="#"> <img src="images/products/banner.jpg"
-                                                        alt="Ecommerce" class="icon-shape icon-xl"></a>
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                <a href="#" class="fw-semi-bold text-inherit">
-                                                    <h6 class="mb-0">Banner</h6>
-                                                </a>
-                                                <span><small class="text-muted">Sedang</small></span>
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                <a href="#" class="text-inherit">ID11020303
-                                                </a>
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                Oct 03, 2023
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                4
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                <span class="badge bg-success">Completed</span>
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                Rp. 18,000
-                                            </td>
-                                            {{-- <td class="text-muted align-middle border-top-0">
-                                                <a href="#" class="text-inherit" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" data-bs-title="View"><i
-                                                        class="feather-icon icon-eye"></i></a>
-                                            </td> --}}
                                         </tr>
                                     </tbody>
                                 </table>
@@ -231,16 +150,6 @@
                 <li class="nav-item">
                     <a class="nav-link " href="{{ route('account-address') }}"><i
                             class="feather-icon icon-map-pin me-2"></i>Address</a>
-                </li>
-                <!-- nav item -->
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('account-payment') }}"><i
-                            class="feather-icon icon-credit-card me-2"></i>Payment Method</a>
-                </li>
-                <!-- nav item -->
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('account-notification') }}"><i
-                            class="feather-icon icon-bell me-2"></i>Notification</a>
                 </li>
             </ul>
             <hr class="my-6">

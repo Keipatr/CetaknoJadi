@@ -142,15 +142,7 @@
                                             class="text-inherit">{{ $store->NAME_SHOP }}</a></h2>
                                     <div class="small text-muted">
                                     </div>
-                                    <div class="py-3">
-                                        <ul class="list-unstyled mb-0 small">
-                                            <li><span class="text-primary">Delivery</span>
-                                            </li>
-                                            <li>Pickup available</li>
-                                        </ul>
-                                    </div>
                                     <div>
-                                        <div class="badge text-bg-light border">7.5 km away</div>
                                     </div>
                                 </div>
                             </div>

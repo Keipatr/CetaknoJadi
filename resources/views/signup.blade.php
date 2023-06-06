@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <title>Cetakno - Printing Provider</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -26,21 +25,16 @@
     <!-- Favicon icon-->
     <link rel="shortcut icon" type="image/x-icon" href="/images/favicon/logoTitleCetakno.ico">
 
-
     <!-- Libs CSS -->
     <link href="/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="/libs/feather-webfont/dist/feather-icons.css" rel="stylesheet">
     <link href="/libs/simplebar/dist/simplebar.min.css" rel="stylesheet">
 
-
     <!-- Theme CSS -->
     <link rel="stylesheet" href="/css/theme.min.css">
-
-
 </head>
 
 <body>
-
     <!-- navigation -->
     <div class="border-bottom shadow-sm">
         <nav class="navbar navbar-light py-2">
@@ -51,7 +45,8 @@
                         class="d-inline-block align-text-top">
                 </a>
                 <span class="navbar-text">
-                    Already have an account? <a href="{{ url('signin') }}" style="color: black; text-decoration: none;"
+                    Already have an account? <a href="{{ url('signin') }}"
+                        style="color: black; text-decoration: none;"
                         onmouseover="this.style.color='green'; this.style.textDecoration='underline';"
                         onmouseout="this.style.color='black'; this.style.textDecoration='none';">Sign in</a>
                 </span>
@@ -59,10 +54,8 @@
         </nav>
     </div>
 
-
     <main>
         <!-- section -->
-
         <section class="my-lg-14 my-8">
             <!-- container -->
             <div class="container">
@@ -82,14 +75,14 @@
                             @csrf
                             <div class="row g-3">
                                 @if (session('success'))
-                                    <div class="alert alert-danger">
-                                        {{ session('success') }}
-                                    </div>
+                                <div class="alert alert-danger">
+                                    {{ session('success') }}
+                                </div>
                                 @endif
                                 @if (session('error'))
-                                    <div class="alert alert-danger">
-                                        {{ session('error') }}
-                                    </div>
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
                                 @endif
                                 <div class="col">
                                     <div class="form-group">
@@ -140,20 +133,15 @@
                                             required="required" name="ADDRESS_CUST" />
                                     </div>
                                 </div>
-
-
                                 <div class="col">
                                     <div class="form-group">
                                         <i class="fa fa-star fa-user"></i>
                                         <input class="form-control" type="text" placeholder="City"
-                                            required="required" name="CITY_CUST" id="cityInput"
-                                            autocomplete="off" />
+                                            required="required" name="CITY_CUST" id="cityInput" autocomplete="off" />
                                         <ul class="dropdown-menu" id="suggestionsDropdown"
                                             aria-labelledby="cityInput"></ul>
                                     </div>
                                 </div>
-
-
                                 <div class="col">
                                     <div class="form-group">
                                         <i class="fa fa-star fa-user"></i>
@@ -169,21 +157,16 @@
                                             href="#!">Privacy Policy</a></small></p>
                             </div>
                         </form>
-
-
                     </div>
                 </div>
             </div>
-
-
         </section>
     </main>
-
     <script>
         // Get the city input field element
         const cityInput = document.getElementById('cityInput');
         const suggestionsDropdown = document.getElementById('suggestionsDropdown');
-        const form = document.getElementById('checkoutForm');
+        const form = document.getElementsByTagName('form')[0];
 
         // Add event listeners
         cityInput.addEventListener('input', handleInput);
@@ -260,11 +243,6 @@
             }
         }
     </script>
-
-
-
-
-
     <!-- Footer -->
     @include('layouts.footer')
     <!-- Javascript-->
@@ -272,14 +250,9 @@
     <script src="/libs/jquery/dist/jquery.min.js"></script>
     <script src="/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/libs/simplebar/dist/simplebar.min.js"></script>
-
     <!-- Theme JS -->
     <script src="/js/theme.min.js"></script>
     <script src="/js/vendors/password.js"></script>
-
-
-
-
 </body>
 
 </html>
