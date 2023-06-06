@@ -27,6 +27,31 @@ class SearchController extends Controller
             return response()->json(['error' => 'Failed to fetch areas'], $response->status());
         }
     }
+    public function searchCities(Request $request)
+    {
+        $baseURL = env('BASE_URL');
+        $authKey = env('AUTH_KEY');
+
+        $search = $request->get('searchLocation');
+        $response = Http::withHeaders([
+            'Authorization' => $authKey,
+        ])->get($baseURL . '/api/v1/public/basic/suggestion', [
+            'search' => $search,
+        ]);
+        if ($response->ok()) {
+            $areas = $response->json();
+
+            $cities = [];
+            foreach ($areas as $area) {
+                $cities[] = ['name' => $area['name']];
+            }
+
+            return response()->json($cities);
+        } else {
+            return response()->json(['error' => 'Failed to fetch areas'], $response->status());
+        }
+
+    }
 
     public function searchProducts(Request $request)
 {

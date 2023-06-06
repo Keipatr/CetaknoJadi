@@ -140,13 +140,20 @@
                                             required="required" name="ADDRESS_CUST" />
                                     </div>
                                 </div>
+
+
                                 <div class="col">
                                     <div class="form-group">
                                         <i class="fa fa-star fa-user"></i>
                                         <input class="form-control" type="text" placeholder="City"
-                                            required="required" name="CITY_CUST" />
+                                            required="required" name="CITY_CUST" id="cityInput"
+                                            autocomplete="off" />
+                                        <ul class="dropdown-menu" id="suggestionsDropdown"
+                                            aria-labelledby="cityInput"></ul>
                                     </div>
                                 </div>
+
+
                                 <div class="col">
                                     <div class="form-group">
                                         <i class="fa fa-star fa-user"></i>
@@ -172,7 +179,87 @@
         </section>
     </main>
 
+    <script>
+        // Get the city input field element
+        const cityInput = document.getElementById('cityInput');
+        const suggestionsDropdown = document.getElementById('suggestionsDropdown');
+        const form = document.getElementById('checkoutForm');
 
+        // Add event listeners
+        cityInput.addEventListener('input', handleInput);
+        form.addEventListener('submit', handleSubmit);
+        document.addEventListener('click', handleClickOutside);
+
+        // Function to handle input changes
+        function handleInput() {
+            const search = cityInput.value;
+
+            // Make an AJAX request to fetch city suggestions
+            $.ajax({
+                url: '/search-city',
+                type: 'GET',
+                data: {
+                    searchLocation: search
+                },
+                success: function(response) {
+                    // Process the response and update the suggestions
+                    showSuggestions(response);
+                },
+                error: function(xhr) {
+                    // Handle error response if needed
+                }
+            });
+        }
+
+        // Function to display the suggestions
+        function showSuggestions(suggestions) {
+            // Clear any existing suggestions
+            clearSuggestions();
+
+            // Show the suggestions dropdown
+            suggestionsDropdown.style.display = 'block';
+
+            // Add suggestions as dropdown items
+            suggestions.forEach(suggestion => {
+                const dropdownItem = document.createElement('li');
+                dropdownItem.classList.add('dropdown-item');
+                dropdownItem.textContent = suggestion.name;
+                dropdownItem.addEventListener('click', () => {
+                    // Set the selected suggestion as the input value
+                    cityInput.value = suggestion.name;
+
+                    // Hide the suggestions dropdown
+                    suggestionsDropdown.style.display = 'none';
+                });
+                suggestionsDropdown.appendChild(dropdownItem);
+            });
+        }
+
+        // Function to clear the suggestions
+        function clearSuggestions() {
+            suggestionsDropdown.innerHTML = '';
+        }
+
+        // Function to handle form submission
+        function handleSubmit(event) {
+            const selectedCity = cityInput.value;
+
+            // Prevent form submission if a city is not selected
+            if (!selectedCity) {
+                event.preventDefault();
+                alert('Please select a city from the dropdown');
+            }
+        }
+
+        // Function to handle clicks outside the input field
+        function handleClickOutside(event) {
+            if (!cityInput.contains(event.target)) {
+                // Clear suggestions and hide the dropdown
+                clearSuggestions();
+                suggestionsDropdown.style.display = 'none';
+            }
+        }
+    </script>
 
 
 
