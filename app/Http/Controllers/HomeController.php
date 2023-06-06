@@ -159,10 +159,15 @@ GROUP BY c.ID_CATEGORY,p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category
             }
             $formatSubtotal = 'Rp ' . number_format($subtotal, 0, ',', '.');
 
-            return view('shop-checkout', ['selectedProducts' => $selectedProducts
-                                        , 'data' => $data[0]
-                                        , 'totalQuantity' => $totalQuantity
-                                        , 'subtotal' => $formatSubtotal]);
+            return view('shop-checkout', [
+                'selectedProducts' => $selectedProducts
+                ,
+                'data' => $data[0]
+                ,
+                'totalQuantity' => $totalQuantity
+                ,
+                'subtotal' => $formatSubtotal
+            ]);
         }
     }
     public function cancelOrder()
@@ -173,16 +178,10 @@ GROUP BY c.ID_CATEGORY,p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category
         }
         return redirect()->route('home');
     }
-    protected $request;
-    public function __construct(Request $request)
+    public function forgetSelectedProducts()
     {
-        $currentRoute = FacadeRequest::route()->getName();
-        if ($currentRoute !== 'checkoutPage' && !Session::has('selectedProducts')) {
-            // remove the session selectedProducts
-            Session::pull('selectedProducts');
-            session()->forget('selectedProducts');
-        }
-
+        Session::forget('selectedProducts');
+        return response()->json(['success' => true]);
     }
 
     public function wishlist()

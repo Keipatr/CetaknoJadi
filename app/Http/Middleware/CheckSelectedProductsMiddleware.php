@@ -11,12 +11,9 @@ class CheckSelectedProductsMiddleware
     public function handle($request, Closure $next)
     {
         $currentRouteName = Route::currentRouteName();
-
         if ($currentRouteName !== 'checkoutPage' && Session::has('selectedProducts')) {
             Session::forget('selectedProducts');
-            // return redirect()->route('cart');
         }
-
         return $next($request);
     }
 }

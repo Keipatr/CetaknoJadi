@@ -21,17 +21,67 @@
                 </div>
             </div>
         </div>
-        <!-- section -->
+
+        <script>
+            // Get the timer element
+            const timerElement = document.getElementById('timer');
+
+            // Calculate the target time by adding 2 hours to the current time
+            const targetTime = new Date();
+            targetTime.setTime(targetTime.getTime() + (2 * 60 * 60 * 1000));
+
+            // Start the timer
+            updateTimer();
+
+            function updateTimer() {
+                // Calculate the remaining time
+                const currentTime = new Date();
+                const remainingTime = targetTime - currentTime;
+
+                // Check if the remaining time is positive
+                if (remainingTime > 0) {
+                    // Convert the remaining time to hours, minutes, and seconds
+                    const hours = Math.floor((remainingTime / (1000 * 60 * 60)) % 24);
+                    const minutes = Math.floor((remainingTime / (1000 * 60)) % 60);
+                    const seconds = Math.floor((remainingTime / 1000) % 60);
+
+                    // Format the time and update the timer element
+                    const formattedTime = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':' +
+                        seconds.toString().padStart(2, '0');
+                    timerElement.textContent = formattedTime;
+
+                    // Schedule the next update after 1 second
+                    setTimeout(updateTimer, 1000);
+                } else {
+                    // Forget the selectedProducts
+                    forgetSelectedProducts();
+                }
+            }
+
+            function forgetSelectedProducts() {
+                // Perform an AJAX request to forget the selectedProducts
+                $.ajax({
+                    url: '{{ route('forgetSelectedProducts') }}',
+                    type: 'POST',
+                    success: function(response) {
+                        // Redirect to a different page or perform any other necessary action
+                        window.location.href = '{{ route('home') }}';
+                    },
+                    error: function(xhr) {
+                        // Handle error response if needed
+                    }
+                });
+            }
+        </script>
+
         <section class="mb-lg-14 mb-8 mt-8">
             <div class="container">
-                <!-- row -->
                 <div class="row">
-                    <!-- col -->
                     <div class="col-12">
                         <div>
                             <div class="mb-8">
-                                <!-- text -->
                                 <h1 class="fw-bold mb-0">Checkout</h1>
+                                <p class="mb-0" id="timer"></p>
                             </div>
                         </div>
                     </div>
@@ -53,11 +103,6 @@
                                             <i class="feather-icon icon-map-pin me-2 text-muted"></i>Delivery
                                             Address
                                         </a>
-                                        <!-- btn -->
-                                        {{-- <a href="#" class="btn btn-outline-primary btn-sm"
-                                            data-bs-toggle="modal" data-bs-target="#addAddressModal">Add a new
-                                            address </a> --}}
-                                        <!-- collapse -->
                                     </div>
                                     <div id="flush-collapseOne" class="accordion-collapse collapse show"
                                         data-bs-parent="#accordionFlushExample">

@@ -33,6 +33,7 @@ Route::post('/signup', [LoginController::class, 'signup'])
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('/cancelOrder', [HomeController::class, 'cancelOrder'])->name('cancelOrder');
+Route::post('/forget-selected-products', [HomeController::class, 'forgetSelectedProducts'])->name('forgetSelectedProducts');
 
 
 Route::get('/search', [SearchController::class, 'search'])->name('search');
