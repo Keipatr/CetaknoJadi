@@ -12,7 +12,7 @@ class CheckSelectedProductsMiddleware
     {
         $currentRouteName = Route::currentRouteName();
         if ($currentRouteName !== 'checkoutPage' && Session::has('selectedProducts')) {
-            Session::forget('selectedProducts');
+            // Session::forget('selectedProducts');
         }
         return $next($request);
     }

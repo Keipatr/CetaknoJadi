@@ -142,6 +142,8 @@
                                             aria-labelledby="cityInput"></ul>
                                     </div>
                                 </div>
+                                <input class="form-control" type="hidden"
+                                            required="required" name="ID_CITY" id="cityInputs" autocomplete="off" />
                                 <div class="col">
                                     <div class="form-group">
                                         <i class="fa fa-star fa-user"></i>
@@ -165,6 +167,7 @@
     <script>
         // Get the city input field element
         const cityInput = document.getElementById('cityInput');
+        const cityInputs = document.getElementById('cityInputs');
         const suggestionsDropdown = document.getElementById('suggestionsDropdown');
         const form = document.getElementsByTagName('form')[0];
 
@@ -210,7 +213,7 @@
                 dropdownItem.addEventListener('click', () => {
                     // Set the selected suggestion as the input value
                     cityInput.value = suggestion.name;
-
+                    cityInputs.value = suggestion.id;
                     // Hide the suggestions dropdown
                     suggestionsDropdown.style.display = 'none';
                 });

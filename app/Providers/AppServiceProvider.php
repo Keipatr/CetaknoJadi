@@ -28,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer('layouts.header', function ($view) {
             $data = array();
             $cart = array();
+            $cat = array();
             if (Session::has('USERNAME_CUST') || isset($_COOKIE['USERNAME_CUST'])) {
                 if (Session::has('USERNAME_CUST')) {
                     $username = Session::get('USERNAME_CUST');
@@ -44,19 +45,22 @@ class AppServiceProvider extends ServiceProvider
                 AND ca.ID_CART= c.ID_CART AND
                  USERNAME_CUST = '$username';");
                 $cart = DB::select("
-            select PRODUCT_NAME,image, NAME_CATEGORY,PRICE_PRODUCT as price FROM product p, container c, cart cr,category ca, customer cu, cart_product cw
-        where p.ID_CONTAINER = c.ID_CONTAINER
-        and cr.ID_CART = cu.ID_CART
-        and ca.ID_CATEGORY = c.ID_CATEGORY
-        and cr.ID_CART= cw.ID_CART
-        and cw.ID_CONTAINER = c.ID_CONTAINER
-        and cw.STATUS_DELETE = 0 AND
-             USERNAME_CUST = '$username';");
+                select PRODUCT_NAME,image, NAME_CATEGORY,PRICE_PRODUCT as price FROM product p, container c, cart cr,category ca, customer cu, cart_product cw
+                where p.ID_CONTAINER = c.ID_CONTAINER
+                and cr.ID_CART = cu.ID_CART
+                and ca.ID_CATEGORY = c.ID_CATEGORY
+                and cr.ID_CART= cw.ID_CART
+                and cw.ID_CONTAINER = c.ID_CONTAINER
+                and cw.STATUS_DELETE = 0 AND
+                USERNAME_CUST = '$username';");
                 foreach ($cart as $list) {
                     $list->formatted_price = 'Rp ' . number_format($list->price, 0, ',', '.');
                 }
             }
-            $view->with('data', $data)->with('cart',$cart);
+            $cat = DB::select("
+            SELECT * FROM category where STATUS_DELETE = 0;
+            ");
+            $view->with('data', $data)->with('cat',$cat)->with('cart',$cart);
         });
     }
 }

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Session;
 
 class SearchController extends Controller
 {
@@ -17,8 +19,8 @@ class SearchController extends Controller
         $response = Http::withHeaders([
             'Authorization' => $authKey,
         ])->get($baseURL . '/api/v1/public/basic/suggestion', [
-            'search' => $search,
-        ]);
+                'search' => $search,
+            ]);
 
         if ($response->ok()) {
             $areas = $response->json();
@@ -36,14 +38,17 @@ class SearchController extends Controller
         $response = Http::withHeaders([
             'Authorization' => $authKey,
         ])->get($baseURL . '/api/v1/public/basic/suggestion', [
-            'search' => $search,
-        ]);
+                'search' => $search,
+            ]);
         if ($response->ok()) {
             $areas = $response->json();
 
             $cities = [];
             foreach ($areas as $area) {
-                $cities[] = ['name' => $area['name']];
+                $cities[] = [
+                    'name' => $area['name'],
+                    'id' => $area['id']
+                ];
             }
 
             return response()->json($cities);
@@ -52,32 +57,58 @@ class SearchController extends Controller
         }
 
     }
+    public function getPrice(Request $request)
+    {
+        $baseURL = env('BASE_URL');
+        $authKey = env('AUTH_KEY');
 
-    public function searchProducts(Request $request)
-{
-    $searchQuery = $request->get('searchProduct');
+        if (Session::has('USERNAME_CUST')) {
+            $username = Session::get('USERNAME_CUST');
+        } else {
+            $username = Cookie::get('USERNAME_CUST');
+        }
+        $cityID = DB::select("select ID_CITY from customer where USERNAME_CUST = '$username'");
 
-    // Perform the product search query
-    $products = DB::table('product')
-        ->join('container', 'product.ID_CONTAINER', '=', 'container.ID_CONTAINER')
-        ->join('category', 'category.ID_CATEGORY', '=', 'container.ID_CATEGORY')
-        ->where('product.PRODUCT_NAME', 'LIKE', "%$searchQuery%")
-        ->select('product.PRODUCT_NAME', 'container.ID_CONTAINER')
-        ->get();
+        $response = Http::withHeaders([
+            'Authorization' => $authKey,
+        ])->get($baseURL . '/api/v1/public/basic/rate?id='.$cityID[0]->ID_CITY);
 
-    // Prepare the search results array
-    $results = [];
+        if ($response->ok()) {
+            $data = $response->json();
+            return response()->json(['data' => $data]);
+        }
+        else
+        {
+            return response()->json(['error' => 'Failed to fetch areas'], $response->status());
+        }
 
-    // Add product results to the array
-    foreach ($products as $product) {
-        $results[] = [
-            'name' => $product->PRODUCT_NAME,
-            'url' => '/products/' . $product->ID_CONTAINER, // Replace with the actual product URL or ID
-        ];
     }
 
-    // Return the search results as JSON
-    return response()->json($results);
-}
+    public function searchProducts(Request $request)
+    {
+        $searchQuery = $request->get('searchProduct');
+
+        // Perform the product search query
+        $products = DB::table('product')
+            ->join('container', 'product.ID_CONTAINER', '=', 'container.ID_CONTAINER')
+            ->join('category', 'category.ID_CATEGORY', '=', 'container.ID_CATEGORY')
+            ->where('product.PRODUCT_NAME', 'LIKE', "%$searchQuery%")
+            ->select('product.PRODUCT_NAME', 'container.ID_CONTAINER')
+            ->get();
+
+        // Prepare the search results array
+        $results = [];
+
+        // Add product results to the array
+        foreach ($products as $product) {
+            $results[] = [
+                'name' => $product->PRODUCT_NAME,
+                'url' => '/products/' . $product->ID_CONTAINER, // Replace with the actual product URL or ID
+            ];
+        }
+
+        // Return the search results as JSON
+        return response()->json($results);
+    }
 
 }

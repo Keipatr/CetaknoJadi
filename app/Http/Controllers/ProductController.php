@@ -85,6 +85,9 @@ GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS,
 
         $currentPage = $request->input('page', 1); // Get the current page from the request
 
+        $cat = DB::select("
+            SELECT * FROM category where STATUS_DELETE = 0;
+            ");
         // Slice the collection to get the products for the current page
         $currentPageProducts = $products->slice(($currentPage - 1) * $perPage, $perPage)->all();
 
@@ -99,7 +102,7 @@ GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS,
         foreach ($paginator as $product) {
             $product->formatted_price = 'Rp ' . number_format($product->price, 0, ',', '.');
         }
-        return view('shop-grid', compact('paginator', 'category_url'));
+        return view('shop-grid', compact('paginator', 'category_url','cat'));
     }
     public function storeShow($store_url)
     {
@@ -349,5 +352,14 @@ GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS,
             'subtotal' => 'Rp '. $subtotal,
             'totalQuantity' => $totalQuantity
         ]);
+    }
+    public function placeOrder(Request $request){
+        dd($request->all());
+        // DB::insert("");
+
+
+
+
+        // return redirect()->route('home');
     }
 }

@@ -27,18 +27,8 @@
                             <ul class="nav flex-column nav-pills nav-pills-dark">
                                 <li class="nav-item">
                                     <!-- nav link -->
-                                    <a class="nav-link active" aria-current="page" href="{{ route('account-orders') }}"><i
+                                    <a class="nav-link active" aria-current="page" href="{{ route('my-account') }}"><i
                                             class="feather-icon icon-shopping-bag me-2"></i>Your Orders</a>
-                                </li>
-                                <!-- nav item -->
-                                <li class="nav-item">
-                                    <a class="nav-link " href="{{ route('my-account') }}"><i
-                                            class="feather-icon icon-settings me-2"></i>Settings</a>
-                                </li>
-                                <!-- nav item -->
-                                <li class="nav-item">
-                                    <a class="nav-link " href="{{ route('account-address') }}"><i
-                                            class="feather-icon icon-map-pin me-2"></i>Address</a>
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
@@ -79,40 +69,46 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($data as $list)
                                         <tr>
-
                                             <td class="align-middle border-top-0 w-0">
-                                                <a href="#"> <img src="images/products/dokumen.jpg"
+                                                <a href="{{ '/products/' . $list->NAME_SHOP . '/' . $list->PRODUCT_NAME . '?id=' . Crypt::encryptString($list->ID_CONTAINER) }}"> <img src="{{'/images/all/'.$list->image}}"
                                                         alt="Ecommerce" class="icon-shape icon-xl"></a>
 
                                             </td>
                                             <td class="align-middle border-top-0">
 
-                                                <a href="#" class="fw-semi-bold text-inherit">
-                                                    <h6 class="mb-0">Print A4</h6>
+                                                <a href="{{ '/products/' . $list->NAME_SHOP . '/' . $list->PRODUCT_NAME . '?id=' . Crypt::encryptString($list->ID_CONTAINER) }}"
+                                                    class="fw-semi-bold text-inherit">
+                                                    <h6 class="mb-0" style="color: black;" onmouseover="this.style.color='green';" onmouseout="this.style.color='black';">
+                                                        {{ $list->PRODUCT_NAME }}
+                                                    </h6>
+
                                                 </a>
-                                                <span><small class="text-muted">Warna</small></span>
+                                                <span><small class="text-muted">{{$list->jenis}}</small></span>
 
                                             </td>
                                             <td class="align-middle border-top-0">
-                                                <a href="#" class="text-inherit">ID11020301</a>
+                                                {{$list->ID_INVOICE}}
 
                                             </td>
                                             <td class="align-middle border-top-0">
-                                                March 5, 2023
+                                                {{$list->DATE}}
 
                                             </td>
                                             <td class="align-middle border-top-0">
-                                                1
-
+                                                {{$list->QTY_DETAIL}}
                                             </td>
                                             <td class="align-middle border-top-0">
-                                                <span class="badge bg-warning">Processing</span>
+                                                <span class="badge {{ $list->STATUS === 'Completed' ? 'bg-success' : 'bg-warning' }}">
+                                                    {{ $list->STATUS }}
+                                                </span>
                                             </td>
                                             <td class="align-middle border-top-0">
-                                                Rp. 15,000
+                                                {{$list->formatted_price}}
                                             </td>
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -138,18 +134,8 @@
             <ul class="nav flex-column nav-pills nav-pills-dark">
                 <!-- nav item -->
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('account-orders') }}"><i
+                    <a class="nav-link active" aria-current="page" href="{{ route('my-account') }}"><i
                             class="feather-icon icon-shopping-bag me-2"></i>Your Orders</a>
-                </li>
-                <!-- nav item -->
-                <li class="nav-item">
-                    <a class="nav-link " href="{{ route('my-account') }}"><i
-                            class="feather-icon icon-settings me-2"></i>Settings</a>
-                </li>
-                <!-- nav item -->
-                <li class="nav-item">
-                    <a class="nav-link " href="{{ route('account-address') }}"><i
-                            class="feather-icon icon-map-pin me-2"></i>Address</a>
                 </li>
             </ul>
             <hr class="my-6">

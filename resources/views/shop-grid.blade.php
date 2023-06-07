@@ -20,8 +20,11 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb mb-0">
                                 <li class="breadcrumb-item"><a href="{{ url('') }}">Home</a></li>
-                                <li class="breadcrumb-item"><a href="{{ route('category-show', ['category_url' => 'all-product']) }}">Products</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">{{ $category_url === 'all-product' ? 'All Products' : $category_url }}</li>
+                                <li class="breadcrumb-item"><a
+                                        href="{{ route('category-show', ['category_url' => 'all-product']) }}">Products</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    {{ $category_url === 'all-product' ? 'All Products' : $category_url }}</li>
                             </ol>
                         </nav>
                     </div>
@@ -45,144 +48,24 @@
                                     <h5 class="mb-3">Categories</h5>
                                     <ul class="nav nav-category" id="categoryCollapseMenu">
                                         <li class="nav-item border-bottom w-100 collapsed">
-                                            <a href="{{ route('category-show', ['category_url' => 'all-product']) }}" class="nav-link">
+                                            <a href="{{ route('category-show', ['category_url' => 'all-product']) }}"
+                                                class="nav-link">
                                                 All Products
                                             </a>
                                         </li>
-
-
-                                        <li class="nav-item border-bottom w-100 collapsed" data-bs-toggle="collapse"
-                                            data-bs-target="#categoryFlushOne" aria-expanded="false"
-                                            aria-controls="categoryFlushOne"><a href="{{ url('products') }}"
-                                                class="nav-link">Cetak Kalender
-                                            </a>
-                                        </li>
-                                        <li class="nav-item border-bottom w-100 collapsed" data-bs-toggle="collapse"
-                                            data-bs-target="#flush-collapseTwo" aria-expanded="false"
-                                            aria-controls="flush-collapseTwo"><a href="{{ url('products') }}"
-                                                class="nav-link">
-                                                Kartu Nama undangan & Foto
-                                            </a>
-                                        </li>
-                                        <li class="nav-item border-bottom w-100 collapsed" data-bs-toggle="collapse"
-                                            data-bs-target="#flush-collapseThree" aria-expanded="false"
-                                            aria-controls="flush-collapseThree"> <a href="{{ url('products') }}"
-                                                class="nav-link">Dokumen
-                                            </a>
-                                        </li>
-                                        <li class="nav-item border-bottom w-100 collapsed" data-bs-toggle="collapse"
-                                            data-bs-target="#flush-collapseFour" aria-expanded="false"
-                                            aria-controls="flush-collapseFour"> <a href="{{ url('products') }}"
-                                                class="nav-link">Media Promosi
-                                            </a>
-                                        </li>
-                                        <li class="nav-item border-bottom w-100 collapsed" data-bs-toggle="collapse"
-                                            data-bs-target="#flush-collapseFive" aria-expanded="false"
-                                            aria-controls="flush-collapseFive"> <a href="{{ url('products') }}"
-                                                class="nav-link">Print Offset
-                                            </a>
-                                        </li>
-                                        <li class="nav-item border-bottom w-100 collapsed" data-bs-toggle="collapse"
-                                            data-bs-target="#flush-collapseSix" aria-expanded="false"
-                                            aria-controls="flush-collapseSix"> <a href="{{ url('products') }}"
-                                                class="nav-link">Spanduk & Banner
-                                            </a>
-                                        </li>
-                                        <li class="nav-item border-bottom w-100 collapsed" data-bs-toggle="collapse"
-                                            data-bs-target="#flush-collapseSeven" aria-expanded="false"
-                                            aria-controls="flush-collapseSeven"> <a href="{{ url('products') }}"
-                                                class="nav-link">Kaos & Kain
-                                            </a>
-                                        </li>
-
+                                        @foreach ($cat as $list)
+                                            <li class="nav-item border-bottom w-100 collapsed"><a
+                                                    href="{{ url('/categories/' . $list->NAME_CATEGORY . '?id=' . Crypt::encryptString($list->ID_CATEGORY)) }}"
+                                                    class="nav-link">{{ $list->NAME_CATEGORY }}
+                                                </a>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
 
 
 
-                                {{-- <div class="mb-8">
-                                    <h5 class="mb-3">Price</h5>
-                                    <div>
-                                        <div id="priceRange" class="mb-3"></div>
-                                        <small class="text-muted">Price:</small> <span id="priceRange-value"
-                                            class="small"></span>
-                                    </div>
-                                </div> --}}
-                                {{-- <div class="mb-8">
-                                    <h5 class="mb-3">Rating</h5>
-                                    <div>
-                                        <div class="form-check mb-2">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="ratingFive">
-                                            <label class="form-check-label" for="ratingFive">
-                                                <i class="bi bi-star-fill text-warning"></i>
-                                                <i class="bi bi-star-fill text-warning "></i>
-                                                <i class="bi bi-star-fill text-warning "></i>
-                                                <i class="bi bi-star-fill text-warning "></i>
-                                                <i class="bi bi-star-fill text-warning "></i>
-                                            </label>
-                                        </div>
-                                        <div class="form-check mb-2">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="ratingFour" checked>
-                                            <label class="form-check-label" for="ratingFour">
-                                                <i class="bi bi-star-fill text-warning"></i>
-                                                <i class="bi bi-star-fill text-warning "></i>
-                                                <i class="bi bi-star-fill text-warning "></i>
-                                                <i class="bi bi-star-fill text-warning "></i>
-                                                <i class="bi bi-star text-warning"></i>
-                                            </label>
-                                        </div>
-                                        <div class="form-check mb-2">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="ratingThree">
-                                            <label class="form-check-label" for="ratingThree">
-                                                <i class="bi bi-star-fill text-warning"></i>
-                                                <i class="bi bi-star-fill text-warning "></i>
-                                                <i class="bi bi-star-fill text-warning "></i>
-                                                <i class="bi bi-star text-warning"></i>
-                                                <i class="bi bi-star text-warning"></i>
-                                            </label>
-                                        </div>
-                                        <div class="form-check mb-2">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="ratingTwo">
-                                            <label class="form-check-label" for="ratingTwo">
-                                                <i class="bi bi-star-fill text-warning"></i>
-                                                <i class="bi bi-star-fill text-warning"></i>
-                                                <i class="bi bi-star text-warning"></i>
-                                                <i class="bi bi-star text-warning"></i>
-                                                <i class="bi bi-star text-warning"></i>
-                                            </label>
-                                        </div>
-                                        <div class="form-check mb-2">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="ratingOne">
-                                            <label class="form-check-label" for="ratingOne">
-                                                <i class="bi bi-star-fill text-warning"></i>
-                                                <i class="bi bi-star text-warning"></i>
-                                                <i class="bi bi-star text-warning"></i>
-                                                <i class="bi bi-star text-warning"></i>
-                                                <i class="bi bi-star text-warning"></i>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div> --}}
-                                {{-- <div class="mb-8 position-relative">
-                                        <!-- Banner Design -->
-                                        <!-- Banner Content -->
-                                        <div class="position-absolute p-5 py-8">
-                                            <h3 class="mb-0">Fresh Fruits </h3>
-                                            <p>Get Upto 25% Off</p>
-                                            <a href="#" class="btn btn-dark">Shop Now<i
-                                                    class="feather-icon icon-arrow-right ms-1"></i></a>
-                                        </div>
-                                        <!-- Banner Content -->
-                                        <!-- Banner Image -->
-                                        <!-- img --><img src="/images/banner/assortment-citrus-fruits.png" alt=""
-                                            class="img-fluid rounded ">
-                                        <!-- Banner Image -->
-                                    </div> --}}
+
                             </div>
                         </div>
                     </aside>
@@ -204,40 +87,22 @@
                                 </p>
                             </div>
 
-                            {{-- <div class="d-md-flex justify-content-between align-items-center">
+                            <div class="d-md-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div>
-
                                     </div>
                                     <div class="ms-2 d-lg-none">
                                         <a class="btn btn-outline-gray-400 text-muted" data-bs-toggle="offcanvas"
-                                            href="#offcanvasCategory" role="button"
-                                            aria-controls="offcanvasCategory"><svg xmlns="http://www.w3.org/2000/svg"
-                                                width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round" class="feather feather-filter me-2">
-                                                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3">
-                                                </polygon>
+                                            href="#offcanvasCategory" role="button" aria-controls="offcanvasCategory"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-filter me-2">
+                                                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
                                             </svg> Filters</a>
                                     </div>
                                 </div>
-
-                                <div class="d-flex mt-2 mt-lg-0">
-                                    <div>
-                                        <!-- select option -->
-                                        <select class="form-select">
-                                            <option selected>Sort by: Featured</option>
-                                            <option value="Low to High">Price: Low to High</option>
-                                            <option value="High to Low"> Price: High to Low</option>
-                                            <option value="Release Date"> Release Date</option>
-                                            <option value="Avg. Rating"> Avg. Rating</option>
-
-                                        </select>
-                                    </div>
-
-                                </div>
-
-                            </div> --}}
+                            </div>
                         </div>
 
                         <div class="row g-4 row-cols-xl-4 row-cols-lg-3 row-cols-2 row-cols-md-2 mt-2">

@@ -61,7 +61,7 @@
                                                 {{-- </a> --}}
                                                 <a href="{{ '/products/' . $list->NAME_SHOP . '/' . $list->PRODUCT_NAME . '?id=' . Crypt::encryptString($list->ID_CONTAINER) }}"
                                                     class="text-inherit">
-                                                    <h6 class="mb-0">{{ $list->PRODUCT_NAME }}</h6>
+                                                    <h6 class="mb-0">{{ $list->PRODUCT_NAME }} @if($list->jenis) - {{ $list->jenis }} @endif</h6>
                                                 </a>
                                                 <span><small class="text-muted">{{ $list->NAME_CATEGORY }}</small></span>
                                                 <div class="mt-2 small lh-1">

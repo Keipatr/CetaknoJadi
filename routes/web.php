@@ -37,6 +37,7 @@ Route::post('/forget-selected-products', [HomeController::class, 'forgetSelected
 
 Route::get('/search-city', [SearchController::class, 'searchCities'])->name('searchCities');
 Route::get('/search', [SearchController::class, 'search'])->name('search');
+// Route::get('/get-price', [SearchController::class, 'getPrice'])->name('getPrice');
 Route::get('/search-products', [SearchController::class,'searchProducts'])->name('searchProducts');
 
 Route::post('/add-to-cart', [ProductController::class, 'addToCart']);
@@ -46,6 +47,7 @@ Route::post('/cart/delete', [ProductController::class, 'deleteCartItem']);
 Route::post('/cart/update', [ProductController::class, 'updateCartItem']);
 Route::post('/cart/update', [ProductController::class, 'updateCartItem']);
 Route::post('/updateCheckout', [ProductController::class, 'updateCheckout']);
+Route::post('/place-order', [ProductController::class, 'placeOrder']);
 
 Route::get('/checkout', [HomeController::class, 'checkoutPage'])->name('checkoutPage');
 Route::get('/wishlist', [HomeController::class, 'wishlist'])->name('wishlist');
@@ -56,11 +58,11 @@ Route::get('/signup', [HomeController::class, 'signup'])->name('signup');
 Route::get('/about-us', [HomeController::class, 'about'])->name('about-us');
 Route::get('/contact-us', [HomeController::class, 'contact'])->name('contact-us');
 
-Route::get('/my-account', [HomeController::class, 'viewAccount'])->name('my-account');
-Route::get('/account-orders', [HomeController::class, 'orders'])->name('account-orders');
-Route::get('/account-address', [HomeController::class, 'address'])->name('account-address');
-Route::get('/account-payment', [HomeController::class, 'payment'])->name('account-payment');
-Route::get('/account-notification', [HomeController::class, 'notification'])->name('account-notification');
+// Route::get('/my-account', [HomeController::class, 'viewAccount'])->name('my-account');
+Route::get('/account-orders', [HomeController::class, 'viewAccount'])->name('my-account');
+// Route::get('/account-address', [HomeController::class, 'address'])->name('account-address');
+// Route::get('/account-payment', [HomeController::class, 'payment'])->name('account-payment');
+// Route::get('/account-notification', [HomeController::class, 'notification'])->name('account-notification');
 
 Route::get('/products/{store_url}/{product_url}', [ProductController::class, 'productShow'])->name('product-show');
 Route::get('/categories/{category_url}', [ProductController::class, 'categoryShow'])->name('category-show');

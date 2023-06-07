@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Request as FacadeRequest;
@@ -96,37 +97,33 @@ GROUP BY c.ID_CATEGORY,p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category
     {
         if (!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST'])) {
             return redirect()->route('loginpage');
+        } else {
+            if (Session::has('USERNAME_CUST')) {
+                $username = Session::get('USERNAME_CUST');
+            } else {
+                $username = Cookie::get('USERNAME_CUST');
+            }
+            $data = DB::select("
+                select pi.ID_INVOICE, co.ID_CONTAINER,p.ID_PRODUCT,s.NAME_SHOP,
+                p.PRODUCT_NAME, pi.QTY_DETAIL, pi.PRICE_DETAIL,
+                pi.SUBTOTAL_DETAIL, date_format(i.DATE_INVOICE,'%M %d, %Y') as DATE,i.STATUS,image,jenis
+                from product_invoice pi, invoice i,
+                customer c, container co, product p, shop s
+                where  pi.ID_INVOICE = i.ID_INVOICE
+                and c.ID_CUSTOMER = i.ID_CUSTOMER
+                and pi.ID_CONTAINER = co.ID_CONTAINER
+                and pi.ID_PRODUCT = p.ID_PRODUCT
+                and co.ID_CONTAINER = p.ID_container
+                and i.ID_SHOP = s.ID_SHOP
+                and i.STATUS_DELETE = 0
+                and USERNAME_CUST = '$username';
+            ");
+            foreach ($data as $product) {
+                $product->formatted_price = 'Rp ' . number_format($product->SUBTOTAL_DETAIL, 0, ',', '.');
+            }
+
+            return view('account-orders', compact('data'));
         }
-        return view('account-settings');
-    }
-    public function orders()
-    {
-        if (!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST'])) {
-            return redirect()->route('loginpage');
-        }
-        
-        return view('account-orders');
-    }
-    public function address()
-    {
-        if (!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST'])) {
-            return redirect()->route('loginpage');
-        }
-        return view('account-address');
-    }
-    public function payment()
-    {
-        if (!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST'])) {
-            return redirect()->route('loginpage');
-        }
-        return view('account-payment-method');
-    }
-    public function notification()
-    {
-        if (!Session::has('USERNAME_CUST') && !isset($_COOKIE['USERNAME_CUST'])) {
-            return redirect()->route('loginpage');
-        }
-        return view('account-notification');
     }
     public function checkoutPage()
     {
@@ -151,7 +148,7 @@ GROUP BY c.ID_CATEGORY,p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category
             $data = DB::select("
             select * from customer where USERNAME_CUST='$username';
             ");
-
+            $payment = DB::select("select * from payment where STATUS_DELETE = 0;");
             $totalQuantity = 0;
             $subtotal = 0;
             foreach ($selectedProducts as $product) {
@@ -160,15 +157,39 @@ GROUP BY c.ID_CATEGORY,p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category
             }
             $formatSubtotal = 'Rp ' . number_format($subtotal, 0, ',', '.');
 
-            return view('shop-checkout', [
-                'selectedProducts' => $selectedProducts
-                ,
-                'data' => $data[0]
-                ,
-                'totalQuantity' => $totalQuantity
-                ,
-                'subtotal' => $formatSubtotal
-            ]);
+            $baseURL = env('BASE_URL');
+            $authKey = env('AUTH_KEY');
+
+            $cityID = DB::select("select ID_CITY from customer where USERNAME_CUST = '$username'");
+
+            $response = Http::withHeaders([
+                'Authorization' => $authKey,
+            ])->get($baseURL . '/api/v1/public/basic/rate?id=' . $cityID[0]->ID_CITY);
+
+            if ($response->ok()) {
+                $delivery = $response->json();
+                $sicepat = $delivery['sicepat'];
+                $anteraja = $delivery['anteraja'];
+                foreach ($sicepat as &$list) {
+                    $list['formatted_rates'] = 'Rp ' . number_format($list['rates'], 0, ',', '.');
+                }
+
+                foreach ($anteraja as &$list) {
+                    $list['formatted_rates'] = 'Rp ' . number_format($list['rates'], 0, ',', '.');
+                }
+                // dd($sicepat);
+                return view('shop-checkout', [
+                    'selectedProducts' => $selectedProducts,
+                    'data' => $data[0],
+                    'totalQuantity' => $totalQuantity,
+                    'subtotal' => $formatSubtotal,
+                    'sicepat' => $sicepat,
+                    'anteraja' => $anteraja,
+                    'payment' => $payment
+                ]);
+            } else {
+                return back()->with('fail', 'Add your address');
+            }
         }
     }
     public function cancelOrder()
@@ -199,13 +220,14 @@ GROUP BY c.ID_CATEGORY,p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category
             }
 
             $wishlist = DB::select("
-            select c.ID_CONTAINER,p.ID_PRODUCT, image,PRODUCT_NAME, NAME_CATEGORY,PRICE_PRODUCT as price, c.STATUS as container_status, p.STATUS as product_status
+            select c.ID_CONTAINER,p.ID_PRODUCT, image,PRODUCT_NAME, NAME_CATEGORY,PRICE_PRODUCT as price,jenis, c.STATUS as container_status, p.STATUS as product_status
             FROM product p, container c, wishlist w,category ca, customer cu, product_wishlist pw
         where p.ID_CONTAINER = c.ID_CONTAINER
         and w.ID_WISHLIST = cu.ID_WISHLIST
         and ca.ID_CATEGORY = c.ID_CATEGORY
         and w.ID_WISHLIST = pw.ID_WISHLIST
         and pw.ID_CONTAINER = c.ID_CONTAINER
+        and p.ID_PRODUCT = pw.ID_PRODUCT
         and pw.STATUS_DELETE = 0 AND
              USERNAME_CUST = '$username';
              ");
@@ -237,6 +259,7 @@ GROUP BY c.ID_CATEGORY,p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category
         and ca.ID_CATEGORY = c.ID_CATEGORY
         and cr.ID_CART= cw.ID_CART
         and cw.ID_CONTAINER = c.ID_CONTAINER
+        and cw.ID_PRODUCT = p.ID_PRODUCT
         and cw.STATUS_DELETE = 0 AND
              USERNAME_CUST = '$username'
              order by sh.ID_SHOP, NAME_SHOP;");
