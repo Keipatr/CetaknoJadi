@@ -110,12 +110,15 @@
                                 <div class="col">
                                     <div class="card card-product">
                                         <div class="card-body">
-                                            <div class="text-center position-relative ">
-                                                <div class=" position-absolute top-0 start-0"></div>
+                                            <div class="text-center position-relative">
+                                                <div class="position-absolute top-0 start-0"></div>
                                                 <a
-                                                    href="{{ '/products/' . $product->NAME_SHOP . '/' . $product->PRODUCT_NAME.'/'.$product->ID_PRODUCT . '?id=' . Crypt::encryptString($product->ID_CONTAINER) }}">
-                                                    <img src="{{ $product->image ? '/images/all/' . $product->image : 'images/products/product-img-18.jpg' }}"
-                                                        alt="Grocery Ecommerce Template" class="mb-3 img-fluid">
+                                                    href="{{ '/products/' . $product->NAME_SHOP . '/' . $product->PRODUCT_NAME . '/' . $product->ID_PRODUCT . '?id=' . Crypt::encryptString($product->ID_CONTAINER) }}">
+                                                    <div class="image-container">
+                                                        <img src="{{ $product->image ? '/images/all/' . $product->image : 'images/products/product-img-18.jpg' }}"
+                                                            alt="Grocery Ecommerce Template"
+                                                            class="mb-3 img-fluid fixed-size-image">
+                                                    </div>
                                                 </a>
                                                 <div class="card-product-action">
                                                     <a href="#!" class="btn-action add-to-wishlist"
@@ -126,13 +129,19 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="text-small mb-1"><a
-                                                    href="{{ url('/categories/' . $product->NAME_CATEGORY . '?id=' . Crypt::encryptString($product->ID_CATEGORY)) }}"
-                                                    class="text-decoration-none text-muted"><small>{{ $product->NAME_CATEGORY }}</small></a>
+                                            <div class="text-small mb-1">
+                                                <a href="{{ url('/categories/' . $product->NAME_CATEGORY . '?id=' . Crypt::encryptString($product->ID_CATEGORY)) }}"
+                                                    class="text-decoration-none text-muted">
+                                                    <small>{{ $product->NAME_CATEGORY }}</small>
+                                                </a>
                                             </div>
-                                            <h2 class="fs-6"><a
-                                                    href="{{ '/products/' . $product->NAME_SHOP . '/' . $product->PRODUCT_NAME.'/'.$product->ID_PRODUCT . '?id=' . Crypt::encryptString($product->ID_CONTAINER) }}"
-                                                    class="text-inherit text-decoration-none">{{ $product->PRODUCT_NAME }} @if($product->jenis) - {{ $product->jenis }} @endif</a>
+                                            <h2 class="fs-6">
+                                                <a href="{{ '/products/' . $product->NAME_SHOP . '/' . $product->PRODUCT_NAME . '/' . $product->ID_PRODUCT . '?id=' . Crypt::encryptString($product->ID_CONTAINER) }}"
+                                                    class="text-inherit text-decoration-none">{{ $product->PRODUCT_NAME }}
+                                                    @if ($product->jenis)
+                                                        - {{ $product->jenis }}
+                                                    @endif
+                                                </a>
                                             </h2>
                                             <div class="text-small mb-1">
                                                 <i class='fas fa-store-alt' style='font-size:12px'></i>
@@ -158,15 +167,17 @@
                                                         <i class="bi bi-star"></i>
                                                     @endfor
                                                 </small>
-                                                <span
-                                                    class="text-muted small">{{ $product->rating != 0 ? ($product->rating != round($product->rating) ? number_format($product->rating, 1) : round($product->rating)) : '0' }}
+                                                <span class="text-muted small">
+                                                    {{ $product->rating != 0 ? ($product->rating != round($product->rating) ? number_format($product->rating, 1) : round($product->rating)) : '0' }}
                                                     ({{ $product->rating_count }})
                                                 </span>
                                             </div>
                                             <div class="d-flex justify-content-between align-items-center mt-3">
-                                                <div><span class="text-dark">{{ $product->formatted_price }}</span>
+                                                <div>
+                                                    <span class="text-dark">{{ $product->formatted_price }}</span>
                                                 </div>
-                                                <div><a href="#!" class="btn btn-primary btn-sm add-to-cart"
+                                                <div>
+                                                    <a href="#!" class="btn btn-primary btn-sm add-to-cart"
                                                         data-product-id="{{ $product->ID_PRODUCT }}"
                                                         data-container-id="{{ $product->ID_CONTAINER }}">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -174,11 +185,9 @@
                                                             stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                                             stroke-linejoin="round" class="feather feather-plus">
                                                             <line x1="12" y1="5" x2="12"
-                                                                y2="19">
-                                                            </line>
+                                                                y2="19"></line>
                                                             <line x1="5" y1="12" x2="19"
-                                                                y2="12">
-                                                            </line>
+                                                                y2="12"></line>
                                                         </svg> Add To Cart
                                                     </a>
                                                 </div>
@@ -188,7 +197,21 @@
                                 </div>
                             @endforeach
                         </div>
+                        <style>
+                            .image-container {
+                                width: 200px;
+                                /* Adjust the width to your desired size */
+                                height: 200px;
+                                /* Adjust the height to your desired size */
+                                overflow: hidden;
+                            }
 
+                            .fixed-size-image {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                            }
+                        </style>
                         <script>
                             $(document).ready(function() {
                                 $('.add-to-cart').click(function(e) {
