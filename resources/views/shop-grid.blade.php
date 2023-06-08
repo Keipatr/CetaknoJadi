@@ -197,16 +197,19 @@
                                 </div>
                             @endforeach
                         </div>
+
                         <style>
                             .image-container {
-                                width: 200px;
-                                /* Adjust the width to your desired size */
-                                height: 200px;
-                                /* Adjust the height to your desired size */
+                                width: 100%;
+                                padding-top: 100%;
+                                position: relative;
                                 overflow: hidden;
                             }
 
                             .fixed-size-image {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
                                 width: 100%;
                                 height: 100%;
                                 object-fit: cover;

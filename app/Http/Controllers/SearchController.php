@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
@@ -85,30 +86,34 @@ class SearchController extends Controller
     }
 
     public function searchProducts(Request $request)
-    {
-        $searchQuery = $request->get('searchProduct');
+{
+    $searchQuery = $request->get('searchProduct');
 
-        // Perform the product search query
-        $products = DB::table('product')
-            ->join('container', 'product.ID_CONTAINER', '=', 'container.ID_CONTAINER')
-            ->join('category', 'category.ID_CATEGORY', '=', 'container.ID_CATEGORY')
-            ->where('product.PRODUCT_NAME', 'LIKE', "%$searchQuery%")
-            ->select('product.PRODUCT_NAME', 'container.ID_CONTAINER')
-            ->get();
+    // Perform the product search query
+    $products = DB::table('container as co')
+        ->select('p.PRODUCT_NAME', 'co.ID_CONTAINER', 's.NAME_SHOP', 'p.ID_PRODUCT')
+        ->join('category as ca', 'co.ID_CATEGORY', '=', 'ca.ID_CATEGORY')
+        ->join('product as p', 'co.ID_CONTAINER', '=', 'p.ID_CONTAINER')
+        ->join('shop as s', 'co.ID_SHOP', '=', 's.ID_SHOP')
+        ->where('p.STATUS', 'Y')
+        ->where('p.STATUS_DELETE', 0)
+        ->where('co.STATUS', 1)
+        ->where('p.PRODUCT_NAME', 'LIKE', "%$searchQuery%")
+        ->get();
 
-        // Prepare the search results array
-        $results = [];
+    // Prepare the search results array
+    $results = [];
 
-        // Add product results to the array
-        foreach ($products as $product) {
-            $results[] = [
-                'name' => $product->PRODUCT_NAME,
-                'url' => '/products/' . $product->ID_CONTAINER, // Replace with the actual product URL or ID
-            ];
-        }
-
-        // Return the search results as JSON
-        return response()->json($results);
+    // Add product results to the array
+    foreach ($products as $product) {
+        $results[] = [
+            'name' => $product->PRODUCT_NAME,
+            'url' => '/products/' . $product->NAME_SHOP . '/' . $product->PRODUCT_NAME . '/' . $product->ID_PRODUCT . '?id=' . Crypt::encryptString($product->ID_CONTAINER),
+        ];
     }
+
+    // Return the search results as JSON
+    return response()->json($results);
+}
 
 }

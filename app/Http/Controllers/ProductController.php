@@ -13,14 +13,14 @@ use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
-    public function productShow(string $store_url, string $product_url,string $idprod, Request $request)
+    public function productShow(string $store_url, string $product_url, string $idprod, Request $request)
     {
         $id_container = $request->query('id');
 
         $products = DB::select("
-        SELECT co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS, DESC_PRODUCT, NAME_CATEGORY,
+        SELECT co.ID_CONTAINER, p.ID_PRODUCT, p.image, s.NAME_SHOP, PRODUCT_NAME, JENIS, DESC_PRODUCT, NAME_CATEGORY,
         c.ID_CATEGORY, PRICE_PRODUCT AS price,
-    AVG(RATING_REVIEW) AS rating, image, COUNT(r.ID_REVIEW) AS rating_count
+    AVG(RATING_REVIEW) AS rating, COUNT(r.ID_REVIEW) AS rating_count
 FROM product p
 JOIN container co ON p.id_container = co.ID_CONTAINER
 JOIN category c ON c.ID_CATEGORY = co.ID_CATEGORY
@@ -32,7 +32,7 @@ WHERE co.STATUS_DELETE = 0
     AND product_name = '$product_url'
     and ID_PRODUCT = '$idprod'
     AND co.ID_CONTAINER = '" . Crypt::decryptString($id_container) . "'
-GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS, DESC_PRODUCT, NAME_CATEGORY, c.ID_CATEGORY, PRICE_PRODUCT;
+GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, p.image, s.NAME_SHOP, PRODUCT_NAME, JENIS, DESC_PRODUCT, NAME_CATEGORY, c.ID_CATEGORY, PRICE_PRODUCT;
 
     ");
 
@@ -51,7 +51,7 @@ GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS,
             $id_category = $request->query('id');
             $query = DB::select("
             SELECT p.ID_PRODUCT,s.ID_SHOP,c.ID_CATEGORY,co.ID_CONTAINER, s.NAME_SHOP, PRODUCT_NAME,DESC_PRODUCT, NAME_CATEGORY, PRICE_PRODUCT AS price,
-            AVG(RATING_REVIEW) AS rating, image, COUNT(r.ID_REVIEW) AS rating_count, jenis
+            AVG(RATING_REVIEW) AS rating, p.image, COUNT(r.ID_REVIEW) AS rating_count, jenis
             FROM product p
             JOIN container co ON p.id_container = co.ID_CONTAINER
             JOIN category c ON c.ID_CATEGORY = co.ID_CATEGORY
@@ -62,12 +62,12 @@ GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS,
             AND s.STATUS_SHOP = 'Y'
             and NAME_CATEGORY = '$category_url'
             AND co.ID_CATEGORY = '" . Crypt::decryptString($id_category) . "'
-            GROUP BY jenis,p.ID_PRODUCT,s.ID_SHOP,c.ID_CATEGORY,s.NAME_SHOP, p.product_name, c.name_category, p.PRICE_PRODUCT, image, co.ID_CONTAINER,DESC_PRODUCT;
+            GROUP BY jenis,p.ID_PRODUCT,s.ID_SHOP,c.ID_CATEGORY,s.NAME_SHOP, p.product_name, c.name_category, p.PRICE_PRODUCT, p.image, co.ID_CONTAINER,DESC_PRODUCT;
             ");
         } else {
             $query = DB::select("
             SELECT p.ID_PRODUCT,c.ID_CATEGORY,s.ID_SHOP,co.ID_CONTAINER, s.NAME_SHOP, PRODUCT_NAME,DESC_PRODUCT, NAME_CATEGORY, PRICE_PRODUCT AS price,
-        AVG(RATING_REVIEW) AS rating, image, COUNT(r.ID_REVIEW) AS rating_count, jenis
+        AVG(RATING_REVIEW) AS rating, p.image, COUNT(r.ID_REVIEW) AS rating_count, jenis
         FROM product p
         JOIN container co ON p.id_container = co.ID_CONTAINER
         JOIN category c ON c.ID_CATEGORY = co.ID_CATEGORY
@@ -76,7 +76,7 @@ GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS,
         WHERE co.STATUS_DELETE = 0
         AND co.STATUS = 1
         AND s.STATUS_SHOP = 'Y'
-        GROUP BY jenis, p.ID_PRODUCT,s.ID_SHOP,s.NAME_SHOP, p.product_name, c.name_category, p.PRICE_PRODUCT, image,c.ID_CATEGORY ,co.ID_CONTAINER,DESC_PRODUCT;
+        GROUP BY jenis, p.ID_PRODUCT,s.ID_SHOP,s.NAME_SHOP, p.product_name, c.name_category, p.PRICE_PRODUCT, p.image,c.ID_CATEGORY ,co.ID_CONTAINER,DESC_PRODUCT;
             ");
         }
         $products = collect($query);
@@ -353,6 +353,7 @@ GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS,
     }
     public function placeOrder(Request $request)
     {
+        // dd($request->all());
         $shopId = null;
         $productCode = $request->input('productCode');
         $productName = $request->input('productName');
@@ -394,17 +395,18 @@ GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS,
         // Process the uploaded images
         $productImages = $request->file('productImage');
         $uploadedImagePaths = [];
+        $filenames = []; // Store the filenames in an array
 
         if ($productImages) {
             foreach ($productImages as $index => $productImage) {
                 if ($productImage->isValid()) {
-                    $fileName = 'product_image_' . ($index + 1) . '.' . $productImage->getClientOriginalExtension();
+                    $extension = $productImage->getClientOriginalExtension();
+                    $fileName = 'product_image_' . ($index + 1) . '_' . uniqid() . '.' . $extension; // Add a unique identifier to the filename
                     $path = $productImage->storeAs('public\images\upload', $fileName);
 
                     $uploadedImagePaths[] = $path;
+                    $filenames[] = $fileName; // Store the filename in the array
 
-                    // Get the filename
-                    $filename = $productImage->getClientOriginalName();
                     // Use the filename as needed (e.g., store it in the database)
                 }
             }
@@ -437,13 +439,14 @@ GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS,
 
         // insert into product_invoice
         foreach ($selectedProducts as $product) {
+            $filename = isset($filenames[$index]) ? $filenames[$index] : ''; // Get the corresponding filename from the array
             $containerId = $product['containerId'];
             $productId = $product['productId'];
             $productQuantity = $product['quantity'];
             $productPrice = $product['realPrice'];
             $productSubtotal = $productQuantity * $productPrice;
             DB::insert("insert into product_invoice()
-            values('$containerId','$productId','$idInvoice','$productQuantity','$productPrice','$productSubtotal','0','$filename');");
+            values('$containerId','$productId','$idInvoice','$productQuantity','$productPrice','$productSubtotal','$filename',0);");
 
             // update product quantity
             DB::update("update product set QTY_PRODUCT = QTY_PRODUCT - $productQuantity where ID_PRODUCT = '$productId' and ID_CONTAINER = '$containerId';");

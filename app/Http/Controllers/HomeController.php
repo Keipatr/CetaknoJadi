@@ -43,7 +43,7 @@ class HomeController extends Controller
 
         $products = DB::select("
         SELECT c.ID_CATEGORY,co.ID_CONTAINER, s.NAME_SHOP, p.ID_PRODUCT,PRODUCT_NAME, NAME_CATEGORY, PRICE_PRODUCT AS price,
-       AVG(RATING_REVIEW) AS rating, image, COUNT(r.ID_REVIEW) AS rating_count
+       AVG(RATING_REVIEW) AS rating, p.image, COUNT(r.ID_REVIEW) AS rating_count
 FROM product p
 JOIN container co ON p.id_container = co.ID_CONTAINER
 JOIN category c ON c.ID_CATEGORY = co.ID_CATEGORY
@@ -53,9 +53,9 @@ WHERE co.STATUS_DELETE = 0
   AND co.STATUS = 1
   AND s.STATUS_SHOP = 'Y'
   and CITY_SHOP like '%%'
-GROUP BY c.ID_CATEGORY,p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category, p.PRICE_PRODUCT, image, co.ID_CONTAINER;
+GROUP BY c.ID_CATEGORY,p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category, p.PRICE_PRODUCT, p.image, co.ID_CONTAINER;
         ");
-        $categories = DB::select("select ID_CATEGORY,NAME_CATEGORY from category where status_delete = 0;");
+        $categories = DB::select("select ID_CATEGORY,NAME_CATEGORY,image from category where status_delete = 0;");
         $stores = DB::select("select NAME_SHOP, TELP_SHOP, ADDRESS_SHOP,POSTAL_SHOP,CITY_SHOP,STATUS_SHOP
         from shop s
         where STATUS_DELETE=0
@@ -221,7 +221,7 @@ GROUP BY c.ID_CATEGORY,p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category
             }
 
             $wishlist = DB::select("
-            select c.ID_CONTAINER,p.ID_PRODUCT, image,PRODUCT_NAME, NAME_CATEGORY,PRICE_PRODUCT as price,jenis, c.STATUS as container_status, p.STATUS as product_status
+            select c.ID_CONTAINER,p.ID_PRODUCT, p.image,PRODUCT_NAME, NAME_CATEGORY,PRICE_PRODUCT as price,jenis, c.STATUS as container_status, p.STATUS as product_status
             FROM product p, container c, wishlist w,category ca, customer cu, product_wishlist pw
         where p.ID_CONTAINER = c.ID_CONTAINER
         and w.ID_WISHLIST = cu.ID_WISHLIST
@@ -252,7 +252,7 @@ GROUP BY c.ID_CATEGORY,p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category
             }
 
             $cart = DB::select("
-            select sh.ID_SHOP, NAME_SHOP,PRODUCT_NAME, NAME_CATEGORY,PRICE_PRODUCT as price, c.ID_CONTAINER,p.ID_PRODUCT,image,jenis,cw.QTY_CART,p.QTY_PRODUCT
+            select sh.ID_SHOP, NAME_SHOP,PRODUCT_NAME, NAME_CATEGORY,PRICE_PRODUCT as price, c.ID_CONTAINER,p.ID_PRODUCT,p.image,jenis,cw.QTY_CART,p.QTY_PRODUCT
             FROM product p, container c, cart cr,category ca, customer cu, cart_product cw, shop sh
         where p.ID_CONTAINER = c.ID_CONTAINER
         and sh.ID_SHOP = c.ID_SHOP

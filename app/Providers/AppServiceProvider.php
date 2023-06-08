@@ -45,7 +45,7 @@ class AppServiceProvider extends ServiceProvider
                 AND ca.ID_CART= c.ID_CART AND
                  USERNAME_CUST = '$username';");
                 $cart = DB::select("
-                select PRODUCT_NAME,image, NAME_CATEGORY,PRICE_PRODUCT as price FROM product p, container c, cart cr,category ca, customer cu, cart_product cw
+                select PRODUCT_NAME,p.image, NAME_CATEGORY,PRICE_PRODUCT as price FROM product p, container c, cart cr,category ca, customer cu, cart_product cw
                 where p.ID_CONTAINER = c.ID_CONTAINER
                 and cr.ID_CART = cu.ID_CART
                 and ca.ID_CATEGORY = c.ID_CATEGORY

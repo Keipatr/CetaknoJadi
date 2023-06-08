@@ -364,7 +364,7 @@
             }
         }
     </script> --}}
-    <script>
+    {{-- <script>
         function previewImage(event, index) {
             var input = event.target;
             var imagePreview = document.getElementById('imagePreview' + index);
@@ -409,6 +409,84 @@
                     if (img.files.length > 0) {
                         const file = img.files[0];
                         const fileName = `product_image_${index + 1}.${file.name.split('.').pop()}`;
+                        formData.append(`productImage[${index}]`, file, fileName);
+                    }
+                });
+
+                // Send the AJAX request with the form data
+                $.ajax({
+                    url: 'place-order',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        if (response.success) {
+                            // Redirect to the specified route
+                            window.location.href = response.route;
+                        } else {
+                            // Handle any errors or display a message
+                        }
+                    },
+                    error: function(xhr) {
+                        // Handle the error response
+                    }
+                });
+            }
+        }
+    </script> --}}
+    <script>
+        function previewImage(event, index) {
+            var input = event.target;
+            var imagePreview = document.getElementById('imagePreview' + index);
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function generateUniqueFileName(file) {
+            var timestamp = new Date().getTime();
+            var random = Math.floor(Math.random() * 1000000);
+            var extension = file.name.split('.').pop();
+            return `product_image_${timestamp}_${random}.${extension}`;
+        }
+
+        function placeOrder() {
+            const selectedDeliveryMethod = document.querySelector('input[name="deliveryMethod"]:checked');
+            const selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+            const productImages = Array.from(document.querySelectorAll('input[name="productImage[]"]'));
+
+            if (selectedDeliveryMethod && selectedPaymentMethod && productImages.every(img => img.value !== '')) {
+                // Extract the selected delivery method data
+                const productCode = selectedDeliveryMethod.dataset.deliveryId;
+                const productName = selectedDeliveryMethod.dataset.deliveryName;
+                const rates = selectedDeliveryMethod.dataset.deliveryRates;
+                const formatRates = selectedDeliveryMethod.dataset.deliveryFormatted;
+
+                // Extract the selected payment method data
+                const paymentMethodName = selectedPaymentMethod.dataset.paymentName;
+                const paymentMethodId = selectedPaymentMethod.dataset.paymentId;
+
+                // Create the FormData object to send the data and files
+                const formData = new FormData();
+                formData.append('_token', '{{ csrf_token() }}');
+                formData.append('productCode', productCode);
+                formData.append('productName', productName);
+                formData.append('rates', rates);
+                formData.append('formatRates', formatRates);
+                formData.append('paymentMethodName', paymentMethodName);
+                formData.append('paymentMethodId', paymentMethodId);
+
+                productImages.forEach((img, index) => {
+                    if (img.files.length > 0) {
+                        const file = img.files[0];
+                        const fileName = generateUniqueFileName(file);
                         formData.append(`productImage[${index}]`, file, fileName);
                     }
                 });

@@ -122,16 +122,14 @@
     <main>
         <div class="mt-4">
             <div class="container">
-                <!-- row -->
                 <div class="row ">
-                    <!-- col -->
                     <div class="col-12">
-                        <!-- breadcrumb -->
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb mb-0">
                                 <li class="breadcrumb-item"><a href="{{ url('') }}">Home</a></li>
                                 <li class="breadcrumb-item"><a
-                                        href="{{ url('/categories/' . $products[0]->NAME_CATEGORY . '?id=' . Crypt::encryptString($products[0]->ID_CATEGORY)) }}">{{ $products[0]->NAME_CATEGORY }}</a>
+                                        href="{{ url('/categories/' . $products[0]->NAME_CATEGORY . '?id=' . Crypt::encryptString($products[0]->ID_CATEGORY)) }}">
+                                        {{ $products[0]->NAME_CATEGORY }}</a>
                                 </li>
 
                                 <li class="breadcrumb-item active" aria-current="page">{{ $products[0]->PRODUCT_NAME }}</li>
@@ -146,35 +144,14 @@
                 <div class="row">
 
                     <div class="col-md-6">
-                        <!-- img slide -->
                         <div class="product" id="product">
                             @foreach ($products as $item)
                                 <div>
-                                    {{-- <div class="zoom" onmousemove="zoom(event)"
-                                    style="background-image: url({{'/images/all/'.$item->image}})"> --}}
                                     <img src="{{ '/images/all/' . $item->image }}" alt="">
-                                    {{-- </div> --}}
                                 </div>
                             @endforeach
-                            {{-- <div class="zoom" onmousemove="zoom(event)"
-                                style="background-image: url({{ asset('images/products/banner.jpg') }})">
-                                <img src="{{ asset('images/products/banner.jpg') }}" alt="">
-                            </div>
-                            <div>
-                                <div class="zoom" onmousemove="zoom(event)"
-                                    style="background-image: url(/images/products/banner.jpg)">
-                                    <img src="{{ asset('images/products/banner.jpg') }}" alt="">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="zoom" onmousemove="zoom(event)"
-                                    style="background-image: url(/images/products/banner.jpg)">
-                                    <img src="{{ asset('images/products/banner.jpg') }}" alt="">
-                                </div>
-                            </div> --}}
 
                         </div>
-                        <!-- product tools -->
                         <div class="product-tools">
                             <div class="thumbnails row g-3" id="productThumbnails">
                                 @foreach ($products as $item)
@@ -184,30 +161,6 @@
                                         </div>
                                     </div>
                                 @endforeach
-                                {{-- <div class="col-3">
-                                    <div class="thumbnails-img">
-                                        <!-- img -->
-                                        <img src="{{ asset('images/products/banner.jpg') }}" alt="">
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="thumbnails-img">
-                                        <!-- img -->
-                                        <img src="{{ asset('images/products/banner.jpg') }}" alt="">
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="thumbnails-img">
-                                        <!-- img -->
-                                        <img src="{{ asset('images/products/banner.jpg') }}" alt="">
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="thumbnails-img">
-                                        <!-- img -->
-                                        <img src="{{ asset('images/products/banner.jpg') }}" alt="">
-                                    </div>
-                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -255,14 +208,14 @@
                                 <button type="button" class="btn btn-outline-secondary">Besar</button> --}}
                             </div>
                             <div>
-                                <div class="input-group input-spinner  ">
+                                {{-- <div class="input-group input-spinner  ">
                                     <input type="button" value="-" class="button-minus  btn  btn-sm "
                                         data-field="quantity">
                                     <input type="number" step="1" max="10" value="1" name="quantity"
                                         class="quantity-field form-control-sm form-input   ">
                                     <input type="button" value="+" class="button-plus btn btn-sm "
                                         data-field="quantity">
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="mt-3 row justify-content-start g-2 align-items-center">
 
