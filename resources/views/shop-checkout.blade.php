@@ -102,9 +102,8 @@
                                             <div class="tab-pane fade show active" id="pills-today" role="tabpanel"
                                                 aria-labelledby="pills-today-tab" tabindex="0">
                                                 <ul class="list-group list-group-flush mt-4">
-                                                    @foreach ($sicepat as $list)
-                                                        <li
-                                                            class="list-group-item d-flex justify-content-between align-items-center px-0 py-3">
+                                                    @foreach($sicepat as $list)
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-3">
                                                             <div class="col-4">
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"

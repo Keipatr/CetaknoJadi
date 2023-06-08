@@ -465,15 +465,9 @@
                         }
                     </script>
 
-
-
-
                 </div>
             </div>
         </section>
-
-
-
 
 
         <section class=" pt-lg-16 pt-8 my-lg-14 my-8">
