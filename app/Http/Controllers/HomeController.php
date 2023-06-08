@@ -107,7 +107,7 @@ GROUP BY c.ID_CATEGORY,p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category
             $data = DB::select("
                 select pi.ID_INVOICE, co.ID_CONTAINER,p.ID_PRODUCT,s.NAME_SHOP,
                 p.PRODUCT_NAME, pi.QTY_DETAIL, pi.PRICE_DETAIL,
-                pi.SUBTOTAL_DETAIL, date_format(i.DATE_INVOICE,'%M %d, %Y') as DATE,i.STATUS,image,jenis
+                pi.SUBTOTAL_DETAIL, date_format(i.DATE_INVOICE,'%M %d, %Y') as DATE,i.STATUS,p.image,jenis
                 from product_invoice pi, invoice i,
                 customer c, container co, product p, shop s
                 where  pi.ID_INVOICE = i.ID_INVOICE

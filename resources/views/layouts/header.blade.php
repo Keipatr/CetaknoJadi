@@ -260,10 +260,10 @@
 
                 <div class="col-md-2 col-xxl-3 d-none d-lg-block mt-lg-4">
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn  btn-outline-gray-400 text-muted" data-bs-toggle="modal"
+                    {{-- <button type="button" class="btn  btn-outline-gray-400 text-muted" data-bs-toggle="modal"
                         data-bs-target="#locationModal">
                         <i class="feather-icon icon-map-pin me-2"></i>Location
-                    </button>
+                    </button> --}}
 
 
                 </div>
@@ -369,7 +369,9 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
                     @foreach ($cat as $list)
-                    <li><a class="dropdown-item" href="{{ url('/categories/' . $list->NAME_CATEGORY . '?id=' . Crypt::encryptString($list->ID_CATEGORY)) }}">{{$list->NAME_CATEGORY}}</a></li>
+                        <li><a class="dropdown-item"
+                                href="{{ url('/categories/' . $list->NAME_CATEGORY . '?id=' . Crypt::encryptString($list->ID_CATEGORY)) }}">{{ $list->NAME_CATEGORY }}</a>
+                        </li>
                     @endforeach
                 </ul>
             </div>
@@ -385,24 +387,26 @@
                         aria-label="Close"></button>
                 </div>
                 <div class="d-block d-lg-none my-4">
-                    <form action="#">
-                        <div class="input-group ">
-                            <input class="form-control rounded" type="search" placeholder="Search for products">
+                        <div class="input-group">
+                            <input id="searchInput" class="form-control rounded" type="text" placeholder="Search for products" onkeydown="return handleKeyDown(event);">
                             <span class="input-group-append">
-                                <button class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end"
-                                    type="button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round"
-                                        class="feather feather-search">
+                                <button class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end" type="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
                                         <circle cx="11" cy="11" r="8"></circle>
-                                        <line x1="21" y1="21" x2="16.65" y2="16.65">
-                                        </line>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                                     </svg>
                                 </button>
                             </span>
                         </div>
-                    </form>
+
+                    <script>
+                        function handleKeyDown(event) {
+                            if (event.key === 'Enter') {
+                                event.preventDefault();
+                                return false;
+                            }
+                        }
+                    </script>
                     <div class="mt-2">
                         <button type="button" class="btn  btn-outline-gray-400 text-muted w-100 "
                             data-bs-toggle="modal" data-bs-target="#locationModal">
@@ -427,7 +431,9 @@
                         <div class="card card-body">
                             <ul class="mb-0 list-unstyled">
                                 @foreach ($cat as $list)
-                                <li><a class="dropdown-item" href="{{ url('/categories/' . $list->NAME_CATEGORY . '?id=' . Crypt::encryptString($list->ID_CATEGORY)) }}">{{$list->NAME_CATEGORY}}</a></li>
+                                    <li><a class="dropdown-item"
+                                            href="{{ url('/categories/' . $list->NAME_CATEGORY . '?id=' . Crypt::encryptString($list->ID_CATEGORY)) }}">{{ $list->NAME_CATEGORY }}</a>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
