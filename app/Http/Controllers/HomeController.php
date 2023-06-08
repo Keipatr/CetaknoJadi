@@ -86,7 +86,9 @@ GROUP BY c.ID_CATEGORY,p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category
     }
     public function about()
     {
-        return view('about');
+        $cust = DB::select("select * from customer");
+        $shop = DB::select("select * from shop");
+        return view('about',compact('cust','shop'));
     }
     public function contact()
     {
