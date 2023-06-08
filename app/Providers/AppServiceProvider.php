@@ -62,5 +62,11 @@ class AppServiceProvider extends ServiceProvider
             ");
             $view->with('data', $data)->with('cat',$cat)->with('cart',$cart);
         });
+        View::composer('layouts.footer', function ($view) {
+            $cat = DB::select("
+            SELECT * FROM category where STATUS_DELETE = 0;
+            ");
+            $view->with('cat', $cat);
+        });
     }
 }
