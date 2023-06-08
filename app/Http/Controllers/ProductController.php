@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
-    public function productShow(string $store_url, string $product_url, Request $request)
+    public function productShow(string $store_url, string $product_url,string $idprod, Request $request)
     {
         $id_container = $request->query('id');
 
@@ -29,8 +29,8 @@ LEFT JOIN review r ON r.ID_CONTAINER = co.ID_CONTAINER
 WHERE co.STATUS_DELETE = 0
     AND co.STATUS = 1
     AND s.STATUS_SHOP = 'Y'
-    AND p.ID_PRODUCT =1
     AND product_name = '$product_url'
+    and ID_PRODUCT = '$idprod'
     AND co.ID_CONTAINER = '" . Crypt::decryptString($id_container) . "'
 GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS, DESC_PRODUCT, NAME_CATEGORY, c.ID_CATEGORY, PRICE_PRODUCT;
 
@@ -51,7 +51,7 @@ GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS,
             $id_category = $request->query('id');
             $query = DB::select("
             SELECT p.ID_PRODUCT,s.ID_SHOP,c.ID_CATEGORY,co.ID_CONTAINER, s.NAME_SHOP, PRODUCT_NAME,DESC_PRODUCT, NAME_CATEGORY, PRICE_PRODUCT AS price,
-            AVG(RATING_REVIEW) AS rating, image, COUNT(r.ID_REVIEW) AS rating_count
+            AVG(RATING_REVIEW) AS rating, image, COUNT(r.ID_REVIEW) AS rating_count, jenis
             FROM product p
             JOIN container co ON p.id_container = co.ID_CONTAINER
             JOIN category c ON c.ID_CATEGORY = co.ID_CATEGORY
@@ -59,16 +59,15 @@ GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS,
             LEFT JOIN review r ON r.ID_CONTAINER = co.ID_CONTAINER
             WHERE co.STATUS_DELETE = 0
             AND co.STATUS = 1
-            and p.ID_PRODUCT = 1
             AND s.STATUS_SHOP = 'Y'
             and NAME_CATEGORY = '$category_url'
             AND co.ID_CATEGORY = '" . Crypt::decryptString($id_category) . "'
-            GROUP BY p.ID_PRODUCT,s.ID_SHOP,c.ID_CATEGORY,s.NAME_SHOP, p.product_name, c.name_category, p.PRICE_PRODUCT, image, co.ID_CONTAINER,DESC_PRODUCT;
+            GROUP BY jenis,p.ID_PRODUCT,s.ID_SHOP,c.ID_CATEGORY,s.NAME_SHOP, p.product_name, c.name_category, p.PRICE_PRODUCT, image, co.ID_CONTAINER,DESC_PRODUCT;
             ");
         } else {
             $query = DB::select("
             SELECT p.ID_PRODUCT,c.ID_CATEGORY,s.ID_SHOP,co.ID_CONTAINER, s.NAME_SHOP, PRODUCT_NAME,DESC_PRODUCT, NAME_CATEGORY, PRICE_PRODUCT AS price,
-        AVG(RATING_REVIEW) AS rating, image, COUNT(r.ID_REVIEW) AS rating_count
+        AVG(RATING_REVIEW) AS rating, image, COUNT(r.ID_REVIEW) AS rating_count, jenis
         FROM product p
         JOIN container co ON p.id_container = co.ID_CONTAINER
         JOIN category c ON c.ID_CATEGORY = co.ID_CATEGORY
@@ -76,9 +75,8 @@ GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS,
         LEFT JOIN review r ON r.ID_CONTAINER = co.ID_CONTAINER
         WHERE co.STATUS_DELETE = 0
         AND co.STATUS = 1
-        and p.ID_PRODUCT = 1
         AND s.STATUS_SHOP = 'Y'
-        GROUP BY p.ID_PRODUCT,s.ID_SHOP,s.NAME_SHOP, p.product_name, c.name_category, p.PRICE_PRODUCT, image,c.ID_CATEGORY ,co.ID_CONTAINER,DESC_PRODUCT;
+        GROUP BY jenis, p.ID_PRODUCT,s.ID_SHOP,s.NAME_SHOP, p.product_name, c.name_category, p.PRICE_PRODUCT, image,c.ID_CATEGORY ,co.ID_CONTAINER,DESC_PRODUCT;
             ");
         }
         $products = collect($query);
@@ -102,7 +100,7 @@ GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS,
         foreach ($paginator as $product) {
             $product->formatted_price = 'Rp ' . number_format($product->price, 0, ',', '.');
         }
-        return view('shop-grid', compact('paginator', 'category_url','cat'));
+        return view('shop-grid', compact('paginator', 'category_url', 'cat'));
     }
     public function storeShow($store_url)
     {
@@ -349,17 +347,133 @@ GROUP BY co.ID_CONTAINER, p.ID_PRODUCT, image, s.NAME_SHOP, PRODUCT_NAME, JENIS,
         }
         return response()->json([
             'message' => 'Selected products updated',
-            'subtotal' => 'Rp '. $subtotal,
+            'subtotal' => 'Rp ' . $subtotal,
             'totalQuantity' => $totalQuantity
         ]);
     }
-    public function placeOrder(Request $request){
-        dd($request->all());
-        // DB::insert("");
+    public function placeOrder(Request $request)
+    {
+        $shopId = null;
+        $productCode = $request->input('productCode');
+        $productName = $request->input('productName');
+        $rates = $request->input('rates');
+        $formatRates = $request->input('formatRates');
+        $paymentMethodName = $request->input('paymentMethodName');
+        $paymentMethodId = $request->input('paymentMethodId');
+
+        if (Session::has('USERNAME_CUST')) {
+            $username = Session::get('USERNAME_CUST');
+        } else {
+            $username = Cookie::get('USERNAME_CUST');
+        }
+
+        $cartIdResult = DB::select("SELECT c.ID_CART FROM cart c, customer cu WHERE c.ID_CART = cu.ID_CART AND cu.USERNAME_CUST ='$username'");
+        $cartId = $cartIdResult[0]->ID_CART;
+
+        $selectedProducts = Session::get('selectedProducts', []);
+        if ($selectedProducts) {
+            $selectedProducts = json_decode($selectedProducts, true);
+        }
+
+        $totalQuantity = 0;
+        $subtotal = 0;
+        foreach ($selectedProducts as $product) {
+            $subtotal += intval($product['realPrice']) * intval($product['quantity']);
+            $totalQuantity += intval($product['quantity']);
+        }
+        // get selected product shop id
+        foreach ($selectedProducts as $product) {
+
+            $shopId = $product['shop'];
+        }
+        // get id customer
+        $idCustomer = DB::select("select ID_CUSTOMER from customer where USERNAME_CUST = '$username'");
+        $idCustomer = $idCustomer[0]->ID_CUSTOMER;
+
+
+        // Process the uploaded images
+        $productImages = $request->file('productImage');
+        $uploadedImagePaths = [];
+
+        if ($productImages) {
+            foreach ($productImages as $index => $productImage) {
+                if ($productImage->isValid()) {
+                    $fileName = 'product_image_' . ($index + 1) . '.' . $productImage->getClientOriginalExtension();
+                    $path = $productImage->storeAs('public\images\upload', $fileName);
+
+                    $uploadedImagePaths[] = $path;
+
+                    // Get the filename
+                    $filename = $productImage->getClientOriginalName();
+                    // Use the filename as needed (e.g., store it in the database)
+                }
+            }
+        }
+        // dd($filename);
+
+
+        $adaDelivery = DB::select("select * from delivery where ID_DELIVERY = '$productCode'");
+        if (count($adaDelivery) <= 0) {
+            DB::insert("insert into delivery()
+           values ('$productCode','$productName',0);");
+        }
+        // run function from db named fid_invoice
+        $idInvoiceResult = DB::select("select fid_invoice(curdate()) as fid_invoice;");
+        $idInvoice = $idInvoiceResult[0]->fid_invoice;
+
+        $totalPurchase = $subtotal + $rates;
+
+        DB::insert("insert into invoice()
+        values('$idInvoice',null,'$productCode','$shopId','$idCustomer','$paymentMethodId',curdate(),'$totalPurchase',null,null,'Completed',0);");
+
+
+        $cart = DB::select("select cp.ID_CART, cp.ID_CONTAINER, cp.ID_PRODUCT, cp.QTY_CART, cp.SUBTOTAL_CART, p.QTY_PRODUCT
+        from cart_product cp,cart ca, customer cu , container co, product p
+        where cu.ID_CART = ca.ID_CART and cp.ID_CART = ca.ID_CART
+        and co.ID_CONTAINER = cp.ID_CONTAINER
+        and co.ID_CONTAINER = p.ID_CONTAINER
+        and p.ID_PRODUCT = cp.ID_PRODUCT
+        and USERNAME_CUST = '$username';");
+
+        // insert into product_invoice
+        foreach ($selectedProducts as $product) {
+            $containerId = $product['containerId'];
+            $productId = $product['productId'];
+            $productQuantity = $product['quantity'];
+            $productPrice = $product['realPrice'];
+            $productSubtotal = $productQuantity * $productPrice;
+            DB::insert("insert into product_invoice()
+            values('$containerId','$productId','$idInvoice','$productQuantity','$productPrice','$productSubtotal','0','$filename');");
+
+            // update product quantity
+            DB::update("update product set QTY_PRODUCT = QTY_PRODUCT - $productQuantity where ID_PRODUCT = '$productId' and ID_CONTAINER = '$containerId';");
+
+            // update cart product
+            DB::update("update cart_product set QTY_CART = QTY_CART - $productQuantity where ID_PRODUCT = '$productId' and ID_CONTAINER = '$containerId' and ID_CART = '$cartId';");
+
+            // delete cart product if quantity = 0
+            DB::delete("delete from cart_product where QTY_CART = 0 and ID_PRODUCT = '$productId' and ID_CONTAINER = '$containerId' and ID_CART = '$cartId';");
+
+
+
+        }
+
+        // update cart
+        DB::update("
+            UPDATE cart
+            SET QTY_CART = COALESCE((SELECT SUM(QTY_CART) FROM cart_product WHERE ID_CART ='$cartId' GROUP BY ID_CART),0),
+                TOTAL_CART = COALESCE((SELECT SUM(SUBTOTAL_CART) FROM cart_product WHERE ID_CART ='$cartId' GROUP BY ID_CART),0)
+            WHERE ID_CART = '$cartId';
+            ");
 
 
 
 
-        // return redirect()->route('home');
+
+        // dd ($cart);
+        return response()->json([
+            'success' => true,
+            'route' => route('home')
+        ]);
     }
 }

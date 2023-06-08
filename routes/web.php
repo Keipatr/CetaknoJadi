@@ -47,7 +47,7 @@ Route::post('/cart/delete', [ProductController::class, 'deleteCartItem']);
 Route::post('/cart/update', [ProductController::class, 'updateCartItem']);
 Route::post('/cart/update', [ProductController::class, 'updateCartItem']);
 Route::post('/updateCheckout', [ProductController::class, 'updateCheckout']);
-Route::post('/place-order', [ProductController::class, 'placeOrder']);
+Route::post('/place-order', [ProductController::class, 'placeOrder'])->name('placeOrder');
 
 Route::get('/checkout', [HomeController::class, 'checkoutPage'])->name('checkoutPage');
 Route::get('/wishlist', [HomeController::class, 'wishlist'])->name('wishlist');
@@ -64,7 +64,7 @@ Route::get('/account-orders', [HomeController::class, 'viewAccount'])->name('my-
 // Route::get('/account-payment', [HomeController::class, 'payment'])->name('account-payment');
 // Route::get('/account-notification', [HomeController::class, 'notification'])->name('account-notification');
 
-Route::get('/products/{store_url}/{product_url}', [ProductController::class, 'productShow'])->name('product-show');
+Route::get('/products/{store_url}/{product_url}/{idprod}', [ProductController::class, 'productShow'])->name('product-show');
 Route::get('/categories/{category_url}', [ProductController::class, 'categoryShow'])->name('category-show');
 Route::get('/stores/{store_url}', [ProductController::class, 'storeShow'])->name('store-show');
 Route::get('/stores', [ProductController::class, 'allStoreShow'])->name('allStore-show');

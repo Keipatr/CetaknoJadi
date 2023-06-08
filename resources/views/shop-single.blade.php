@@ -1,7 +1,124 @@
 @extends('layouts.main')
 
 @section('main-content')
-    {{-- <body> --}}
+<script>
+    $(document).ready(function() {
+        // $('.add-to-cart').click(function(e) {
+        //     e.preventDefault();
+        //     var productId = $(this).data('product-id');
+        //     var containerId = $(this).data('container-id');
+
+        //     $.ajax({
+        //         url: '/add-to-cart',
+        //         type: 'POST',
+        //         data: {
+        //             productId: productId,
+        //             containerId: containerId,
+        //             _token: '{{ csrf_token() }}'
+        //         },
+        //         success: function(response) {
+        //             if (response.login) {
+        //                 alert('Please login to add a product to the cart.');
+        //             } else if (response.success) {
+        //                 alert('Product added to cart successfully!');
+        //             } else {
+        //                 alert('Failed to add the product to the cart. Please try again.');
+        //             }
+        //         },
+        //         error: function(xhr) {
+        //             if (xhr.responseJSON && xhr.responseJSON.login) {
+        //                 alert('Please login to add a product to the cart.');
+        //             } else {
+        //                 alert('Failed to add the product to the cart. Please try again.');
+        //             }
+        //         }
+        //     });
+        // });
+
+        $('.add-to-cart').click(function(e) {
+            e.preventDefault();
+            var productId = $(this).data('product-id');
+            var containerId = $(this).data('container-id');
+
+            $.ajax({
+                url: '/add-to-cart',
+                type: 'POST',
+                data: {
+                    productId: productId,
+                    containerId: containerId,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    if (response.login) {
+                        alert('Please login to add a product to the cart.');
+                    } else if (response.success) {
+                        alert('Product added to cart successfully!');
+                        updateCartQuantity(response.quantity);
+                    } else {
+                        alert('Failed to add the product to the cart. Please try again.');
+                    }
+                },
+                error: function(xhr) {
+                    if (xhr.responseJSON && xhr.responseJSON.login) {
+                        alert('Please login to add a product to the cart.');
+                    } else {
+                        alert('Failed to add the product to the cart. Please try again.');
+                    }
+                }
+            });
+        });
+
+
+
+        $('.add-to-wishlist').click(function(e) {
+            e.preventDefault();
+            var productId = $(this).data('product-id');
+            var containerId = $(this).data('container-id');
+
+            $.ajax({
+                url: '/add-to-wishlist',
+                type: 'POST',
+                data: {
+                    containerId: containerId,
+                    productId: productId,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    if (response.login) {
+                        alert('Please login to add a product to the wishlist.');
+                    } else if (response.success) {
+                        alert('Product added to wishlist successfully!');
+                        updateWishlistQuantity(response.quantity);
+                    } else if (response.exists) {
+                        alert('Product already exists in the wishlist!');
+                    } else {
+                        alert(
+                            'Failed to add the product to the wishlist. Please try again.'
+                        );
+                    }
+                },
+                error: function(xhr) {
+                    if (xhr.responseJSON && xhr.responseJSON.login) {
+                        alert('Please login to add a product to the wishlist.');
+                    } else {
+                        alert(
+                            'Failed to add the product to the wishlist. Please try again.'
+                        );
+                    }
+                }
+            });
+        });
+    });
+
+    function updateCartQuantity(quantity) {
+        $('#cartQtySmall').text(quantity);
+        $('#cartQtyLarge').text(quantity);
+    }
+
+    function updateWishlistQuantity(quantity) {
+        $('#wishlistQty').text(quantity);
+    }
+</script>
     <main>
         <div class="mt-4">
             <div class="container">
@@ -128,7 +245,7 @@
                                 @foreach ($products as $index => $list)
                                     @if (!empty($list->JENIS))
                                         <button type="button"
-                                            class="btn btn-outline-secondary{{ $index === 0 && $list->JENIS ? ' active' : '' }}">
+                                            class="btn btn-outline-secondary{{ $list->JENIS ? ' active' : '' }}">
                                             {{ $list->JENIS }}
                                         </button>
                                     @endif
@@ -150,13 +267,15 @@
                             <div class="mt-3 row justify-content-start g-2 align-items-center">
 
                                 <div class="col-xxl-4 col-lg-4 col-md-5 col-5 d-grid">
-                                    <button type="button" class="btn btn-primary"><i
+                                    <button type="button"  class="btn btn-primary add-to-cart" data-product-id="{{ $products[0]->ID_PRODUCT }}"
+                                        data-container-id="{{ $products[0]->ID_CONTAINER }}"><i
                                             class="feather-icon icon-shopping-bag me-2"></i>Add to
                                         cart</button>
                                 </div>
                                 <div class="col-md-4 col-4">
-                                    <a class="btn btn-light " href="{{ url('wishlist') }}" data-bs-toggle="tooltip"
-                                        data-bs-html="true" aria-label="Wishlist"><i
+                                    <a class="btn btn-light add-to-wishlist" href="{{ url('wishlist') }}" data-bs-toggle="tooltip"
+                                        data-bs-html="true" aria-label="Wishlist" data-product-id="{{ $products[0]->ID_PRODUCT }}"
+                                        data-container-id="{{ $products[0]->ID_CONTAINER }}"><i
                                             class="feather-icon icon-heart"></i></a>
                                 </div>
                             </div>
@@ -167,7 +286,7 @@
                                 <table class="table table-borderless mb-0">
 
                                     <tbody>
-                                        <tr>
+                                        {{-- <tr>
                                             <td>Product Code:</td>
                                             <td>FBB00255</td>
 
@@ -176,7 +295,7 @@
                                             <td>Availability:</td>
                                             <td>In Stock</td>
 
-                                        </tr>
+                                        </tr> --}}
                                         {{-- <tr>
                                             <td>Type:</td>
                                             <td>Fruits</td>
@@ -230,15 +349,14 @@
                             </li>
                             <!-- nav item -->
                             <li class="nav-item" role="presentation">
-                                <!-- btn --> <button class="nav-link" id="details-tab" data-bs-toggle="tab"
+                                 {{-- <button class="nav-link" id="details-tab" data-bs-toggle="tab"
                                     data-bs-target="#details-tab-pane" type="button" role="tab"
-                                    aria-controls="details-tab-pane" aria-selected="false">Information</button>
+                                    aria-controls="details-tab-pane" aria-selected="false">Information</button> --}}
                             </li>
-                            <!-- nav item -->
                             <li class="nav-item" role="presentation">
-                                <!-- btn --> <button class="nav-link" id="reviews-tab" data-bs-toggle="tab"
+                                 {{-- <button class="nav-link" id="reviews-tab" data-bs-toggle="tab"
                                     data-bs-target="#reviews-tab-pane" type="button" role="tab"
-                                    aria-controls="reviews-tab-pane" aria-selected="false">Reviews</button>
+                                    aria-controls="reviews-tab-pane" aria-selected="false">Reviews</button> --}}
                             </li>
                             <!-- nav item -->
                             <li class="nav-item" role="presentation">

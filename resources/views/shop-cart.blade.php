@@ -59,7 +59,7 @@
                                                 <i class='fas fa-store-alt' style='font-size:12px'></i>
                                                 <small class="mb-0 text-muted">{{ $list->NAME_SHOP }}</small>
                                                 {{-- </a> --}}
-                                                <a href="{{ '/products/' . $list->NAME_SHOP . '/' . $list->PRODUCT_NAME . '?id=' . Crypt::encryptString($list->ID_CONTAINER) }}"
+                                                <a href="{{ '/products/' . $list->NAME_SHOP . '/' . $list->PRODUCT_NAME.'/'.$list->ID_PRODUCT . '?id=' . Crypt::encryptString($list->ID_CONTAINER) }}"
                                                     class="text-inherit">
                                                     <h6 class="mb-0">{{ $list->PRODUCT_NAME }} @if($list->jenis) - {{ $list->jenis }} @endif</h6>
                                                 </a>

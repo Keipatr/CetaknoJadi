@@ -91,7 +91,7 @@
 
         <!-- Nearest Store -->
 
-        <section class="my-lg-10 my-8">
+        {{-- <section class="my-lg-10 my-8">
             <div class="container ">
                 <div class="row align-items-center mb-8">
                     <!-- store -->
@@ -106,13 +106,11 @@
                             </div>
                             <div class="ms-3">
                                 <h3 class=" mb-0">Nearest Store</h3>
-                                {{-- <p class="mb-0">Find the best store products in your area with discount.</p> --}}
                             </div>
                             <div>
                             </div>
                         </div>
                     </div>
-                    <!-- all store -->
                     <div class="col-md-4 text-end col-12 d-none d-md-block">
                         <a href="{{ url('/stores') }}">
                             All stores
@@ -124,7 +122,6 @@
                         </a>
                     </div>
                 </div>
-                <!-- row -->
                 <div class="row row-cols-1 row-cols-lg-3 row-cols-md-3 g-4 g-lg-4">
                     @php
                         shuffle($stores);
@@ -152,7 +149,7 @@
 
                 </div>
             </div>
-        </section>
+        </section> --}}
         <section class="my-lg-14 my-8">
             <div class="container">
                 <div class="row align-items-center mb-8">
@@ -160,10 +157,9 @@
                     <div class="col-md-8 col-12">
                         <div class="d-flex">
                             <div class="mt-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="feather feather-star text-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-star text-primary">
                                     <polygon
                                         points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
                                     </polygon>
@@ -266,85 +262,99 @@
                     @endforeach --}}
 
                     @foreach ($randomProducts as $product)
-                        <div class="col">
-                            <div class="card card-product">
-                                <div class="card-body">
-                                    <div class="text-center position-relative">
-                                        <div class="position-absolute top-0 start-0">
-                                        </div>
-                                        <a
-                                            href="{{ '/products/' . $product->NAME_SHOP . '/' . $product->PRODUCT_NAME . '?id=' . Crypt::encryptString($product->ID_CONTAINER) }}">
+                    <div class="col">
+                        <div class="card card-product">
+                            <div class="card-body">
+                                <div class="text-center position-relative">
+                                    <div class="position-absolute top-0 start-0"></div>
+                                    <a href="{{ '/products/' . $product->NAME_SHOP . '/' . $product->PRODUCT_NAME.'/'.$product->ID_PRODUCT . '?id=' . Crypt::encryptString($product->ID_CONTAINER) }}">
+                                        <div class="image-container">
                                             <img src="{{ $product->image ? '/images/all/' . $product->image : 'images/products/product-img-18.jpg' }}"
                                                 alt="Grocery Ecommerce Template"
-                                                class="mb-3 img-fluid rounded fixed-size-image w-1100 h-1000">
+                                                class="mb-3 img-fluid rounded fixed-size-image">
+                                        </div>
+                                    </a>
+                                    <div class="card-product-action">
+                                        <a href="#!" class="btn-action add-to-wishlist" data-bs-toggle="tooltip"
+                                            data-bs-html="true" title="Wishlist"
+                                            data-product-id="{{ $product->ID_PRODUCT }}"
+                                            data-container-id="{{ $product->ID_CONTAINER }}">
+                                            <i class="bi bi-heart"></i>
                                         </a>
-                                        <div class="card-product-action">
-                                            <a href="#!" class="btn-action add-to-wishlist" data-bs-toggle="tooltip"
-                                                data-bs-html="true" title="Wishlist"
-                                                data-product-id="{{ $product->ID_PRODUCT }}"
-                                                data-container-id="{{ $product->ID_CONTAINER }}">
-                                                <i class="bi bi-heart"></i>
-                                            </a>
-                                        </div>
                                     </div>
-                                    <div class="text-small mb-1"><a
-                                            href="{{ url('/categories/' . $product->NAME_CATEGORY . '?id=' . Crypt::encryptString($product->ID_CATEGORY)) }}"
-                                            class="text-decoration-none text-muted"><small>{{ $product->NAME_CATEGORY }}</small></a>
-                                    </div>
-                                    <h2 class="fs-6">
-                                        <a href="{{ '/products/' . $product->NAME_SHOP . '/' . $product->PRODUCT_NAME . '?id=' . Crypt::encryptString($product->ID_CONTAINER) }}"
-                                            class="text-inherit text-decoration-none">{{ $product->PRODUCT_NAME }}</a>
-                                    </h2>
+                                </div>
+                                <div class="text-small mb-1">
+                                    <a href="{{ url('/categories/' . $product->NAME_CATEGORY . '?id=' . Crypt::encryptString($product->ID_CATEGORY)) }}"
+                                        class="text-decoration-none text-muted">
+                                        <small>{{ $product->NAME_CATEGORY }}</small>
+                                    </a>
+                                </div>
+                                <h2 class="fs-6">
+                                    <a href="{{ '/products/' . $product->NAME_SHOP . '/' . $product->PRODUCT_NAME.'/'.$product->ID_PRODUCT . '?id=' . Crypt::encryptString($product->ID_CONTAINER) }}"
+                                        class="text-inherit text-decoration-none">{{ $product->PRODUCT_NAME }}</a>
+                                </h2>
+                                <div>
+                                    <small class="text-warning">
+                                        @php
+                                            $fullStars = floor($product->rating);
+                                            $halfStar = ceil($product->rating - $fullStars);
+                                            $emptyStars = 5 - $fullStars - $halfStar;
+                                        @endphp
+
+                                        @for ($i = 0; $i < $fullStars; $i++)
+                                            <i class="bi bi-star-fill"></i>
+                                        @endfor
+
+                                        @for ($i = 0; $i < $halfStar; $i++)
+                                            <i class="bi bi-star-half"></i>
+                                        @endfor
+
+                                        @for ($i = 0; $i < $emptyStars; $i++)
+                                            <i class="bi bi-star"></i>
+                                        @endfor
+                                    </small>
+                                    <span class="text-muted small">
+                                        {{ $product->rating != 0 ? ($product->rating != round($product->rating) ? number_format($product->rating, 1) : round($product->rating)) : '0' }}
+                                        ({{ $product->rating_count }})
+                                    </span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
                                     <div>
-                                        <small class="text-warning">
-                                            @php
-                                                $fullStars = floor($product->rating);
-                                                $halfStar = ceil($product->rating - $fullStars);
-                                                $emptyStars = 5 - $fullStars - $halfStar;
-                                            @endphp
-
-                                            @for ($i = 0; $i < $fullStars; $i++)
-                                                <i class="bi bi-star-fill"></i>
-                                            @endfor
-
-                                            @for ($i = 0; $i < $halfStar; $i++)
-                                                <i class="bi bi-star-half"></i>
-                                            @endfor
-
-                                            @for ($i = 0; $i < $emptyStars; $i++)
-                                                <i class="bi bi-star"></i>
-                                            @endfor
-                                        </small>
-                                        <span class="text-muted small">
-                                            {{ $product->rating != 0 ? ($product->rating != round($product->rating) ? number_format($product->rating, 1) : round($product->rating)) : '0' }}
-                                            ({{ $product->rating_count }})
-                                        </span>
+                                        <span class="text-dark">{{ $product->formatted_price }}</span>
                                     </div>
-                                    <div class="d-flex justify-content-between align-items-center mt-3">
-                                        <div>
-                                            <span class="text-dark">{{ $product->formatted_price }}</span>
-                                        </div>
-                                        <div>
-                                            <a href="#!" class="btn btn-primary btn-sm add-to-cart"
-                                                data-product-id="{{ $product->ID_PRODUCT }}"
-                                                data-container-id="{{ $product->ID_CONTAINER }}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    class="feather feather-plus">
-                                                    <line x1="12" y1="5" x2="12" y2="19">
-                                                    </line>
-                                                    <line x1="5" y1="12" x2="19" y2="12">
-                                                    </line>
-                                                </svg> Add To Cart
-                                            </a>
-                                        </div>
+                                    <div>
+                                        <a href="#!" class="btn btn-primary btn-sm add-to-cart"
+                                            data-product-id="{{ $product->ID_PRODUCT }}"
+                                            data-container-id="{{ $product->ID_CONTAINER }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-plus">
+                                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                            </svg> Add To Cart
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    </div>
+                @endforeach
+                    <style>
+                        .image-container {
+                            width: 200px;
+                            /* Adjust the width to your desired size */
+                            height: 200px;
+                            /* Adjust the height to your desired size */
+                            overflow: hidden;
+                        }
 
+                        .fixed-size-image {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    </style>
 
                     <script>
                         $(document).ready(function() {

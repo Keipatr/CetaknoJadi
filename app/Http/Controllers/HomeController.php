@@ -51,7 +51,6 @@ JOIN shop s ON s.ID_SHOP = co.ID_SHOP
 LEFT JOIN review r ON r.ID_CONTAINER = co.ID_CONTAINER
 WHERE co.STATUS_DELETE = 0
   AND co.STATUS = 1
-  and p.ID_PRODUCT = 1
   AND s.STATUS_SHOP = 'Y'
   and CITY_SHOP like '%%'
 GROUP BY c.ID_CATEGORY,p.ID_PRODUCT,s.NAME_SHOP, p.product_name, c.name_category, p.PRICE_PRODUCT, image, co.ID_CONTAINER;

@@ -113,7 +113,7 @@
                                             <div class="text-center position-relative ">
                                                 <div class=" position-absolute top-0 start-0"></div>
                                                 <a
-                                                    href="{{ '/products/' . $product->NAME_SHOP . '/' . $product->PRODUCT_NAME . '?id=' . Crypt::encryptString($product->ID_CONTAINER) }}">
+                                                    href="{{ '/products/' . $product->NAME_SHOP . '/' . $product->PRODUCT_NAME.'/'.$product->ID_PRODUCT . '?id=' . Crypt::encryptString($product->ID_CONTAINER) }}">
                                                     <img src="{{ $product->image ? '/images/all/' . $product->image : 'images/products/product-img-18.jpg' }}"
                                                         alt="Grocery Ecommerce Template" class="mb-3 img-fluid">
                                                 </a>
@@ -131,12 +131,12 @@
                                                     class="text-decoration-none text-muted"><small>{{ $product->NAME_CATEGORY }}</small></a>
                                             </div>
                                             <h2 class="fs-6"><a
-                                                    href="{{ '/products/' . $product->NAME_SHOP . '/' . $product->PRODUCT_NAME . '?id=' . Crypt::encryptString($product->ID_CONTAINER) }}"
-                                                    class="text-inherit text-decoration-none">{{ $product->PRODUCT_NAME }}</a>
+                                                    href="{{ '/products/' . $product->NAME_SHOP . '/' . $product->PRODUCT_NAME.'/'.$product->ID_PRODUCT . '?id=' . Crypt::encryptString($product->ID_CONTAINER) }}"
+                                                    class="text-inherit text-decoration-none">{{ $product->PRODUCT_NAME }} @if($product->jenis) - {{ $product->jenis }} @endif</a>
                                             </h2>
-                                            <div class="text-small mb-1"><a
-                                                    href="{{ url('/stores/' . $product->NAME_SHOP . '?id=' . Crypt::encryptString($product->ID_CATEGORY)) }}"
-                                                    class="text-decoration-none text-muted"><small>{{ $product->NAME_SHOP }}</small></a>
+                                            <div class="text-small mb-1">
+                                                <i class='fas fa-store-alt' style='font-size:12px'></i>
+                                                <small class="mb-0 text-muted">{{ $product->NAME_SHOP }}</small>
                                             </div>
                                             <div>
                                                 <small class="text-warning">

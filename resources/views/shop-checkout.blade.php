@@ -1,6 +1,8 @@
 @extends('layouts.main')
 
 @section('main-content')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <main>
         <!-- section-->
         <div class="mt-4">
@@ -109,7 +111,12 @@
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
                                                                         name="deliveryMethod"
-                                                                        id="sicepatRadio{{ $loop->index }}">
+                                                                        id="sicepatRadio{{ $loop->index }}"
+                                                                        value="{{ $list['product_code'] }}"
+                                                                        data-delivery-id="{{ $list['product_code'] }}"
+                                                                        data-delivery-name="{{ $list['product_name'] }}"
+                                                                        data-delivery-rates="{{ $list['rates'] }}"
+                                                                        data-delivery-formatted="{{ $list['formatted_rates'] }}">
                                                                     <label class="form-check-label"
                                                                         for="sicepatRadio{{ $loop->index }}">
                                                                         {{ $list['product_name'] }} <br>
@@ -133,7 +140,12 @@
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
                                                                         name="deliveryMethod"
-                                                                        id="anterajaRadio{{ $loop->index }}">
+                                                                        id="anterajaRadio{{ $loop->index }}"
+                                                                        value="{{ $list['product_code'] }}"
+                                                                        data-delivery-id="{{ $list['product_code'] }}"
+                                                                        data-delivery-name="{{ $list['product_name'] }}"
+                                                                        data-delivery-rates="{{ $list['rates'] }}"
+                                                                        data-delivery-formatted="{{ $list['formatted_rates'] }}">
                                                                     <label class="form-check-label"
                                                                         for="anterajaRadio{{ $loop->index }}">
                                                                         {{ $list['product_name'] }} <br>
@@ -165,9 +177,13 @@
                                                             <div class="d-flex">
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="paymentMethod" id="paypal">
+                                                                        name="paymentMethod"
+                                                                        id="payment{{ $loop->index }}"
+                                                                        value="{{ $list->ID_PAYMENT }}"
+                                                                        data-payment-id="{{ $list->ID_PAYMENT }}"
+                                                                        data-payment-name="{{ $list->NAME_PAYMENT }}">
                                                                     <label class="form-check-label ms-2"
-                                                                        for="paypal"></label>
+                                                                        for="payment{{ $loop->index }}"></label>
                                                                 </div>
                                                                 <div>
                                                                     <h6 class="mb-1 h6">
@@ -186,12 +202,10 @@
                                     <a href="#" class="text-inherit h5">
                                         <i class="far fa-image text-muted"></i> Product Images
                                     </a>
-                                    <div id="flush-collapseThree" class="accordion-collapse"
+                                    <div id="flush-collapseFour" class="accordion-collapse"
                                         data-bs-parent="#accordionFlushExample">
                                         <div class="mt-5">
                                             <div>
-                                                <!-- Existing code for payment methods -->
-
                                                 <div class="mt-5">
                                                     <h5 class="mb-3"></h5>
                                                     @foreach ($selectedProducts as $list)
@@ -257,7 +271,6 @@
                                                 </div>
                                                 <div class="fw-bold">
                                                     {{ $totalQuantity }}
-
                                                 </div>
                                             </div>
                                         </li>
@@ -287,6 +300,70 @@
 
         </section>
     </main>
+    {{-- <script>
+        function previewImage(event, index) {
+            var input = event.target;
+            var imagePreview = document.getElementById('imagePreview' + index);
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function placeOrder() {
+            const selectedDeliveryMethod = document.querySelector('input[name="deliveryMethod"]:checked');
+            const selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+            const productImages = Array.from(document.querySelectorAll('input[name="productImage[]"]'));
+
+            if (selectedDeliveryMethod && selectedPaymentMethod && productImages.every(img => img.value !== '')) {
+                // Extract the selected delivery method data
+                const productCode = selectedDeliveryMethod.dataset.deliveryId;
+                const productName = selectedDeliveryMethod.dataset.deliveryName;
+                const rates = selectedDeliveryMethod.dataset.deliveryRates;
+                const formatrates = selectedDeliveryMethod.dataset.deliveryFormatted;
+
+                // Extract the selected payment method data
+                const paymentMethodName = selectedPaymentMethod.dataset.paymentName;
+                const paymentMethodId = selectedPaymentMethod.dataset.paymentId;
+
+                // Get the selected product images
+                const productImageUrls = productImages.map(img => URL.createObjectURL(img.files[0]));
+
+
+                // Create the order data object
+                const data = {
+                    productCode: productCode,
+                    productName: productName,
+                    rates: rates,
+                    formatrates: formatrates,
+                    paymentMethodName: paymentMethodName,
+                    paymentMethodId: paymentMethodId,
+                    productImageUrls: productImageUrls
+                };
+                console.log(data);
+
+                $.ajax({
+                    url: 'place-order',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        selected: data
+                    },
+                    success: function(response) {
+                        // Handle the success response from the controller
+                    },
+                    error: function(xhr) {
+                        // Handle the error response
+                    }
+                });
+            }
+        }
+    </script> --}}
     <script>
         function previewImage(event, index) {
             var input = event.target;
@@ -309,35 +386,47 @@
 
             if (selectedDeliveryMethod && selectedPaymentMethod && productImages.every(img => img.value !== '')) {
                 // Extract the selected delivery method data
-                const productCode = selectedDeliveryMethod.id.replace('Radio', '');
-                const productName = selectedDeliveryMethod.nextElementSibling.querySelector('label').innerText;
-                const rates = selectedDeliveryMethod.parentElement.nextElementSibling.innerText.trim();
+                const productCode = selectedDeliveryMethod.dataset.deliveryId;
+                const productName = selectedDeliveryMethod.dataset.deliveryName;
+                const rates = selectedDeliveryMethod.dataset.deliveryRates;
+                const formatRates = selectedDeliveryMethod.dataset.deliveryFormatted;
 
                 // Extract the selected payment method data
-                const paymentMethodName = selectedPaymentMethod.nextElementSibling.querySelector('h6').innerText;
+                const paymentMethodName = selectedPaymentMethod.dataset.paymentName;
+                const paymentMethodId = selectedPaymentMethod.dataset.paymentId;
 
-                // Get the selected product images
-                const productImageUrls = productImages.map(img => URL.createObjectURL(img.files[0]));
+                // Create the FormData object to send the data and files
+                const formData = new FormData();
+                formData.append('_token', '{{ csrf_token() }}');
+                formData.append('productCode', productCode);
+                formData.append('productName', productName);
+                formData.append('rates', rates);
+                formData.append('formatRates', formatRates);
+                formData.append('paymentMethodName', paymentMethodName);
+                formData.append('paymentMethodId', paymentMethodId);
 
-                // Create the order data object
-                const data = {
-                    productCode: productCode,
-                    productName: productName,
-                    rates: rates,
-                    paymentMethodName: paymentMethodName,
-                    productImageUrls: productImageUrls
-                };
-                console.log(data);
+                productImages.forEach((img, index) => {
+                    if (img.files.length > 0) {
+                        const file = img.files[0];
+                        const fileName = `product_image_${index + 1}.${file.name.split('.').pop()}`;
+                        formData.append(`productImage[${index}]`, file, fileName);
+                    }
+                });
 
+                // Send the AJAX request with the form data
                 $.ajax({
                     url: 'place-order',
                     type: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        selected: data
-                    },
+                    data: formData,
+                    processData: false,
+                    contentType: false,
                     success: function(response) {
-                        // Handle the success response from the controller
+                        if (response.success) {
+                            // Redirect to the specified route
+                            window.location.href = response.route;
+                        } else {
+                            // Handle any errors or display a message
+                        }
                     },
                     error: function(xhr) {
                         // Handle the error response
@@ -346,6 +435,7 @@
             }
         }
     </script>
+
     <!-- Javascript-->
     <script src="/libs/flatpickr/dist/flatpickr.min.js"></script>
     <!-- Libs JS -->
