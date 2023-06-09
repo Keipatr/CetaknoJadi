@@ -25,31 +25,10 @@
                         <div class="pt-10 pe-lg-10">
                             <!-- nav -->
                             <ul class="nav flex-column nav-pills nav-pills-dark">
-                                <!-- nav item -->
                                 <li class="nav-item">
                                     <!-- nav link -->
-                                    <a class="nav-link active" aria-current="page" href="{{url('account-orders')}}"><i
+                                    <a class="nav-link active" aria-current="page" href="{{ route('my-account') }}"><i
                                             class="feather-icon icon-shopping-bag me-2"></i>Your Orders</a>
-                                </li>
-                                <!-- nav item -->
-                                <li class="nav-item">
-                                    <a class="nav-link " href="{{url('account')}}"><i
-                                            class="feather-icon icon-settings me-2"></i>Settings</a>
-                                </li>
-                                <!-- nav item -->
-                                <li class="nav-item">
-                                    <a class="nav-link " href="{{url('account-address')}}"><i
-                                            class="feather-icon icon-map-pin me-2"></i>Address</a>
-                                </li>
-                                <!-- nav item -->
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{url('account-payment')}}"><i
-                                            class="feather-icon icon-credit-card me-2"></i>Payment Method</a>
-                                </li>
-                                <!-- nav item -->
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{url('account-notification')}}"><i
-                                            class="feather-icon icon-bell me-2"></i>Notification</a>
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
@@ -57,8 +36,12 @@
                                 </li>
                                 <!-- nav item -->
                                 <li class="nav-item">
-                                    <a class="nav-link " href="{{url('')}}"><i
-                                            class="feather-icon icon-log-out me-2"></i>Log out</a>
+                                    <form method="post" action="{{ route('logout') }}">
+                                        @csrf
+                                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
+                                            <i class="feather-icon icon-log-out me-2"></i>Log out
+                                        </a>
+                                    </form>
                                 </li>
                             </ul>
                         </div>
@@ -86,111 +69,47 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!-- Table body -->
+                                        @foreach ($data as $list)
+                                        @php $imageArray = json_decode($list->image, true);@endphp
                                         <tr>
                                             <td class="align-middle border-top-0 w-0">
-                                                <a href="#"> <img src="images/products/dokumen.jpg"
+                                                <a href="{{ '/products/' . $list->NAME_SHOP . '/' . $list->PRODUCT_NAME.'/'.$list->ID_PRODUCT . '?id=' . Crypt::encryptString($list->ID_CONTAINER) }}"> <img src="{{ isset($imageArray[0]) ? '/images/all/' . $imageArray[0] : '/images/all/no image.jpg' }}"
                                                         alt="Ecommerce" class="icon-shape icon-xl"></a>
 
                                             </td>
                                             <td class="align-middle border-top-0">
 
-                                                <a href="#" class="fw-semi-bold text-inherit">
-                                                    <h6 class="mb-0">Print A4</h6>
+                                                <a href="{{ '/products/' . $list->NAME_SHOP . '/' . $list->PRODUCT_NAME.'/'.$list->ID_PRODUCT . '?id=' . Crypt::encryptString($list->ID_CONTAINER) }}"
+                                                    class="fw-semi-bold text-inherit">
+                                                    <h6 class="mb-0" style="color: black;" onmouseover="this.style.color='green';" onmouseout="this.style.color='black';">
+                                                        {{ $list->PRODUCT_NAME }}
+                                                    </h6>
+
                                                 </a>
-                                                <span><small class="text-muted">Warna</small></span>
+                                                <span><small class="text-muted">{{$list->jenis}}</small></span>
 
                                             </td>
                                             <td class="align-middle border-top-0">
-                                                <a href="#" class="text-inherit">ID11020301</a>
+                                                {{$list->ID_INVOICE}}
 
                                             </td>
                                             <td class="align-middle border-top-0">
-                                                March 5, 2023
+                                                {{$list->DATE}}
 
                                             </td>
                                             <td class="align-middle border-top-0">
-                                                1
-
+                                                {{$list->QTY_DETAIL}}
                                             </td>
                                             <td class="align-middle border-top-0">
-                                                <span class="badge bg-warning">Processing</span>
+                                                <span class="badge {{ $list->STATUS === 'Completed' ? 'bg-success' : 'bg-warning' }}">
+                                                    {{ $list->STATUS }}
+                                                </span>
                                             </td>
                                             <td class="align-middle border-top-0">
-                                                Rp. 15,000
+                                                {{$list->formatted_price}}
                                             </td>
-                                            {{-- <td class="text-muted align-middle border-top-0">
-                                                <a href="#" class="text-inherit" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" data-bs-title="View"><i
-                                                        class="feather-icon icon-eye"></i></a>
-                                            </td> --}}
                                         </tr>
-                                        <tr>
-                                            <td class="align-middle border-top-0 w-0">
-                                                <a href="#"> <img src="images/products/Banner.jpg"
-                                                        alt="Ecommerce" class="icon-shape icon-xl"></a>
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                <a href="#" class="fw-semi-bold text-inherit">
-                                                    <h6 class="mb-0">Banner </h6>
-                                                </a>
-                                                <span><small class="text-muted">Kecil</small></span>
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                <a href="#" class="text-inherit">ID11020302
-                                                </a>
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                July 9, 2023
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                2
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                <span class="badge bg-danger">Cancel</span>
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                Rp. 6,000
-                                            </td>
-                                            {{-- <td class="text-muted align-middle border-top-0">
-                                                <a href="#" class="text-inherit" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" data-bs-title="View"><i
-                                                        class="feather-icon icon-eye"></i></a>
-                                            </td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td class="align-middle border-top-0 w-0">
-                                                <a href="#"> <img src="images/products/banner.jpg"
-                                                        alt="Ecommerce" class="icon-shape icon-xl"></a>
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                <a href="#" class="fw-semi-bold text-inherit">
-                                                    <h6 class="mb-0">Banner</h6>
-                                                </a>
-                                                <span><small class="text-muted">Sedang</small></span>
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                <a href="#" class="text-inherit">ID11020303
-                                                </a>
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                Oct 03, 2023
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                4
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                <span class="badge bg-success">Completed</span>
-                                            </td>
-                                            <td class="align-middle border-top-0">
-                                                Rp. 18,000
-                                            </td>
-                                            {{-- <td class="text-muted align-middle border-top-0">
-                                                <a href="#" class="text-inherit" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" data-bs-title="View"><i
-                                                        class="feather-icon icon-eye"></i></a>
-                                            </td> --}}
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -216,41 +135,23 @@
             <ul class="nav flex-column nav-pills nav-pills-dark">
                 <!-- nav item -->
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{url('account-orders')}}"><i
+                    <a class="nav-link active" aria-current="page" href="{{ route('my-account') }}"><i
                             class="feather-icon icon-shopping-bag me-2"></i>Your Orders</a>
                 </li>
-                <!-- nav item -->
-                <li class="nav-item">
-                    <a class="nav-link " href="{{url('account')}}"><i
-                            class="feather-icon icon-settings me-2"></i>Settings</a>
-                </li>
-                <!-- nav item -->
-                <li class="nav-item">
-                    <a class="nav-link " href="{{url('account-address')}}"><i
-                            class="feather-icon icon-map-pin me-2"></i>Address</a>
-                </li>
-                <!-- nav item -->
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url('account-payment')}}"><i
-                            class="feather-icon icon-credit-card me-2"></i>Payment Method</a>
-                </li>
-                <!-- nav item -->
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url('account-notification')}}"><i
-                            class="feather-icon icon-bell me-2"></i>Notification</a>
-                </li>
-
             </ul>
             <hr class="my-6">
             <div>
-                <!-- nav  -->
+                <!-- navs -->
                 <ul class="nav flex-column nav-pills nav-pills-dark">
                     <!-- nav item -->
                     <li class="nav-item">
-                        <a class="nav-link " href="../index.html"><i
-                                class="feather-icon icon-log-out me-2"></i>Log out</a>
+                        <form method="post" action="{{ route('logout') }}">
+                            @csrf
+                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
+                                <i class="feather-icon icon-log-out me-2"></i>Log out
+                            </a>
+                        </form>
                     </li>
-
                 </ul>
             </div>
         </div>

@@ -1,6 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SearchController;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,84 +20,54 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// riil
+Route::get('/{optional?}', [HomeController::class, 'index'])
+    ->where('optional', '^(|/)$')
+    ->name('home');
 
-Route::get('/', function () {
-    return view('index');
-});
-Route::get('/index', function () {
-    return view('index');
-});
+Route::post('/signin-customer', [LoginController::class, 'signinCustomer'])->name('signin-customer');
 
-
-Route::get('signin', function () {
-    return view('signin');
-});
-Route::get('signup', function () {
-    return view('signup');
-});
-Route::get('forgot', function () {
-    return view('forgot-password');
-});
+Route::post('/signup', [LoginController::class, 'signup'])
+    ->name('signup');
 
 
-Route::get('store', function () {
-    return view('store-list');
-});
-Route::get('/about-us', function () {
-    return view('about');
-});
-Route::get('/contact-us', function () {
-    return view('contact');
-});
-Route::get('/cart', function () {
-    return view('shop-cart');
-});
-Route::get('/checkout', function () {
-    return view('shop-checkout');
-});
-Route::get('/account', function () {
-    return view('account-settings');
-});
-Route::get('/account-settings', function () {
-    return view('account-settings');
-});
-Route::get('/account-orders', function () {
-    return view('account-orders');
-});
-Route::get('account-notification', function () {
-    return view('account-notification');
-});
-Route::get('/account-address', function () {
-    return view('account-address');
-});
-Route::get('/account-payment', function () {
-    return view('account-payment-method');
-});
-Route::get('/wishlist', function () {
-    return view('shop-wishlist');
-});
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/cancelOrder', [HomeController::class, 'cancelOrder'])->name('cancelOrder');
+Route::post('/forget-selected-products', [HomeController::class, 'forgetSelectedProducts'])->name('forgetSelectedProducts');
 
-Route::get('stores', function () {
-    return view('store-list');
-});
-Route::get('store-draya', function () {
-    return view('store-single');
-});
+Route::get('/search-city', [SearchController::class, 'searchCities'])->name('searchCities');
+Route::get('/search', [SearchController::class, 'search'])->name('search');
+// Route::get('/get-price', [SearchController::class, 'getPrice'])->name('getPrice');
+Route::get('/search-products', [SearchController::class,'searchProducts'])->name('searchProducts');
 
-Route::get('overview', function () {
-    return view('overview');
-});
+Route::post('/add-to-cart', [ProductController::class, 'addToCart']);
+Route::post('/add-to-wishlist', [ProductController::class, 'addToWishlist']);
+Route::post('/wishlist/delete', [ProductController::class, 'deleteWishlistItem']);
+Route::post('/cart/delete', [ProductController::class, 'deleteCartItem']);
+Route::post('/cart/update', [ProductController::class, 'updateCartItem']);
+Route::post('/cart/update', [ProductController::class, 'updateCartItem']);
+Route::post('/updateCheckout', [ProductController::class, 'updateCheckout']);
+Route::post('/place-order', [ProductController::class, 'placeOrder'])->name('placeOrder');
 
+Route::get('/checkout', [HomeController::class, 'checkoutPage'])->name('checkoutPage');
+Route::get('/wishlist', [HomeController::class, 'wishlist'])->name('wishlist');
+Route::get('/cart', [HomeController::class, 'cart'])->name('cart');
+Route::get('/signin', [HomeController::class, 'loginpage'])->name('loginpage');
+Route::get('/forgot-password', [HomeController::class, 'forgot'])->name('forgot');
+Route::get('/signup', [HomeController::class, 'signup'])->name('signup');
+Route::get('/about-us', [HomeController::class, 'about'])->name('about-us');
+Route::get('/contact-us', [HomeController::class, 'contact'])->name('contact-us');
 
-Route::get('products', function () {
-    return view('shop-grid');
-});
-Route::get('product-banner', function () {
-    return view('shop-single');
-});
-Route::get('products-banner', function () {
-    return view('shop-single');
-});
+// Route::get('/my-account', [HomeController::class, 'viewAccount'])->name('my-account');
+Route::get('/account-orders', [HomeController::class, 'viewAccount'])->name('my-account');
+// Route::get('/account-address', [HomeController::class, 'address'])->name('account-address');
+// Route::get('/account-payment', [HomeController::class, 'payment'])->name('account-payment');
+// Route::get('/account-notification', [HomeController::class, 'notification'])->name('account-notification');
+
+Route::get('/products/{store_url}/{product_url}/{idprod}', [ProductController::class, 'productShow'])->name('product-show');
+Route::get('/categories/{category_url}', [ProductController::class, 'categoryShow'])->name('category-show');
+Route::get('/stores/{store_url}', [ProductController::class, 'storeShow'])->name('store-show');
+Route::get('/stores', [ProductController::class, 'allStoreShow'])->name('allStore-show');
 
 Route::fallback(function () {
     return view('404error');

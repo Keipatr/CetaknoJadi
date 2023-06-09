@@ -21,17 +21,17 @@
 </script>
 
 <!-- Favicon icon-->
-<link rel="shortcut icon" type="image/x-icon" href="images/favicon/logoTitleCetakno.ico">
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon/logoTitleCetakno.ico">
 
 
 <!-- Libs CSS -->
-<link href="libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-<link href="libs/feather-webfont/dist/feather-icons.css" rel="stylesheet">
-<link href="libs/simplebar/dist/simplebar.min.css" rel="stylesheet">
+<link href="/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="/libs/feather-webfont/dist/feather-icons.css" rel="stylesheet">
+<link href="/libs/simplebar/dist/simplebar.min.css" rel="stylesheet">
 
 
 <!-- Theme CSS -->
-<link rel="stylesheet" href="css/theme.min.css">
+<link rel="stylesheet" href="/css/theme.min.css">
 
 
 </head>
@@ -47,7 +47,7 @@
         <div class="offset-lg-1 col-lg-10  py-8 py-xl-0">
           <div class=" mb-10 mb-xxl-0">
             <!-- img -->
-            <a href="{{url('')}}"> <img src="images/logo/logo cetakno hitam.png" style="width: 250px !important; height: 100px !important;" alt=""></a>
+            <a href="{{url('')}}"> <img src="/images/logo/logo cetakno hitam.png" style="width: 250px !important; height: 100px !important;" alt=""></a>
           </div>
           <div class="row justify-content-center align-items-center">
             <!-- content -->
@@ -66,7 +66,7 @@
             <div class="col-md-6">
               <div>
                  <!-- img -->
-                <img src="images/svg-graphics/error.svg" alt="" class="img-fluid">
+                <img src="/images/svg-graphics/error.svg" alt="" class="img-fluid">
               </div>
             </div>
           </div>

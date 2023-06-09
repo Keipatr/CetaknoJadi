@@ -8,23 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 
-class user extends Model implements Authenticatable
+// class Customer extends Model
+class Customer extends Model implements Authenticatable
 
 {
     use HasFactory;
-    protected $table = 'customer';
-    protected $primaryKey = 'id_customer';
-    protected $fillable = ['id_customer', 'id_wishlist', 'id_cart', 'name_cust', 'telp_cust','address_cust','city_cust','postal_cust','username_cust','password_cust','email_cust'];
+    protected $table = 'CUSTOMER';
+    protected $primaryKey = 'ID_CUSTOMER';
+    protected $fillable = ['ID_CUSTOMER', 'ID_WISHLIST', 'ID_CART', 'NAME_CUST', 'TELP_CUST','ADDRESS_CUST','CITY_CUST','POSTAL_CUST','USERNAME_CUST','PASSWORD_CUST','EMAIL_CUST','STATUS_DELETE'];
     protected $rememberTokenName = 'remember_token';
 
     public function getAuthIdentifierName()
     {
-        return 'id_customer'; // Replace with the actual identifier column name
+        return 'ID_CUSTOMER'; // Replace with the actual identifier column name
     }
 
     public function getAuthIdentifier()
     {
-        return $this->id_customer; // Replace with the actual identifier column name
+        return $this->ID_CUSTOMER; // Replace with the actual identifier column name
     }
 
     public function getAuthPassword()

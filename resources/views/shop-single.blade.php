@@ -1,21 +1,138 @@
 @extends('layouts.main')
 
 @section('main-content')
-{{-- <body> --}}
+    <script>
+        $(document).ready(function() {
+            // $('.add-to-cart').click(function(e) {
+            //     e.preventDefault();
+            //     var productId = $(this).data('product-id');
+            //     var containerId = $(this).data('container-id');
+
+            //     $.ajax({
+            //         url: '/add-to-cart',
+            //         type: 'POST',
+            //         data: {
+            //             productId: productId,
+            //             containerId: containerId,
+            //             _token: '{{ csrf_token() }}'
+            //         },
+            //         success: function(response) {
+            //             if (response.login) {
+            //                 alert('Please login to add a product to the cart.');
+            //             } else if (response.success) {
+            //                 alert('Product added to cart successfully!');
+            //             } else {
+            //                 alert('Failed to add the product to the cart. Please try again.');
+            //             }
+            //         },
+            //         error: function(xhr) {
+            //             if (xhr.responseJSON && xhr.responseJSON.login) {
+            //                 alert('Please login to add a product to the cart.');
+            //             } else {
+            //                 alert('Failed to add the product to the cart. Please try again.');
+            //             }
+            //         }
+            //     });
+            // });
+
+            $('.add-to-cart').click(function(e) {
+                e.preventDefault();
+                var productId = $(this).data('product-id');
+                var containerId = $(this).data('container-id');
+
+                $.ajax({
+                    url: '/add-to-cart',
+                    type: 'POST',
+                    data: {
+                        productId: productId,
+                        containerId: containerId,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        if (response.login) {
+                            alert('Please login to add a product to the cart.');
+                        } else if (response.success) {
+                            alert('Product added to cart successfully!');
+                            updateCartQuantity(response.quantity);
+                        } else {
+                            alert('Failed to add the product to the cart. Please try again.');
+                        }
+                    },
+                    error: function(xhr) {
+                        if (xhr.responseJSON && xhr.responseJSON.login) {
+                            alert('Please login to add a product to the cart.');
+                        } else {
+                            alert('Failed to add the product to the cart. Please try again.');
+                        }
+                    }
+                });
+            });
+
+
+
+            $('.add-to-wishlist').click(function(e) {
+                e.preventDefault();
+                var productId = $(this).data('product-id');
+                var containerId = $(this).data('container-id');
+
+                $.ajax({
+                    url: '/add-to-wishlist',
+                    type: 'POST',
+                    data: {
+                        containerId: containerId,
+                        productId: productId,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        if (response.login) {
+                            alert('Please login to add a product to the wishlist.');
+                        } else if (response.success) {
+                            alert('Product added to wishlist successfully!');
+                            updateWishlistQuantity(response.quantity);
+                        } else if (response.exists) {
+                            alert('Product already exists in the wishlist!');
+                        } else {
+                            alert(
+                                'Failed to add the product to the wishlist. Please try again.'
+                            );
+                        }
+                    },
+                    error: function(xhr) {
+                        if (xhr.responseJSON && xhr.responseJSON.login) {
+                            alert('Please login to add a product to the wishlist.');
+                        } else {
+                            alert(
+                                'Failed to add the product to the wishlist. Please try again.'
+                            );
+                        }
+                    }
+                });
+            });
+        });
+
+        function updateCartQuantity(quantity) {
+            $('#cartQtySmall').text(quantity);
+            $('#cartQtyLarge').text(quantity);
+        }
+
+        function updateWishlistQuantity(quantity) {
+            $('#wishlistQty').text(quantity);
+        }
+    </script>
     <main>
         <div class="mt-4">
             <div class="container">
-                <!-- row -->
                 <div class="row ">
-                    <!-- col -->
                     <div class="col-12">
-                        <!-- breadcrumb -->
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb mb-0">
-                                <li class="breadcrumb-item"><a href="{{url('')}}">Home</a></li>
-                                <li class="breadcrumb-item"><a href="{{url('products')}}">Spanduk & Banner</a></li>
+                                <li class="breadcrumb-item"><a href="{{ url('') }}">Home</a></li>
+                                <li class="breadcrumb-item"><a
+                                        href="{{ url('/categories/' . $products[0]->NAME_CATEGORY . '?id=' . Crypt::encryptString($products[0]->ID_CATEGORY)) }}">
+                                        {{ $products[0]->NAME_CATEGORY }}</a>
+                                </li>
 
-                                <li class="breadcrumb-item active" aria-current="page">Banner</li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ $products[0]->PRODUCT_NAME }}</li>
                             </ol>
                         </nav>
                     </div>
@@ -27,123 +144,96 @@
                 <div class="row">
 
                     <div class="col-md-6">
-                        <!-- img slide -->
                         <div class="product" id="product">
-                            <div class="zoom" onmousemove="zoom(event)"
-                                style="background-image: url(images/products/banner.jpg)">
-                                <!-- img -->
-                                <!-- img --><img src="images/products/banner.jpg" alt="">
-                            </div>
-                            <div>
-                                <div class="zoom" onmousemove="zoom(event)"
-                                    style="background-image: url(images/products/banner.jpg)">
-                                    <!-- img -->
-                                    <img src="images/products/banner.jpg" alt="">
+                            @foreach ($products as $item)
+                                <div>
+                                    @php $imageArray = json_decode($item->image, true);@endphp
+                                    <img src="{{ isset($imageArray[0]) ? '/images/all/' . $imageArray[0] : '/images/all/no image.jpg' }}" alt="">
                                 </div>
-                            </div>
-                            <div>
-                                <div class="zoom" onmousemove="zoom(event)"
-                                    style="background-image: url(images/products/banner.jpg)">
-                                    <!-- img -->
-                                    <img src="images/products/banner.jpg" alt="">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="zoom" onmousemove="zoom(event)"
-                                    style="background-image: url(images/products/banner.jpg)">
-                                    <!-- img -->
-                                    <img src="images/products/banner.jpg" alt="">
-                                </div>
-                            </div>
+                            @endforeach
+
                         </div>
-                        <!-- product tools -->
                         <div class="product-tools">
                             <div class="thumbnails row g-3" id="productThumbnails">
-                                <div class="col-3">
-                                    <div class="thumbnails-img">
-                                        <!-- img -->
-                                        <img src="images/products/banner.jpg" alt="">
+                                @foreach ($products as $item)
+                                    <div class="col-3">
+                                        <div class="thumbnails-img">
+                                            @php $imageArray = json_decode($item->image, true);@endphp
+                                            <img src="{{ isset($imageArray[0]) ? '/images/all/' . $imageArray[0] : '/images/all/no image.jpg' }}" alt="">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="thumbnails-img">
-                                        <!-- img -->
-                                        <img src="images/products/banner.jpg" alt="">
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="thumbnails-img">
-                                        <!-- img -->
-                                        <img src="images/products/banner.jpg" alt="">
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="thumbnails-img">
-                                        <!-- img -->
-                                        <img src="images/products/banner.jpg" alt="">
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="ps-lg-10 mt-6 mt-md-0">
-                            <!-- content -->
-                            <a href="#!" class="mb-4 d-block">Spanduk & Banner</a>
-                            <!-- heading -->
-                            <h1 class="mb-1">Banner </h1>
+                            <a href="{{ url('/categories/' . $products[0]->NAME_CATEGORY . '?id=' . Crypt::encryptString($products[0]->ID_CATEGORY)) }}"
+                                class="mb-4 d-block">{{ $products[0]->NAME_CATEGORY }}</a>
+                            <h1 class="mb-1">{{ $products[0]->PRODUCT_NAME }} @if ($products[0]->jenis)
+                                - {{ $products[0]->jenis }}@endif</h1>
                             <div class="mb-4">
-                                <!-- rating -->
-                                <!-- rating --> <small class="text-warning"> <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-half"></i></small><a href="#" class="ms-2">(30
-                                    reviews)</a>
+                                <small class="text-warning">
+                                    @php
+                                        $fullStars = floor($products[0]->rating);
+                                        $halfStar = ceil($products[0]->rating - $fullStars);
+                                        $emptyStars = 5 - $fullStars - $halfStar;
+                                    @endphp
+
+                                    @for ($i = 0; $i < $fullStars; $i++)
+                                        <i class="bi bi-star-fill"></i>
+                                    @endfor
+
+                                    @for ($i = 0; $i < $halfStar; $i++)
+                                        <i class="bi bi-star-half"></i>
+                                    @endfor
+
+                                    @for ($i = 0; $i < $emptyStars; $i++)
+                                        <i class="bi bi-star"></i>
+                                    @endfor
+                                </small><a href="#" class="ms-2">({{ $products[0]->rating_count }} Reviews)</a>
                             </div>
                             <div class="fs-4">
-                                <!-- price --><span class="fw-bold text-dark">Rp. 32,000</span>
-                                {{-- <span class="text-decoration-line-through text-muted">$35</span> --}}
-                                {{-- <span><small class="fs-6 ms-2 text-danger">26% Off</small></span> --}}
+                                <span class="fw-bold text-dark">{{ $products[0]->formatted_price }}</span>
                             </div>
-                            <!-- hr -->
                             <hr class="my-6">
-                            <div class="mb-5"><button type="button"
-                                    class="btn btn-outline-secondary">Kecil</button>
-                                <!-- btn -->
-                                <button type="button" class="btn btn-outline-secondary">Sedang</button>
-                                <!-- btn -->
-                                 <button type="button" class="btn btn-outline-secondary">Besar</button>
+                            <div class="mb-5">
+                                @foreach ($products as $index => $list)
+                                    @if (!empty($list->JENIS))
+                                        <button type="button"
+                                            class="btn btn-outline-secondary{{ $list->JENIS ? ' active' : '' }}">
+                                            {{ $list->JENIS }}
+                                        </button>
+                                    @endif
+                                @endforeach
+
+                                {{-- <button type="button" class="btn btn-outline-secondary">Sedang</button>
+                                <button type="button" class="btn btn-outline-secondary">Besar</button> --}}
                             </div>
                             <div>
-
-
-                                <!-- input -->
-                                <div class="input-group input-spinner  ">
+                                {{-- <div class="input-group input-spinner  ">
                                     <input type="button" value="-" class="button-minus  btn  btn-sm "
                                         data-field="quantity">
-                                    <input type="number" step="1" max="10" value="1"
-                                        name="quantity" class="quantity-field form-control-sm form-input   ">
+                                    <input type="number" step="1" max="10" value="1" name="quantity"
+                                        class="quantity-field form-control-sm form-input   ">
                                     <input type="button" value="+" class="button-plus btn btn-sm "
                                         data-field="quantity">
-                                </div>
-
+                                </div> --}}
                             </div>
                             <div class="mt-3 row justify-content-start g-2 align-items-center">
 
                                 <div class="col-xxl-4 col-lg-4 col-md-5 col-5 d-grid">
-                                    <!-- button -->
-                                    <!-- btn --> <button type="button" class="btn btn-primary"><i
+                                    <button type="button" class="btn btn-primary add-to-cart"
+                                        data-product-id="{{ $products[0]->ID_PRODUCT }}"
+                                        data-container-id="{{ $products[0]->ID_CONTAINER }}"><i
                                             class="feather-icon icon-shopping-bag me-2"></i>Add to
                                         cart</button>
                                 </div>
                                 <div class="col-md-4 col-4">
-                                    <!-- btn -->
-                                    {{-- <a class="btn btn-light " href="#" data-bs-toggle="tooltip"
-                                        data-bs-html="true" aria-label="Compare"><i
-                                            class="bi bi-arrow-left-right"></i></a> --}}
-                                    <a class="btn btn-light " href="{{url('wishlist')}}" data-bs-toggle="tooltip"
-                                        data-bs-html="true" aria-label="Wishlist"><i
+                                    <a class="btn btn-light add-to-wishlist" href="{{ url('wishlist') }}"
+                                        data-bs-toggle="tooltip" data-bs-html="true" aria-label="Wishlist"
+                                        data-product-id="{{ $products[0]->ID_PRODUCT }}"
+                                        data-container-id="{{ $products[0]->ID_CONTAINER }}"><i
                                             class="feather-icon icon-heart"></i></a>
                                 </div>
                             </div>
@@ -154,7 +244,7 @@
                                 <table class="table table-borderless mb-0">
 
                                     <tbody>
-                                        <tr>
+                                        {{-- <tr>
                                             <td>Product Code:</td>
                                             <td>FBB00255</td>
 
@@ -163,7 +253,7 @@
                                             <td>Availability:</td>
                                             <td>In Stock</td>
 
-                                        </tr>
+                                        </tr> --}}
                                         {{-- <tr>
                                             <td>Type:</td>
                                             <td>Fruits</td>
@@ -217,15 +307,14 @@
                             </li>
                             <!-- nav item -->
                             <li class="nav-item" role="presentation">
-                                <!-- btn --> <button class="nav-link" id="details-tab" data-bs-toggle="tab"
+                                {{-- <button class="nav-link" id="details-tab" data-bs-toggle="tab"
                                     data-bs-target="#details-tab-pane" type="button" role="tab"
-                                    aria-controls="details-tab-pane" aria-selected="false">Information</button>
+                                    aria-controls="details-tab-pane" aria-selected="false">Information</button> --}}
                             </li>
-                            <!-- nav item -->
                             <li class="nav-item" role="presentation">
-                                <!-- btn --> <button class="nav-link" id="reviews-tab" data-bs-toggle="tab"
+                                {{-- <button class="nav-link" id="reviews-tab" data-bs-toggle="tab"
                                     data-bs-target="#reviews-tab-pane" type="button" role="tab"
-                                    aria-controls="reviews-tab-pane" aria-selected="false">Reviews</button>
+                                    aria-controls="reviews-tab-pane" aria-selected="false">Reviews</button> --}}
                             </li>
                             <!-- nav item -->
                             <li class="nav-item" role="presentation">
@@ -243,8 +332,15 @@
                                 <div class="my-8">
                                     <div class="mb-5">
                                         <!-- text -->
-                                        <h4 class="mb-1">Cetak Banner</h4>
-                                        <p class="mb-0"> Kami menyediakan beragam ukuran dan jenis banner, baik untuk keperluan indoor maupun outdoor, dengan kualitas cetakan yang terjamin. Banner merupakan media promosi yang efektif dan dapat menarik perhatian banyak orang, sehingga cocok digunakan untuk promosi acara, produk, atau jasa bisnis Anda. Dengan harga yang terjangkau dan pengerjaan yang cepat, kami siap membantu Anda untuk mencetak banner sesuai dengan kebutuhan Anda. </p>
+                                        <h4 class="mb-1">{{ $products[0]->PRODUCT_NAME }}</h4>
+                                        {{-- <p class="mb-0">{{ $products[0]->DESC_PRODUCT }}</p> --}}
+                                        @php
+                                            // $htmlString = "<p>Desjd</p>";
+                                            $htmlString = $products[0]->DESC_PRODUCT;
+                                            $cleanHtmlString = str_replace('\\"', '"', $htmlString);
+                                            $decodedString = html_entity_decode(trim($cleanHtmlString, '"'));
+                                            echo $decodedString;
+                                        @endphp
                                     </div>
                                     {{-- <div class="mb-5">
                                         <h5 class="mb-1">Storage Tips</h5>
@@ -276,8 +372,8 @@
                                 </div>
                             </div>
                             <!-- tab pane -->
-                            <div class="tab-pane fade" id="details-tab-pane" role="tabpanel"
-                                aria-labelledby="details-tab" tabindex="0">
+                            <div class="tab-pane fade" id="details-tab-pane" role="tabpanel" aria-labelledby="details-tab"
+                                tabindex="0">
                                 <div class="my-8">
                                     <div class="row">
                                         <div class="col-12">
@@ -370,8 +466,8 @@
                                                             <i class="bi bi-star-fill"></i>
                                                             <i class="bi bi-star-fill"></i>
                                                             <i class="bi bi-star-half"></i></small><span
-                                                            class="ms-3">4.1 out of 5</span><small
-                                                            class="ms-3">11,130 global ratings</small>
+                                                            class="ms-3">4.1 out of 5</span><small class="ms-3">11,130
+                                                            global ratings</small>
                                                     </span>
                                                 </div>
                                                 <div class="mb-8">
@@ -383,10 +479,9 @@
                                                         </div>
                                                         <div class="w-100">
                                                             <div class="progress" style="height: 6px;">
-                                                                <div class="progress-bar bg-warning"
-                                                                    role="progressbar" style="width: 60%;"
-                                                                    aria-valuenow="60" aria-valuemin="0"
-                                                                    aria-valuemax="100"></div>
+                                                                <div class="progress-bar bg-warning" role="progressbar"
+                                                                    style="width: 60%;" aria-valuenow="60"
+                                                                    aria-valuemin="0" aria-valuemax="100"></div>
                                                             </div>
                                                         </div><span class="text-muted ms-3">53%</span>
                                                     </div>
@@ -398,10 +493,9 @@
                                                         </div>
                                                         <div class="w-100">
                                                             <div class="progress" style="height: 6px;">
-                                                                <div class="progress-bar bg-warning"
-                                                                    role="progressbar" style="width: 50%;"
-                                                                    aria-valuenow="50" aria-valuemin="0"
-                                                                    aria-valuemax="50"></div>
+                                                                <div class="progress-bar bg-warning" role="progressbar"
+                                                                    style="width: 50%;" aria-valuenow="50"
+                                                                    aria-valuemin="0" aria-valuemax="50"></div>
                                                             </div>
                                                         </div><span class="text-muted ms-3">22%</span>
                                                     </div>
@@ -413,10 +507,9 @@
                                                         </div>
                                                         <div class="w-100">
                                                             <div class="progress" style="height: 6px;">
-                                                                <div class="progress-bar bg-warning"
-                                                                    role="progressbar" style="width: 35%;"
-                                                                    aria-valuenow="35" aria-valuemin="0"
-                                                                    aria-valuemax="35"></div>
+                                                                <div class="progress-bar bg-warning" role="progressbar"
+                                                                    style="width: 35%;" aria-valuenow="35"
+                                                                    aria-valuemin="0" aria-valuemax="35"></div>
                                                             </div>
                                                         </div><span class="text-muted ms-3">14%</span>
                                                     </div>
@@ -428,10 +521,9 @@
                                                         </div>
                                                         <div class="w-100">
                                                             <div class="progress" style="height: 6px;">
-                                                                <div class="progress-bar bg-warning"
-                                                                    role="progressbar" style="width: 22%;"
-                                                                    aria-valuenow="22" aria-valuemin="0"
-                                                                    aria-valuemax="22"></div>
+                                                                <div class="progress-bar bg-warning" role="progressbar"
+                                                                    style="width: 22%;" aria-valuenow="22"
+                                                                    aria-valuemin="0" aria-valuemax="22"></div>
                                                             </div>
                                                         </div><span class="text-muted ms-3">5%</span>
                                                     </div>
@@ -443,10 +535,9 @@
                                                         </div>
                                                         <div class="w-100">
                                                             <div class="progress" style="height: 6px;">
-                                                                <div class="progress-bar bg-warning"
-                                                                    role="progressbar" style="width: 14%;"
-                                                                    aria-valuenow="14" aria-valuemin="0"
-                                                                    aria-valuemax="14"></div>
+                                                                <div class="progress-bar bg-warning" role="progressbar"
+                                                                    style="width: 14%;" aria-valuenow="14"
+                                                                    aria-valuemin="0" aria-valuemax="14"></div>
                                                             </div>
                                                         </div><span class="text-muted ms-3">7%</span>
                                                     </div>
@@ -481,8 +572,8 @@
                                                 </div>
                                                 <div class="d-flex border-bottom pb-6 mb-6">
                                                     <!-- img -->
-                                                    <!-- img --><img src="images/avatar/avatar-10.jpg"
-                                                        alt="" class="rounded-circle avatar-lg">
+                                                    <!-- img --><img src="images/avatar/avatar-10.jpg" alt=""
+                                                        class="rounded-circle avatar-lg">
                                                     <div class="ms-5">
                                                         <h6 class="mb-1">
                                                             Jeffri
@@ -515,151 +606,26 @@
                                                         <div>
                                                             <div class="border icon-shape icon-lg border-2 ">
                                                                 <!-- img --><img
-                                                                    src="images/products/banner.jpg"
+                                                                    src="{{ asset('/images/products/banner.jpg') }}"
                                                                     alt="" class="img-fluid ">
                                                             </div>
                                                             <div class="border icon-shape icon-lg border-2 ms-1 ">
                                                                 <!-- img --><img
-                                                                    src="images/products/banner.jpg"
+                                                                    src="{{ asset('/images/products/banner.jpg') }}"
                                                                     alt="" class="img-fluid ">
                                                             </div>
                                                             <div class="border icon-shape icon-lg border-2 ms-1 ">
                                                                 <!-- img --><img
-                                                                    src="images/products/banner.jpg"
+                                                                    src="{{ asset('/images/products/banner.jpg') }}"
                                                                     alt="" class="img-fluid ">
                                                             </div>
 
-                                                        </div>
-                                                        <!-- icon -->
-                                                        {{-- <div class="d-flex justify-content-end mt-4">
-                                                            <a href="#" class="text-muted"><i
-                                                                    class="feather-icon icon-thumbs-up me-1"></i>Helpful</a>
-                                                            <a href="#" class="text-muted ms-4"><i
-                                                                    class="feather-icon icon-flag me-2"></i>Report
-                                                                abuse</a>
-                                                        </div> --}}
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex border-bottom pb-6 mb-6 pt-4">
-                                                    <!-- img --><img src="images/avatar/avatar-12.jpg"
-                                                        alt="" class="rounded-circle avatar-lg">
-                                                    <div class="ms-5">
-                                                        <h6 class="mb-1">
-                                                            Yves
-
-                                                        </h6>
-                                                        <!-- content -->
-                                                        <p class="small"> <span class="text-muted">29 December
-                                                                2022</span>
-                                                            {{-- <span class="text-primary ms-3 fw-bold">Verified
-                                                                Purchase</span> --}}
-                                                        </p>
-                                                        <!-- rating -->
-                                                        <div class=" mb-2">
-                                                            <i class="bi bi-star-fill text-warning"></i>
-                                                            <i class="bi bi-star-fill text-warning"></i>
-                                                            <i class="bi bi-star-fill text-warning"></i>
-                                                            <i class="bi bi-star-fill text-warning"></i>
-                                                            <i class="bi bi-star text-warning"></i>
-                                                            <span class="ms-3 text-dark fw-bold">Need to recheck the
-                                                                weight at delivery point</span>
-                                                        </div>
-
-                                                        <p>Product quality is good. But, weight seemed less than 1kg.
-                                                            Since it is being sent in open
-                                                            package, there is a possibility of pilferage in between.
-                                                            FreshCart sends the veggies and
-                                                            fruits through sealed plastic covers and Barcode on the
-                                                            weight etc. .</p>
-
-                                                        <!-- icon -->
-                                                        <div class="d-flex justify-content-end mt-4">
-                                                            {{-- <a href="#" class="text-muted"><i
-                                                                    class="feather-icon icon-thumbs-up me-1"></i>Helpful</a>
-                                                            <a href="#" class="text-muted ms-4"><i
-                                                                    class="feather-icon icon-flag me-2"></i>Report
-                                                                abuse</a> --}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex border-bottom pb-6 mb-6 pt-4">
-                                                    <!-- img --><img src="images/avatar/avatar-9.jpg" alt=""
-                                                        class="rounded-circle avatar-lg">
-                                                    <div class="ms-5">
-                                                        <h6 class="mb-1">
-                                                            Trisha
-
-                                                        </h6>
-                                                        <!-- content -->
-                                                        <p class="small"> <span class="text-muted">28 December
-                                                                2022</span>
-                                                            {{-- <span class="text-danger ms-3 fw-bold">Unverified
-                                                                Purchase</span> --}}
-                                                        </p>
-                                                        <!-- rating -->
-                                                        <div class=" mb-2">
-                                                            <i class="bi bi-star-fill text-warning"></i>
-                                                            <i class="bi bi-star-fill text-warning"></i>
-                                                            <i class="bi bi-star-fill text-warning"></i>
-                                                            <i class="bi bi-star-fill text-warning"></i>
-                                                            <i class="bi bi-star text-warning"></i>
-                                                            <span class="ms-3 text-dark fw-bold">Need to recheck the
-                                                                weight at delivery point</span>
-                                                        </div>
-
-                                                        <p>Everytime i ordered from fresh i got greenish yellow bananas
-                                                            just like i wanted so go for
-                                                            it , its happens very rare that u get over riped ones.</p>
-
-                                                        <!-- icon -->
-                                                        <div class="d-flex justify-content-end mt-4">
-                                                            {{-- <a href="#" class="text-muted"><i
-                                                                    class="feather-icon icon-thumbs-up me-1"></i>Helpful</a>
-                                                            <a href="#" class="text-muted ms-4"><i
-                                                                    class="feather-icon icon-flag me-2"></i>Report
-                                                                abuse</a> --}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex border-bottom pb-6 mb-6 pt-4">
-                                                    <!-- img --><img src="images/avatar/avatar-8.jpg" alt=""
-                                                        class="rounded-circle avatar-lg">
-                                                    <div class="ms-5 flex-grow-1">
-                                                        <h6 class="mb-1">
-                                                            Kei
-
-                                                        </h6>
-                                                        <!-- content -->
-                                                        <p class="small"> <span class="text-muted">8 December
-                                                                2022</span>
-                                                            {{-- <span class="text-danger ms-3 fw-bold">Unverified
-                                                                Purchase</span> --}}
-                                                        </p>
-                                                        <!-- rating -->
-                                                        <div class=" mb-2">
-                                                            <i class="bi bi-star-fill text-warning"></i>
-                                                            <i class="bi bi-star-fill text-warning"></i>
-                                                            <i class="bi bi-star-fill text-warning"></i>
-                                                            <i class="bi bi-star-fill text-warning"></i>
-                                                            <i class="bi bi-star text-warning"></i>
-                                                            <span class="ms-3 text-dark fw-bold">Great product</span>
-                                                        </div>
-
-                                                        <p>Great product & package. Delivery can be expedited. </p>
-
-                                                        <!-- icon -->
-                                                        <div class="d-flex justify-content-end mt-4">
-                                                            {{-- <a href="#" class="text-muted"><i
-                                                                    class="feather-icon icon-thumbs-up me-1"></i>Helpful</a>
-                                                            <a href="#" class="text-muted ms-4"><i
-                                                                    class="feather-icon icon-flag me-2"></i>Report
-                                                                abuse</a> --}}
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <a href="#"
-                                                        class="btn btn-outline-gray-400 text-muted">Read More
+                                                    <a href="#" class="btn btn-outline-gray-400 text-muted">Read
+                                                        More
                                                         Reviews</a>
                                                 </div>
                                             </div>
@@ -732,333 +698,24 @@
                     </div>
                 </div>
             </div>
-
-
-
         </section>
-
-        <!-- section -->
-        {{-- <section class="my-lg-14 my-14">
-            <div class="container">
-                <!-- row -->
-                <div class="row">
-                    <div class="col-12">
-                        <!-- heading -->
-                        <h3>Related Items</h3>
-                    </div>
-                </div>
-                <!-- row -->
-                <div class="row g-4 row-cols-lg-5 row-cols-2 row-cols-md-2 mt-2">
-                    <!-- col -->
-                    <div class="col">
-                        <div class="card card-product">
-                            <div class="card-body">
-                                <!-- badge -->
-
-                                <div class="text-center position-relative ">
-                                    <div class=" position-absolute top-0 start-0">
-                                        <span class="badge bg-danger">Sale</span>
-                                    </div>
-                                    <a href="#!">
-                                        <!-- img --><img src="images/products/product-img-1.jpg"
-                                            alt="Grocery Ecommerce Template" class="mb-3 img-fluid">
-                                    </a>
-                                    <!-- action btn -->
-                                    <div class="card-product-action">
-                                        <a href="#!" class="btn-action" data-bs-toggle="modal"
-                                            data-bs-target="#quickViewModal"><i class="bi bi-eye"
-                                                data-bs-toggle="tooltip" data-bs-html="true"
-                                                title="Quick View"></i></a>
-                                        <a href="shop-wishlist.html" class="btn-action" data-bs-toggle="tooltip"
-                                            data-bs-html="true" title="Wishlist"><i class="bi bi-heart"></i></a>
-                                        <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-                                            data-bs-html="true" title="Compare"><i
-                                                class="bi bi-arrow-left-right"></i></a>
-                                    </div>
-                                </div>
-                                <!-- heading -->
-                                <div class="text-small mb-1"><a href="#!"
-                                        class="text-decoration-none text-muted"><small>Snack &
-                                            Munchies</small></a></div>
-                                <h2 class="fs-6"><a href="#!"
-                                        class="text-inherit text-decoration-none">Haldiram's Sev Bhujia</a></h2>
-                                <div>
-
-                                    <!-- rating --> <small class="text-warning"> <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-half"></i></small> <span
-                                        class="text-muted small">4.5(149)</span>
-                                </div>
-                                <!-- price -->
-                                <div class="d-flex justify-content-between align-items-center mt-3">
-                                    <div><span class="text-dark">$18</span> <span
-                                            class="text-decoration-line-through text-muted">$24</span>
-                                    </div>
-                                    <!-- btn -->
-                                    <div><a href="#!" class="btn btn-primary btn-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                class="feather feather-plus">
-                                                <line x1="12" y1="5" x2="12"
-                                                    y2="19"></line>
-                                                <line x1="5" y1="12" x2="19"
-                                                    y2="12"></line>
-                                            </svg> Add</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- col -->
-                    <div class="col">
-                        <div class="card card-product">
-                            <div class="card-body">
-                                <!-- badge -->
-                                <div class="text-center position-relative"> <a href="#!"><img
-                                            src="images/products/product-img-2.jpg" alt="Grocery Ecommerce Template"
-                                            class="mb-3 img-fluid"></a>
-                                    <!-- action btn -->
-                                    <div class="card-product-action">
-                                        <a href="#!" class="btn-action" data-bs-toggle="modal"
-                                            data-bs-target="#quickViewModal"><i class="bi bi-eye"
-                                                data-bs-toggle="tooltip" data-bs-html="true"
-                                                title="Quick View"></i></a>
-                                        <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-                                            data-bs-html="true" title="Wishlist"><i class="bi bi-heart"></i></a>
-                                        <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-                                            data-bs-html="true" title="Compare"><i
-                                                class="bi bi-arrow-left-right"></i></a>
-                                    </div>
-                                </div>
-                                <!-- heading -->
-                                <div class="text-small mb-1"><a href="#!"
-                                        class="text-decoration-none text-muted"><small>Bakery &
-                                            Biscuits</small></a></div>
-                                <h2 class="fs-6"><a href="#!"
-                                        class="text-inherit text-decoration-none">NutriChoice Digestive </a></h2>
-                                <div class="text-warning">
-
-                                    <small> <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-half"></i></small> <span class="text-muted small">4.5
-                                        (25)</span>
-                                </div>
-                                <!-- price -->
-                                <div class="d-flex justify-content-between align-items-center mt-3">
-                                    <div><span class="text-dark">$24</span>
-                                    </div>
-                                    <!-- btn -->
-                                    <div><a href="#!" class="btn btn-primary btn-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                class="feather feather-plus">
-                                                <line x1="12" y1="5" x2="12"
-                                                    y2="19"></line>
-                                                <line x1="5" y1="12" x2="19"
-                                                    y2="12"></line>
-                                            </svg> Add</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- col -->
-                    <div class="col">
-                        <div class="card card-product">
-                            <div class="card-body">
-                                <!-- badge -->
-                                <div class="text-center position-relative"> <a href="#!"><img
-                                            src="images/products/product-img-3.jpg" alt="Grocery Ecommerce Template"
-                                            class="mb-3 img-fluid"></a>
-                                    <!-- action btn -->
-                                    <div class="card-product-action">
-                                        <a href="#!" class="btn-action" data-bs-toggle="modal"
-                                            data-bs-target="#quickViewModal"><i class="bi bi-eye"
-                                                data-bs-toggle="tooltip" data-bs-html="true"
-                                                title="Quick View"></i></a>
-                                        <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-                                            data-bs-html="true" title="Wishlist"><i class="bi bi-heart"></i></a>
-                                        <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-                                            data-bs-html="true" title="Compare"><i
-                                                class="bi bi-arrow-left-right"></i></a>
-                                    </div>
-                                </div>
-                                <!-- heading -->
-                                <div class="text-small mb-1"><a href="#!"
-                                        class="text-decoration-none text-muted"><small>Bakery &
-                                            Biscuits</small></a></div>
-                                <h2 class="fs-6"><a href="#!"
-                                        class="text-inherit text-decoration-none">Cadbury 5 Star Chocolate</a></h2>
-                                <div class="text-warning">
-
-                                    <small> <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i></small> <span class="text-muted small">5
-                                        (469)</span>
-                                </div>
-                                <!-- price -->
-                                <div class="d-flex justify-content-between align-items-center mt-3">
-                                    <div><span class="text-dark">$32</span> <span
-                                            class="text-decoration-line-through text-muted">$35</span>
-                                    </div>
-                                    <!-- btn -->
-                                    <div><a href="#!" class="btn btn-primary btn-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                class="feather feather-plus">
-                                                <line x1="12" y1="5" x2="12"
-                                                    y2="19"></line>
-                                                <line x1="5" y1="12" x2="19"
-                                                    y2="12"></line>
-                                            </svg> Add</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- col -->
-                    <div class="col">
-                        <div class="card card-product">
-                            <div class="card-body">
-                                <!-- badge -->
-                                <div class="text-center position-relative"> <a href="#!"><img
-                                            src="images/products/product-img-4.jpg" alt="Grocery Ecommerce Template"
-                                            class="mb-3 img-fluid"></a>
-                                    <!-- action btn -->
-                                    <div class="card-product-action">
-                                        <a href="#!" class="btn-action" data-bs-toggle="modal"
-                                            data-bs-target="#quickViewModal"><i class="bi bi-eye"
-                                                data-bs-toggle="tooltip" data-bs-html="true"
-                                                title="Quick View"></i></a>
-                                        <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-                                            data-bs-html="true" title="Wishlist"><i class="bi bi-heart"></i></a>
-                                        <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-                                            data-bs-html="true" title="Compare"><i
-                                                class="bi bi-arrow-left-right"></i></a>
-                                    </div>
-                                </div>
-                                <!-- heading -->
-                                <div class="text-small mb-1"><a href="#!"
-                                        class="text-decoration-none text-muted"><small>Snack &
-                                            Munchies</small></a></div>
-                                <h2 class="fs-6"><a href="#!"
-                                        class="text-inherit text-decoration-none">Onion Flavour Potato</a></h2>
-                                <div class="text-warning">
-
-                                    <small> <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-half"></i>
-                                        <i class="bi bi-star"></i></small> <span class="text-muted small">3.5
-                                        (456)</span>
-                                </div>
-                                <!-- price -->
-                                <div class="d-flex justify-content-between align-items-center mt-3">
-                                    <div><span class="text-dark">$3</span> <span
-                                            class="text-decoration-line-through text-muted">$5</span>
-                                    </div>
-                                    <!-- btn -->
-                                    <div><a href="#!" class="btn btn-primary btn-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                class="feather feather-plus">
-                                                <line x1="12" y1="5" x2="12"
-                                                    y2="19"></line>
-                                                <line x1="5" y1="12" x2="19"
-                                                    y2="12"></line>
-                                            </svg> Add</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- col -->
-                    <div class="col">
-                        <div class="card card-product">
-                            <div class="card-body">
-                                <!-- badge -->
-                                <div class="text-center position-relative"> <a href="#!"><img
-                                            src="images/products/product-img-9.jpg" alt="Grocery Ecommerce Template"
-                                            class="mb-3 img-fluid"></a>
-                                    <!-- action btn -->
-                                    <div class="card-product-action">
-                                        <a href="#!" class="btn-action" data-bs-toggle="modal"
-                                            data-bs-target="#quickViewModal"><i class="bi bi-eye"
-                                                data-bs-toggle="tooltip" data-bs-html="true"
-                                                title="Quick View"></i></a>
-                                        <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-                                            data-bs-html="true" title="Wishlist"><i class="bi bi-heart"></i></a>
-                                        <a href="#!" class="btn-action" data-bs-toggle="tooltip"
-                                            data-bs-html="true" title="Compare"><i
-                                                class="bi bi-arrow-left-right"></i></a>
-                                    </div>
-                                </div>
-                                <!-- heading -->
-                                <div class="text-small mb-1"><a href="#!"
-                                        class="text-decoration-none text-muted"><small>Snack &
-                                            Munchies</small></a></div>
-                                <h2 class="fs-6"><a href="#!"
-                                        class="text-inherit text-decoration-none">Slurrp Millet Chocolate </a></h2>
-                                <div class="text-warning">
-
-                                    <small> <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-half"></i></small> <span class="text-muted small">4.5
-                                        (67)</span>
-                                </div>
-                                <!-- price -->
-                                <div class="d-flex justify-content-between align-items-center mt-3">
-                                    <div><span class="text-dark">$6</span> <span
-                                            class="text-decoration-line-through text-muted">$10</span>
-                                    </div>
-                                    <!-- btn -->
-                                    <div><a href="#!" class="btn btn-primary btn-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                class="feather feather-plus">
-                                                <line x1="12" y1="5" x2="12"
-                                                    y2="19"></line>
-                                                <line x1="5" y1="12" x2="19"
-                                                    y2="12"></line>
-                                            </svg> Add</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> --}}
-
     </main>
 
-    <!-- modal -->
     <!-- Modal -->
     <div class="modal fade" id="quickViewModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body p-8">
                     <div class="position-absolute top-0 end-0 me-3 mt-3">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
-                            <!-- img slide -->
                             <div class="product productModal" id="productModal">
                                 <div class="zoom" onmousemove="zoom(event)"
                                     style="
                   background-image: url(images/products/product-single-img-1.jpg);
                 ">
-                                    <!-- img -->
                                     <img src="images/products/product-single-img-1.jpg" alt="">
                                 </div>
                                 <div>
@@ -1066,7 +723,6 @@
                                         style="
                     background-image: url(images/products/product-single-img-2.jpg);
                   ">
-                                        <!-- img -->
                                         <img src="images/products/product-single-img-2.jpg" alt="">
                                     </div>
                                 </div>
@@ -1075,7 +731,6 @@
                                         style="
                     background-image: url(images/products/product-single-img-3.jpg);
                   ">
-                                        <!-- img -->
                                         <img src="images/products/product-single-img-3.jpg" alt="">
                                     </div>
                                 </div>
@@ -1084,35 +739,29 @@
                                         style="
                     background-image: url(images/products/product-single-img-4.jpg);
                   ">
-                                        <!-- img -->
                                         <img src="images/products/product-single-img-4.jpg" alt="">
                                     </div>
                                 </div>
                             </div>
-                            <!-- product tools -->
                             <div class="product-tools">
                                 <div class="thumbnails row g-3" id="productModalThumbnails">
                                     <div class="col-3" class="tns-nav-active">
                                         <div class="thumbnails-img">
-                                            <!-- img -->
                                             <img src="images/products/product-single-img-1.jpg" alt="">
                                         </div>
                                     </div>
                                     <div class="col-3">
                                         <div class="thumbnails-img">
-                                            <!-- img -->
                                             <img src="images/products/product-single-img-2.jpg" alt="">
                                         </div>
                                     </div>
                                     <div class="col-3">
                                         <div class="thumbnails-img">
-                                            <!-- img -->
                                             <img src="images/products/product-single-img-3.jpg" alt="">
                                         </div>
                                     </div>
                                     <div class="col-3">
                                         <div class="thumbnails-img">
-                                            <!-- img -->
                                             <img src="images/products/product-single-img-4.jpg" alt="">
                                         </div>
                                     </div>
@@ -1129,8 +778,8 @@
                                         <i class="bi bi-star-fill"></i>
                                         <i class="bi bi-star-fill"></i>
                                         <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-half"></i></small><a href="#"
-                                        class="ms-2">(30 reviews)</a>
+                                        <i class="bi bi-star-half"></i></small><a href="#" class="ms-2">(30
+                                        reviews)</a>
                                 </div>
                                 <div class="fs-4">
                                     <span class="fw-bold text-dark">$32</span>
@@ -1150,8 +799,6 @@
                                     </button>
                                 </div>
                                 <div>
-                                    <!-- input -->
-                                    <!-- input -->
                                     <div class="input-group input-spinner  ">
                                         <input type="button" value="-" class="button-minus  btn  btn-sm "
                                             data-field="quantity">
@@ -1164,18 +811,12 @@
                                 <div class="mt-3 row justify-content-start g-2 align-items-center">
 
                                     <div class="col-lg-4 col-md-5 col-6 d-grid">
-                                        <!-- button -->
-                                        <!-- btn -->
                                         <button type="button" class="btn btn-primary">
                                             <i class="feather-icon icon-shopping-bag me-2"></i>Add to
                                             cart
                                         </button>
                                     </div>
                                     <div class="col-md-4 col-5">
-                                        <!-- btn -->
-                                        <a class="btn btn-light" href="#" data-bs-toggle="tooltip"
-                                            data-bs-html="true" aria-label="Compare"><i
-                                                class="bi bi-arrow-left-right"></i></a>
                                         <a class="btn btn-light" href="#!" data-bs-toggle="tooltip"
                                             data-bs-html="true" aria-label="Wishlist"><i
                                                 class="feather-icon icon-heart"></i></a>
@@ -1219,26 +860,26 @@
 
 
     <!-- Javascript-->
-    <script src="libs/rater-js/index.js"></script>
-    <script src="libs/dropzone/dist/min/dropzone.min.js"></script>
+    <script src="{{ asset('libs/rater-js/index.js') }}"></script>
+    <script src="{{ asset('libs/dropzone/dist/min/dropzone.min.js') }}"></script>
 
     <!-- Libs JS -->
-    <script src="libs/jquery/dist/jquery.min.js"></script>
-    <script src="libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="libs/simplebar/dist/simplebar.min.js"></script>
+    <script src="{{ asset('libs/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('libs/simplebar/dist/simplebar.min.js') }}"></script>
 
     <!-- Theme JS -->
-    <script src="js/theme.min.js"></script>
+    <script src="{{ asset('js/theme.min.js') }}"></script>
 
-    <script src="libs/tiny-slider/dist/min/tiny-slider.js"></script>
-    <script src="js/vendors/tns-slider.js"></script>
-    <script src="js/vendors/zoom.js"></script>
-    <script src="js/vendors/increment-value.js"></script>
-
-
+    <script src="{{ asset('libs/tiny-slider/dist/min/tiny-slider.js') }}"></script>
+    <script src="{{ asset('js/vendors/tns-slider.js') }}"></script>
+    <script src="{{ asset('js/vendors/zoom.js') }}"></script>
+    <script src="{{ asset('js/vendors/increment-value.js') }}"></script>
 
 
 
-{{-- </body> --}}
+
+
+    {{-- </body> --}}
 @endsection
 {{-- </html> --}}
