@@ -131,7 +131,9 @@
                                     <div class="position-absolute top-0 start-0"></div>
                                     <a href="{{ '/products/' . $product->NAME_SHOP . '/' . $product->PRODUCT_NAME.'/'.$product->ID_PRODUCT . '?id=' . Crypt::encryptString($product->ID_CONTAINER) }}">
                                         <div class="image-container">
-                                            <img src="{{ $product->image ? '/images/all/' . $product->image : 'images/products/product-img-18.jpg' }}"
+                                            @php $imageArray = json_decode($product->image, true);@endphp
+                                            <img src = "{{ isset($imageArray[0]) ? '/images/all/' . $imageArray[0] : '/images/all/no image.jpg' }}"
+                                            {{-- src="{{ $product->image ? '/images/all/' . $product->image : 'images/products/product-img-18.jpg' }}" --}}
                                                 alt="Grocery Ecommerce Template"
                                                 class="mb-3 img-fluid rounded fixed-size-image">
                                         </div>
@@ -153,7 +155,9 @@
                                 </div>
                                 <h2 class="fs-6">
                                     <a href="{{ '/products/' . $product->NAME_SHOP . '/' . $product->PRODUCT_NAME.'/'.$product->ID_PRODUCT . '?id=' . Crypt::encryptString($product->ID_CONTAINER) }}"
-                                        class="text-inherit text-decoration-none">{{ $product->PRODUCT_NAME }}</a>
+                                        class="text-inherit text-decoration-none">{{ $product->PRODUCT_NAME }} @if ($product->jenis)
+                                        - {{ $product->jenis }}
+                                    @endif</a>
                                 </h2>
                                 <div>
                                     <small class="text-warning">

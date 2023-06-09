@@ -115,7 +115,8 @@
                                                 <a
                                                     href="{{ '/products/' . $product->NAME_SHOP . '/' . $product->PRODUCT_NAME . '/' . $product->ID_PRODUCT . '?id=' . Crypt::encryptString($product->ID_CONTAINER) }}">
                                                     <div class="image-container">
-                                                        <img src="{{ $product->image ? '/images/all/' . $product->image : 'images/products/product-img-18.jpg' }}"
+                                                        @php $imageArray = json_decode($product->image, true);@endphp
+                                                        <img src="{{ isset($imageArray[0]) ? '/images/all/' . $imageArray[0] : '/images/all/no image.jpg' }}"
                                                             alt="Grocery Ecommerce Template"
                                                             class="mb-3 img-fluid fixed-size-image">
                                                     </div>

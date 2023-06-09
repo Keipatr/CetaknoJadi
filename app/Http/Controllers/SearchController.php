@@ -68,18 +68,16 @@ class SearchController extends Controller
         } else {
             $username = Cookie::get('USERNAME_CUST');
         }
-        $cityID = DB::select("select ID_CITY from customer where USERNAME_CUST = '$username'");
+        $cityID = DB::select("select ID_CITY from CUSTOMER where USERNAME_CUST = '$username'");
 
         $response = Http::withHeaders([
             'Authorization' => $authKey,
-        ])->get($baseURL . '/api/v1/public/basic/rate?id='.$cityID[0]->ID_CITY);
+        ])->get($baseURL . '/api/v1/public/basic/rate?id=' . $cityID[0]->ID_CITY);
 
         if ($response->ok()) {
             $data = $response->json();
             return response()->json(['data' => $data]);
-        }
-        else
-        {
+        } else {
             return response()->json(['error' => 'Failed to fetch areas'], $response->status());
         }
 
@@ -90,17 +88,17 @@ class SearchController extends Controller
     $searchQuery = $request->get('searchProduct');
 
     // Perform the product search query
-    $products = DB::table('container as co')
+    $products = DB::table('CONTAINER as co')
         ->select('p.PRODUCT_NAME', 'co.ID_CONTAINER', 's.NAME_SHOP', 'p.ID_PRODUCT')
-        ->join('category as ca', 'co.ID_CATEGORY', '=', 'ca.ID_CATEGORY')
-        ->join('product as p', 'co.ID_CONTAINER', '=', 'p.ID_CONTAINER')
-        ->join('shop as s', 'co.ID_SHOP', '=', 's.ID_SHOP')
-        ->where('p.STATUS', 'Y')
+        ->join('CATEGORY as ca', 'co.ID_CATEGORY', '=', 'ca.ID_CATEGORY')
+        ->join('PRODUCT as p', 'co.ID_CONTAINER', '=', 'p.ID_CONTAINER')
+        ->join('SHOP as s', 'co.ID_SHOP', '=', 's.ID_SHOP')
+        ->where('p.STATUS', '1')
         ->where('p.STATUS_DELETE', 0)
         ->where('co.STATUS', 1)
         ->where('p.PRODUCT_NAME', 'LIKE', "%$searchQuery%")
         ->get();
-
+    // dd($searchQuery);
     // Prepare the search results array
     $results = [];
 

@@ -70,9 +70,10 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($data as $list)
+                                        @php $imageArray = json_decode($list->image, true);@endphp
                                         <tr>
                                             <td class="align-middle border-top-0 w-0">
-                                                <a href="{{ '/products/' . $list->NAME_SHOP . '/' . $list->PRODUCT_NAME.'/'.$list->ID_PRODUCT . '?id=' . Crypt::encryptString($list->ID_CONTAINER) }}"> <img src="{{'/images/all/'.$list->image}}"
+                                                <a href="{{ '/products/' . $list->NAME_SHOP . '/' . $list->PRODUCT_NAME.'/'.$list->ID_PRODUCT . '?id=' . Crypt::encryptString($list->ID_CONTAINER) }}"> <img src="{{ isset($imageArray[0]) ? '/images/all/' . $imageArray[0] : '/images/all/no image.jpg' }}"
                                                         alt="Ecommerce" class="icon-shape icon-xl"></a>
 
                                             </td>

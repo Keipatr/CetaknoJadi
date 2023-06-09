@@ -40,12 +40,13 @@ class AppServiceProvider extends ServiceProvider
 
                 $data = DB::select("
                 SELECT c.NAME_CUST, QTY_WISHLIST,  QTY_CART
-                FROM customer c, wishlist w, cart ca
+                FROM CUSTOMER c, WISHLIST w, CART ca
                 WHERE w.ID_WISHLIST= c.ID_WISHLIST
                 AND ca.ID_CART= c.ID_CART AND
                  USERNAME_CUST = '$username';");
                 $cart = DB::select("
-                select PRODUCT_NAME,p.image, NAME_CATEGORY,PRICE_PRODUCT as price FROM product p, container c, cart cr,category ca, customer cu, cart_product cw
+                select PRODUCT_NAME,p.image, NAME_CATEGORY,PRICE_PRODUCT as price
+                FROM PRODUCT p, CONTAINER c, CART cr,CATEGORY ca, CUSTOMER cu, CART_PRODUCT cw
                 where p.ID_CONTAINER = c.ID_CONTAINER
                 and cr.ID_CART = cu.ID_CART
                 and ca.ID_CATEGORY = c.ID_CATEGORY
@@ -58,13 +59,13 @@ class AppServiceProvider extends ServiceProvider
                 }
             }
             $cat = DB::select("
-            SELECT * FROM category where STATUS_DELETE = 0;
+            SELECT * FROM CATEGORY where STATUS_DELETE = 0;
             ");
             $view->with('data', $data)->with('cat',$cat)->with('cart',$cart);
         });
         View::composer('layouts.footer', function ($view) {
             $cat = DB::select("
-            SELECT * FROM category where STATUS_DELETE = 0;
+            SELECT * FROM CATEGORY where STATUS_DELETE = 0;
             ");
             $view->with('cat', $cat);
         });

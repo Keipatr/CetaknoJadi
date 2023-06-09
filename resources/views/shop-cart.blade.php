@@ -33,13 +33,14 @@
 
                             <ul class="list-group list-group-flush">
                                 @foreach ($cart as $list)
+                                @php $imageArray = json_decode($list->image, true);@endphp
                                     <li class="list-group-item py-3 py-lg-0 px-0 border-top" style="margin-bottom: 10px;">
                                         <div class="row align-items-center">
                                             <div class="col-1">
                                                 <input class="form-check-input update-subtotal-checkbox" type="checkbox"
                                                     name="updateSubtotalCheckbox" data-product-id="{{ $list->ID_PRODUCT }}"
                                                     data-container-id="{{ $list->ID_CONTAINER }}"
-                                                    data-product-image="{{ '/images/all/' . $list->image }}"
+                                                    data-product-image="{{ isset($imageArray[0]) ? '/images/all/' . $imageArray[0] : '/images/all/no image.jpg' }}"
                                                     data-product-price="{{ $list->formatted_price }}"
                                                     data-category-name="{{ $list->NAME_CATEGORY }}"
                                                     data-product-name="{{ $list->PRODUCT_NAME }}"
@@ -51,7 +52,7 @@
                                                 </label>
                                             </div>
                                             <div class="col-2">
-                                                <img src="{{ '/images/all/' . $list->image }}" alt="Ecommerce"
+                                                <img src="{{ isset($imageArray[0]) ? '/images/all/' . $imageArray[0] : '/images/all/no image.jpg' }}" alt="Ecommerce"
                                                     class="img-fluid">
                                             </div>
                                             <div class="col-3">

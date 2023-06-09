@@ -1,124 +1,124 @@
 @extends('layouts.main')
 
 @section('main-content')
-<script>
-    $(document).ready(function() {
-        // $('.add-to-cart').click(function(e) {
-        //     e.preventDefault();
-        //     var productId = $(this).data('product-id');
-        //     var containerId = $(this).data('container-id');
+    <script>
+        $(document).ready(function() {
+            // $('.add-to-cart').click(function(e) {
+            //     e.preventDefault();
+            //     var productId = $(this).data('product-id');
+            //     var containerId = $(this).data('container-id');
 
-        //     $.ajax({
-        //         url: '/add-to-cart',
-        //         type: 'POST',
-        //         data: {
-        //             productId: productId,
-        //             containerId: containerId,
-        //             _token: '{{ csrf_token() }}'
-        //         },
-        //         success: function(response) {
-        //             if (response.login) {
-        //                 alert('Please login to add a product to the cart.');
-        //             } else if (response.success) {
-        //                 alert('Product added to cart successfully!');
-        //             } else {
-        //                 alert('Failed to add the product to the cart. Please try again.');
-        //             }
-        //         },
-        //         error: function(xhr) {
-        //             if (xhr.responseJSON && xhr.responseJSON.login) {
-        //                 alert('Please login to add a product to the cart.');
-        //             } else {
-        //                 alert('Failed to add the product to the cart. Please try again.');
-        //             }
-        //         }
-        //     });
-        // });
+            //     $.ajax({
+            //         url: '/add-to-cart',
+            //         type: 'POST',
+            //         data: {
+            //             productId: productId,
+            //             containerId: containerId,
+            //             _token: '{{ csrf_token() }}'
+            //         },
+            //         success: function(response) {
+            //             if (response.login) {
+            //                 alert('Please login to add a product to the cart.');
+            //             } else if (response.success) {
+            //                 alert('Product added to cart successfully!');
+            //             } else {
+            //                 alert('Failed to add the product to the cart. Please try again.');
+            //             }
+            //         },
+            //         error: function(xhr) {
+            //             if (xhr.responseJSON && xhr.responseJSON.login) {
+            //                 alert('Please login to add a product to the cart.');
+            //             } else {
+            //                 alert('Failed to add the product to the cart. Please try again.');
+            //             }
+            //         }
+            //     });
+            // });
 
-        $('.add-to-cart').click(function(e) {
-            e.preventDefault();
-            var productId = $(this).data('product-id');
-            var containerId = $(this).data('container-id');
+            $('.add-to-cart').click(function(e) {
+                e.preventDefault();
+                var productId = $(this).data('product-id');
+                var containerId = $(this).data('container-id');
 
-            $.ajax({
-                url: '/add-to-cart',
-                type: 'POST',
-                data: {
-                    productId: productId,
-                    containerId: containerId,
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(response) {
-                    if (response.login) {
-                        alert('Please login to add a product to the cart.');
-                    } else if (response.success) {
-                        alert('Product added to cart successfully!');
-                        updateCartQuantity(response.quantity);
-                    } else {
-                        alert('Failed to add the product to the cart. Please try again.');
+                $.ajax({
+                    url: '/add-to-cart',
+                    type: 'POST',
+                    data: {
+                        productId: productId,
+                        containerId: containerId,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        if (response.login) {
+                            alert('Please login to add a product to the cart.');
+                        } else if (response.success) {
+                            alert('Product added to cart successfully!');
+                            updateCartQuantity(response.quantity);
+                        } else {
+                            alert('Failed to add the product to the cart. Please try again.');
+                        }
+                    },
+                    error: function(xhr) {
+                        if (xhr.responseJSON && xhr.responseJSON.login) {
+                            alert('Please login to add a product to the cart.');
+                        } else {
+                            alert('Failed to add the product to the cart. Please try again.');
+                        }
                     }
-                },
-                error: function(xhr) {
-                    if (xhr.responseJSON && xhr.responseJSON.login) {
-                        alert('Please login to add a product to the cart.');
-                    } else {
-                        alert('Failed to add the product to the cart. Please try again.');
+                });
+            });
+
+
+
+            $('.add-to-wishlist').click(function(e) {
+                e.preventDefault();
+                var productId = $(this).data('product-id');
+                var containerId = $(this).data('container-id');
+
+                $.ajax({
+                    url: '/add-to-wishlist',
+                    type: 'POST',
+                    data: {
+                        containerId: containerId,
+                        productId: productId,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        if (response.login) {
+                            alert('Please login to add a product to the wishlist.');
+                        } else if (response.success) {
+                            alert('Product added to wishlist successfully!');
+                            updateWishlistQuantity(response.quantity);
+                        } else if (response.exists) {
+                            alert('Product already exists in the wishlist!');
+                        } else {
+                            alert(
+                                'Failed to add the product to the wishlist. Please try again.'
+                            );
+                        }
+                    },
+                    error: function(xhr) {
+                        if (xhr.responseJSON && xhr.responseJSON.login) {
+                            alert('Please login to add a product to the wishlist.');
+                        } else {
+                            alert(
+                                'Failed to add the product to the wishlist. Please try again.'
+                            );
+                        }
                     }
-                }
+                });
             });
         });
 
+        function updateCartQuantity(quantity) {
+            $('#cartQtySmall').text(quantity);
+            $('#cartQtyLarge').text(quantity);
+        }
 
-
-        $('.add-to-wishlist').click(function(e) {
-            e.preventDefault();
-            var productId = $(this).data('product-id');
-            var containerId = $(this).data('container-id');
-
-            $.ajax({
-                url: '/add-to-wishlist',
-                type: 'POST',
-                data: {
-                    containerId: containerId,
-                    productId: productId,
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(response) {
-                    if (response.login) {
-                        alert('Please login to add a product to the wishlist.');
-                    } else if (response.success) {
-                        alert('Product added to wishlist successfully!');
-                        updateWishlistQuantity(response.quantity);
-                    } else if (response.exists) {
-                        alert('Product already exists in the wishlist!');
-                    } else {
-                        alert(
-                            'Failed to add the product to the wishlist. Please try again.'
-                        );
-                    }
-                },
-                error: function(xhr) {
-                    if (xhr.responseJSON && xhr.responseJSON.login) {
-                        alert('Please login to add a product to the wishlist.');
-                    } else {
-                        alert(
-                            'Failed to add the product to the wishlist. Please try again.'
-                        );
-                    }
-                }
-            });
-        });
-    });
-
-    function updateCartQuantity(quantity) {
-        $('#cartQtySmall').text(quantity);
-        $('#cartQtyLarge').text(quantity);
-    }
-
-    function updateWishlistQuantity(quantity) {
-        $('#wishlistQty').text(quantity);
-    }
-</script>
+        function updateWishlistQuantity(quantity) {
+            $('#wishlistQty').text(quantity);
+        }
+    </script>
     <main>
         <div class="mt-4">
             <div class="container">
@@ -147,7 +147,8 @@
                         <div class="product" id="product">
                             @foreach ($products as $item)
                                 <div>
-                                    <img src="{{ '/images/all/' . $item->image }}" alt="">
+                                    @php $imageArray = json_decode($item->image, true);@endphp
+                                    <img src="{{ isset($imageArray[0]) ? '/images/all/' . $imageArray[0] : '/images/all/no image.jpg' }}" alt="">
                                 </div>
                             @endforeach
 
@@ -157,7 +158,8 @@
                                 @foreach ($products as $item)
                                     <div class="col-3">
                                         <div class="thumbnails-img">
-                                            <img src="{{ '/images/all/' . $item->image }}" alt="">
+                                            @php $imageArray = json_decode($item->image, true);@endphp
+                                            <img src="{{ isset($imageArray[0]) ? '/images/all/' . $imageArray[0] : '/images/all/no image.jpg' }}" alt="">
                                         </div>
                                     </div>
                                 @endforeach
@@ -168,7 +170,8 @@
                         <div class="ps-lg-10 mt-6 mt-md-0">
                             <a href="{{ url('/categories/' . $products[0]->NAME_CATEGORY . '?id=' . Crypt::encryptString($products[0]->ID_CATEGORY)) }}"
                                 class="mb-4 d-block">{{ $products[0]->NAME_CATEGORY }}</a>
-                            <h1 class="mb-1">{{ $products[0]->PRODUCT_NAME }} </h1>
+                            <h1 class="mb-1">{{ $products[0]->PRODUCT_NAME }} @if ($products[0]->jenis)
+                                - {{ $products[0]->jenis }}@endif</h1>
                             <div class="mb-4">
                                 <small class="text-warning">
                                     @php
@@ -220,14 +223,16 @@
                             <div class="mt-3 row justify-content-start g-2 align-items-center">
 
                                 <div class="col-xxl-4 col-lg-4 col-md-5 col-5 d-grid">
-                                    <button type="button"  class="btn btn-primary add-to-cart" data-product-id="{{ $products[0]->ID_PRODUCT }}"
+                                    <button type="button" class="btn btn-primary add-to-cart"
+                                        data-product-id="{{ $products[0]->ID_PRODUCT }}"
                                         data-container-id="{{ $products[0]->ID_CONTAINER }}"><i
                                             class="feather-icon icon-shopping-bag me-2"></i>Add to
                                         cart</button>
                                 </div>
                                 <div class="col-md-4 col-4">
-                                    <a class="btn btn-light add-to-wishlist" href="{{ url('wishlist') }}" data-bs-toggle="tooltip"
-                                        data-bs-html="true" aria-label="Wishlist" data-product-id="{{ $products[0]->ID_PRODUCT }}"
+                                    <a class="btn btn-light add-to-wishlist" href="{{ url('wishlist') }}"
+                                        data-bs-toggle="tooltip" data-bs-html="true" aria-label="Wishlist"
+                                        data-product-id="{{ $products[0]->ID_PRODUCT }}"
                                         data-container-id="{{ $products[0]->ID_CONTAINER }}"><i
                                             class="feather-icon icon-heart"></i></a>
                                 </div>
@@ -302,12 +307,12 @@
                             </li>
                             <!-- nav item -->
                             <li class="nav-item" role="presentation">
-                                 {{-- <button class="nav-link" id="details-tab" data-bs-toggle="tab"
+                                {{-- <button class="nav-link" id="details-tab" data-bs-toggle="tab"
                                     data-bs-target="#details-tab-pane" type="button" role="tab"
                                     aria-controls="details-tab-pane" aria-selected="false">Information</button> --}}
                             </li>
                             <li class="nav-item" role="presentation">
-                                 {{-- <button class="nav-link" id="reviews-tab" data-bs-toggle="tab"
+                                {{-- <button class="nav-link" id="reviews-tab" data-bs-toggle="tab"
                                     data-bs-target="#reviews-tab-pane" type="button" role="tab"
                                     aria-controls="reviews-tab-pane" aria-selected="false">Reviews</button> --}}
                             </li>
@@ -328,7 +333,14 @@
                                     <div class="mb-5">
                                         <!-- text -->
                                         <h4 class="mb-1">{{ $products[0]->PRODUCT_NAME }}</h4>
-                                        <p class="mb-0">{{ $products[0]->DESC_PRODUCT }}</p>
+                                        {{-- <p class="mb-0">{{ $products[0]->DESC_PRODUCT }}</p> --}}
+                                        @php
+                                            // $htmlString = "<p>Desjd</p>";
+                                            $htmlString = $products[0]->DESC_PRODUCT;
+                                            $cleanHtmlString = str_replace('\\"', '"', $htmlString);
+                                            $decodedString = html_entity_decode(trim($cleanHtmlString, '"'));
+                                            echo $decodedString;
+                                        @endphp
                                     </div>
                                     {{-- <div class="mb-5">
                                         <h5 class="mb-1">Storage Tips</h5>
@@ -360,8 +372,8 @@
                                 </div>
                             </div>
                             <!-- tab pane -->
-                            <div class="tab-pane fade" id="details-tab-pane" role="tabpanel"
-                                aria-labelledby="details-tab" tabindex="0">
+                            <div class="tab-pane fade" id="details-tab-pane" role="tabpanel" aria-labelledby="details-tab"
+                                tabindex="0">
                                 <div class="my-8">
                                     <div class="row">
                                         <div class="col-12">
