@@ -6,25 +6,24 @@
                 <div class="col-12 col-md-12 col-lg-4">
                     <h6 class="mb-4">Categories</h6>
                     <div class="row">
-                        <div class="col-6">
-                            <!-- list -->
-                            <ul class="nav flex-column">
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link">Cetak Kalender</a></li>
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link">Kartu Nama Undangan &
-                                        Foto</a>
-                                </li>
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link">Dokumen</a></li>
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link">Media Promosi</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-6">
-                            <!-- list -->
-                            <ul class="nav flex-column">
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link">Print Offset</a></li>
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link">Spanduk & Banner</a></li>
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link">Kaos & Kain</a></li>
-                            </ul>
-                        </div>
+                        @php
+                            $totalColumns = 3; // Set the total number of columns
+                            $itemsPerColumn = ceil(count($cat) / $totalColumns); // Calculate the number of items per column
+                        @endphp
+
+                        @for ($column = 0; $column < $totalColumns; $column++)
+                            <div class="col-{{ 12 / $totalColumns }}">
+                                <ul class="nav flex-column">
+                                    @foreach ($cat as $index => $category)
+                                        @if ($index >= ($column * $itemsPerColumn) && $index < (($column + 1) * $itemsPerColumn))
+                                            <li class="nav-item mb-2">
+                                                <a href="{{ url('/categories/' . $category->NAME_CATEGORY . '?id=' . Crypt::encryptString($category->ID_CATEGORY)) }}" class="nav-link">{{ $category->NAME_CATEGORY }}</a>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endfor
                     </div>
                 </div>
                 <div class="col-12 col-md-12 col-lg-8">

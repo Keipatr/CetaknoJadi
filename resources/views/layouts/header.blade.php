@@ -133,7 +133,7 @@
                 <div class="col-xxl-6 col-lg-5 d-none d-lg-block mt-lg-4">
                     <form id="searchForm">
                         <div class="search-bar">
-                            <input class="form-control rounded" type="search" placeholder="Search for products"
+                            <input class="form-control rounded" type="input" placeholder="Search for products"
                                 id="searchProduct" autocomplete="off">
                             <div class="search-results" id="searchResults">
                                 <!-- Search results will be dynamically added here -->
@@ -260,10 +260,10 @@
 
                 <div class="col-md-2 col-xxl-3 d-none d-lg-block mt-lg-4">
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn  btn-outline-gray-400 text-muted" data-bs-toggle="modal"
+                    {{-- <button type="button" class="btn  btn-outline-gray-400 text-muted" data-bs-toggle="modal"
                         data-bs-target="#locationModal">
                         <i class="feather-icon icon-map-pin me-2"></i>Location
-                    </button>
+                    </button> --}}
 
 
                 </div>
@@ -369,7 +369,9 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
                     @foreach ($cat as $list)
-                    <li><a class="dropdown-item" href="{{ url('/categories/' . $list->NAME_CATEGORY . '?id=' . Crypt::encryptString($list->ID_CATEGORY)) }}">{{$list->NAME_CATEGORY}}</a></li>
+                        <li><a class="dropdown-item"
+                                href="{{ url('/categories/' . $list->NAME_CATEGORY . '?id=' . Crypt::encryptString($list->ID_CATEGORY)) }}">{{ $list->NAME_CATEGORY }}</a>
+                        </li>
                     @endforeach
                 </ul>
             </div>
@@ -385,30 +387,123 @@
                         aria-label="Close"></button>
                 </div>
                 <div class="d-block d-lg-none my-4">
-                    <form action="#">
-                        <div class="input-group ">
-                            <input class="form-control rounded" type="search" placeholder="Search for products">
-                            <span class="input-group-append">
-                                <button class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end"
-                                    type="button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round"
-                                        class="feather feather-search">
-                                        <circle cx="11" cy="11" r="8"></circle>
-                                        <line x1="21" y1="21" x2="16.65" y2="16.65">
-                                        </line>
-                                    </svg>
-                                </button>
-                            </span>
-                        </div>
-                    </form>
-                    <div class="mt-2">
-                        <button type="button" class="btn  btn-outline-gray-400 text-muted w-100 "
-                            data-bs-toggle="modal" data-bs-target="#locationModal">
-                            <i class="feather-icon icon-map-pin me-2"></i>Pick Location
-                        </button>
+                    <div class="input-group">
+                        <input id="newSearchInput" class="form-control rounded" type="text"
+                            placeholder="Search for products" oninput="fetchNewProductResults(this.value);">
+                        <span class="input-group-append">
+                            <button class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end"
+                                type="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </button>
+                        </span>
                     </div>
+                    <div class="new-search-results" id="newSearchResults">
+                        <!-- New search results will be dynamically added here -->
+                    </div>
+
+                    <style>
+                        .new-search-bar {
+                            position: relative;
+                        }
+
+                        .new-search-bar .new-search-results {
+                            position: absolute;
+                            top: 100%;
+                            left: 0;
+                            right: 0;
+                            background-color: #fff;
+                            border: 1px solid #ccc;
+                            border-top: none;
+                            height: 300px;
+                            /* Set a fixed height */
+                            overflow-y: auto;
+                            /* Enable vertical scroll */
+                            z-index: 10;
+                            display: none;
+                        }
+
+                        .new-search-bar .new-search-results.active {
+                            display: block;
+                        }
+
+                        .new-search-result-item {
+                            display: block;
+                            padding: 8px;
+                            border-bottom: 1px solid #ccc;
+                            text-decoration: none;
+                            color: #333;
+                        }
+
+                        .new-search-result-item:last-child {
+                            border-bottom: none;
+                        }
+
+                        .new-product-not-found {
+                            padding: 8px;
+                            color: #333;
+                            font-style: italic;
+                        }
+                    </style>
+
+                    <script>
+                        $(document).ready(function() {
+                            function fetchNewProductResults(searchQuery) {
+                                if (searchQuery === '') {
+                                    $('#newSearchResults').empty();
+                                    $('.new-search-results').removeClass('active');
+                                    return;
+                                }
+
+                                $.ajax({
+                                    url: '/search-products',
+                                    type: 'GET',
+                                    data: {
+                                        searchProduct: searchQuery
+                                    },
+                                    success: function(response) {
+                                        $('#newSearchResults').empty();
+
+                                        if (Array.isArray(response) && response.length > 0) {
+                                            $.each(response, function(index, product) {
+                                                var listItem = $('<a>').attr('href', product.url)
+                                                    .addClass('new-search-result-item')
+                                                    .text(product.name);
+
+                                                $('#newSearchResults').append(listItem);
+                                            });
+
+                                            $('.new-search-results').addClass('active');
+                                        } else {
+                                            var notFoundMessage = $('<div>').addClass('new-product-not-found')
+                                                .text('Product Not Found');
+
+                                            $('#newSearchResults').append(notFoundMessage);
+                                            $('.new-search-results').addClass('active');
+                                        }
+                                    },
+                                    error: function(xhr, status, error) {
+                                        console.log('Error fetching new product results:', error);
+                                    }
+                                });
+                            }
+
+                            $('#newSearchInput').on('input', function() {
+                                var searchQuery = $(this).val().trim();
+                                fetchNewProductResults(searchQuery);
+                            });
+
+                            $(document).on('click', function(event) {
+                                if (!$(event.target).closest('.new-search-bar').length) {
+                                    $('.new-search-results').removeClass('active');
+                                }
+                            });
+                        });
+                    </script>
                 </div>
                 <div class="d-block d-lg-none mb-4">
                     <a class="btn btn-primary w-100 d-flex justify-content-center align-items-center"
@@ -427,7 +522,9 @@
                         <div class="card card-body">
                             <ul class="mb-0 list-unstyled">
                                 @foreach ($cat as $list)
-                                <li><a class="dropdown-item" href="{{ url('/categories/' . $list->NAME_CATEGORY . '?id=' . Crypt::encryptString($list->ID_CATEGORY)) }}">{{$list->NAME_CATEGORY}}</a></li>
+                                    <li><a class="dropdown-item"
+                                            href="{{ url('/categories/' . $list->NAME_CATEGORY . '?id=' . Crypt::encryptString($list->ID_CATEGORY)) }}">{{ $list->NAME_CATEGORY }}</a>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>

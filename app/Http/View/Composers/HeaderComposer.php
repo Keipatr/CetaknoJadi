@@ -24,7 +24,7 @@ class HeaderComposer
 
             $data = DB::select("
             SELECT c.NAME_CUST, QTY_WISHLIST,  QTY_CART
-            FROM customer c, wishlist w, cart ca
+            FROM CUSTOMER c, WISHLIST w, CART ca
             WHERE w.ID_WISHLIST= c.ID_WISHLIST
             AND ca.ID_CART= c.ID_CART AND
              USERNAME_CUST = '$username';");

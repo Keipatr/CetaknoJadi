@@ -29,7 +29,7 @@
 
                         </div>
                         <!-- row -->
-                        <div class="row mb-12">
+                        {{-- <div class="row mb-12">
                             <div class="col-12">
                                 <div class="mb-8">
                                     <!-- heading -->
@@ -98,7 +98,7 @@
                                         Center</a></p> -->
                             </div>
 
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -124,17 +124,12 @@
                             <div class="row row-cols-2 row-cols-md-4">
                                 <!-- col -->
                                 <div class="col mb-4 mb-md-0">
-                                    <h3 class="display-5 fw-bold text-white mb-0">1</h3>
+                                    <h3 class="display-5 fw-bold text-white mb-0">{{count($cust)}}</h3>
                                     <span class="fs-6 text-white">Shoppers</span>
                                 </div>
                                 <!-- col -->
                                 <div class="col mb-4 mb-md-0">
-                                    <h3 class="display-5 fw-bold text-white mb-0">5</h3>
-                                    <span class="fs-6 text-white">Cities</span>
-                                </div>
-                                <!-- col -->
-                                <div class="col mb-4 mb-md-0">
-                                    <h3 class="display-5 fw-bold text-white mb-0">1</h3>
+                                    <h3 class="display-5 fw-bold text-white mb-0">{{count($shop)}}</h3>
                                     <span class="fs-6 text-white">Stores</span>
                                 </div>
                                 <!-- col -->
@@ -174,7 +169,7 @@
                         <!-- text -->
                         <div class="p-6">
                             <h5 class="h6 mb-0">Jeffri Lieca</h5>
-                            <small>President</small>
+                            <small>Ketua</small>
                         </div>
                         <!-- img -->
                         <img src="images/about/team-1.png" alt="" class="img-fluid">
@@ -187,7 +182,7 @@
                         <!-- text -->
                         <div class="p-6">
                             <h5 class="h6 mb-0">Kei Patrick</h5>
-                            <small>Pekerja Keras</small>
+                            <small>Pekerja</small>
                         </div>
                         <!-- img -->
                         <img src="images/about/team-2.png" alt="" class="img-fluid">
@@ -199,7 +194,7 @@
                         <!-- text -->
                         <div class="p-6">
                             <h5 class="h6 mb-0">Yves King</h5>
-                            <small>Chief Communications Officer</small>
+                            <small>Manaeger</small>
                         </div>
                         <!-- img -->
                         <img src="images/about/team-3.png" alt="" class="img-fluid">
@@ -211,7 +206,7 @@
                         <!-- text -->
                         <div class="p-6">
                             <h5 class="h6 mb-0">Trisha Alexis</h5>
-                            <small>Chief Technology Officer</small>
+                            <small>Manager</small>
                         </div>
                         <!-- img -->
                         <img src="images/about/team-4.png" alt="" class="img-fluid">

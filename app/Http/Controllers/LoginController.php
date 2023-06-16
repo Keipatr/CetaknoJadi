@@ -64,17 +64,17 @@ class LoginController extends Controller
         $validatedData = $request->validate([
             'FIRST_NAME' => 'required',
             'LAST_NAME' => 'required',
-            'EMAIL_CUST' => 'required|email|unique:customer',
+            'EMAIL_CUST' => 'required|email|unique:CUSTOMER',
             'PASSWORD_CUST' => 'required|min:8',
             'TELP_CUST' => 'required',
             'ADDRESS_CUST' => 'required',
             'ID_CITY' => 'required',
             'CITY_CUST' => 'required',
             'POSTAL_CUST' => 'required',
-            'USERNAME_CUST' => 'required|unique:customer',
+            'USERNAME_CUST' => 'required|unique:CUSTOMER',
         ]);
 
-        $insert = DB::table('customer')->insert([
+        $insert = DB::table('CUSTOMER')->insert([
             'ID_CUSTOMER' => 'AUTO',
             'ID_WISHLIST' => 'AUTO',
             'ID_CART' => 'AUTO',

@@ -13,7 +13,7 @@ class Customer extends Model implements Authenticatable
 
 {
     use HasFactory;
-    protected $table = 'customer';
+    protected $table = 'CUSTOMER';
     protected $primaryKey = 'ID_CUSTOMER';
     protected $fillable = ['ID_CUSTOMER', 'ID_WISHLIST', 'ID_CART', 'NAME_CUST', 'TELP_CUST','ADDRESS_CUST','CITY_CUST','POSTAL_CUST','USERNAME_CUST','PASSWORD_CUST','EMAIL_CUST','STATUS_DELETE'];
     protected $rememberTokenName = 'remember_token';

@@ -70,15 +70,16 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($data as $list)
+                                        @php $imageArray = json_decode($list->image, true);@endphp
                                         <tr>
                                             <td class="align-middle border-top-0 w-0">
-                                                <a href="{{ '/products/' . $list->NAME_SHOP . '/' . $list->PRODUCT_NAME . '?id=' . Crypt::encryptString($list->ID_CONTAINER) }}"> <img src="{{'/images/all/'.$list->image}}"
+                                                <a href="{{ '/products/' . $list->NAME_SHOP . '/' . $list->PRODUCT_NAME.'/'.$list->ID_PRODUCT . '?id=' . Crypt::encryptString($list->ID_CONTAINER) }}"> <img src="{{ isset($imageArray[0]) ? '/images/all/' . $imageArray[0] : '/images/all/no image.jpg' }}"
                                                         alt="Ecommerce" class="icon-shape icon-xl"></a>
 
                                             </td>
                                             <td class="align-middle border-top-0">
 
-                                                <a href="{{ '/products/' . $list->NAME_SHOP . '/' . $list->PRODUCT_NAME . '?id=' . Crypt::encryptString($list->ID_CONTAINER) }}"
+                                                <a href="{{ '/products/' . $list->NAME_SHOP . '/' . $list->PRODUCT_NAME.'/'.$list->ID_PRODUCT . '?id=' . Crypt::encryptString($list->ID_CONTAINER) }}"
                                                     class="fw-semi-bold text-inherit">
                                                     <h6 class="mb-0" style="color: black;" onmouseover="this.style.color='green';" onmouseout="this.style.color='black';">
                                                         {{ $list->PRODUCT_NAME }}

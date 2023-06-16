@@ -135,13 +135,14 @@
                                         @foreach ($wishlist as $list)
                                             <tr>
                                                 <td class="align-middle">
-                                                    <a href="#"><img src="{{ '/images/all/' . $list->image }}"
+                                                    @php $imageArray = json_decode($list->image, true);@endphp
+                                                    <a href="{{ '/products/' . $list->NAME_SHOP . '/' . $list->PRODUCT_NAME.'/'.$list->ID_PRODUCT . '?id=' . Crypt::encryptString($list->ID_CONTAINER) }}"><img src="{{ isset($imageArray[0]) ? '/images/all/' . $imageArray[0] : '/images/all/no image.jpg' }}"
                                                             class="icon-shape icon-xxl" alt=""></a>
 
                                                 </td>
                                                 <td class="align-middle">
                                                     <div>
-                                                        <h5 class="fs-6 mb-0"><a href="#"
+                                                        <h5 class="fs-6 mb-0"><a href="{{ '/products/' . $list->NAME_SHOP . '/' . $list->PRODUCT_NAME.'/'.$list->ID_PRODUCT . '?id=' . Crypt::encryptString($list->ID_CONTAINER) }}"
                                                                 class="text-inherit">{{ $list->PRODUCT_NAME }} {{ $list->PRODUCT_NAME }} @if($list->jenis) - {{ $list->jenis }} @endif</a></h5>
                                                         <small>{{ $list->NAME_CATEGORY }}</small>
                                                     </div>
@@ -149,7 +150,7 @@
                                                 <td class="align-middle">{{ $list->formatted_price }}</td>
 
                                                 <td class="align-middle">
-                                                    @if ($list->container_status == 1 && $list->product_status == 'Y')
+                                                    @if ($list->container_status == 1 && $list->product_status == 1)
                                                         <span class="badge bg-success">In Stock</span>
                                                     @else
                                                         <span class="badge bg-secondary">Not Available</span>
